@@ -1,25 +1,104 @@
+// const express = require('express');
+// const mysql = require('mysql2/promise');
+// const moment = require('moment-timezone');
+// require('dotenv').config();
+
+
+// const dbConfig = process.env.JAWSDB_URL ? new URL(process.env.JAWSDB_URL) : {
+//     host: 'localhost',
+//     user: 'root',
+//     password: 'FCBarcelona1899', 
+//     database: 'h_h_database'
+//   };
+
+//   const PORT = process.env.PORT || 3003;
+// const DATABASE_CONFIG = {
+//     host: 'database-2.crcc4k6awjdh.us-east-2.rds.amazonaws.com',
+//     port: "3306",
+//     user: 'admin',
+//     password: 'FCBarcelona1899', 
+//     database: 'h_h_database'
+// };
+
+// const app = express();
+// app.use(express.json());
+
+// let db;
+
+// async function connectToDatabase() {
+//     if (db) return;
+//     db = await mysql.createConnection(DATABASE_CONFIG);
+//     console.log("Connected to the database.");
+// }
+
+// async function connectToDatabase() {
+//     const connection = await mysql.createConnection({
+//       host: dbConfig.hostname,
+//       user: dbConfig.username,
+//       password: dbConfig.password,
+//       database: dbConfig.pathname.slice(1)
+//     });
+//     return connection;
+//   }
+
+
 const express = require('express');
 const mysql = require('mysql2/promise');
 const moment = require('moment-timezone');
+require('dotenv').config({ path: 'src/.env' });
+const path = require('path');
+
 
 const PORT = process.env.PORT || 3003;
-const DATABASE_CONFIG = {
-    host: 'localhost',
-    user: 'root',
-    password: 'FCBarcelona1899', 
-    database: 'h_h_database'
-};
 
+
+// let dbConfig;
+
+// if (process.env.JAWSDB_URL) {
+//     const dbUrl = new URL(process.env.JAWSDB_URL);
+//     dbConfig = {
+//         host: dbUrl.hostname,
+//         user: dbUrl.username,
+//         password: dbUrl.password,
+//         database: dbUrl.pathname.slice(1) // Remove the leading slash to get the database name
+//     };
+// } 
+// else {
+    // Fallback for local development
+const dbConfig = {
+    host: 'database-2.crcc4k6awjdh.us-east-2.rds.amazonaws.com',
+    user: 'admin',
+    password: 'FCBarcelona1899',
+    database: 'h_h_database',
+    port: 3306
+    };
+      
+//}
+
+
+const cors = require('cors');
 const app = express();
+app.use(cors());
 app.use(express.json());
 
-let db;
 
 async function connectToDatabase() {
-    if (db) return;
-    db = await mysql.createConnection(DATABASE_CONFIG);
+    db = await mysql.createConnection(dbConfig);
     console.log("Connected to the database.");
 }
+
+// Additional route handlers...
+
+async function startServer() {
+    await connectToDatabase();
+    app.listen(PORT, () => {
+        console.log(`Server started on http://localhost:${PORT}`);
+    });
+}
+
+
+
+
 
 app.get('/channels', async (req, res) => {
     try {
@@ -155,7 +234,7 @@ async function fetchNextVideo(channelId) {
 
 
 
-app.use(express.static('../public'));
+app.use(express.static(path.join(__dirname, '../public')));
 
 async function startServer() {
     await connectToDatabase();
