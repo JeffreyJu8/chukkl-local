@@ -12,13 +12,14 @@ body {
     height: 100px;
     padding: 10px;
     background-color: black;
-    border-radius: 10px;
-    margin-left: 10px;
+    margin-left: -20px;
+    margin-right: -20px;
     margin-bottom: 5px;
+    margin-top: -20px;
 }
 
 #appTitle {
-    font-family: 'Aileron', sans-serif;               
+    font-family: 'Aileron', sans-serif;                
     display: flex;
     font-size: 60px;
     margin-left: 20px;
@@ -27,6 +28,7 @@ body {
 
 #appTitle .letter {
     margin: -2.2px;
+    font-weight: bolder;
 }
 
 #appTitle .sub{
@@ -40,7 +42,7 @@ body {
 #appTitle .button-group {
     display: flex; 
     /* align-items: center;  */
-    margin-left: 850px;
+    margin-left: 830px;
     gap: 10px;
 }
 
@@ -166,6 +168,7 @@ body {
     color: #ffffff; 
     margin-bottom: 30px; 
     margin-left: 30px;
+    margin-right: 8px;
 }
 
 
@@ -310,7 +313,7 @@ body {
 
 .channel-style-4 {
     font-family: 'Karantina';
-    font-size: 70px;
+    font-size: 55px;
     display: flex;
     gap: 10px;
     justify-content: center; 
@@ -328,12 +331,14 @@ body {
 }
 
 .channel-style-6 {
-    font-family: 'Luckiest Guy';
-    font-size: 28px;
     display: flex;
+    font-family: 'luckiest guy';
+    font-size: 28px;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 10px;
-    justify-content: center; 
-    align-items: center; 
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -375,11 +380,20 @@ body {
     align-items: center; 
 }
 
+.name-of-channel {
+    font-size: normal;
+    line-height: 1; 
+    margin: 0; 
+    padding: 0; 
+}
+
 
 .channel-name-expanded {
     height: 196px;
     border: 2px solid transparent;
     border-radius: 5px;
+    /* align-items: center;
+    justify-content: center; */
 }
 
 
@@ -473,7 +487,7 @@ body {
 .mute-toggle {
     background-color: #1a1126;
     font-size: 20px;
-    color: #373243;
+    color: white;
     border: none;
     
 }

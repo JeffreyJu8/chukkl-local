@@ -9,7 +9,31 @@ var channelSchedules = {};
 var currentlyExpandedChannel = null;
 var currentVideoDetails = {};
 
+async function defaultVideo(){
 
+    try {
+        const response = await fetch('http://localhost:3003/channels'); 
+        const channels = await response.json();
+        const grid = document.getElementById('channelsGrid');
+        grid.innerHTML = '';
+
+        for (const [index, channel] of channels.entries()) {
+            const channelBlock = document.createElement('div');
+            channelBlock.className = 'channel-block';
+            channelBlock.dataset.styleClass = 'channel-style-' + index;
+            //selectChannel(channel.channel_id);
+
+            if (index === 8) {
+                selectChannel(channel.channel_id);
+                getChannelInfo(channel, 'channel-style-' + index);
+            }
+        }
+    } catch (error) {
+        console.error("Error fetching channels:", error);
+    }
+
+    localStorage.setItem('defaultVideoCalled', 'true');
+}
 
 async function fetchChannels() {
     try {
@@ -24,6 +48,11 @@ async function fetchChannels() {
             channelBlock.className = 'channel-block';
             channelBlock.dataset.styleClass = 'channel-style-' + index;
             //selectChannel(channel.channel_id);
+
+            // if (index === 8) {
+            //     selectChannel(channel.channel_id);
+            //     getChannelInfo(channel, 'channel-style-' + index);
+            // }
 
             channelBlock.onclick = function() {
                 if (currentlyExpandedChannel && currentlyExpandedChannel !== this) {
@@ -236,7 +265,6 @@ function selectChannel(channelId) {
 
 
 
-
 function checkForScheduledVideo() {
     if (!selectedChannelId) {
         console.error('No channel selected');
@@ -422,6 +450,12 @@ function convertToFullDateTime(endTime) {
 
 function onPlayerReady(event) {
     event.target.playVideo();
+
+    const muteButtonIcon = document.querySelector('.mute-toggle i');
+    if (muteButtonIcon) {
+        muteButtonIcon.classList.remove('fa-volume-up');
+        muteButtonIcon.classList.add('fa-volume-mute');
+    }
 }
 
 
@@ -510,12 +544,6 @@ function loadVolume() {
 }
 
 
-document.addEventListener("DOMContentLoaded", function() {
-    //const firstChannelId = 1;
-    selectChannel(1);
-    //loadVideo(1);
-});
-
 
 
 document.querySelector('.mute-toggle').addEventListener('click', toggleMute);
@@ -541,10 +569,11 @@ function setInitialVolume() {
 }
 
 
-//Call loadVolume when the page loads or when the player is ready
-document.addEventListener('DOMContentLoaded', loadVolume);
 
-document.addEventListener('DOMContentLoaded', setInitialVolume);
-
-document.addEventListener('DOMContentLoaded', fetchChannels);
+document.addEventListener("DOMContentLoaded", function() {
+    defaultVideo();
+    fetchChannels();
+    loadVolume();
+    setInitialVolume();
+});
 

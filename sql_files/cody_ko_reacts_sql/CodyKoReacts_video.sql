@@ -30,7 +30,7 @@ INSERT INTO Videos (video_id, title, url, category_id, channel_id, description)
 VALUES (23, "Idiots in Cars", 
 "https://www.youtube.com/embed/l-mgDGfrb-s?si=dbS6bX3UtNf0ujjp&start=0&end=900&autoplay=1&mute=1&controls=0&showinfo=0&modestbranding=0", 
 1, 7,
-"If Couples Couldn't Lie");
+"Cody reacts to idiots in cars...");
 
 
 INSERT INTO Videos (video_id, title, url, category_id, channel_id, description)

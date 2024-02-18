@@ -116,6 +116,8 @@ INSERT INTO Schedules (schedule_id, video_id, start_time, end_time, channel_id, 
 
 Select * FROM Schedules;
 
+SELECT * FROM Schedules WHERE schedule_id = 49;
+
 DELETE FROM Schedules WHERE schedule_id = 96;
 
 DELETE FROM Schedules WHERE schedule_id BETWEEN 58 AND 59;
