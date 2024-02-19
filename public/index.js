@@ -49,18 +49,17 @@ async function fetchChannels() {
             channelBlock.dataset.styleClass = 'channel-style-' + index;
             //selectChannel(channel.channel_id);
 
-            // if (index === 8) {
-            //     selectChannel(channel.channel_id);
-            //     getChannelInfo(channel, 'channel-style-' + index);
-            // }
 
             channelBlock.onclick = function() {
                 if (currentlyExpandedChannel && currentlyExpandedChannel !== this) {
                     collapseChannel(currentlyExpandedChannel);
                 }
 
-
+                
+                getVideoCast(channel.channel_id);
                 selectChannel(channel.channel_id); // triggers the video change
+
+                //console.log("cast", currVideoCast); 
 
                 // Toggle the expanded class on click
                 this.classList.toggle('channel-block-expanded');
@@ -171,6 +170,7 @@ function getChannelInfo(channel, styleClass) {
     // console.log("video details", currentVideoDetails); 
     const videoInfoDiv = document.getElementById('channelInfo');
     // Display both the description and the bio of the channel
+    //getVideoCast(channel.chanel_id);
     videoInfoDiv.innerHTML = `
         <h3 id="nowPlayingTitle">Now Playing</h3>
         <h3 id="currChannelName">${channel.name}</h3>
@@ -284,22 +284,18 @@ function checkForScheduledVideo() {
             },
             body: JSON.stringify({ channelId: channelId})
         })
-
         
             .then(response => response.json())
             .then(data => {
-                console.log("Data from server:", data);
+                //console.log("Data from server:", data);
+
                 scheduledStartTime = convertToFullDateTime(data.startTime);
                 scheduledEndTime = convertToFullDateTime(data.endTime);
                 const currentTime = new Date();
 
-                // currentVideoDetails = {
-                //     video_cast: data.video_cast,
-                // };
+                
 
-                currVideoCast = data.video_cast;
-
-                console.log("cast", currVideoCast); 
+                //console.log("cast", currVideoCast); 
                 //console.log("Current Time:", currentTime, "Scheduled Start Time:", scheduledStartTime);
                 
                 if (currentTime.getTime() >= scheduledStartTime.getTime() && currentTime.getTime() < scheduledEndTime.getTime()) {
@@ -313,6 +309,44 @@ function checkForScheduledVideo() {
                 console.error("Error fetching video data:", error);
             });
     }, 1000);
+}
+
+async function getVideoCast(channelId) {
+    try {
+        // Make a POST request to your endpoint that returns video details including the cast
+        const response = await fetch('http://localhost:3003/videos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ channelId: channelId})
+        });
+
+        // Check if the request was successful
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        
+        const videoCast = data.video_cast;
+
+        // Update the global 'currVideoCast' variable
+        currVideoCast = videoCast;
+
+        updateCastUI(videoCast);
+
+    } catch (error) {
+        console.error("Error fetching video cast:", error);
+    }
+}
+
+function updateCastUI(cast) {
+    // Assuming you have an element with id 'videoCast' to display the cast
+    const castElement = document.getElementById('videoCast');
+    if (castElement) {
+        castElement.innerHTML = `<strong>Cast:</strong> ${cast || 'N/A'}`;
+    }
 }
 
 
@@ -353,10 +387,9 @@ async function fetchNextVideoAndLoad(channelId) {
 
         const nextVideo = await response.json();
         console.log(nextVideo);
-        //if (nextVideo && nextVideo.videoID) {
         fetchChannels();
         loadVideo(channelId);
-        //}
+
     } catch (error) {
         console.error("Error fetching next video:", error);
     }
@@ -573,6 +606,7 @@ function setInitialVolume() {
 document.addEventListener("DOMContentLoaded", function() {
     defaultVideo();
     fetchChannels();
+    getVideoCast(9);
     loadVolume();
     setInitialVolume();
 });

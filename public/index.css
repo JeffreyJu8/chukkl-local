@@ -33,9 +33,9 @@ body {
 
 #appTitle .sub{
     font-family: 'Aileron';
-    font-size: 17px;
+    font-size: 15px;
     color: #8aefe7;
-    margin-top: 40px;
+    margin-top: 42px;
     margin-left: 7px;
 }
 
@@ -86,9 +86,9 @@ body {
 #appTitle .letter:nth-child(6) { color: white; } /* Sixth letter 'l' */
 
 #appMoto{
-    font-size: 20px;
+    font-size: 18px;
     margin-left: 20px;
-    margin-top: -8px;
+    margin-top: -6px;
 }
 
 
@@ -166,16 +166,17 @@ body {
     font-family: 'Poppins';
     font-size: 16px;
     color: #ffffff; 
-    margin-bottom: 30px; 
+    margin-bottom: 20px; 
     margin-left: 30px;
     margin-right: 8px;
+    margin-top: 0px;
 }
-
 
 #videoCast{
     margin-left: 30px;
     font-family: 'Poppins';
     font-size: 16px;
+    margin-right: 8px;
 }
 
 
@@ -294,6 +295,7 @@ body {
     font-family: 'Koulen';
     font-size: 25px;
     display: flex;
+    height: 90px;
     gap: 5px;
     justify-content: center; 
     text-align: center;
@@ -504,22 +506,6 @@ input[type="range"]::-webkit-slider-thumb {
     cursor: pointer;
 }
 
-/* input[type="range"]::-moz-range-thumb {
-    height: 11px;
-    width: 11px;
-    border: none;
-    border-radius: 50%;
-    background: white;
-    cursor: pointer;
-}
-
-input[type="range"]::-ms-thumb {
-    height: 11px;
-    width: 11px;
-    border-radius: 50%;
-    background: white;
-    cursor: pointer;
-} */
 
 /* Style the track */
 input[type="range"]::-webkit-slider-runnable-track {
@@ -529,19 +515,6 @@ input[type="range"]::-webkit-slider-runnable-track {
     border-radius: 50px;
 }
 
-/* input[type="range"]::-moz-range-track {
-    width: 100%;
-    height: 10px;
-    background: #8aefe7;
-    border-radius: 50px;
-}
-
-input[type="range"]::-ms-track {
-    width: 100%;
-    height: 10px;
-    background: #8aefe7;
-    border-radius: 50px;
-} */
 
 
 
