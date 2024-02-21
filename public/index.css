@@ -32,7 +32,9 @@ body {
 }
 
 #appTitle .sub{
-    font-family: 'Poppins';
+    font-family: "Poppins", sans-serif;
+    font-weight: 100;
+    font-style: normal;
     font-size: 19px;
     color: #8aefe7;
     margin-top: 26px;
