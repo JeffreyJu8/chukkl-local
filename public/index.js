@@ -193,10 +193,20 @@ async function fetchScheduleForChannel(channelId) {
         }
         const schedule = await response.json();
         // Filter and store the first 4 upcoming schedules
-        const upcomingSchedules = schedule.filter(item => 
-            convertToFullDateTime(item.end_time) > new Date()
-        ).slice(0, 4);
-        channelSchedules[channelId] = upcomingSchedules;
+
+        if (window.innerWidth <= 568) {
+            const upcomingSchedules = schedule.filter(item => 
+                convertToFullDateTime(item.end_time) > new Date()
+            ).slice(0, 2);
+            channelSchedules[channelId] = upcomingSchedules;
+        } else {
+            const upcomingSchedules = schedule.filter(item => 
+                convertToFullDateTime(item.end_time) > new Date()
+            ).slice(0, 4);
+            channelSchedules[channelId] = upcomingSchedules;
+        }
+
+        
     
         return upcomingSchedules;
     } catch (error) {
@@ -212,6 +222,8 @@ function createScheduleBlock(channelId, maturityRating) {
     scheduleBlock.className = 'channel-schedule';
 
     const displayedItems = channelSchedules[channelId] || [];
+
+
 
     displayedItems.forEach(item => {
         const itemDiv = document.createElement('div');
@@ -302,6 +314,7 @@ function checkForScheduledVideo() {
                     //console.log("Here");
                     clearInterval(checkForVideoInterval);
                     loadVideo(channelId);
+                    //getVideoCast(channelId);
                 }
 
             })
@@ -459,16 +472,13 @@ function loadVideo(channelId) {
                 startSeconds: startTimes
             });
         }
-
+        getVideoCast(channelId);
         checkForScheduledEnding();
     })
     .catch(error => {
         console.error("Error fetching video data:", error);
     });
 
-    //console.log("Current Video Details updated:", currentVideoDetails);
-
-    // checkForScheduledEnding();
     
 }
 

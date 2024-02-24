@@ -120,22 +120,21 @@ body {
 }
 
 
+.video-overlay {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    right: 0; 
+    bottom: 0;
+    z-index: 10;
+    pointer-events: auto;
+}
+
 #videoPlayer {
-    position: relative;
+    position: absolute; 
     width: 100%;
     height: 100%;
     border-radius: 10px;
-}
-
-.video-overlay {
-    /* position: absolute; */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-    pointer-events: auto;
-    background-color: transparent; 
 }
 
 .channel-info{
@@ -528,9 +527,9 @@ input[type="range"]::-webkit-slider-runnable-track {
     }
 
     #header {
-        /* display: flex; */
+        
         flex-direction: column;
-        margin-left: 0;
+        margin-left: -10px;
         margin-right: 0;
         margin-top: 0;
         padding: 1vw;
@@ -538,103 +537,7 @@ input[type="range"]::-webkit-slider-runnable-track {
 
     #appTitle {
         font-size: 6vw;
-        /* font-size: 50px;  */
-        margin-left: 10px;
-        margin-bottom: -40px;
-    }
-
-    #appTitle .letter {
-        margin: 0; 
-    }
-
-    #appTitle .sub {
-        font-size: 12px; 
-        margin-top: 3.8vw;
-    }
-
-    #appMoto{
-        font-size: 18px;
-        margin: 1vw 0;
-        margin-left: 10px;
-        width: 300px;
-    }
-
-    #appTitle .button-group {
-        flex-direction: column;
-        margin-left: 35vw;
-        gap: 0px;
-        margin-top: -5px;
-    }
-
-    .about-us{
-        font-size: 2vw;
-        width: 150px; 
-        height: 30px;
-    }
-    
-    #appTitle .feedback{
-        font-size: 2vw;
-        width: 150px; 
-        height: 30px;
-    }
-
-
-    #contentWrapper {
-        flex-direction: column; 
-    }
-
-    .channel-info{
-        display: none;
-    }
-    
-    
-    #videoContainer {
-        width: 100%;
-        margin: 5px 0; 
-    }
-
-    #currChannelName {
-        font-size: 40px; /* Adjust font size */
-        margin-top: 20px;
-    }
-
-    #currChannelBio, #videoCast {
-        font-size: 14px; /* Adjust font size */
-    }
-
-    #channelBar {
-        display: none;
-    }
-
-    /* Adjust slider thumb and track for easier interaction on touch devices */
-    /* input[type="range"]::-webkit-slider-thumb {
-        height: 15px; 
-        width: 15px; 
-    }
-
-    input[type="range"]::-webkit-slider-runnable-track {
-        height: 8px; 
-    } */
-}
-
-
-@media (max-width: 400px) {
-    body {
-        padding: 10px; 
-    }
-
-    #header {
-        /* display: flex; */
-        flex-direction: column;
-        margin-left: 0;
-        margin-right: 0;
-        margin-top: 0;
-        padding: 1vw;
-    }
-
-    #appTitle {
-        font-size: 6vw;
-        /* font-size: 50px;  */
+       
         margin-left: 10px;
         margin-bottom: -40px;
     }
@@ -653,25 +556,27 @@ input[type="range"]::-webkit-slider-runnable-track {
         margin: 1vw 0;
         margin-left: 10px;
         width: 300px;
+        margin-top: 6vw;
     }
 
     #appTitle .button-group {
-        flex-direction: column;
-        margin-left: 35vw;
-        gap: 0px;
+        flex-direction: row;
+        margin-left: 32vw;
+        gap: 10px;
         margin-top: -5px;
     }
 
-    .about-us{
+    #appTitle .about-us{
         font-size: 2vw;
-        width: 50px; 
-        height: 30px;
+        width: 100px; 
+        height: 40px;
+        margin-top: 3.1vw;
     }
     
     #appTitle .feedback{
         font-size: 2vw;
-        width: 50px; 
-        height: 30px;
+        width: 100px; 
+        height: 40px;
     }
 
 
@@ -685,31 +590,408 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     
     #videoContainer {
+        position: relative;
         width: 100%;
-        margin: 5px 0; 
+        max-width: 830px; 
+        margin: auto;
+        height: 400px;
+    }
+
+    .video-overlay {
+        position: absolute; 
+        top: 0;
+        left: 0;
+        right: 0; 
+        bottom: 0;
+        z-index: 10;
+        pointer-events: auto;
+    }
+    
+    #videoPlayer {
+        position: absolute; 
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
     }
 
     #currChannelName {
-        font-size: 40px; /* Adjust font size */
+        font-size: 40px; 
         margin-top: 20px;
     }
 
     #currChannelBio, #videoCast {
-        font-size: 14px; /* Adjust font size */
+        font-size: 14px; 
     }
 
     #channelBar {
         display: none;
     }
-    
+}
 
-    /* Adjust slider thumb and track for easier interaction on touch devices */
-    /* input[type="range"]::-webkit-slider-thumb {
-        height: 15px; 
-        width: 15px; 
+
+@media (max-width: 400px) {
+    body {
+        padding: 10px; 
+        overflow-x: hidden;
     }
 
+    #header{
+        position: fixed;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        height: 50px;
+        width: 100%;
+        background-color: black;
+        margin-bottom: 5px;
+        margin-top: -20px;
+        margin-left: -10px;
+    }
+
+    #appTitle {
+        font-size: 6vw;
+        margin-left: 10px;
+    }
+
+    #appTitle .letter {
+        margin: 0; 
+        margin-top: 5px;
+    }
+
+    #appTitle .sub {
+        font-size: 12px; 
+        margin-top: 3.7vw;
+    }
+
+    #appMoto{
+        font-size: 10px;
+        margin-left: 10px;
+        margin-top: 30px;
+        width: 300px;
+    }
+
+    #appTitle .button-group {
+        display: flex;
+        flex-direction: row;
+        margin-left: 33vw;
+        gap:10px;
+
+    }
+
+    #appTitle .about-us{
+        font-size: 2vw;
+        width: 55px; 
+        height: 30px;
+        margin-top: 5vw;
+    }
+    
+    #appTitle .feedback{
+        font-size: 2vw;
+        width: 55px; 
+        height: 30px;
+        margin-top: 5vw;
+    }
+
+
+    #contentWrapper {
+        flex-direction: column; 
+    }
+
+    .channel-info{
+        display: none;
+    }
+    
+    
+    #videoContainer {
+        position: relative;
+        left: 0;
+        right: 0; 
+        margin-top: 38px;
+        margin-left: -15px;
+        height: 250px;
+        max-width: 100%;
+    }
+
+    .video-overlay {
+        position: fixed; 
+        left: 0;
+        right: 0; 
+        z-index: 1000;
+        height: 260px;
+        width: 100%;
+        margin-top: 38px;
+        pointer-events: auto;
+    }
+    
+    #videoPlayer {
+        position: fixed; 
+        width: 100%;
+        height: 250px;
+        margin-left: 5px;
+        z-index: 999;
+        border-radius: 0px;
+    }
+
+    #currChannelName {
+        font-size: 10px; 
+        margin-top: 20px;
+    }
+
+    #currChannelBio, #videoCast {
+        font-size: 14px;
+    }
+
+    #channelBar {
+        position: fixed;
+        z-index: 1000;
+        display: flex;
+        flex-direction: row;
+        margin-top: -3px;
+        margin-left: 12px;
+        width: 360px;
+    }
+
+    #channelBar .displays{
+        white-space: nowrap;
+    }
+    
+    #channelBar .displays:nth-child(1) {
+        color:white; 
+        margin-right: 3vw;
+        font-size: 7px;
+    }
+    #channelBar .displays:nth-child(2) {
+        color:#8aefe7;
+        margin-right: 24.5vw;
+        font-size: 7px;
+    }
+    #channelBar .displays:nth-child(3) {
+        color:white;
+        font-size: 7px;
+    }
+    #channelBar .displays:nth-child(4) {display: none;}
+    #channelBar .displays:nth-child(5) {display: none;}
+
+    .channel-name {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        border: 2px solid transparent;
+        background-color: #000000;
+        height: 68px;
+        border-radius: 5px;
+        width: 80px;
+        margin-top: -1px;
+    }
+
+    .channel-style-0 {
+        font-family: 'Kavoon', sans-serif;
+        font-size: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-1 {
+        font-family: 'Koulen';
+        font-size: 15px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        text-align: center;
+        align-items: center;
+    }
+    
+    
+    .channel-style-2 {
+        font-family: 'Koulen';
+        font-size: 15px;
+        display: flex;
+        height: 68px;
+        gap: 5px;
+        justify-content: center; 
+        text-align: center;
+        align-items: center;
+    }
+    
+    .channel-style-3 {
+        font-family: 'Lilita One';
+        font-size: 15px;
+        display: flex;
+        gap: 10px;
+        justify-content: center; 
+        text-align: center;
+        align-items: center;
+    }
+    
+    .channel-style-4 {
+        font-family: 'Karantina';
+        font-size: 25px;
+        display: flex;
+        gap: 10px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-5 {
+        font-family: 'Kaushan Script';
+        font-size: 15px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-6 {
+        display: flex;
+        font-family: 'luckiest guy';
+        font-size: 15px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    
+    .channel-style-7 {
+        font-family: 'Fredoka';
+        font-size: 15px;
+        display: flex;
+        gap: 10px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-8 {
+        font-family: 'Lilita One';
+        font-size: 15px;
+        display: flex;
+        gap: 3px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-9 {
+        font-family: 'Lilita One';
+        font-size: 15px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-10 {
+        font-family: 'Fredoka One';
+        font-size: 15px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+
+    .name-of-channel {
+        font-size: normal;
+        line-height: 1; 
+        margin: 0; 
+        padding: 0; 
+    }
+
+    .schedule-item {
+        flex: 1;
+        gap: 10px;
+        background-color: #373243; 
+        border: 2px solid transparent;
+        padding: 5px;
+        border-radius: 5px;
+        top: 0;
+        margin-top: -5px;
+        width: 20px;
+        height: 68px;
+    }
+
+    .schedule-title {
+        margin-top: 10px;
+        margin-left: 10px;
+        font-weight: bold;
+        font-size: 10px;
+    }
+
+    .channel-block, .channel-block-expanded {
+        transform-origin: top;
+    }
+
+    .channel-block-expanded{
+        height: 208px;
+    }
+    
+    .channel-schedule-expanded {
+        display: flex;
+        flex-direction: row;
+        height: 200px;
+        border-radius: 5px;
+    }
+
+    .channel-name-expanded {
+        height: 196px;
+        border: 2px solid transparent;
+        border-radius: 5px;
+    }
+
+    .schedule-item-expanded{
+        border: 2px solid transparent;
+        height: 196px;
+    }
+
+    .schedule-video-description{
+        font-family: 'Poppins';
+        font-size: 7px;
+        margin-top: 15px;
+        margin-left: 10px;
+        line-height: 1.5;
+    }
+
+    #volume-control-container {
+        display: flex;
+        justify-content: flex-end; 
+        padding-right: 20px;
+        margin-top: 10px; 
+        margin-bottom: -5px;
+    }
+
+    #volume-control {
+        display: flex;
+        align-items: center; 
+        gap: 0px;
+    }
+
+
+    #volume-control-container .mute-toggle {
+        position: fixed;
+        z-index: 1000;
+        right: 20px;
+        font-size: 10px;
+        color: white;
+        border: none;
+        margin-top: -4px;
+        height: 10px;
+    }
+
+
+    /* Style the thumb */
+    input[type="range"]::-webkit-slider-thumb {
+        display: none;
+    }
+
+
+    /* Style the track */
     input[type="range"]::-webkit-slider-runnable-track {
-        height: 8px; 
-    } */
+        display: none;
+    }
+    
 }
