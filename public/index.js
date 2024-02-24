@@ -61,7 +61,6 @@ async function fetchChannels() {
 
                 //console.log("cast", currVideoCast); 
 
-                // Toggle the expanded class on click
                 this.classList.toggle('channel-block-expanded');
 
                 // expanding the channe name block when user clicks on it
@@ -169,7 +168,6 @@ function collapseChannel(channelElement) {
 function getChannelInfo(channel, styleClass) {
     // console.log("video details", currentVideoDetails); 
     const videoInfoDiv = document.getElementById('channelInfo');
-    // Display both the description and the bio of the channel
     //getVideoCast(channel.chanel_id);
     videoInfoDiv.innerHTML = `
         <h3 id="nowPlayingTitle">Now Playing</h3>
@@ -192,7 +190,7 @@ async function fetchScheduleForChannel(channelId) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const schedule = await response.json();
-        // Filter and store the first 4 upcoming schedules
+        // Filter and store the first 4 or 2 upcoming schedules
 
         if (window.innerWidth <= 568) {
             const upcomingSchedules = schedule.filter(item => 
@@ -211,7 +209,7 @@ async function fetchScheduleForChannel(channelId) {
         return upcomingSchedules;
     } catch (error) {
         console.error("Error fetching schedule:", error);
-        return []; // Return an empty array in case of error
+        return []; 
     }
 }
 
@@ -326,7 +324,6 @@ function checkForScheduledVideo() {
 
 async function getVideoCast(channelId) {
     try {
-        // Make a POST request to your endpoint that returns video details including the cast
         const response = await fetch('http://localhost:3003/videos', {
             method: 'POST',
             headers: {
@@ -335,7 +332,6 @@ async function getVideoCast(channelId) {
             body: JSON.stringify({ channelId: channelId})
         });
 
-        // Check if the request was successful
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -344,7 +340,6 @@ async function getVideoCast(channelId) {
         
         const videoCast = data.video_cast;
 
-        // Update the global 'currVideoCast' variable
         currVideoCast = videoCast;
 
         updateCastUI(videoCast);
@@ -355,7 +350,6 @@ async function getVideoCast(channelId) {
 }
 
 function updateCastUI(cast) {
-    // Assuming you have an element with id 'videoCast' to display the cast
     const castElement = document.getElementById('videoCast');
     if (castElement) {
         castElement.innerHTML = `<strong>Cast:</strong> ${cast || 'N/A'}`;
@@ -448,7 +442,6 @@ function loadVideo(channelId) {
         //console.log("Current Video Details updated:", currentVideoDetails);
 
         if (!player) {
-            // Initialize the player only if it doesn't exist
             player = new YT.Player('videoPlayer', {
                 videoId: extractVideoID(data.embedUrl),
                 playerVars: {
@@ -466,7 +459,6 @@ function loadVideo(channelId) {
 
             });
         } else {
-            // If the player exists, just load the new video
             player.loadVideoById({
                 videoId: extractVideoID(data.embedUrl),
                 startSeconds: startTimes
@@ -514,8 +506,7 @@ function onPlayerStateChange(event) {
 
 // updates the schedule display after each video 
 function updateNewSchedule(channelId) { 
-    // Remove the first item and fetch the next upcoming video
-    channelSchedules[channelId].shift(); // Remove the first element
+    channelSchedules[channelId].shift();
     fetchScheduleForChannel(channelId).then(() => {
         const channelBlock = document.querySelector(`[data-channel-id="${channelId}"]`);
         if (channelBlock) {
@@ -572,12 +563,12 @@ function toggleMute() {
 
 
 
-// Save volume to localStorage
+
 function saveVolume(volume) {
     localStorage.setItem('userVolume', volume);
 }
 
-// Load volume from localStorage
+
 function loadVolume() {
     var volume = localStorage.getItem('userVolume');
     if (volume !== null) {
