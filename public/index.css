@@ -675,7 +675,7 @@ input[type="range"]::-webkit-slider-runnable-track {
     #currChannelName{
         display: flex;
         color: #ffffff; 
-        font-size: 5vw; 
+        font-size: 4vw; 
         float: left;
         margin-top: 1vw;
         margin-left: 2vw;
