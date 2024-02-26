@@ -520,13 +520,21 @@ input[type="range"]::-webkit-slider-runnable-track {
 }
 
 #footer {
-    background-color: #222; /* Dark background for the footer */
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: space-between;
+    background-color: #222; 
     color: white;
     padding: 20px;
-    text-align: center;
+    width: 100%;
+    margin-left: -20px;
+    margin-bottom: -20px;
+    margin-top: 40px;
 }
 
 #footer .social-links {
+    align-self: start;
     margin-bottom: 20px;
 }
 
@@ -541,15 +549,21 @@ input[type="range"]::-webkit-slider-runnable-track {
     color: #8aefe7; 
 }
 
+#footer .application-form {
+    align-self: flex-end;
+    margin-top: -55px;
+    width: 200px;
+}
+
 #footer .application-form button {
     background-color: #373243; 
     color: white;
     border: none;
     padding: 10px 20px;
-    margin: 20px 0;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    width: 200px;
 }
 
 #footer .application-form button:hover {
@@ -557,7 +571,8 @@ input[type="range"]::-webkit-slider-runnable-track {
 }
 
 #footer .email-contact {
-    margin-top: 20px;
+    align-self: center;
+    margin-top: -30px;
     font-size: 16px;
 }
 
@@ -590,7 +605,6 @@ input[type="range"]::-webkit-slider-runnable-track {
         font-size: 14px;
     }
 }
-
 
 
 
