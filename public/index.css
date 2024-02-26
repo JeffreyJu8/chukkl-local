@@ -519,6 +519,79 @@ input[type="range"]::-webkit-slider-runnable-track {
     border-radius: 50px;
 }
 
+#footer {
+    background-color: #222; /* Dark background for the footer */
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+#footer .social-links {
+    margin-bottom: 20px;
+}
+
+#footer .social-links a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+#footer .social-links a:hover {
+    color: #8aefe7; 
+}
+
+#footer .application-form button {
+    background-color: #373243; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#footer .application-form button:hover {
+    background-color: #8aefe7; 
+}
+
+#footer .email-contact {
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+#footer .email-contact a {
+    color: #8aefe7; 
+    text-decoration: none;
+}
+
+#footer .email-contact a:hover {
+    text-decoration: underline;
+}
+
+
+@media (max-width: 768px) {
+    #footer {
+        padding: 10px;
+    }
+
+    #footer .social-links a {
+        margin: 0 5px;
+        font-size: 18px;
+    }
+
+    #footer .contact-form button {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+
+    #footer .email-contact {
+        font-size: 14px;
+    }
+}
+
+
 
 
 @media (max-width: 844px) {
