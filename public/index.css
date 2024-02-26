@@ -21,7 +21,7 @@ body {
 #appTitle {
     font-family: 'Aileron', sans-serif;                
     display: flex;
-    font-size: 50px;
+    font-size: 3.4vw;
     margin-left: 20px;
     flex-direction: row;
 }
@@ -35,7 +35,7 @@ body {
     font-family: "Poppins", sans-serif;
     font-weight: 100;
     font-style: normal;
-    font-size: 19px;
+    font-size: 1.3vw;
     color: #8aefe7;
     margin-top: 26px;
     margin-left: 7px;
@@ -50,7 +50,7 @@ body {
 
 
 .about-us {
-    font-size: 15px;
+    font-size: 1vw;
     color: white;
     width: 150px;
     margin-top: 10px;
@@ -65,7 +65,7 @@ body {
 }
 
 #appTitle .feedback{
-    font-size: 15px;
+    font-size: 1vw;
     color: white;
     width: 150px;
     margin-top: 18px;
@@ -89,7 +89,7 @@ body {
 
 #appMoto{
     font-family: 'Poppins';
-    font-size: 16px;
+    font-size: 1.2vw;
     margin-left: 20px;
     margin-top: -13px;
 }
@@ -148,9 +148,8 @@ body {
 
 #nowPlayingTitle {
     font-family: 'Poppins';
-    font-size: 32px;
     color: #ffffff; 
-    font-size: 24px; 
+    font-size: 1.5vw; 
     margin-bottom: 1px; 
     margin-left: 30px;
 }
@@ -158,7 +157,7 @@ body {
 #currChannelName{
     display: flex;
     color: #ffffff; 
-    font-size: 70px; 
+    font-size: 4.5vw; 
     float: left;
     margin-top: 30px;
     margin-left: 30px;
@@ -168,7 +167,7 @@ body {
 #currChannelBio{
     display: flex;
     font-family: 'Poppins';
-    font-size: 16px;
+    font-size: 1vw;
     color: #ffffff; 
     margin-bottom: 20px; 
     margin-left: 30px;
@@ -179,7 +178,7 @@ body {
 #videoCast{
     margin-left: 30px;
     font-family: 'Poppins';
-    font-size: 16px;
+    font-size: 1vw;
     margin-right: 8px;
 }
 
@@ -192,13 +191,13 @@ body {
 }
 
 #channelBar .displays{
-    font-size: 15px;
-    margin-right: 25px;
+    font-size: 1vw;
+    margin-right: 27px;
 }
 
 #channelBar .displays:nth-child(1) {
     color:white; 
-    margin-right: 38px;
+    margin-right: 41px;
 }
 #channelBar .displays:nth-child(2) {
     color:#8aefe7;
@@ -398,8 +397,6 @@ body {
     height: 196px;
     border: 2px solid transparent;
     border-radius: 5px;
-    /* align-items: center;
-    justify-content: center; */
 }
 
 
@@ -451,11 +448,11 @@ body {
     margin-top: 10px;
     margin-left: 10px;
     font-weight: bold;
-    font-size: medium;
+    font-size: 1vw;
 }
 
 .schedule-maturity-rating{
-    font-size: 12px;
+    font-size: 0.8vw;
     margin-top: 5px;
     margin-left: 10px;
 }
@@ -467,7 +464,7 @@ body {
 
 .schedule-video-description{
     font-family: 'Poppins';font-size: 22px;
-    font-size: 12px;
+    font-size: 0.8vw;
     margin-top: 15px;
     margin-left: 10px;
     line-height: 1.5;
@@ -492,7 +489,7 @@ body {
 
 .mute-toggle {
     background-color: #1a1126;
-    font-size: 20px;
+    font-size: 1.2vw;
     color: white;
     border: none;
     
@@ -542,7 +539,7 @@ input[type="range"]::-webkit-slider-runnable-track {
     color: white;
     margin: 0 10px;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 1.2vw;
 }
 
 #footer .social-links a:hover {
@@ -562,7 +559,7 @@ input[type="range"]::-webkit-slider-runnable-track {
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1vw;
     width: 200px;
 }
 
@@ -573,7 +570,7 @@ input[type="range"]::-webkit-slider-runnable-track {
 #footer .email-contact {
     align-self: center;
     margin-top: -30px;
-    font-size: 16px;
+    font-size: 1vw;
 }
 
 #footer .email-contact a {
@@ -829,8 +826,6 @@ input[type="range"]::-webkit-slider-runnable-track {
     }
 
     #channelBar {
-        position: fixed;
-        z-index: 1000;
         display: flex;
         flex-direction: row;
         margin-top: -3px;
@@ -1009,6 +1004,32 @@ input[type="range"]::-webkit-slider-runnable-track {
         font-size: 10px;
     }
 
+    .schedule-title {
+        margin-top: 10px;
+        margin-left: 10px;
+        font-weight: bold;
+        font-size: 2.5vw;
+    }
+    
+    .schedule-maturity-rating{
+        font-size: 2vw;
+        margin-top: 5px;
+        margin-left: 10px;
+    }
+    
+    .schedule-time {
+        font-size: smaller;
+        color: #ddd; 
+    }
+    
+    .schedule-video-description{
+        font-family: 'Poppins';
+        font-size: 2vw;
+        margin-top: 15px;
+        margin-left: 10px;
+        line-height: 1.5;
+    }
+
     .channel-block, .channel-block-expanded {
         transform-origin: top;
     }
@@ -1035,13 +1056,6 @@ input[type="range"]::-webkit-slider-runnable-track {
         height: 196px;
     }
 
-    .schedule-video-description{
-        font-family: 'Poppins';
-        font-size: 7px;
-        margin-top: 15px;
-        margin-left: 10px;
-        line-height: 1.5;
-    }
 
     #volume-control-container {
         display: flex;
@@ -1049,24 +1063,24 @@ input[type="range"]::-webkit-slider-runnable-track {
         padding-right: 20px;
         margin-top: 10px; 
         margin-bottom: -5px;
+        width: 100%; 
     }
-
+    
+    
     #volume-control {
         display: flex;
-        align-items: center; 
+        position: relative;
+        justify-content: center; 
         gap: 0px;
     }
 
-
-    #volume-control-container .mute-toggle {
-        position: fixed;
-        z-index: 1000;
-        right: 20px;
-        font-size: 10px;
+    #volume-control .mute-toggle {
+        position: absolute;
+        right: 10px;
+        background-color: #1a1126;
+        font-size: 13px;
         color: white;
         border: none;
-        margin-top: -4px;
-        height: 10px;
     }
 
 
@@ -1079,6 +1093,73 @@ input[type="range"]::-webkit-slider-runnable-track {
     /* Style the track */
     input[type="range"]::-webkit-slider-runnable-track {
         display: none;
+    }
+
+    #footer {
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        justify-content: space-between;
+        background-color: #222; 
+        color: white;
+        padding: 20px;
+        width: 100%;
+        margin-left: -20px;
+        margin-bottom: -20px;
+        margin-top: 10px;
+    }
+    
+    #footer .social-links {
+        align-self: start;
+        margin-top: -2vw;
+        margin-bottom: 14vw;
+    }
+    
+    #footer .social-links a {
+        color: white;
+        margin: 0 10px;
+        text-decoration: none;
+        font-size: 4vw;
+    }
+    
+    #footer .social-links a:hover {
+        color: #8aefe7; 
+    }
+    
+    #footer .application-form {
+        align-self: flex-end;
+        margin-top: -23.5vw;
+        width: 20vw;
+    }
+    
+    #footer .application-form button {
+        background-color: #373243; 
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1.5vw;
+        width: 20vw;
+    }
+    
+    #footer .application-form button:hover {
+        background-color: #8aefe7; 
+    }
+    
+    #footer .email-contact {
+        align-self: center;
+        margin-top: -10vw;
+        font-size: 3vw;
+    }
+    
+    #footer .email-contact a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .email-contact a:hover {
+        text-decoration: underline;
     }
     
 }
