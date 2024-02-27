@@ -250,13 +250,14 @@ function getChannelInfo(channel, styleClass) {
 
 
 async function fetchScheduleForChannel(channelId) {
+    const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     try {
         const response = await fetch(`${API_BASE_URL}/schedules?channelId=${channelId}`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const schedule = await response.json();
-        const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        
         const currentTime = new Date();
 
         console.log("User Time Zone:", userTimeZone);
@@ -346,35 +347,36 @@ function selectChannel(channelId) {
 }
 
 
-function checkForScheduledVideo(timeZone) {
+function checkForScheduledVideo() {
     if (!selectedChannelId) {
         console.error('No channel selected');
         return;
     }
     const channelId = selectedChannelId;
     
+    const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone; 
     checkForVideoInterval = setInterval(function() {
         fetch(`${API_BASE_URL}/videos`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ channelId: channelId})
+            body: JSON.stringify({ channelId: channelId, timezone: userTimeZone})
         })
         .then(response => response.json())
         .then(data => {
             console.log("Data from server:", data);
-            const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone; 
-            // console.log("start_time: ", data.startTime);
+            
+            console.log("start_time: ", data.startTime);
 
-            initialStartTime = convertTimeToTimezone(data.startTime, userTimeZone);
+            // initialStartTime = convertTimeToTimezone(data.startTime, userTimeZone);
             // console.log("initial: ", initialStartTime);
 
-            initialEndTime = convertTimeToTimezone(data.endTime, userTimeZone);
+            // initialEndTime = convertTimeToTimezone(data.endTime, userTimeZone);
 
 
-            scheduledStartTime = convertToFullDateTime(initialStartTime, userTimeZone);
-            scheduledEndTime = convertToFullDateTime(initialEndTime, userTimeZone);
+            scheduledStartTime = convertToFullDateTime(data.startTime, userTimeZone);
+            scheduledEndTime = convertToFullDateTime(data.endTime, userTimeZone);
             const currentTime = new Date();
             // console.log("initial ", initialStartDate);
  
@@ -409,6 +411,7 @@ function convertTimeToTimezone(timeString, targetTimezone) {
   
 
 async function getVideoCast(channelId) {
+    const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone; 
     try {
         // Make a POST request to your endpoint that returns video details including the cast
         const response = await fetch(`${API_BASE_URL}/videos`, {
@@ -416,7 +419,7 @@ async function getVideoCast(channelId) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ channelId: channelId})
+            body: JSON.stringify({ channelId: channelId, timezone: userTimeZone})
         });
 
         // Check if the request was successful
@@ -468,6 +471,7 @@ function checkForScheduledEnding() {
 
 
 async function fetchNextVideoAndLoad(channelId) {
+    const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone; 
     console.log("fetching");
     try {
         const response = await fetch(`${API_BASE_URL}/videos`, {
@@ -475,7 +479,7 @@ async function fetchNextVideoAndLoad(channelId) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ channelId: channelId })
+            body: JSON.stringify({ channelId: channelId, timezone: userTimeZone })
         });
 
         if (!response.ok) {
@@ -495,24 +499,25 @@ async function fetchNextVideoAndLoad(channelId) {
 
 
 function loadVideo(channelId) {
+    const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     fetch(`${API_BASE_URL}/videos`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ channelId: channelId })
+        body: JSON.stringify({ channelId: channelId, timezone: userTimeZone })
     })
     .then(response => response.json())
     .then(data => {
-        const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        
 
-        const initialStart = convertTimeToTimezone(data.startTime, userTimeZone);
-        const initialEnd = convertTimeToTimezone(data.endTime, userTimeZone);
+        // const initialStart = convertTimeToTimezone(data.startTime, userTimeZone);
+        // const initialEnd = convertTimeToTimezone(data.endTime, userTimeZone);
 
         // console.log("initial start: ", initialStart);
 
-        scheduledStartTime = convertToFullDateTime(initialStart, userTimeZone);
-        scheduledEndTime = convertToFullDateTime(initialEnd, userTimeZone);
+        scheduledStartTime = convertToFullDateTime(data.startTime, userTimeZone);
+        scheduledEndTime = convertToFullDateTime(data.endTime, userTimeZone);
 
         const currentTime = new Date();
         const timeElapsed = (currentTime - scheduledStartTime) / 1000;

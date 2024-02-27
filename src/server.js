@@ -63,31 +63,75 @@ app.get('/categories', async (req, res) => {
     res.json(channels);
 });
 
-app.post('/videos', async (req, res) => {
-    const channelId = req.body.channelId;
-    // const currentTimeMoment = moment().tz('America/Los_Angeles');
-    const currentTimeUtc = moment.utc().format('HH:mm:ss');
+// app.post('/videos', async (req, res) => {
+//     const { channelId, timezone } = req.body;
+//     // const currentTimeMoment = moment().tz('America/Los_Angeles');
+//     // const currentTimeUtc = moment.utc().format('HH:mm:ss');
+//     const currentTime = moment().tz(timezone).format('HH:mm:ss');
 
-    const query = `
-        SELECT v.url, v.cast, s.start_time, s.end_time 
-        FROM Schedules s
-        JOIN Videos v ON s.video_id = v.video_id
-        WHERE s.channel_id = ?
-        AND ? BETWEEN s.start_time AND s.end_time
-        ORDER BY s.start_time`;
+
+//     const query = `
+//         SELECT v.url, v.cast, s.start_time, s.end_time 
+//         FROM Schedules s
+//         JOIN Videos v ON s.video_id = v.video_id
+//         WHERE s.channel_id = ?
+//         AND ? BETWEEN s.start_time AND s.end_time
+//         ORDER BY s.start_time`;
+
+//     try {
+//         const [videos] = await db.execute(query, [channelId, currentTime]);
+
+//         if (videos.length === 0) {
+//             return res.status(404).json({ message: 'No video is scheduled to play at this time.' });
+//         }
+
+//         // const video = videos[0];
+//         // const startTimeMoment = moment(video.start_time, 'HH:mm:ss');
+//         // const offsetInSeconds = currentTimeMoment.diff(startTimeMoment, 'seconds');
+//         // const baseUrl = video.url.split('&')[0];
+//         // const autoPlayUrl = `${baseUrl}?autoplay=1&mute=1`;
+
+//         const video = videos[0];
+//         const urlParts = video.url.split('?');
+//         const baseUrl = urlParts[0];
+//         const queryParams = new URLSearchParams(urlParts[1]);
+//         const autoPlayUrl = `${baseUrl}?${queryParams.toString()}`;
+
+//         res.json({videoID: video.video_id, embedUrl: autoPlayUrl, endTime: video.end_time, startTime: video.start_time, vChannelId: video.channel_id,
+//                 category: video.category_id, video_cast: video.cast});
+//     } catch (error) {
+//         console.error("Error fetching videos:", error);
+//         res.status(500).send('Internal Server Error');
+//     }
+// });
+
+
+app.post('/videos', async (req, res) => {
+    const { channelId, timezone } = req.body;
+
+    // Debug: Log the received timezone
+    console.log("Received timezone:", timezone);
+
+    // Check if timezone is provided and valid
+    if (!timezone || !moment.tz.zone(timezone)) {
+        return res.status(400).json({ message: 'Invalid or missing timezone.' });
+    }
 
     try {
-        const [videos] = await db.execute(query, [channelId, currentTimeUtc]);
+        const currentTime = moment().tz(timezone).format('HH:mm:ss');
+        const query = `
+            SELECT v.url, v.cast, s.start_time, s.end_time 
+            FROM Schedules s
+            JOIN Videos v ON s.video_id = v.video_id
+            WHERE s.channel_id = ?
+            AND ? BETWEEN s.start_time AND s.end_time
+            ORDER BY s.start_time`;
+
+        const [videos] = await db.execute(query, [channelId, currentTime]);
 
         if (videos.length === 0) {
             return res.status(404).json({ message: 'No video is scheduled to play at this time.' });
         }
-
-        // const video = videos[0];
-        // const startTimeMoment = moment(video.start_time, 'HH:mm:ss');
-        // const offsetInSeconds = currentTimeMoment.diff(startTimeMoment, 'seconds');
-        // const baseUrl = video.url.split('&')[0];
-        // const autoPlayUrl = `${baseUrl}?autoplay=1&mute=1`;
 
         const video = videos[0];
         const urlParts = video.url.split('?');
@@ -95,8 +139,15 @@ app.post('/videos', async (req, res) => {
         const queryParams = new URLSearchParams(urlParts[1]);
         const autoPlayUrl = `${baseUrl}?${queryParams.toString()}`;
 
-        res.json({videoID: video.video_id, embedUrl: autoPlayUrl, endTime: video.end_time, startTime: video.start_time, vChannelId: video.channel_id,
-                category: video.category_id, video_cast: video.cast});
+        res.json({
+            videoID: video.video_id, 
+            embedUrl: autoPlayUrl, 
+            endTime: video.end_time, 
+            startTime: video.start_time, 
+            vChannelId: video.channel_id,
+            category: video.category_id, 
+            video_cast: video.cast
+        });
     } catch (error) {
         console.error("Error fetching videos:", error);
         res.status(500).send('Internal Server Error');
