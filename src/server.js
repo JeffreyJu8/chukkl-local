@@ -13,7 +13,8 @@ const dbConfig = {
     user: 'admin',
     password: 'FCBarcelona1899',
     database: 'h_h_database',
-    port: 3306
+    port: 3306,
+    timezone: 'Z'
     };
       
 //}
@@ -21,6 +22,7 @@ const dbConfig = {
 
 const cors = require('cors');
 const app = express();
+const currentTimeUtc = moment.utc();
 app.use(cors());
 app.use(express.json());
 
@@ -63,7 +65,8 @@ app.get('/categories', async (req, res) => {
 
 app.post('/videos', async (req, res) => {
     const channelId = req.body.channelId;
-    const currentTimeMoment = moment().tz('America/Los_Angeles');
+    // const currentTimeMoment = moment().tz('America/Los_Angeles');
+    const currentTimeUtc = moment.utc().format('HH:mm:ss');
 
     const query = `
         SELECT v.url, v.cast, s.start_time, s.end_time 
@@ -74,7 +77,7 @@ app.post('/videos', async (req, res) => {
         ORDER BY s.start_time`;
 
     try {
-        const [videos] = await db.execute(query, [channelId, currentTimeMoment.format('HH:mm:ss')]);
+        const [videos] = await db.execute(query, [channelId, currentTimeUtc]);
 
         if (videos.length === 0) {
             return res.status(404).json({ message: 'No video is scheduled to play at this time.' });
