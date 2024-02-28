@@ -83,6 +83,7 @@ const API_BASE_URL = window.location.hostname.includes('localhost')
     
             for (const [index, channel] of channels.entries()) {
                 const channelBlock = document.createElement('div');
+                channelBlock.id = channel.name
                 channelBlock.className = 'channel-block';
                 channelBlock.dataset.styleClass = 'channel-style-' + index;
                 //selectChannel(channel.channel_id);
@@ -110,6 +111,7 @@ const API_BASE_URL = window.location.hostname.includes('localhost')
             for (const [index, channel] of channels.entries()) {
                 const channelBlock = document.createElement('div');
                 channelBlock.className = 'channel-block';
+                channelBlock.id = channel.name
                 channelBlock.dataset.styleClass = 'channel-style-' + index;
                 //selectChannel(channel.channel_id);
     
@@ -165,6 +167,7 @@ const API_BASE_URL = window.location.hostname.includes('localhost')
                 // Channel Content container
                 const channelContent = document.createElement('div');
                 channelContent.className = 'channel-content';
+                channelContent.id = channel.name
     
     
                 // Channel Name
@@ -176,6 +179,7 @@ const API_BASE_URL = window.location.hostname.includes('localhost')
                     const wordSpan = document.createElement('div');
                     wordSpan.textContent = word;
                     wordSpan.className = 'name-of-channel';
+                    wordSpan.id = channel.name
                     //channelName.classList.add('channel-style-' + index);
                     channelName.appendChild(wordSpan);
                 });
@@ -187,7 +191,7 @@ const API_BASE_URL = window.location.hostname.includes('localhost')
                 const schedule = await fetchScheduleForChannel(channel.channel_id); 
                 // console.log('Schedule for channel', schedule);
                 //const scheduleBlock = createScheduleBlock(schedule, channel.maturity_rating); 
-                const scheduleBlock = createScheduleBlock(channel.channel_id, channel.maturity_rating);
+                const scheduleBlock = createScheduleBlock(channel.channel_id, channel.maturity_rating, channel.name);
                 channelContent.appendChild(scheduleBlock);
     
                 channelBlock.appendChild(channelContent);
@@ -290,7 +294,7 @@ async function fetchScheduleForChannel(channelId) {
 
 
 
-function createScheduleBlock(channelId, maturityRating) {
+function createScheduleBlock(channelId, maturityRating, channelName="default") {
     const scheduleBlock = document.createElement('div');
     scheduleBlock.className = 'channel-schedule';
 
@@ -299,16 +303,19 @@ function createScheduleBlock(channelId, maturityRating) {
     displayedItems.forEach(item => {
         const itemDiv = document.createElement('div');
         itemDiv.className = 'schedule-item';
+        itemDiv.id = channelName;
 
         // Create a div for the title
         const titleDiv = document.createElement('div');
         titleDiv.className = 'schedule-title';
+        titleDiv.id = channelName;
         titleDiv.textContent = item.title;
         itemDiv.appendChild(titleDiv);
 
         // Create a div for the maturity rating
         const maturityDiv = document.createElement('div');
         maturityDiv.className = 'schedule-maturity-rating';
+        maturityDiv.id = channelName;
         maturityDiv.textContent = maturityRating;
         itemDiv.appendChild(maturityDiv);
 
@@ -321,6 +328,7 @@ function createScheduleBlock(channelId, maturityRating) {
         // Create a div for video description
         const descriptionDiv = document.createElement('div');
         descriptionDiv.className = 'schedule-video-description';
+        descriptionDiv.id = channelName;
         descriptionDiv.textContent = item.description;
         descriptionDiv.style.display = 'none'; // Initially hidden
         itemDiv.appendChild(descriptionDiv);
