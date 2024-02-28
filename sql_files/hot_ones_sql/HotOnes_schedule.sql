@@ -76,7 +76,7 @@ INSERT INTO Schedules (schedule_id, video_id, start_time, end_time, channel_id, 
 INSERT INTO Schedules (schedule_id, video_id, start_time, end_time, channel_id, Days) VALUES (1228, 460, '18:45:00', '19:00:00', 10, 'Monday');
 INSERT INTO Schedules (schedule_id, video_id, start_time, end_time, channel_id, Days) VALUES (1229, 461, '19:00:00', '19:15:00', 10, 'Monday');
 INSERT INTO Schedules (schedule_id, video_id, start_time, end_time, channel_id, Days) VALUES (1230, 462, '19:15:00', '19:30:00', 10, 'Monday');
-INSERT INTO Schedules (schedule_id, video_id, start_time, end_time, channel_id, Days) VALUES (1231, 363, '19:30:00', '19:45:00', 10, 'Monday');
+INSERT INTO Schedules (schedule_id, video_id, start_time, end_time, channel_id, Days) VALUES (1231, 463, '19:30:00', '19:45:00', 10, 'Monday');
 INSERT INTO Schedules (schedule_id, video_id, start_time, end_time, channel_id, Days) VALUES (1232, 464, '19:45:00', '20:00:00', 10, 'Monday');
 INSERT INTO Schedules (schedule_id, video_id, start_time, end_time, channel_id, Days) VALUES (1233, 465, '20:00:00', '20:15:00', 10, 'Monday');
 INSERT INTO Schedules (schedule_id, video_id, start_time, end_time, channel_id, Days) VALUES (1234, 466, '20:15:00', '20:30:00', 10, 'Monday');
@@ -98,7 +98,7 @@ INSERT INTO Schedules (schedule_id, video_id, start_time, end_time, channel_id, 
 
 SELECT * FROM Schedules;
 
-DELETE FROM Schedules WHERE schedule_id = 1248;
+DELETE FROM Schedules WHERE schedule_id = 1231;
 
 
 DELETE FROM Schedules WHERE schedule_id BETWEEN 1153 AND 1248;
