@@ -82,11 +82,6 @@ const API_BASE_URL = window.location.hostname.includes('localhost')
             grid.innerHTML = '';
     
             for (const [index, channel] of channels.entries()) {
-                const channelBlock = document.createElement('div');
-                channelBlock.id = channel.name
-                channelBlock.className = 'channel-block';
-                channelBlock.dataset.styleClass = 'channel-style-' + index;
-                //selectChannel(channel.channel_id);
     
                 if (index === 8) {
                     selectChannel(channel.channel_id);
@@ -342,8 +337,7 @@ function createScheduleBlock(channelId, maturityRating, channelName="default") {
 
 
 function onYouTubeIframeAPIReady() {
-    //checkForScheduledVideo();
-    //loadVideo();
+    
 }
 
 
@@ -532,6 +526,9 @@ function loadVideo(channelId) {
         const initialStartTime = parseInt(extractStartTime(data.embedUrl));
         const startTimes = initialStartTime + timeElapsed;
 
+        // console.log("initial start time: ", initialStartTime);
+        // console.log("starTimes: ", startTimes);
+
         currentVideoDetails = {
             channelId: channelId,
             startTime: scheduledStartTime,
@@ -546,12 +543,18 @@ function loadVideo(channelId) {
                     controls: 0,
                     autoplay: 1,
                     mute: 1,
-                    start: startTimes,
+                    startSeconds: startTimes,
                     disablekb: 1,
                     modestbranding: 1
                 },
                 events: {
-                    'onReady': onPlayerReady,
+                    'onReady': function(event) {
+                        // Once the player is ready, apply startSeconds parameter
+                        event.target.loadVideoById({
+                            videoId: extractVideoID(data.embedUrl),
+                            startSeconds: startTimes
+                        });
+                    },
                     'onStateChange': onPlayerStateChange
                 }
             });
@@ -709,11 +712,41 @@ function setInitialVolume() {
     }
 }
 
+// cache the requests sent to backend
+async function fetchChannelsWithCaching() {
 
-document.addEventListener("DOMContentLoaded", function() {
+    const cachedChannels = localStorage.getItem('channels');
+    if (cachedChannels) {
+        return JSON.parse(cachedChannels); // Return the cached channels
+    }
+
+    // If not cached, fetch from the server
+    try {
+        const response = await fetch(`${API_BASE_URL}/channels`);
+        const channels = await response.json();
+        // Cache the channels in local storage
+        localStorage.setItem('channels', JSON.stringify(channels));
+        return channels;
+    } catch (error) {
+        console.error("Error fetching channels:", error);
+    }
+}
+
+
+
+document.addEventListener("DOMContentLoaded", async function() {
+
+    selectChannel(9);
     defaultVideo();
     fetchChannels();
     getVideoCast(9);
-    loadVolume();
-    setInitialVolume();
+    // loadVolume();
+    // setInitialVolume();
+
+    const muteButtonIcon = document.querySelector('.mute-toggle i');
+    if (muteButtonIcon) {
+        muteButtonIcon.classList.remove('fa-volume-up');
+        muteButtonIcon.classList.add('fa-volume-mute');
+    }
+
 });
