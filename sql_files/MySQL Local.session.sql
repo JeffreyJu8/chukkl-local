@@ -1,3 +1,11 @@
+SELECT @@global.time_zone;
+SELECT @@session.time_zone;
+
+-- SET time_zone = '+00:00';
+-- SET GLOBAL time_zone = '+00:00';
+
+
+
 CREATE TABLE Categories (
     category_id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL

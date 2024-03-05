@@ -7,14 +7,15 @@ const path = require('path');
 
 
 const PORT = process.env.PORT || 3003;
+let db;
 
 
 const dbConfig = {
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    port: 3306,
+    database: process.env.DB_DATABASE,
+    port: process.env.DB_PORT, 
     timezone: 'Z'
 };
 
@@ -27,41 +28,39 @@ app.use(express.json());
 
 
 async function connectToDatabase() {
-    db = await mysql.createConnection(dbConfig);
-    console.log("Connected to the database.");
+    try {
+        db = await mysql.createConnection(dbConfig);
+        console.log("Connected to the database.");
+    } catch (error) {
+        console.error("Failed to connect to the database:", error);
+    }
 }
 
 
-async function startServer() {
-    await connectToDatabase();
-    app.listen(PORT, () => {
-        console.log(`Server started on http://localhost:${PORT}`);
-    });
+async function preloadAllChannels() {
+    const channels = await fetchChannelsFromDatabase();
+    const cacheKey = 'all_channels';
+    await memcachedClient.set(cacheKey, JSON.stringify(channels), { expires: 3600 });
+    // console.log('Preloaded all channels into cache: ', channels);
+}
+
+async function preloadIndividualChannels() {
+    const channels = await fetchChannelsFromDatabase();
+    // Iterate over each channel and preload its details into the cache
+    for (const channel of channels) {
+        const cacheKey = `channel_${channel.channel_id}`;
+        await memcachedClient.set(cacheKey, JSON.stringify(channel), { expires: 3600 });
+    }
+    console.log('Preloaded individual channel details into cache');
 }
 
 
-const memcachedServers = process.env.MEMCACHED_SERVERS;
-const memcachedUsername = process.env.MEMCACHED_USERNAME;
-const memcachedPassword = process.env.MEMCACHED_PASSWORD; 
 
-const memcachedClient = memjs.Client.create(memcachedServers, {
-    username: memcachedUsername,
-    password: memcachedPassword,
-  });
+const memcachedClient = memjs.Client.create(process.env.MEMCACHIER_SERVERS, {
+    username: process.env.MEMCACHIER_USERNAME,
+    password: process.env.MEMCACHIER_PASSWORD
+});
 
-
-// app.get('/channels', async (req, res) => {
-//     try {
-//         const query = `
-//             SELECT c.channel_id, c.name, c.maturity_rating, c.bio
-//             FROM Channels c`;
-//         const [channels] = await db.query(query);
-//         res.json(channels);
-//     } catch (error) {
-//         console.error("Error fetching channels:", error);
-//         res.status(500).send('Internal Server Error');
-//     }
-// });
 
 
 async function fetchChannelsFromDatabase() {
@@ -71,8 +70,48 @@ async function fetchChannelsFromDatabase() {
 }
 
 
+async function fetchChannelDetailsWhenMiss(channelId) {
+    const query = `SELECT c.channel_id, c.name, c.maturity_rating, c.bio FROM Channels c WHERE c.channel_id = ?`;
+    const [results] = await db.query(query, [channelId]);
+    return results[0]; // Assuming the query returns one row per channel ID
+}
+
+
+
+app.get('/channel/:id', async (req, res) => {
+    const channelId = req.params.id; // Extract channel ID from URL parameters
+    const cacheKey = `channel_${channelId}`;
+
+    try {
+        let channelDetails = await memcachedClient.get(cacheKey);
+        if (channelDetails && channelDetails.value) {
+            console.log('Serving channel details from cache.');
+            channelDetails = JSON.parse(channelDetails.value.toString());
+        } else {
+            console.log('Cache miss. Loading channel details from database.');
+            channelDetails = await fetchChannelDetailsWhenMiss(channelId);
+            await memcachedClient.set(cacheKey, JSON.stringify(channelDetails), { expires: 3600 }); // Cache for 1 hour
+        }
+        res.json(channelDetails);
+    } catch (error) {
+        console.error("Error fetching channel details:", error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+
+
 app.get('/channels', async (req, res) => {
-    const cacheKey = 'channels';
+    const { channel_id } = req.query;
+    const cacheKey = 'all_channels';
+
+    // Validate channel_id
+    if (!channel_id) {
+        return res.status(400).send('channel_id is required');
+    }
+
+    // Construct a unique cache key using channel_id
+    // const cacheKey = `channel_${channel_id}`;
     try {
         let channels = await memcachedClient.get(cacheKey);
         if (channels && channels.value) {
@@ -108,80 +147,34 @@ async function fetchVideoDetailsFromDatabase(channelId, currentTime) {
 }
 
 
-// app.post('/videos', async (req, res) => {
-//     const { channelId, timezone } = req.body;
-
-//     // console.log("Received timezone:", timezone);
-
-//     // Check if timezone is provided and valid
-//     if (!timezone || !moment.tz.zone(timezone)) {
-//         return res.status(400).json({ message: 'Invalid or missing timezone.' });
-//     }
-
-//     try {
-//         const currentTime = moment().tz(timezone).format('HH:mm:ss');
-//         const query = `
-//             SELECT v.url, v.cast, s.start_time, s.end_time 
-//             FROM Schedules s
-//             JOIN Videos v ON s.video_id = v.video_id
-//             WHERE s.channel_id = ?
-//             AND ? BETWEEN s.start_time AND s.end_time
-//             ORDER BY s.start_time`;
-
-//         const [videos] = await db.execute(query, [channelId, currentTime]);
-
-//         if (videos.length === 0) {
-//             return res.status(404).json({ message: 'No video is scheduled to play at this time.' });
-//         }
-
-//         const video = videos[0];
-//         const urlParts = video.url.split('?');
-//         const baseUrl = urlParts[0];
-//         const queryParams = new URLSearchParams(urlParts[1]);
-//         const autoPlayUrl = `${baseUrl}?${queryParams.toString()}`;
-
-//         res.json({
-//             videoID: video.video_id, 
-//             embedUrl: autoPlayUrl, 
-//             endTime: video.end_time, 
-//             startTime: video.start_time, 
-//             vChannelId: video.channel_id,
-//             category: video.category_id, 
-//             video_cast: video.cast
-//         });
-//     } catch (error) {
-//         console.error("Error fetching videos:", error);
-//         res.status(500).send('Internal Server Error');
-//     }
-// });
-
 
 app.post('/videos', async (req, res) => {
     const { channelId, timezone } = req.body;
-    if (!timezone || !moment.tz.zone(timezone)) {
-        return res.status(400).json({ message: 'Invalid or missing timezone.' });
-    }
-
-    const currentTime = moment().tz(timezone).format('HH:mm:ss');
+    const currentTime = moment().tz(timezone).format('HH:mm');
     const cacheKey = `video_${channelId}_${currentTime}`;
+
     try {
         let videoDetails = await memcachedClient.get(cacheKey);
         if (videoDetails && videoDetails.value) {
+            console.log('Serving video details from cache.');
             videoDetails = JSON.parse(videoDetails.value.toString());
         } else {
+            console.log('Cache miss. Loading video details from database.');
             const videos = await fetchVideoDetailsFromDatabase(channelId, currentTime);
             if (videos.length === 0) {
                 return res.status(404).json({ message: 'No video is scheduled to play at this time.' });
             }
-            videoDetails = videos[0];
-            await memcachedClient.set(cacheKey, JSON.stringify(videoDetails), { expires: 3600 });
+            videoDetails = videos[0]; // Assuming you want the first matching video
+            await memcachedClient.set(cacheKey, JSON.stringify(videoDetails), { expires: 900 }); // Update cache
         }
-        res.json(formatVideoResponse(videoDetails));
+        res.json(formatVideoResponse(videoDetails)); // Send the video details to the client
     } catch (error) {
         console.error("Error fetching videos:", error);
         res.status(500).send('Internal Server Error');
     }
 });
+
+
 
 function formatVideoResponse(video) {
     const urlParts = video.url.split('?');
@@ -198,8 +191,6 @@ function formatVideoResponse(video) {
         video_cast: video.cast
     };
 }
-
-
 
 app.get('/videos', async (req, res) => {
     // This is a sample response. Modify as needed.
@@ -280,6 +271,10 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 async function startServer() {
     await connectToDatabase();
+    await preloadAllChannels();
+    await preloadIndividualChannels();
+    setInterval(preloadAllChannels, 3500 * 1000);
+    setInterval(preloadIndividualChannels, 3500 * 1000);
     app.listen(PORT, () => {
         console.log(`Server started on http://localhost:${PORT}`);
     });

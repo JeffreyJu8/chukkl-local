@@ -15,195 +15,234 @@ const API_BASE_URL = window.location.hostname.includes('localhost')
     : 'https://chukkl-heroku-839b30d27713.herokuapp.com';
 
 
-    function debounce(func, wait) {
-        let timeout;
-    
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-    
+function debounce(func, wait) {
+    let timeout;
+
+    return function executedFunction(...args) {
+        const later = () => {
             clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
+            func(...args);
         };
+
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+async function channelSelectionHandler(channel, element) {
+    if (currentlyExpandedChannel && currentlyExpandedChannel !== element) {
+        collapseChannel(currentlyExpandedChannel);
+    }
+
+    await fetchChannelDetails(channel.channel_id);
+
+    getVideoCast(channel.channel_id);
+    selectChannel(channel.channel_id); // triggers the video change
+
+    //console.log("cast", currVideoCast); 
+
+    element.classList.toggle('channel-block-expanded');
+
+    // expanding the channe name block when user clicks on it
+    const channelName = element.querySelector('.channel-name');
+    if (channelName) {
+        channelName.classList.toggle('channel-name-expanded');
+    }
+
+    // make description visible
+    const descriptions = element.querySelectorAll('.schedule-video-description');
+    descriptions.forEach(function(desc) {
+        desc.style.display = desc.style.display === 'none' ? 'block' : 'none';
+    });
+
+    // expanding the channel schedule block when user clicks on it
+    const channelSche = element.querySelector('.channel-schedule');
+    if(channelSche){
+        channelSche.classList.toggle('channel-schedule-expanded');
     }
     
-    function channelSelectionHandler(channel, element) {
-        if (currentlyExpandedChannel && currentlyExpandedChannel !== element) {
-            collapseChannel(currentlyExpandedChannel);
-        }
+
+    // expand the schedule padding when clicked on
+    const scheduleItems = element.querySelectorAll('.schedule-item');
+    scheduleItems.forEach(function(item) {
+        item.classList.toggle('schedule-item-expanded');
+    });
     
-        
-        getVideoCast(channel.channel_id);
-        selectChannel(channel.channel_id); // triggers the video change
-    
-        //console.log("cast", currVideoCast); 
-    
-        element.classList.toggle('channel-block-expanded');
-    
-        // expanding the channe name block when user clicks on it
-        const channelName = element.querySelector('.channel-name');
-        if (channelName) {
-            channelName.classList.toggle('channel-name-expanded');
-        }
-    
-        // make description visible
-        const descriptions = element.querySelectorAll('.schedule-video-description');
-        descriptions.forEach(function(desc) {
-            desc.style.display = desc.style.display === 'none' ? 'block' : 'none';
-        });
-    
-        // expanding the channel schedule block when user clicks on it
-        const channelSche = element.querySelector('.channel-schedule');
-        if(channelSche){
-            channelSche.classList.toggle('channel-schedule-expanded');
+    getChannelInfo(channel, element.dataset.styleClass);
+    currentlyExpandedChannel = element.classList.contains('channel-block-expanded') ? element : null;
+}
+
+
+async function fetchChannelDetails(channelId) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/channel/${channelId}`);
+        if (!response.ok) {
+            console.log(`Cache hit for channel ${channelId}`);
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
         
-        
-    
-        // expand the schedule padding when clicked on
-        const scheduleItems = element.querySelectorAll('.schedule-item');
-        scheduleItems.forEach(function(item) {
-            item.classList.toggle('schedule-item-expanded');
-        });
-        
-        getChannelInfo(channel, element.dataset.styleClass);
-        currentlyExpandedChannel = element.classList.contains('channel-block-expanded') ? element : null;
+        const channelDetails = await response.json();
+        // console.log("channel details: ", channelDetails);
+        // Update the UI with the detailed information about the channel
+        updateChannelUI(channelDetails);
+    } catch (error) {
+        console.error("Error fetching channel details:", error);
     }
-    
-    
-    async function defaultVideo(){
-    
-        try {
-            const response = await fetch(`${API_BASE_URL}/channels`); 
-            const channels = await response.json();
-            const grid = document.getElementById('channelsGrid');
-            grid.innerHTML = '';
-    
-            for (const [index, channel] of channels.entries()) {
-    
-                if (index === 8) {
-                    selectChannel(channel.channel_id);
-                    getChannelInfo(channel, 'channel-style-' + index);
-                }
+}
+
+
+function updateChannelUI(details) {
+    // Update the UI with the channel's detailed information
+    const bioElement = document.getElementById('channelBio'); 
+    if (bioElement) {
+        bioElement.textContent = details.bio;
+    }
+
+    const castElement = document.getElementById('videoCast'); 
+    if (castElement) {
+        castElement.innerHTML = `<strong>Cast:</strong> ${details.cast || 'N/A'}`;
+    }
+}
+
+
+async function defaultVideo(){
+
+    try {
+        // const response = await fetch(`${API_BASE_URL}/channels`); 
+        // const channels = await response.json();
+        const channels = await fetchChannelsWithCaching();
+        const grid = document.getElementById('channelsGrid');
+        grid.innerHTML = '';
+
+        for (const [index, channel] of channels.entries()) {
+            // const channelBlock = document.createElement('div');
+            // channelBlock.id = channel.name
+            // channelBlock.className = 'channel-block';
+            // channelBlock.dataset.styleClass = 'channel-style-' + index;
+            //selectChannel(channel.channel_id);
+
+            if (index === 8) {
+                // selectChannel(channel.channel_id);
+                getChannelInfo(channel, 'channel-style-' + index);
             }
-        } catch (error) {
-            console.error("Error fetching channels:", error);
         }
-    
-        localStorage.setItem('defaultVideoCalled', 'true');
+    } catch (error) {
+        console.error("Error fetching channels:", error);
     }
-    
-    async function fetchChannels() {
-        try {
-            const response = await fetch(`${API_BASE_URL}/channels`); 
-            const channels = await response.json();
-            const grid = document.getElementById('channelsGrid');
-            grid.innerHTML = ''; // Clear the grid before adding new channels
-            
-            // const channel of channels
-            for (const [index, channel] of channels.entries()) {
-                const channelBlock = document.createElement('div');
-                channelBlock.className = 'channel-block';
-                channelBlock.id = channel.name
-                channelBlock.dataset.styleClass = 'channel-style-' + index;
-                //selectChannel(channel.channel_id);
-    
-    
-                channelBlock.onclick = debounce(function() {
-    
-                    channelSelectionHandler(channel, channelBlock);
-    
-                    // if (currentlyExpandedChannel && currentlyExpandedChannel !== this) {
-                    //     collapseChannel(currentlyExpandedChannel);
-                    // }
-    
-                    
-                    // getVideoCast(channel.channel_id);
-                    // selectChannel(channel.channel_id); // triggers the video change
-    
-                    // //console.log("cast", currVideoCast); 
-    
-                    // this.classList.toggle('channel-block-expanded');
-    
-                    // // expanding the channe name block when user clicks on it
-                    // const channelName = this.querySelector('.channel-name');
-                    // if (channelName) {
-                    //     channelName.classList.toggle('channel-name-expanded');
-                    // }
-    
-                    // // make description visible
-                    // const descriptions = this.querySelectorAll('.schedule-video-description');
-                    // descriptions.forEach(function(desc) {
-                    //     desc.style.display = desc.style.display === 'none' ? 'block' : 'none';
-                    // });
-    
-                    // // expanding the channel schedule block when user clicks on it
-                    // const channelSche = this.querySelector('.channel-schedule');
-                    // if(channelSche){
-                    //     channelSche.classList.toggle('channel-schedule-expanded');
-                    // }
-                    
-                    
-    
-                    // // expand the schedule padding when clicked on
-                    // const scheduleItems = this.querySelectorAll('.schedule-item');
-                    // scheduleItems.forEach(function(item) {
-                    //     item.classList.toggle('schedule-item-expanded');
-                    // });
-                    
-                    // getChannelInfo(channel, this.dataset.styleClass);
-                    // currentlyExpandedChannel = this.classList.contains('channel-block-expanded') ? this : null;
-    
-                }, 300);
-    
-    
-                // Channel Content container
-                const channelContent = document.createElement('div');
-                channelContent.className = 'channel-content';
-                channelContent.id = channel.name
-    
-    
-                // Channel Name
-                const nameofChannel = channel.name.split(" ");
-    
-                const channelName = document.createElement('div');
-                channelName.className = 'channel-name';
-                nameofChannel.forEach(word =>{
-                    const wordSpan = document.createElement('div');
-                    wordSpan.textContent = word;
-                    wordSpan.className = 'name-of-channel';
-                    wordSpan.id = channel.name
-                    //channelName.classList.add('channel-style-' + index);
-                    channelName.appendChild(wordSpan);
-                });
-                //channelName.textContent = channel.name;
-                channelContent.appendChild(channelName);
-    
-    
-                // Channel Schedule
-                const schedule = await fetchScheduleForChannel(channel.channel_id); 
-                // console.log('Schedule for channel', schedule);
-                //const scheduleBlock = createScheduleBlock(schedule, channel.maturity_rating); 
-                const scheduleBlock = createScheduleBlock(channel.channel_id, channel.maturity_rating, channel.name);
-                channelContent.appendChild(scheduleBlock);
-    
-                channelBlock.appendChild(channelContent);
-    
-                grid.appendChild(channelBlock);
-            }
-    
-            const channelNames = document.querySelectorAll('.channel-name');
-            channelNames.forEach((channelName, index) => {
-                // Assign a class based on the index or other data
-                channelName.classList.add('channel-style-' + index);
+
+    localStorage.setItem('defaultVideoCalled', 'true');
+}
+
+async function fetchChannels() {
+    try {
+        // const response = await fetch(`${API_BASE_URL}/channels`); 
+        // const channels = await response.json();
+        const channels = await fetchChannelsWithCaching();
+        const grid = document.getElementById('channelsGrid');
+        grid.innerHTML = ''; // Clear the grid before adding new channels
+        
+        // const channel of channels
+        for (const [index, channel] of channels.entries()) {
+            const channelBlock = document.createElement('div');
+            channelBlock.className = 'channel-block';
+            channelBlock.id = channel.name
+            channelBlock.dataset.styleClass = 'channel-style-' + index;
+            //selectChannel(channel.channel_id);
+
+
+            channelBlock.onclick = debounce(function() {
+
+                channelSelectionHandler(channel, channelBlock);
+
+                // if (currentlyExpandedChannel && currentlyExpandedChannel !== this) {
+                //     collapseChannel(currentlyExpandedChannel);
+                // }
+
+                
+                // getVideoCast(channel.channel_id);
+                // selectChannel(channel.channel_id); // triggers the video change
+
+                // //console.log("cast", currVideoCast); 
+
+                // this.classList.toggle('channel-block-expanded');
+
+                // // expanding the channe name block when user clicks on it
+                // const channelName = this.querySelector('.channel-name');
+                // if (channelName) {
+                //     channelName.classList.toggle('channel-name-expanded');
+                // }
+
+                // // make description visible
+                // const descriptions = this.querySelectorAll('.schedule-video-description');
+                // descriptions.forEach(function(desc) {
+                //     desc.style.display = desc.style.display === 'none' ? 'block' : 'none';
+                // });
+
+                // // expanding the channel schedule block when user clicks on it
+                // const channelSche = this.querySelector('.channel-schedule');
+                // if(channelSche){
+                //     channelSche.classList.toggle('channel-schedule-expanded');
+                // }
+                
+                
+
+                // // expand the schedule padding when clicked on
+                // const scheduleItems = this.querySelectorAll('.schedule-item');
+                // scheduleItems.forEach(function(item) {
+                //     item.classList.toggle('schedule-item-expanded');
+                // });
+                
+                // getChannelInfo(channel, this.dataset.styleClass);
+                // currentlyExpandedChannel = this.classList.contains('channel-block-expanded') ? this : null;
+
+            }, 300);
+
+
+            // Channel Content container
+            const channelContent = document.createElement('div');
+            channelContent.className = 'channel-content';
+            channelContent.id = channel.name
+
+
+            // Channel Name
+            const nameofChannel = channel.name.split(" ");
+
+            const channelName = document.createElement('div');
+            channelName.className = 'channel-name';
+            nameofChannel.forEach(word =>{
+                const wordSpan = document.createElement('div');
+                wordSpan.textContent = word;
+                wordSpan.className = 'name-of-channel';
+                wordSpan.id = channel.name
+                //channelName.classList.add('channel-style-' + index);
+                channelName.appendChild(wordSpan);
             });
-    
-        } catch (error) {
-            console.error("Error fetching channels:", error);
+            //channelName.textContent = channel.name;
+            channelContent.appendChild(channelName);
+
+
+            // Channel Schedule
+            const schedule = await fetchScheduleForChannel(channel.channel_id); 
+            // console.log('Schedule for channel', schedule);
+            //const scheduleBlock = createScheduleBlock(schedule, channel.maturity_rating); 
+            const scheduleBlock = createScheduleBlock(channel.channel_id, channel.maturity_rating, channel.name);
+            channelContent.appendChild(scheduleBlock);
+
+            channelBlock.appendChild(channelContent);
+
+            grid.appendChild(channelBlock);
         }
+
+        const channelNames = document.querySelectorAll('.channel-name');
+        channelNames.forEach((channelName, index) => {
+            // Assign a class based on the index or other data
+            channelName.classList.add('channel-style-' + index);
+        });
+
+    } catch (error) {
+        console.error("Error fetching channels:", error);
     }
+}
 
 function collapseChannel(channelElement) {
     // Collapse the channel block
@@ -259,7 +298,7 @@ async function fetchScheduleForChannel(channelId) {
         
         const currentTime = new Date();
 
-        console.log("User Time Zone:", userTimeZone);
+        // console.log("User Time Zone:", userTimeZone);
 
         // Convert each schedule time to the user's local time zone
         const convertedSchedules = schedule.map(item => ({
@@ -283,9 +322,6 @@ async function fetchScheduleForChannel(channelId) {
         return []; // Return an empty array in case of error
     }
 }
-
-
-
 
 
 
@@ -337,7 +373,8 @@ function createScheduleBlock(channelId, maturityRating, channelName="default") {
 
 
 function onYouTubeIframeAPIReady() {
-    
+    //checkForScheduledVideo();
+    //loadVideo();
 }
 
 
@@ -367,9 +404,9 @@ function checkForScheduledVideo() {
         })
         .then(response => response.json())
         .then(data => {
-            console.log("Data from server:", data);
+            // console.log("Data from server:", data);
             
-            console.log("start_time: ", data.startTime);
+            // console.log("start_time: ", data.startTime);
 
             // initialStartTime = convertTimeToTimezone(data.startTime, userTimeZone);
             // console.log("initial: ", initialStartTime);
@@ -474,7 +511,7 @@ function checkForScheduledEnding() {
 
 async function fetchNextVideoAndLoad(channelId) {
     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone; 
-    console.log("fetching");
+    // console.log("fetching");
     try {
         const response = await fetch(`${API_BASE_URL}/videos`, {
             method: 'POST',
@@ -489,7 +526,7 @@ async function fetchNextVideoAndLoad(channelId) {
         }
 
         const nextVideo = await response.json();
-        console.log(nextVideo);
+        // console.log(nextVideo);
         //if (nextVideo && nextVideo.videoID) {
         fetchChannels();
         loadVideo(channelId);
@@ -526,9 +563,6 @@ function loadVideo(channelId) {
         const initialStartTime = parseInt(extractStartTime(data.embedUrl));
         const startTimes = initialStartTime + timeElapsed;
 
-        // console.log("initial start time: ", initialStartTime);
-        // console.log("starTimes: ", startTimes);
-
         currentVideoDetails = {
             channelId: channelId,
             startTime: scheduledStartTime,
@@ -543,7 +577,7 @@ function loadVideo(channelId) {
                     controls: 0,
                     autoplay: 1,
                     mute: 1,
-                    startSeconds: startTimes,
+                    start: startTimes,
                     disablekb: 1,
                     modestbranding: 1
                 },
@@ -640,7 +674,7 @@ function extractVideoID(url) {
 }
 
 function extractStartTime(url) {
-    console.log('URL received in extractStartTime:', url);
+    // console.log('URL received in extractStartTime:', url);
     const regex = /[?&]start=(\d+)/;
     const match = url.match(regex);
     //console.log('Match result:', match);
@@ -712,11 +746,13 @@ function setInitialVolume() {
     }
 }
 
+
 // cache the requests sent to backend
 async function fetchChannelsWithCaching() {
 
     const cachedChannels = localStorage.getItem('channels');
     if (cachedChannels) {
+        console.log("cached channels: ", cachedChannels);
         return JSON.parse(cachedChannels); // Return the cached channels
     }
 
@@ -726,6 +762,8 @@ async function fetchChannelsWithCaching() {
         const channels = await response.json();
         // Cache the channels in local storage
         localStorage.setItem('channels', JSON.stringify(channels));
+        const cachedChannels = JSON.parse(localStorage.getItem('channels'));
+        console.log("cached: ", cachedChannels);
         return channels;
     } catch (error) {
         console.error("Error fetching channels:", error);
@@ -733,9 +771,8 @@ async function fetchChannelsWithCaching() {
 }
 
 
-
-document.addEventListener("DOMContentLoaded", async function() {
-
+document.addEventListener("DOMContentLoaded", function() {
+    onYouTubeIframeAPIReady();
     selectChannel(9);
     defaultVideo();
     fetchChannels();
@@ -748,5 +785,4 @@ document.addEventListener("DOMContentLoaded", async function() {
         muteButtonIcon.classList.remove('fa-volume-up');
         muteButtonIcon.classList.add('fa-volume-mute');
     }
-
 });
