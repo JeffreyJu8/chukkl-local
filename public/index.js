@@ -4,7 +4,7 @@ var scheduledEndTime;
 var currVideoCast;
 var checkForVideoInterval;
 var selectedChannelId;
-var categoryMap = {};
+var currVideoId;
 var channelSchedules = {};
 var currentlyExpandedChannel = null;
 var currentVideoDetails = {};
@@ -413,13 +413,17 @@ function checkForScheduledVideo() {
 
             // initialEndTime = convertTimeToTimezone(data.endTime, userTimeZone);
 
-
+            console.log("returned data: ", data);
             scheduledStartTime = convertToFullDateTime(data.startTime, userTimeZone);
             scheduledEndTime = convertToFullDateTime(data.endTime, userTimeZone);
             const currentTime = new Date();
-            // console.log("initial ", initialStartDate);
+            console.log("start time", scheduledStartTime);
+            console.log("end time: ", scheduledEndTime);
+            console.log("currenttime: ", currentTime);
+            
  
             if (currentTime.getTime() >= scheduledStartTime.getTime() && currentTime.getTime() < scheduledEndTime.getTime()) {
+                console.log("entered interval");
                 clearInterval(checkForVideoInterval);
                 loadVideo(channelId);
             }
@@ -500,41 +504,16 @@ function checkForScheduledEnding() {
 
     checkForVideoInterval = setInterval(function() {
         const currentTime = new Date();
-        //console.log(currentVideoDetails.endTime);
+        // console.log(currentVideoDetails.endTime);
         if (currentTime.getTime() >= currentVideoDetails.endTime.getTime()) {
             clearInterval(checkForVideoInterval);
-            fetchNextVideoAndLoad(currentVideoDetails.channelId);
+            // fetchNextVideoAndLoad(currentVideoDetails.channelId);
+            fetchChannels();
+            loadVideo(currentVideoDetails.channelId);
         }
     }, 1000); // Check every 1 second
 }
 
-
-async function fetchNextVideoAndLoad(channelId) {
-    const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone; 
-    // console.log("fetching");
-    try {
-        const response = await fetch(`${API_BASE_URL}/videos`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ channelId: channelId, timezone: userTimeZone })
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const nextVideo = await response.json();
-        // console.log(nextVideo);
-        //if (nextVideo && nextVideo.videoID) {
-        fetchChannels();
-        loadVideo(channelId);
-        //}
-    } catch (error) {
-        console.error("Error fetching next video:", error);
-    }
-}
 
 
 function loadVideo(channelId) {
@@ -548,7 +527,7 @@ function loadVideo(channelId) {
     })
     .then(response => response.json())
     .then(data => {
-        
+        console.log("loaded video: ", data);
 
         // const initialStart = convertTimeToTimezone(data.startTime, userTimeZone);
         // const initialEnd = convertTimeToTimezone(data.endTime, userTimeZone);
@@ -745,6 +724,20 @@ function setInitialVolume() {
         player.setVolume(initialVolume);
     }
 }
+
+document.getElementById('fullscreenBtn').addEventListener('click', function() {
+    var videoContainer = document.getElementById('videoContainer');
+    if (videoContainer.requestFullscreen) {
+        videoContainer.requestFullscreen();
+    } else if (videoContainer.mozRequestFullScreen) { /* Firefox */
+        videoContainer.mozRequestFullScreen();
+    } else if (videoContainer.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+        videoContainer.webkitRequestFullscreen();
+    } else if (videoContainer.msRequestFullscreen) { /* IE/Edge */
+        videoContainer.msRequestFullscreen();
+    }
+});
+
 
 
 // cache the requests sent to backend

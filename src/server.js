@@ -51,7 +51,7 @@ async function preloadIndividualChannels() {
         const cacheKey = `channel_${channel.channel_id}`;
         await memcachedClient.set(cacheKey, JSON.stringify(channel), { expires: 3600 });
     }
-    console.log('Preloaded individual channel details into cache');
+    // console.log('Preloaded individual channel details into cache');
 }
 
 
@@ -85,10 +85,10 @@ app.get('/channel/:id', async (req, res) => {
     try {
         let channelDetails = await memcachedClient.get(cacheKey);
         if (channelDetails && channelDetails.value) {
-            console.log('Serving channel details from cache.');
+            // console.log('Serving channel details from cache.');
             channelDetails = JSON.parse(channelDetails.value.toString());
         } else {
-            console.log('Cache miss. Loading channel details from database.');
+            // console.log('Cache miss. Loading channel details from database.');
             channelDetails = await fetchChannelDetailsWhenMiss(channelId);
             await memcachedClient.set(cacheKey, JSON.stringify(channelDetails), { expires: 3600 }); // Cache for 1 hour
         }
@@ -134,9 +134,30 @@ app.get('/categories', async (req, res) => {
 });
 
 
+async function fetchAllVideoDetailsFromDatabase() {
+    const query = `SELECT * FROM Videos`;
+    try {
+        const [videos] = await db.query(query);
+        return videos;
+    } catch (error) {
+        console.error("Error fetching video details from database:", error);
+        return [];
+    }
+}
+
+async function preloadAllVideoDetails() {
+    const videos = await fetchAllVideoDetailsFromDatabase();
+    for (const video of videos) {
+        const cacheKey = `video_details_${video.video_id}`;
+        await memcachedClient.set(cacheKey, JSON.stringify(video), { expires: 3600 }); // Cache for 1 hour
+    }
+    console.log('Preloaded all video details into cache');
+}
+
+
 async function fetchVideoDetailsFromDatabase(channelId, currentTime) {
     const query = `
-        SELECT v.url, v.cast, s.start_time, s.end_time 
+        SELECT v.url, v.cast, v.video_id, v.channel_id, s.start_time, s.end_time 
         FROM Schedules s
         JOIN Videos v ON s.video_id = v.video_id
         WHERE s.channel_id = ?
@@ -150,47 +171,136 @@ async function fetchVideoDetailsFromDatabase(channelId, currentTime) {
 
 app.post('/videos', async (req, res) => {
     const { channelId, timezone } = req.body;
-    const currentTime = moment().tz(timezone).format('HH:mm');
-    const cacheKey = `video_${channelId}_${currentTime}`;
+    const currentTime = moment().tz(timezone).format('HH:mm:ss');
+    const currentTimeMoment = moment().tz(timezone);
+    // const cacheKey = `video_${channelId}_${currentTime}`;
+    //console.log("current time: ", currentTimeMoment);
 
     try {
+
+        const videoId = await getCurrentVideoId(channelId, currentTimeMoment);
+
+        if (!videoId) {
+            return res.status(404).json({ message: 'No video is scheduled to play at this time.' });
+        }
+
+        // Construct the cache key using the video ID
+        const cacheKey = `video_details_${videoId}`;
+
+        // Attempt to retrieve video details from cache
         let videoDetails = await memcachedClient.get(cacheKey);
         if (videoDetails && videoDetails.value) {
-            console.log('Serving video details from cache.');
+            // console.log('Serving video details from cache.');
             videoDetails = JSON.parse(videoDetails.value.toString());
-        } else {
-            console.log('Cache miss. Loading video details from database.');
+            //console.log("video from cache: ", videoDetails);
+        } 
+        else {
+            // console.log('Cache miss. Loading video details from database.');
             const videos = await fetchVideoDetailsFromDatabase(channelId, currentTime);
             if (videos.length === 0) {
                 return res.status(404).json({ message: 'No video is scheduled to play at this time.' });
             }
+            // console.log("current video: ", videos[0]);
             videoDetails = videos[0]; // Assuming you want the first matching video
             await memcachedClient.set(cacheKey, JSON.stringify(videoDetails), { expires: 900 }); // Update cache
         }
-        res.json(formatVideoResponse(videoDetails)); // Send the video details to the client
+        //console.log("video id: ", videoId);
+        // const scheduleTimes = await fetchScheduleTimesForVideo(videoId);
+        const scheduleTimes = await fetchScheduleTimesForVideo(videoId, currentTime);
+
+        //console.log("formated video: ", formatVideoResponse(videoDetails, scheduleTimes))
+        res.json(formatVideoResponse(videoDetails, scheduleTimes)); // Send the video details to the client
     } catch (error) {
-        console.error("Error fetching videos:", error);
+        //console.error("Error fetching videos:", error);
         res.status(500).send('Internal Server Error');
     }
 });
 
 
+async function getCurrentVideoId(channelId, currentTime) {
+    // Format currentTime to match your database's time format, if necessary
+    const currentTimeFormatted = currentTime.format('HH:mm:ss');
+    //console.log("formatted time: ", currentTimeFormatted);
 
-function formatVideoResponse(video) {
+    const query = `
+        SELECT v.video_id
+        FROM Schedules s
+        JOIN Videos v ON s.video_id = v.video_id
+        WHERE s.channel_id = ?
+        AND ? BETWEEN s.start_time AND s.end_time
+        ORDER BY s.start_time
+        LIMIT 1`;
+
+    try {
+        const [results] = await db.query(query, [channelId, currentTimeFormatted]);
+        if (results.length > 0) {
+            //console.log("returning video: ", results[0]);
+            return results[0].video_id; // Return the video_id of the current video
+        } else {
+            return null; // No video is currently scheduled
+        }
+    } catch (error) {
+        console.error("Error fetching current video ID:", error);
+        return null; // Return null in case of any error
+    }
+}
+
+
+
+function formatVideoResponse(video, scheduleTimes) {
     const urlParts = video.url.split('?');
     const baseUrl = urlParts[0];
     const queryParams = new URLSearchParams(urlParts[1]);
     const autoPlayUrl = `${baseUrl}?${queryParams.toString()}`;
+
     return {
         videoID: video.video_id,
         embedUrl: autoPlayUrl,
-        endTime: video.end_time,
-        startTime: video.start_time,
+        endTime: scheduleTimes ? scheduleTimes.end_time : video.end_time,
+        startTime: scheduleTimes ? scheduleTimes.start_time : video.start_time,
         vChannelId: video.channel_id,
         category: video.category_id,
         video_cast: video.cast
     };
 }
+
+
+async function fetchScheduleTimesForVideo(videoId, currentTime) {
+    // Ensure currentTime is properly formatted as "HH:mm:ss"
+    const currentTimeFormatted = moment(currentTime, "HH:mm:ss").format("HH:mm:ss");
+
+    try {
+        // Adjust the query to order schedules based on the closest start time to the current time
+        const query = `
+            SELECT start_time, end_time
+            FROM Schedules
+            WHERE video_id = ?
+            ORDER BY ABS(TIMESTAMPDIFF(MINUTE, STR_TO_DATE(?, '%H:%i:%s'), start_time))
+            LIMIT 1`;
+
+        // Execute the query with the videoId and the currentTimeFormatted
+        const [results] = await db.execute(query, [videoId, currentTimeFormatted]);
+        
+        if (results.length > 0) {
+            const schedule = results[0];
+            
+            // Format start_time and end_time as "HH:mm:ss"
+            const formattedStartTime = moment(schedule.start_time, "HH:mm:ss").format("HH:mm:ss");
+            const formattedEndTime = moment(schedule.end_time, "HH:mm:ss").format("HH:mm:ss");
+
+            return {
+                start_time: formattedStartTime,
+                end_time: formattedEndTime
+            };
+        } else {
+            return null; // No schedule found for this videoId
+        }
+    } catch (error) {
+        console.error(`Error fetching schedule times for video ID ${videoId}:`, error);
+        return null;
+    }
+}
+
 
 app.get('/videos', async (req, res) => {
     // This is a sample response. Modify as needed.
@@ -273,6 +383,7 @@ async function startServer() {
     await connectToDatabase();
     await preloadAllChannels();
     await preloadIndividualChannels();
+    preloadAllVideoDetails();
     setInterval(preloadAllChannels, 3500 * 1000);
     setInterval(preloadIndividualChannels, 3500 * 1000);
     app.listen(PORT, () => {
