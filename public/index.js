@@ -8,6 +8,7 @@ var currVideoId;
 var channelSchedules = {};
 var currentlyExpandedChannel = null;
 var currentVideoDetails = {};
+var isLoading = false; 
 
 
 const API_BASE_URL = window.location.hostname.includes('localhost')
@@ -30,48 +31,44 @@ function debounce(func, wait) {
 }
 
 async function channelSelectionHandler(channel, element) {
+    if (isLoading) return; // Prevent further interaction if already loading
+    isLoading = true; // Set loading state to true
+
     if (currentlyExpandedChannel && currentlyExpandedChannel !== element) {
         collapseChannel(currentlyExpandedChannel);
     }
 
-    await fetchChannelDetails(channel.channel_id);
+    try {
+        await fetchChannelDetails(channel.channel_id);
+        await getVideoCast(channel.channel_id); // Ensure this completes before proceeding
+        selectChannel(channel.channel_id); // triggers the video change
 
-    getVideoCast(channel.channel_id);
-    selectChannel(channel.channel_id); // triggers the video change
+        element.classList.toggle('channel-block-expanded');
+        const channelName = element.querySelector('.channel-name');
+        if (channelName) {
+            channelName.classList.toggle('channel-name-expanded');
+        }
 
-    //console.log("cast", currVideoCast); 
+        const descriptions = element.querySelectorAll('.schedule-video-description');
+        descriptions.forEach(desc => desc.style.display = desc.style.display === 'none' ? 'block' : 'none');
 
-    element.classList.toggle('channel-block-expanded');
+        const channelSche = element.querySelector('.channel-schedule');
+        if (channelSche) {
+            channelSche.classList.toggle('channel-schedule-expanded');
+        }
 
-    // expanding the channe name block when user clicks on it
-    const channelName = element.querySelector('.channel-name');
-    if (channelName) {
-        channelName.classList.toggle('channel-name-expanded');
-    }
-
-    // make description visible
-    const descriptions = element.querySelectorAll('.schedule-video-description');
-    descriptions.forEach(function(desc) {
-        desc.style.display = desc.style.display === 'none' ? 'block' : 'none';
-    });
-
-    // expanding the channel schedule block when user clicks on it
-    const channelSche = element.querySelector('.channel-schedule');
-    if(channelSche){
-        channelSche.classList.toggle('channel-schedule-expanded');
-    }
+        const scheduleItems = element.querySelectorAll('.schedule-item');
+        scheduleItems.forEach(item => item.classList.toggle('schedule-item-expanded'));
     
-
-    // expand the schedule padding when clicked on
-    const scheduleItems = element.querySelectorAll('.schedule-item');
-    scheduleItems.forEach(function(item) {
-        item.classList.toggle('schedule-item-expanded');
-    });
-    
-    getChannelInfo(channel, element.dataset.styleClass);
-    currentlyExpandedChannel = element.classList.contains('channel-block-expanded') ? element : null;
+        getChannelInfo(channel, element.dataset.styleClass);
+        currentlyExpandedChannel = element.classList.contains('channel-block-expanded') ? element : null;
+    } catch (error) {
+        console.error("Error during channel selection:", error);
+        // Handle the error appropriately (e.g., show an error message to the user)
+    } finally {
+        isLoading = false; // Reset loading state regardless of success or failure
+    }
 }
-
 
 async function fetchChannelDetails(channelId) {
     try {
@@ -150,51 +147,8 @@ async function fetchChannels() {
 
             channelBlock.onclick = debounce(function() {
 
-                channelSelectionHandler(channel, channelBlock);
-
-                // if (currentlyExpandedChannel && currentlyExpandedChannel !== this) {
-                //     collapseChannel(currentlyExpandedChannel);
-                // }
-
-                
-                // getVideoCast(channel.channel_id);
-                // selectChannel(channel.channel_id); // triggers the video change
-
-                // //console.log("cast", currVideoCast); 
-
-                // this.classList.toggle('channel-block-expanded');
-
-                // // expanding the channe name block when user clicks on it
-                // const channelName = this.querySelector('.channel-name');
-                // if (channelName) {
-                //     channelName.classList.toggle('channel-name-expanded');
-                // }
-
-                // // make description visible
-                // const descriptions = this.querySelectorAll('.schedule-video-description');
-                // descriptions.forEach(function(desc) {
-                //     desc.style.display = desc.style.display === 'none' ? 'block' : 'none';
-                // });
-
-                // // expanding the channel schedule block when user clicks on it
-                // const channelSche = this.querySelector('.channel-schedule');
-                // if(channelSche){
-                //     channelSche.classList.toggle('channel-schedule-expanded');
-                // }
-                
-                
-
-                // // expand the schedule padding when clicked on
-                // const scheduleItems = this.querySelectorAll('.schedule-item');
-                // scheduleItems.forEach(function(item) {
-                //     item.classList.toggle('schedule-item-expanded');
-                // });
-                
-                // getChannelInfo(channel, this.dataset.styleClass);
-                // currentlyExpandedChannel = this.classList.contains('channel-block-expanded') ? this : null;
-
+            channelSelectionHandler(channel, channelBlock);
             }, 300);
-
 
             // Channel Content container
             const channelContent = document.createElement('div');
@@ -516,6 +470,7 @@ function checkForScheduledEnding() {
 
 
 function loadVideo(channelId) {
+    isLoading = true;
     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     fetch(`${API_BASE_URL}/videos`, {
         method: 'POST',
@@ -582,6 +537,7 @@ function loadVideo(channelId) {
     })
     .catch(error => {
         console.error("Error fetching video data:", error);
+        isLoading = false;
     });
 }
 
@@ -622,6 +578,9 @@ function onPlayerStateChange(event) {
         //fetchChannels();
         updateNewSchedule(selectedChannelId);
         checkForScheduledVideo();
+    }
+    else if (event.data == YT.PlayerState.PLAYING) {
+        isLoading = false; 
     }
 }
 
