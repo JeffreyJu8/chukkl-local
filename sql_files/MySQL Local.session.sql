@@ -4,6 +4,7 @@ SELECT @@session.time_zone;
 -- SET time_zone = '+00:00';
 -- SET GLOBAL time_zone = '+00:00';
 
+SELECT * FROM Schedules WHERE channel_id = 1 ORDER BY start_time;
 
 
 CREATE TABLE Categories (

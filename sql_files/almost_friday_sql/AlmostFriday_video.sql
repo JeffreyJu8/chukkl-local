@@ -209,8 +209,8 @@ VALUES (93, "Almost Friday TV",
 
 
 INSERT INTO Videos (video_id, title, url, category_id, channel_id, description)
-VALUES (94, "Almost Friday Pod | Ep. 41", 
-"https://www.youtube.com/embed/fzD3p9CYJ5k?si=Q5L5pLT3XYw8KmjX&start=1394&end=2294&autoplay=1&mute=1&controls=0&showinfo=0&modestbranding=0", 
+VALUES (94, "AFM Sketches 3", 
+"https://www.youtube.com/embed/jJtQ78OfIzM?si=czvHsRNVILIsPadO&start=0&autoplay=1&mute=1&controls=0&showinfo=0&modestbranding=0", 
 1, 6,
 "Caught up with our lovely friend Rusty (one of Will's little sluggers). Lots of locker room talk for the fellas, friend's older brother stories, RA stories, and Willem Dafoe's hog.");
 
@@ -339,7 +339,7 @@ SELECT * FROM Videos;
 
 DELETE FROM Videos WHERE video_id BETWEEN 9 AND 13;
 
-DELETE FROM Videos WHERE video_id = 11;
+DELETE FROM Videos WHERE video_id = 94;
 DELETE FROM Videos WHERE video_id = 10;
 DELETE FROM Videos WHERE video_id = 11;
 DELETE FROM Videos WHERE video_id = 12;

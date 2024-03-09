@@ -98,6 +98,7 @@ INSERT INTO Schedules (schedule_id, video_id, start_time, end_time, channel_id, 
 
 SELECT * FROM Schedules;
 
+SELECT * FROM Schedules WHERE channel_id = 9;
 DELETE FROM Schedules WHERE schedule_id = 960;
 
-DELETE FROM Schedules WHERE schedule_id BETWEEN 865 AND 960;
+DELETE FROM Schedules WHERE schedule_id BETWEEN 769 AND 864;

@@ -108,9 +108,8 @@ function updateChannelUI(details) {
 async function defaultVideo(){
 
     try {
-        // const response = await fetch(`${API_BASE_URL}/channels`); 
-        // const channels = await response.json();
-        const channels = await fetchChannelsWithCaching();
+        const response = await fetch(`${API_BASE_URL}/channels`); 
+        const channels = await response.json();
         const grid = document.getElementById('channelsGrid');
         grid.innerHTML = '';
 
@@ -135,9 +134,8 @@ async function defaultVideo(){
 
 async function fetchChannels() {
     try {
-        // const response = await fetch(`${API_BASE_URL}/channels`); 
-        // const channels = await response.json();
-        const channels = await fetchChannelsWithCaching();
+        const response = await fetch(`${API_BASE_URL}/channels`); 
+        const channels = await response.json();
         const grid = document.getElementById('channelsGrid');
         grid.innerHTML = ''; // Clear the grid before adding new channels
         
@@ -243,6 +241,7 @@ async function fetchChannels() {
         console.error("Error fetching channels:", error);
     }
 }
+
 
 function collapseChannel(channelElement) {
     // Collapse the channel block
@@ -725,43 +724,7 @@ function setInitialVolume() {
     }
 }
 
-document.getElementById('fullscreenBtn').addEventListener('click', function() {
-    var videoContainer = document.getElementById('videoContainer');
-    if (videoContainer.requestFullscreen) {
-        videoContainer.requestFullscreen();
-    } else if (videoContainer.mozRequestFullScreen) { /* Firefox */
-        videoContainer.mozRequestFullScreen();
-    } else if (videoContainer.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
-        videoContainer.webkitRequestFullscreen();
-    } else if (videoContainer.msRequestFullscreen) { /* IE/Edge */
-        videoContainer.msRequestFullscreen();
-    }
-});
 
-
-
-// cache the requests sent to backend
-async function fetchChannelsWithCaching() {
-
-    const cachedChannels = localStorage.getItem('channels');
-    if (cachedChannels) {
-        console.log("cached channels: ", cachedChannels);
-        return JSON.parse(cachedChannels); // Return the cached channels
-    }
-
-    // If not cached, fetch from the server
-    try {
-        const response = await fetch(`${API_BASE_URL}/channels`);
-        const channels = await response.json();
-        // Cache the channels in local storage
-        localStorage.setItem('channels', JSON.stringify(channels));
-        const cachedChannels = JSON.parse(localStorage.getItem('channels'));
-        console.log("cached: ", cachedChannels);
-        return channels;
-    } catch (error) {
-        console.error("Error fetching channels:", error);
-    }
-}
 
 
 document.addEventListener("DOMContentLoaded", function() {

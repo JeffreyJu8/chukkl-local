@@ -2507,12 +2507,12 @@ input[type="range"]::-webkit-slider-runnable-track {
         font-style: normal;
         font-size: 1.3vw;
         color: #8aefe7;
-        margin-top: 2.3em;
+        margin-top: 2.5vw;
     }
     
     #appTitle .button-group {
         display: flex; 
-        margin-left: 12em;
+        margin-left: 60vw;
         gap: 0.2em;
         margin-top: -0.4em;
     }
@@ -2559,7 +2559,7 @@ input[type="range"]::-webkit-slider-runnable-track {
         font-family: 'Poppins';
         font-size: 1.2vw;
         margin-left: 20px;
-        margin-top: 0.01em;
+        margin-top: -0.4vw;
     }
     
     
@@ -2575,41 +2575,39 @@ input[type="range"]::-webkit-slider-runnable-track {
         display: flex;
         justify-content: center; 
         align-items: start; 
-        gap: 0.5em;
+        gap: 5vw;
     }
     
     
     #videoContainer {
         position: relative;
-        width: 25em;
-        height: 17em;
+        height: 30vw;
     }
     
     
     .video-overlay {
-        position: relative; 
-        width: 50em;
-        margin-left: -20em;
+        position: absolute; 
+        width: 55vw;
+        height: 100%;
         top: 0;
         left: 0;
-        right: 0; 
+        right: 0;
         bottom: 0;
         z-index: 10;
         pointer-events: auto;
     }
     
     #videoPlayer {
-        position: relative; 
-        width: 35em;
+        position: absolute; 
+        width: 55vw;
         height: 100%;
         border-radius: 10px;
-        margin-left: -5em;
     }
     
     .channel-info{
         background-color: #373243; 
-        width: 25em;
-        height: 17em;
+        width: 60vw;
+        height: 30vw;
         border-radius: 10px;
         margin-left: 10px;
     }
@@ -3085,6 +3083,7 @@ input[type="range"]::-webkit-slider-runnable-track {
         color: white;
         margin: 0;
         padding: 20px;
+        width: 100%;
     }
     
     #header{
@@ -3118,13 +3117,13 @@ input[type="range"]::-webkit-slider-runnable-track {
         font-style: normal;
         font-size: 1.3vw;
         color: #8aefe7;
-        margin-top: 3.4em;
+        margin-top: 3.7vw;
         margin-left: 7px;
     }
     
     #appTitle .button-group {
         display: flex; 
-        margin-left: 8em;
+        margin-left: 60vw;
         gap: 0.2em;
         margin-top: -0.4em;
     }
@@ -3187,21 +3186,21 @@ input[type="range"]::-webkit-slider-runnable-track {
         display: flex;
         justify-content: center; 
         align-items: start; 
-        gap: 0.5em;
+        gap: 1vw;
     }
     
     
     #videoContainer {
         position: relative;
-        width: 25em;
+        width: 50vw;
         height: 17em;
     }
     
     
     .video-overlay {
-        position: relative; 
-        width: 50em;
-        margin-left: -20em;
+        position: absolute; 
+        width: 55vw;
+        height: 100%;
         top: 0;
         left: 0;
         right: 0; 
@@ -3211,15 +3210,15 @@ input[type="range"]::-webkit-slider-runnable-track {
     }
     
     #videoPlayer {
-        position: relative; 
-        width: 25em;
+        position: absolute; 
+        width: 55vw;
         height: 100%;
         border-radius: 10px;
     }
     
     .channel-info{
         background-color: #373243; 
-        width: 50em;
+        width: 40vw;
         height: 17em;
         border-radius: 10px;
         margin-left: 10px;
