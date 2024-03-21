@@ -30,7 +30,7 @@ body {
     margin: -2.2px;
     font-weight: bolder;
 }
-
+/* 
 #appTitle .sub{
     font-family: "Poppins", sans-serif;
     font-weight: 100;
@@ -39,7 +39,7 @@ body {
     color: #8aefe7;
     margin-top: 26px;
     margin-left: 7px;
-}
+} */
 
 #appTitle .button-group {
     display: flex; 
@@ -288,7 +288,7 @@ body {
     text-decoration: underline;
 }
 
-@media screen and (-webkit-min-device-pixel-ratio: 1) and (min-device-width: 2550px){
+@media screen and (-webkit-min-device-pixel-ratio: 1) and (min-width: 2160px){
     body {
         font-family: 'Arial', sans-serif;
         background: #1a1126;
@@ -322,7 +322,7 @@ body {
         font-weight: bolder;
     }
     
-    #appTitle .sub{
+    /* #appTitle .sub{
         font-family: "Poppins", sans-serif;
         font-weight: 100;
         font-style: normal;
@@ -330,7 +330,7 @@ body {
         color: #8aefe7;
         margin-top: 1.4em;
         margin-left: 7px;
-    }
+    } */
     
     #appTitle .button-group {
         display: flex; 
@@ -351,7 +351,7 @@ body {
         height: 3em;
     }
     
-    .about-us:hover {
+    .return:hover {
         cursor: pointer; 
     }
     
@@ -391,6 +391,7 @@ body {
     #appMoto .word:nth-child(3) {color:white}
     #appMoto .word:nth-child(4) {color:white}
     #appMoto .word:nth-child(5) {color:white}
+    
 
     #Description {
         text-align: left;
@@ -576,81 +577,121 @@ body {
 }
 
 
-@media (max-width: 850px) {
+@media screen and (-webkit-min-device-pixel-ratio: 1) and (min-width: 1680px) and (max-width: 2160px){
     body {
-        padding: 10px; 
-        overflow-x: hidden;
+        font-family: 'Arial', sans-serif;
+        background: #1a1126;
+        color: white;
+        margin: 0;
+        padding: 20px;
     }
-
-
+    
     #header{
-        position: fixed;
-        z-index: 1000;
         display: flex;
         flex-direction: column;
-        height: 50px;
-        width: 100%;
+        height: 10em;
+        padding: 10px;
         background-color: black;
+        margin-left: -20px;
+        margin-right: -20px;
         margin-bottom: 5px;
         margin-top: -20px;
-        margin-left: -10px;
     }
-
+    
     #appTitle {
-        font-size: 3vw;
-        margin-left: 10px;
-    }
-
-    #appTitle .letter {
-        margin: 0; 
-        margin-top: 5px;
-    }
-
-    #appTitle .sub {
-        font-size: 1.5vw; 
-        margin-top: 1.8vw;
-    }
-
-    #appMoto{
-        font-size: 1.3vw;
-        margin-left: 10px;
-        margin-top: -0.5vw;
-        width: 300px;
-    }
-
-    #appTitle .button-group {
+        font-family: 'Aileron', sans-serif;                
         display: flex;
+        font-size: 3.4vw;
+        margin-left: 20px;
         flex-direction: row;
-        margin-left: 65vw;
-        gap:10px;
-
     }
-
-    #appTitle .return{
+    
+    #appTitle .letter {
+        margin: -2.2px;
+        font-weight: bolder;
+    }
+/*     
+    #appTitle .sub{
+        font-family: "Poppins", sans-serif;
+        font-weight: 100;
+        font-style: normal;
+        font-size: 1.3vw;
+        color: #8aefe7;
+        margin-top: 1.4em;
+        margin-left: 7px;
+    } */
+    
+    #appTitle .button-group {
+        display: flex; 
+        /* align-items: center;  */
+        margin-left: 18em;
+        gap: 10px;
+    }
+    
+    
+    .return {
         font-size: 1vw;
-        width: 55px; 
-        height: 30px;
-        margin-top: 1vw;
+        color: white;
+        width: 9em;
+        margin-top: 10px;
+        background-color: black;
+        border: 0.2em solid #8aefe7;
+        border-radius: 0.8em;
+        height: 3em;
+    }
+    
+    .return:hover {
+        cursor: pointer; 
     }
     
     #appTitle .feedback{
         font-size: 1vw;
-        width: 55px; 
-        height: 30px;
-        margin-top: 1vw;
+        color: white;
+        width: 9em;
+        margin-top: 18px;
+        background-color: black;
+        border: 0.2em solid #8aefe7;
+        border-radius: 0.8em;
+        height: 3em;
     }
+    
+    .feedback:hover {
+        cursor: pointer; 
+    }
+    
+    
+    #appTitle .letter:nth-child(1) { color: #8aefe7; }    /* First letter 'c' */
+    #appTitle .letter:nth-child(2) { color: #8aefe7; } /* Second letter 'h' */
+    #appTitle .letter:nth-child(3) { color: white; } /* Third letter 'u' */
+    #appTitle .letter:nth-child(4) { color: white; }  /* Fourth letter 'k' */
+    #appTitle .letter:nth-child(5) { color: white; }   /* Fifth letter 'k' */
+    #appTitle .letter:nth-child(6) { color: white; } /* Sixth letter 'l' */
+    
+    #appMoto{
+        font-family: 'Poppins';
+        font-size: 1.2vw;
+        margin-left: 20px;
+        margin-top: -13px;
+    }
+    
+    
+    #appMoto .word:nth-child(1) {color:white}
+    #appMoto .word:nth-child(2) {color:#8aefe7}
+    #appMoto .word:nth-child(3) {color:white}
+    #appMoto .word:nth-child(4) {color:white}
+    #appMoto .word:nth-child(5) {color:white}
+    
 
     #Description {
         text-align: left; 
         margin-top: 9vw;
-        margin-left: 5px; 
-        margin-right: 5px; 
+
     }
     
     
     #Description #companymoto {
         font-family: 'Fredoka One';
-        font-size: 5vw; 
+        font-size: 6vw; 
         font-weight: bold;
         margin-bottom: 2vw; 
     }
@@ -667,34 +708,35 @@ body {
     
     
     #Description figure {
-        margin-left: 5px; 
+        margin-left: 0; 
     }
 
     #Description img {
-        margin-top: 20px;
+        margin-top: 1vw;
+        align-self: center;
+        width: 85vw;
     }
     
     #Description figcaption{
         font-family: "Poppins";
         font-size: 1.5vw;
+        align-self: center;
+        margin-bottom: 5vw;
     }
     
     
     #Description h3:nth-of-type(1){
-        margin-top: -5px;
+        margin-top: 5vw;
     }
     
     
     #Description p:nth-of-type(1) {
         font-size: 2.5vw; 
         font-weight: bolder;
-        margin-bottom: 20px; 
         text-align: Left; 
         color: grey;
-        max-width: 800px;
+        max-width: 80vw;
         line-height: 1.6;
-        margin-top: -10px;
-        margin-bottom: 30px;
     }
     
     #Description p:nth-of-type(2) {
@@ -702,8 +744,9 @@ body {
         font-weight: medium;
         text-align: Left; 
         color: white;
-        max-width: 1100px;
+        max-width: 85vw;
         line-height: 1.6;
+        margin-bottom: 10vw;
     }
     
     #Description p:nth-of-type(3) {
@@ -711,8 +754,9 @@ body {
         font-weight: medium;
         text-align: Left; 
         color: white;
-        max-width: 1100px;
+        max-width: 85vw;
         line-height: 1.6;
+        margin-bottom: 5vw;
     }
     
     #Description p:nth-of-type(4) {
@@ -720,7 +764,7 @@ body {
         font-weight: medium;
         text-align: Left; 
         color: white;
-        max-width: 1100px;
+        max-width: 85vw;
         line-height: 1.6;
     }
     
@@ -764,6 +808,7 @@ body {
         color: white;
         padding: 20px;
         width: 100%;
+        height: 1vh;
         margin-left: -20px;
         margin-bottom: -20px;
         margin-top: 40px;
@@ -788,7 +833,7 @@ body {
     
     #footer .application-form {
         align-self: flex-end;
-        margin-top: -24vw;
+        margin-top: -15.5vw;
         width: 20vw;
     }
     
@@ -809,7 +854,6 @@ body {
     
     #footer .email-contact {
         align-self: center;
-        margin-top: -11vw;
         font-size: 1.5vw;
     }
     
@@ -824,7 +868,884 @@ body {
 }
 
 
-@media (max-width: 400px) {
+@media screen and (-webkit-min-device-pixel-ratio: 1) and (min-width: 1021px) and (max-width: 1400px){
+    body {
+        font-family: 'Arial', sans-serif;
+        background: #1a1126;
+        color: white;
+        margin: 0;
+        padding: 20px;
+    }
+    
+    #header{
+        display: flex;
+        flex-direction: column;
+        height: 4em;
+        padding: 10px;
+        background-color: black;
+        margin-left: -20px;
+        margin-right: -20px;
+        margin-bottom: 5px;
+        margin-top: -20px;
+    }
+    
+    #appTitle {
+        font-family: 'Aileron', sans-serif;                
+        display: flex;
+        font-size: 3em;
+        margin-left: 20px;
+        flex-direction: row;
+    }
+    
+    #appTitle .letter {
+        margin: -2.2px;
+        font-weight: bolder;
+    }
+    
+    /* #appTitle .sub{
+        font-family: "Poppins", sans-serif;
+        font-weight: 100;
+        font-style: normal;
+        font-size: 1.3vw;
+        color: #8aefe7;
+        margin-top: 2.5vw;
+    } */
+    
+    #appTitle .button-group {
+        display: flex; 
+        margin-left: 60vw;
+        gap: 0.2em;
+        margin-top: -0.4em;
+    }
+    
+    
+    #appTitle .return {
+        font-size: 0.2em;
+        color: white;
+        width: 9em;
+        background-color: black;
+        border: 0.2em solid #8aefe7;
+        border-radius: 0.8em;
+        height: 4em;
+        margin-top: 3em;
+    }
+    
+    .return:hover {
+        cursor: pointer; 
+    }
+    
+    #appTitle .feedback{
+        font-size: 0.2em;
+        color: white;
+        width: 9em;
+        background-color: black;
+        border: 0.2em solid #8aefe7;
+        border-radius: 0.8em;
+        height: 4em;
+    }
+    
+    .feedback:hover {
+        cursor: pointer; 
+    }
+    
+    
+    #appTitle .letter:nth-child(1) { color: #8aefe7; }    /* First letter 'c' */
+    #appTitle .letter:nth-child(2) { color: #8aefe7; } /* Second letter 'h' */
+    #appTitle .letter:nth-child(3) { color: white; } /* Third letter 'u' */
+    #appTitle .letter:nth-child(4) { color: white; }  /* Fourth letter 'k' */
+    #appTitle .letter:nth-child(5) { color: white; }   /* Fifth letter 'k' */
+    #appTitle .letter:nth-child(6) { color: white; } /* Sixth letter 'l' */
+    
+    #appMoto{
+        font-family: 'Poppins';
+        font-size: 1.2vw;
+        margin-left: 20px;
+        margin-top: -0.4vw;
+    }
+    
+    
+    #appMoto .word:nth-child(1) {color:white}
+    #appMoto .word:nth-child(2) {color:#8aefe7}
+    #appMoto .word:nth-child(3) {color:white}
+    #appMoto .word:nth-child(4) {color:white}
+    #appMoto .word:nth-child(5) {color:white}
+    
+    
+
+    #Description {
+        text-align: left; 
+        margin-top: 9vw;
+
+    }
+    
+    
+    #Description #companymoto {
+        font-family: 'Fredoka One';
+        font-size: 6vw; 
+        font-weight: bold;
+        margin-bottom: 2vw; 
+    }
+    
+    
+    #Description #companymoto .word {
+        color: white;
+        margin-right: 1px; 
+    }
+    #Description #companymoto .word:nth-child(3) {
+        color: #8aefe7; 
+        font-weight: bold;
+    }
+    
+    
+    #Description figure {
+        margin-left: 0; 
+    }
+
+    #Description img {
+        margin-top: 1vw;
+        align-self: center;
+        width: 85vw;
+    }
+    
+    #Description figcaption{
+        font-family: "Poppins";
+        font-size: 1.5vw;
+        align-self: center;
+        margin-bottom: 5vw;
+    }
+    
+    
+    #Description h3:nth-of-type(1){
+        margin-top: 5vw;
+    }
+    
+    
+    #Description p:nth-of-type(1) {
+        font-size: 2.5vw; 
+        font-weight: bolder;
+        text-align: Left; 
+        color: grey;
+        max-width: 80vw;
+        line-height: 1.6;
+    }
+    
+    #Description p:nth-of-type(2) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+        margin-bottom: 10vw;
+    }
+    
+    #Description p:nth-of-type(3) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+        margin-bottom: 5vw;
+    }
+    
+    #Description p:nth-of-type(4) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+    }
+    
+    #Description p:nth-of-type(5) {
+        margin-top: 60px;
+    }
+    
+    
+    #Description h3:first-of-type {
+        font-family: 'Fredoka One';
+        color: white;
+        font-size: 3.5vw; 
+        font-weight: bold; 
+        margin-top: 50px;
+        margin-bottom: 20px; 
+        border-radius: 10px; 
+        
+    }
+    
+    
+    #Description h3:nth-of-type(2) {
+        font-family: 'Fredoka One';
+        color: white;
+        font-size: 3.5vw; 
+        font-weight: bold; 
+        margin-top: 50px;
+        margin-bottom: 20px; 
+        border-radius: 10px; 
+    }
+    
+    .highlight {
+        color: #8aefe7; 
+    }
+
+
+    #footer {
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        justify-content: space-between;
+        background-color: #222; 
+        color: white;
+        padding: 20px;
+        width: 100%;
+        height: 1vh;
+        margin-left: -20px;
+        margin-bottom: -20px;
+        margin-top: 40px;
+    }
+    
+    #footer .social-links {
+        align-self: start;
+        margin-top: -1vw;
+        margin-bottom: 14vw;
+    }
+    
+    #footer .social-links a {
+        color: white;
+        margin: 0 10px;
+        text-decoration: none;
+        font-size: 2vw;
+    }
+    
+    #footer .social-links a:hover {
+        color: #8aefe7; 
+    }
+    
+    #footer .application-form {
+        align-self: flex-end;
+        margin-top: -15.5vw;
+        width: 20vw;
+    }
+    
+    #footer .application-form button {
+        background-color: #373243; 
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1vw;
+        width: 20vw;
+    }
+    
+    #footer .application-form button:hover {
+        background-color: #8aefe7; 
+    }
+    
+    #footer .email-contact {
+        align-self: center;
+        font-size: 1.5vw;
+    }
+    
+    #footer .email-contact a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .email-contact a:hover {
+        text-decoration: underline;
+    }
+}
+
+
+@media screen and (-webkit-min-device-pixel-ratio: 1) and (min-width: 760px) and (max-width: 1020px){
+    body {
+        font-family: 'Arial', sans-serif;
+        background: #1a1126;
+        color: white;
+        margin: 0;
+        padding: 20px;
+        width: 100%;
+    }
+    
+    #header{
+        display: flex;
+        flex-direction: column;
+        height: 4em;
+        padding: 10px;
+        background-color: black;
+        margin-left: -20px;
+        margin-right: -20px;
+        margin-bottom: 5px;
+        margin-top: -20px;
+    }
+    
+    #appTitle {
+        font-family: 'Aileron', sans-serif;                
+        display: flex;
+        font-size: 3em;
+        margin-left: 20px;
+        flex-direction: row;
+    }
+    
+    #appTitle .letter {
+        margin: -2.2px;
+        font-weight: bolder;
+    }
+    
+    /* #appTitle .sub{
+        font-family: "Poppins", sans-serif;
+        font-weight: 100;
+        font-style: normal;
+        font-size: 1.3vw;
+        color: #8aefe7;
+        margin-top: 3.7vw;
+        margin-left: 7px;
+    } */
+    
+    #appTitle .button-group {
+        display: flex; 
+        margin-left: 60vw;
+        gap: 0.2em;
+        margin-top: -0.4em;
+    }
+    
+    
+    #appTitle .return {
+        font-size: 0.2em;
+        color: white;
+        width: 9em;
+        background-color: black;
+        border: 0.2em solid #8aefe7;
+        border-radius: 0.8em;
+        height: 4em;
+        margin-top: 3em;
+    }
+    
+    .return:hover {
+        cursor: pointer; 
+    }
+    
+    #appTitle .feedback{
+        font-size: 0.2em;
+        color: white;
+        width: 9em;
+        background-color: black;
+        border: 0.2em solid #8aefe7;
+        border-radius: 0.8em;
+        height: 4em;
+    }
+    
+    .feedback:hover {
+        cursor: pointer; 
+    }
+    
+    
+    #appTitle .letter:nth-child(1) { color: #8aefe7; }    /* First letter 'c' */
+    #appTitle .letter:nth-child(2) { color: #8aefe7; } /* Second letter 'h' */
+    #appTitle .letter:nth-child(3) { color: white; } /* Third letter 'u' */
+    #appTitle .letter:nth-child(4) { color: white; }  /* Fourth letter 'k' */
+    #appTitle .letter:nth-child(5) { color: white; }   /* Fifth letter 'k' */
+    #appTitle .letter:nth-child(6) { color: white; } /* Sixth letter 'l' */
+    
+    #appMoto{
+        font-family: 'Poppins';
+        font-size: 1.2vw;
+        margin-left: 20px;
+        margin-top: 0.1em;
+    }
+    
+    
+    #appMoto .word:nth-child(1) {color:white}
+    #appMoto .word:nth-child(2) {color:#8aefe7}
+    #appMoto .word:nth-child(3) {color:white}
+    #appMoto .word:nth-child(4) {color:white}
+    #appMoto .word:nth-child(5) {color:white}
+
+    #Description {
+        text-align: left; 
+        margin-top: 9vw;
+
+    }
+    
+    
+    #Description #companymoto {
+        font-family: 'Fredoka One';
+        font-size: 6vw; 
+        font-weight: bold;
+        margin-bottom: 2vw; 
+    }
+    
+    
+    #Description #companymoto .word {
+        color: white;
+        margin-right: 1px; 
+    }
+    #Description #companymoto .word:nth-child(3) {
+        color: #8aefe7; 
+        font-weight: bold;
+    }
+    
+    
+    #Description figure {
+        margin-left: 0; 
+    }
+
+    #Description img {
+        margin-top: 1vw;
+        align-self: center;
+        width: 85vw;
+    }
+    
+    #Description figcaption{
+        font-family: "Poppins";
+        font-size: 1.5vw;
+        align-self: center;
+        margin-bottom: 5vw;
+    }
+    
+    
+    #Description h3:nth-of-type(1){
+        margin-top: 5vw;
+    }
+    
+    
+    #Description p:nth-of-type(1) {
+        font-size: 2.5vw; 
+        font-weight: bolder;
+        text-align: Left; 
+        color: grey;
+        max-width: 80vw;
+        line-height: 1.6;
+    }
+    
+    #Description p:nth-of-type(2) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+        margin-bottom: 10vw;
+    }
+    
+    #Description p:nth-of-type(3) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+        margin-bottom: 5vw;
+    }
+    
+    #Description p:nth-of-type(4) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+    }
+    
+    #Description p:nth-of-type(5) {
+        margin-top: 60px;
+    }
+    
+    
+    #Description h3:first-of-type {
+        font-family: 'Fredoka One';
+        color: white;
+        font-size: 3.5vw; 
+        font-weight: bold; 
+        margin-top: 50px;
+        margin-bottom: 20px; 
+        border-radius: 10px; 
+        
+    }
+    
+    
+    #Description h3:nth-of-type(2) {
+        font-family: 'Fredoka One';
+        color: white;
+        font-size: 3.5vw; 
+        font-weight: bold; 
+        margin-top: 50px;
+        margin-bottom: 20px; 
+        border-radius: 10px; 
+    }
+    
+    .highlight {
+        color: #8aefe7; 
+    }
+
+
+    #footer {
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        justify-content: space-between;
+        background-color: #222; 
+        color: white;
+        padding: 20px;
+        width: 100%;
+        height: 1vh;
+        margin-left: -20px;
+        margin-bottom: -20px;
+        margin-top: 40px;
+    }
+    
+    #footer .social-links {
+        align-self: start;
+        margin-top: -1vw;
+        margin-bottom: 14vw;
+    }
+    
+    #footer .social-links a {
+        color: white;
+        margin: 0 10px;
+        text-decoration: none;
+        font-size: 2vw;
+    }
+    
+    #footer .social-links a:hover {
+        color: #8aefe7; 
+    }
+    
+    #footer .application-form {
+        align-self: flex-end;
+        margin-top: -15.5vw;
+        width: 20vw;
+    }
+    
+    #footer .application-form button {
+        background-color: #373243; 
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1vw;
+        width: 20vw;
+    }
+    
+    #footer .application-form button:hover {
+        background-color: #8aefe7; 
+    }
+    
+    #footer .email-contact {
+        align-self: center;
+        font-size: 1.5vw;
+    }
+    
+    #footer .email-contact a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .email-contact a:hover {
+        text-decoration: underline;
+    }
+    
+
+}
+
+
+@media screen and (-webkit-min-device-pixel-ratio: 1) and (min-device-width: 400px) and (max-device-width: 760px){
+    body {
+        font-family: 'Arial', sans-serif;
+        background: #1a1126;
+        color: white;
+        margin: 0;
+        padding: 20px;
+    }
+    
+    #header{
+        display: flex;
+        flex-direction: column;
+        height: 10em;
+        width: 80em;
+        padding: 10px;
+        background-color: black;
+        margin-left: -20px;
+        margin-right: -20px;
+        margin-bottom: 5px;
+        margin-top: -20px;
+    }
+    
+    #appTitle {
+        font-family: 'Aileron', sans-serif;                
+        display: flex;
+        font-size: 5em;
+        margin-left: 20px;
+        flex-direction: row;
+    }
+    
+    #appTitle .letter {
+        margin: -2.2px;
+        font-weight: bolder;
+    }
+    
+    /* #appTitle .sub{
+        font-family: "Poppins", sans-serif;
+        font-weight: 100;
+        font-style: normal;
+        font-size: 0.25em;
+        color: #8aefe7;
+        margin-top: 2.7em;
+    } */
+    
+    #appTitle .button-group {
+        display: flex; 
+        gap: 5px;
+    }
+    
+    
+    .about-us {
+        font-size: 0.3em;
+        color: white;
+        height: 4em;
+        width: 6em;
+        margin-top: 1.5em;
+        background-color: black;
+        border: 0.2em solid #8aefe7;
+        border-radius: 0.8em;
+        margin-left: -12em;
+    }
+    
+    .about-us:hover {
+        cursor: pointer; 
+    }
+    
+    #appTitle .feedback{
+        font-size: 0.3em;
+        color: white;
+        height: 4em;
+        width: 6em;
+        margin-top: -20em;
+        background-color: black;
+        border: 0.2em solid #8aefe7;
+        border-radius: 0.8em;
+        margin-left: -4em;
+    }
+    
+    .feedback:hover {
+        cursor: pointer; 
+    }
+    
+    
+    #appTitle .letter:nth-child(1) { color: #8aefe7; }    /* First letter 'c' */
+    #appTitle .letter:nth-child(2) { color: #8aefe7; } /* Second letter 'h' */
+    #appTitle .letter:nth-child(3) { color: white; } /* Third letter 'u' */
+    #appTitle .letter:nth-child(4) { color: white; }  /* Fourth letter 'k' */
+    #appTitle .letter:nth-child(5) { color: white; }   /* Fifth letter 'k' */
+    #appTitle .letter:nth-child(6) { color: white; } /* Sixth letter 'l' */
+    
+    #appMoto{
+        font-family: 'Poppins';
+        font-size: 1.5em;
+        margin-left: 20px;
+        margin-top: -1em;
+    }
+    
+    
+    #appMoto .word:nth-child(1) {color:white}
+    #appMoto .word:nth-child(2) {color:#8aefe7}
+    #appMoto .word:nth-child(3) {color:white}
+    #appMoto .word:nth-child(4) {color:white}
+    #appMoto .word:nth-child(5) {color:white}
+
+
+    #Description {
+        text-align: left; 
+        margin-top: 9vw;
+
+    }
+    
+    
+    #Description #companymoto {
+        font-family: 'Fredoka One';
+        font-size: 6vw; 
+        font-weight: bold;
+        margin-bottom: 2vw; 
+    }
+    
+    
+    #Description #companymoto .word {
+        color: white;
+        margin-right: 1px; 
+    }
+    #Description #companymoto .word:nth-child(3) {
+        color: #8aefe7; 
+        font-weight: bold;
+    }
+    
+    
+    #Description figure {
+        margin-left: 0; 
+    }
+
+    #Description img {
+        margin-top: 1vw;
+        align-self: center;
+        width: 85vw;
+    }
+    
+    #Description figcaption{
+        font-family: "Poppins";
+        font-size: 1.5vw;
+        align-self: center;
+        margin-bottom: 5vw;
+    }
+    
+    
+    #Description h3:nth-of-type(1){
+        margin-top: 5vw;
+    }
+    
+    
+    #Description p:nth-of-type(1) {
+        font-size: 2.5vw; 
+        font-weight: bolder;
+        text-align: Left; 
+        color: grey;
+        max-width: 80vw;
+        line-height: 1.6;
+    }
+    
+    #Description p:nth-of-type(2) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+        margin-bottom: 10vw;
+    }
+    
+    #Description p:nth-of-type(3) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+        margin-bottom: 5vw;
+    }
+    
+    #Description p:nth-of-type(4) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+    }
+    
+    #Description p:nth-of-type(5) {
+        margin-top: 60px;
+    }
+    
+    
+    #Description h3:first-of-type {
+        font-family: 'Fredoka One';
+        color: white;
+        font-size: 3.5vw; 
+        font-weight: bold; 
+        margin-top: 50px;
+        margin-bottom: 20px; 
+        border-radius: 10px; 
+        
+    }
+    
+    
+    #Description h3:nth-of-type(2) {
+        font-family: 'Fredoka One';
+        color: white;
+        font-size: 3.5vw; 
+        font-weight: bold; 
+        margin-top: 50px;
+        margin-bottom: 20px; 
+        border-radius: 10px; 
+    }
+    
+    .highlight {
+        color: #8aefe7; 
+    }
+
+
+    #footer {
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        justify-content: space-between;
+        background-color: #222; 
+        color: white;
+        padding: 20px;
+        width: 100%;
+        height: 1vh;
+        margin-left: -20px;
+        margin-bottom: -20px;
+        margin-top: 40px;
+    }
+    
+    #footer .social-links {
+        align-self: start;
+        margin-top: -1vw;
+        margin-bottom: 14vw;
+    }
+    
+    #footer .social-links a {
+        color: white;
+        margin: 0 10px;
+        text-decoration: none;
+        font-size: 2vw;
+    }
+    
+    #footer .social-links a:hover {
+        color: #8aefe7; 
+    }
+    
+    #footer .application-form {
+        align-self: flex-end;
+        margin-top: -15.5vw;
+        width: 20vw;
+    }
+    
+    #footer .application-form button {
+        background-color: #373243; 
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1vw;
+        width: 20vw;
+    }
+    
+    #footer .application-form button:hover {
+        background-color: #8aefe7; 
+    }
+    
+    #footer .email-contact {
+        align-self: center;
+        font-size: 1.5vw;
+    }
+    
+    #footer .email-contact a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .email-contact a:hover {
+        text-decoration: underline;
+    }
+    
+}
+
+
+@media (min-width: 375px) and (max-width: 399px) {
     body {
         padding: 10px; 
         overflow-x: hidden;
@@ -838,7 +1759,7 @@ body {
         height: 50px;
         width: 100%;
         background-color: black;
-        margin-bottom: 5vw;
+        margin-bottom: 5px;
         margin-top: -20px;
         margin-left: -10px;
     }
@@ -853,13 +1774,266 @@ body {
         margin-top: 5px;
     }
 
-    #appTitle .sub {
-        font-size: 3.1vw; 
+    /* #appTitle .sub {
+        font-size: 12px; 
         margin-top: 3.7vw;
-    }
+    } */
 
     #appMoto{
-        font-size: 2.7vw;
+        font-size: 10px;
+        margin-left: 10px;
+        margin-top: -4vw;
+        width: 300px;
+    }
+
+    #appTitle .button-group {
+        display: flex;
+        flex-direction: row;
+        margin-left: 33vw;
+        gap:10px;
+
+    }
+
+    #appTitle .return{
+        font-size: 2vw;
+        width: 55px; 
+        height: 30px;
+        margin-top: 5vw;
+    }
+    
+    #appTitle .feedback{
+        font-size: 2vw;
+        width: 55px; 
+        height: 30px;
+        margin-top: 5vw;
+    }
+
+
+    #Description {
+        text-align: left; 
+        margin-top: 9vw;
+
+    }
+    
+    
+    #Description #companymoto {
+        font-family: 'Fredoka One';
+        font-size: 6vw; 
+        font-weight: bold;
+        margin-bottom: 2vw; 
+    }
+    
+    
+    #Description #companymoto .word {
+        color: white;
+        margin-right: 1px; 
+    }
+    #Description #companymoto .word:nth-child(3) {
+        color: #8aefe7; 
+        font-weight: bold;
+    }
+    
+    
+    #Description figure {
+        margin-left: 0; 
+    }
+
+    #Description img {
+        margin-top: 1vw;
+        align-self: center;
+        width: 85vw;
+    }
+    
+    #Description figcaption{
+        font-family: "Poppins";
+        font-size: 1.5vw;
+        align-self: center;
+        margin-bottom: 5vw;
+    }
+    
+    
+    #Description h3:nth-of-type(1){
+        margin-top: 5vw;
+    }
+    
+    
+    #Description p:nth-of-type(1) {
+        font-size: 2.5vw; 
+        font-weight: bolder;
+        text-align: Left; 
+        color: grey;
+        max-width: 80vw;
+        line-height: 1.6;
+    }
+    
+    #Description p:nth-of-type(2) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+        margin-bottom: 10vw;
+    }
+    
+    #Description p:nth-of-type(3) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+        margin-bottom: 5vw;
+    }
+    
+    #Description p:nth-of-type(4) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+    }
+    
+    #Description p:nth-of-type(5) {
+        margin-top: 60px;
+    }
+    
+    
+    #Description h3:first-of-type {
+        font-family: 'Fredoka One';
+        color: white;
+        font-size: 3.5vw; 
+        font-weight: bold; 
+        margin-top: 50px;
+        margin-bottom: 20px; 
+        border-radius: 10px; 
+        
+    }
+    
+    
+    #Description h3:nth-of-type(2) {
+        font-family: 'Fredoka One';
+        color: white;
+        font-size: 3.5vw; 
+        font-weight: bold; 
+        margin-top: 50px;
+        margin-bottom: 20px; 
+        border-radius: 10px; 
+    }
+    
+    .highlight {
+        color: #8aefe7; 
+    }
+
+
+    #footer {
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        justify-content: space-between;
+        background-color: #222; 
+        color: white;
+        padding: 20px;
+        width: 100%;
+        height: 1vh;
+        margin-left: -20px;
+        margin-bottom: -20px;
+        margin-top: 40px;
+    }
+    
+    #footer .social-links {
+        align-self: start;
+        margin-top: -1vw;
+        margin-bottom: 14vw;
+    }
+    
+    #footer .social-links a {
+        color: white;
+        margin: 0 10px;
+        text-decoration: none;
+        font-size: 2vw;
+    }
+    
+    #footer .social-links a:hover {
+        color: #8aefe7; 
+    }
+    
+    #footer .application-form {
+        align-self: flex-end;
+        margin-top: -15.5vw;
+        width: 20vw;
+    }
+    
+    #footer .application-form button {
+        background-color: #373243; 
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1vw;
+        width: 20vw;
+    }
+    
+    #footer .application-form button:hover {
+        background-color: #8aefe7; 
+    }
+    
+    #footer .email-contact {
+        align-self: center;
+        font-size: 1.5vw;
+    }
+    
+    #footer .email-contact a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .email-contact a:hover {
+        text-decoration: underline;
+    }
+
+
+}
+
+
+@media (max-width: 375px) {
+    body {
+        padding: 10px; 
+        overflow-x: hidden;
+    }
+
+    #header{
+        position: fixed;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        height: 50px;
+        width: 100%;
+        background-color: black;
+        margin-bottom: 5px;
+        margin-top: -20px;
+        margin-left: -10px;
+    }
+
+    #appTitle {
+        font-size: 6vw;
+        margin-left: 10px;
+    }
+
+    #appTitle .letter {
+        margin: 0; 
+        margin-top: 5px;
+    }
+
+    /* #appTitle .sub {
+        font-size: 12px; 
+        margin-top: 3.7vw;
+    } */
+
+    #appMoto{
+        font-size: 10px;
         margin-left: 10px;
         margin-top: -4vw;
         width: 300px;
@@ -889,19 +2063,15 @@ body {
 
     #Description {
         text-align: left; 
-        margin-top: 20vw;
-        margin-left: 5px; 
-        margin-right: 5px; 
+        margin-top: 9vw;
     }
     
     
     #Description #companymoto {
         font-family: 'Fredoka One';
-        font-size: 7vw; 
+        font-size: 6vw; 
         font-weight: bold;
-        margin-top: 10vw;
-        margin-bottom: 5vw; 
-        
+        margin-bottom: 2vw; 
     }
     
     
@@ -916,60 +2086,63 @@ body {
     
     
     #Description figure {
-        margin-left: 5px; 
+        margin-left: 0; 
     }
 
     #Description img {
-        margin-top: 20px;
+        margin-top: 1vw;
+        align-self: center;
+        width: 85vw;
     }
     
     #Description figcaption{
         font-family: "Poppins";
-        font-size: 3vw;
+        font-size: 1.5vw;
+        align-self: center;
+        margin-bottom: 5vw;
     }
     
     
     #Description h3:nth-of-type(1){
-        margin-top: -5px;
+        margin-top: 5vw;
     }
     
     
     #Description p:nth-of-type(1) {
-        font-size: 5vw; 
+        font-size: 2.5vw; 
         font-weight: bolder;
-        margin-bottom: 20px; 
         text-align: Left; 
         color: grey;
-        max-width: 800px;
+        max-width: 80vw;
         line-height: 1.6;
-        margin-top: -10px;
-        margin-bottom: 30px;
     }
     
     #Description p:nth-of-type(2) {
-        font-size: 4vw; 
+        font-size: 2vw; 
         font-weight: medium;
         text-align: Left; 
         color: white;
-        max-width: 1100px;
+        max-width: 85vw;
         line-height: 1.6;
+        margin-bottom: 10vw;
     }
     
     #Description p:nth-of-type(3) {
-        font-size: 4vw; 
+        font-size: 2vw; 
         font-weight: medium;
         text-align: Left; 
         color: white;
-        max-width: 1100px;
+        max-width: 85vw;
         line-height: 1.6;
+        margin-bottom: 5vw;
     }
     
     #Description p:nth-of-type(4) {
-        font-size: 4vw; 
+        font-size: 2vw; 
         font-weight: medium;
         text-align: Left; 
         color: white;
-        max-width: 1100px;
+        max-width: 85vw;
         line-height: 1.6;
     }
     
@@ -981,7 +2154,7 @@ body {
     #Description h3:first-of-type {
         font-family: 'Fredoka One';
         color: white;
-        font-size: 6vw; 
+        font-size: 3.5vw; 
         font-weight: bold; 
         margin-top: 50px;
         margin-bottom: 20px; 
@@ -993,7 +2166,7 @@ body {
     #Description h3:nth-of-type(2) {
         font-family: 'Fredoka One';
         color: white;
-        font-size: 6vw; 
+        font-size: 3.5vw; 
         font-weight: bold; 
         margin-top: 50px;
         margin-bottom: 20px; 
@@ -1014,6 +2187,7 @@ body {
         color: white;
         padding: 20px;
         width: 100%;
+        height: 1vh;
         margin-left: -20px;
         margin-bottom: -20px;
         margin-top: 40px;
@@ -1021,7 +2195,7 @@ body {
     
     #footer .social-links {
         align-self: start;
-        margin-top: -2vw;
+        margin-top: -1vw;
         margin-bottom: 14vw;
     }
     
@@ -1029,7 +2203,7 @@ body {
         color: white;
         margin: 0 10px;
         text-decoration: none;
-        font-size: 4vw;
+        font-size: 2vw;
     }
     
     #footer .social-links a:hover {
@@ -1038,7 +2212,7 @@ body {
     
     #footer .application-form {
         align-self: flex-end;
-        margin-top: -23.5vw;
+        margin-top: -15.5vw;
         width: 20vw;
     }
     
@@ -1049,7 +2223,7 @@ body {
         padding: 10px 20px;
         border-radius: 5px;
         cursor: pointer;
-        font-size: 1.5vw;
+        font-size: 1vw;
         width: 20vw;
     }
     
@@ -1059,8 +2233,7 @@ body {
     
     #footer .email-contact {
         align-self: center;
-        margin-top: -10vw;
-        font-size: 3vw;
+        font-size: 1.5vw;
     }
     
     #footer .email-contact a {
@@ -1071,4 +2244,258 @@ body {
     #footer .email-contact a:hover {
         text-decoration: underline;
     }
+
+
+}
+
+
+@media (max-width: 320px) {
+    body {
+        padding: 10px; 
+        overflow-x: hidden;
+    }
+
+    #header{
+        position: fixed;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        height: 50px;
+        width: 100%;
+        background-color: black;
+        margin-bottom: 5px;
+        margin-top: -20px;
+        margin-left: -10px;
+    }
+
+    #appTitle {
+        font-size: 6vw;
+        margin-left: 10px;
+    }
+
+    #appTitle .letter {
+        margin: 0; 
+        margin-top: 5px;
+    }
+
+    /* #appTitle .sub {
+        font-size: 12px; 
+        margin-top: 3.7vw;
+    } */
+
+    #appMoto{
+        font-size: 10px;
+        margin-left: 10px;
+        margin-top: -4vw;
+        width: 300px;
+    }
+
+    #appTitle .button-group {
+        display: flex;
+        flex-direction: row;
+        margin-left: 7em;
+        gap:10px;
+
+    }
+
+    #appTitle .return{
+        font-size: 2vw;
+        width: 55px; 
+        height: 30px;
+        margin-top: 5vw;
+    }
+    
+    #appTitle .feedback{
+        font-size: 2vw;
+        width: 55px; 
+        height: 30px;
+        margin-top: 5vw;
+    }
+
+
+    #Description {
+        text-align: left; 
+        margin-top: 9vw;
+
+    }
+    
+    
+    #Description #companymoto {
+        font-family: 'Fredoka One';
+        font-size: 6vw; 
+        font-weight: bold;
+        margin-bottom: 2vw; 
+    }
+    
+    
+    #Description #companymoto .word {
+        color: white;
+        margin-right: 1px; 
+    }
+    #Description #companymoto .word:nth-child(3) {
+        color: #8aefe7; 
+        font-weight: bold;
+    }
+    
+    
+    #Description figure {
+        margin-left: 0; 
+    }
+
+    #Description img {
+        margin-top: 1vw;
+        align-self: center;
+        width: 85vw;
+    }
+    
+    #Description figcaption{
+        font-family: "Poppins";
+        font-size: 1.5vw;
+        align-self: center;
+        margin-bottom: 5vw;
+    }
+    
+    
+    #Description h3:nth-of-type(1){
+        margin-top: 5vw;
+    }
+    
+    
+    #Description p:nth-of-type(1) {
+        font-size: 2.5vw; 
+        font-weight: bolder;
+        text-align: Left; 
+        color: grey;
+        max-width: 80vw;
+        line-height: 1.6;
+    }
+    
+    #Description p:nth-of-type(2) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+        margin-bottom: 10vw;
+    }
+    
+    #Description p:nth-of-type(3) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+        margin-bottom: 5vw;
+    }
+    
+    #Description p:nth-of-type(4) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+    }
+    
+    #Description p:nth-of-type(5) {
+        margin-top: 60px;
+    }
+    
+    
+    #Description h3:first-of-type {
+        font-family: 'Fredoka One';
+        color: white;
+        font-size: 3.5vw; 
+        font-weight: bold; 
+        margin-top: 50px;
+        margin-bottom: 20px; 
+        border-radius: 10px; 
+        
+    }
+    
+    
+    #Description h3:nth-of-type(2) {
+        font-family: 'Fredoka One';
+        color: white;
+        font-size: 3.5vw; 
+        font-weight: bold; 
+        margin-top: 50px;
+        margin-bottom: 20px; 
+        border-radius: 10px; 
+    }
+    
+    .highlight {
+        color: #8aefe7; 
+    }
+
+
+    #footer {
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        justify-content: space-between;
+        background-color: #222; 
+        color: white;
+        padding: 20px;
+        width: 100%;
+        height: 1vh;
+        margin-left: -20px;
+        margin-bottom: -20px;
+        margin-top: 40px;
+    }
+    
+    #footer .social-links {
+        align-self: start;
+        margin-top: -1vw;
+        margin-bottom: 14vw;
+    }
+    
+    #footer .social-links a {
+        color: white;
+        margin: 0 10px;
+        text-decoration: none;
+        font-size: 2vw;
+    }
+    
+    #footer .social-links a:hover {
+        color: #8aefe7; 
+    }
+    
+    #footer .application-form {
+        align-self: flex-end;
+        margin-top: -15.5vw;
+        width: 20vw;
+    }
+    
+    #footer .application-form button {
+        background-color: #373243; 
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1vw;
+        width: 20vw;
+    }
+    
+    #footer .application-form button:hover {
+        background-color: #8aefe7; 
+    }
+    
+    #footer .email-contact {
+        align-self: center;
+        font-size: 1.5vw;
+    }
+    
+    #footer .email-contact a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .email-contact a:hover {
+        text-decoration: underline;
+    }
+
 }

@@ -15,7 +15,7 @@ app.use(express.json());
 
 
 const PORT = process.env.PORT || 3003;
-let db;
+// let db;
 
 
 const dbConfig = {
@@ -24,9 +24,11 @@ const dbConfig = {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
     port: process.env.DB_PORT, 
-    timezone: 'Z'
+    timezone: 'Z',
+    connectionLimit: 10,
 };
 
+const db = mysql.createPool(dbConfig);
 
 const memcachedClient = memjs.Client.create(process.env.MEMCACHIER_SERVERS, {
     username: process.env.MEMCACHIER_USERNAME,
@@ -36,10 +38,10 @@ const memcachedClient = memjs.Client.create(process.env.MEMCACHIER_SERVERS, {
 
 async function connectToDatabase() {
     try {
-        db = await mysql.createConnection(dbConfig);
-        console.log("Connected to the database.");
+        // db = await mysql.createPool(dbConfig);
+        console.log("Database connection pool created.");
     } catch (error) {
-        console.error("Failed to connect to the database:", error);
+        console.error("Failed to create the database connection pool:", error);
     }
 }
 
@@ -62,6 +64,45 @@ async function preloadIndividualChannels() {
 }
 
 
+
+async function fetchChannelsFromDatabase() {
+    const query = `SELECT c.channel_id, c.name, c.maturity_rating, c.bio FROM Channels c`;
+    const [channels] = await db.query(query);
+    return channels;
+}
+
+
+async function preloadChannelsByDay() {
+    const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    for (const day of daysOfWeek) {
+        const channels = await fetchChannelsForDay(day);
+        const cacheKey = `channels_day_${day}`;
+        await memcachedClient.set(cacheKey, JSON.stringify(channels)); // Set cache expiration as needed
+    }
+}
+
+
+async function fetchChannelsForDay(dayOfWeek) {
+    const query = `
+        SELECT DISTINCT ch.channel_id, ch.name, ch.tags, ch.bio, ch.maturity_rating
+        FROM Channels ch
+        JOIN Schedules s ON ch.channel_id = s.channel_id
+        WHERE s.Days = ?
+        ORDER BY ch.channel_id`;
+
+    const [channels] = await db.query(query, [dayOfWeek]);
+    return channels;
+}
+
+
+
+async function fetchChannelDetailsWhenMiss(channelId) {
+    const query = `SELECT c.channel_id, c.name, c.maturity_rating, c.bio FROM Channels c WHERE c.channel_id = ?`;
+    const [results] = await db.query(query, [channelId]);
+    return results[0]; // Assuming the query returns one row per channel ID
+}
+
+
 async function preloadAllVideoDetails() {
     const videos = await fetchAllVideoDetailsFromDatabase();
     for (const video of videos) {
@@ -71,42 +112,101 @@ async function preloadAllVideoDetails() {
     console.log('Preloaded all video details into cache');
 }
 
+
+async function fetchAllVideoDetailsFromDatabase() {
+    const query = `SELECT * FROM Videos`;
+    try {
+        const [videos] = await db.query(query);
+        return videos;
+    } catch (error) {
+        console.error("Error fetching video details from database:", error);
+        return [];
+    }
+}
+
+
 async function preloadAndCacheSchedules() {
     const channels = await fetchChannelsFromDatabase(); 
 
     for (const channel of channels) {
-        //console.log("channel id: ", channel.channel_id);
-        const schedule = await fetchScheduleForChannel(channel.channel_id);
-        if (channel.channel_id === 9) {
-            //console.log("schedule for 9: ", schedule);
+        const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        for (const day of daysOfWeek) {
+            const schedule = await fetchScheduleDetailsForChannelAndDay(channel.channel_id, day);
+            const scheduleKey = `schedule_channel_${channel.channel_id}_${day}`;
+            await memcachedClient.set(scheduleKey, JSON.stringify(schedule)); // Adjust expiration as needed
         }
-        const scheduleKey = `schedule_channel_${channel.channel_id}`;
-        //console.log("schedule: ", schedule);
-        await memcachedClient.set(scheduleKey, JSON.stringify(schedule)); // Adjust expiration as needed
     }
 }
 
-async function fetchScheduleForChannel(channelId) {
+
+async function fetchScheduleDetailsForChannelAndDay(channelId, dayOfWeek) {
     const query = `
-        SELECT schedule_id, video_id, start_time, end_time, channel_id
-        FROM Schedules
-        WHERE channel_id = ?
-        ORDER BY start_time
-    `;
+        SELECT s.schedule_id, s.video_id, v.title, v.description, s.start_time, s.end_time, s.channel_id
+        FROM Schedules s
+        JOIN Videos v ON s.video_id = v.video_id
+        WHERE s.channel_id = ? AND s.Days = ?
+        ORDER BY s.start_time`;
 
     try {
-        const [schedules] = await db.query(query, [channelId]);
-        return schedules; // Return the array of schedules without organizing by day
+        const [schedules] = await db.query(query, [channelId, dayOfWeek]);
+        return schedules;
     } catch (error) {
-        console.error("Error fetching schedule for channel:", error);
-        return []; // Return an empty array or appropriate error handling
+        console.error("Error fetching schedule details for channel:", error);
+        return [];
     }
 }
+
+
+// async function fetchScheduleDetailsForChannel(channelId) {
+//     const query = `
+//         SELECT s.schedule_id, s.video_id, v.title, v.description, s.start_time, s.end_time, s.channel_id
+//         FROM Schedules s
+//         JOIN Videos v ON s.video_id = v.video_id
+//         WHERE s.channel_id = ?
+//         ORDER BY s.start_time`;
+
+//     try {
+//         const [schedules] = await db.query(query, [channelId]);
+//         return schedules; // Include title and description
+//     } catch (error) {
+//         console.error("Error fetching schedule details for channel:", error);
+//         return [];
+//     }
+// }
+
+
+
+app.get('/channels/dayoftheweek/:day', async (req, res) => {
+    const dayOfWeek = req.params.day;
+    const cacheKey = `channels_day_${dayOfWeek}`;
+
+    try {
+        // Attempt to retrieve channel data for the day from cache
+        let channelsData = await memcachedClient.get(cacheKey);
+
+        if (channelsData && channelsData.value) {
+            // Cache hit, parse the data
+            const channels = JSON.parse(channelsData.value.toString());
+            //console.log("channels: ", channels);
+            res.json(channels);
+        } else {
+            // Cache miss
+            // In a well-preloaded scenario, this branch should rarely be hit.
+            // You might log this as an unexpected event or trigger a refresh of the cache.
+            console.error(`Cache miss for channels on ${dayOfWeek}. Consider refreshing cache.`);
+            res.status(404).send('Channels not found for the specified day.');
+        }
+    } catch (error) {
+        console.error("Error fetching channels for the day from cache:", error);
+        res.status(500).send('Internal Server Error');
+    }
+});
 
 
 
 app.get('/channel/:id', async (req, res) => {
     const channelId = req.params.id; // Extract channel ID from URL parameters
+    
     const cacheKey = `channel_${channelId}`;
 
     try {
@@ -130,6 +230,7 @@ app.get('/channel/:id', async (req, res) => {
 
 
 app.get('/channels', async (req, res) => {
+    const { dayOfWeek, timezone } = req.query;
     const cacheKey = 'all_channels';
 
     try {
@@ -154,28 +255,19 @@ app.get('/channels', async (req, res) => {
 });
 
 
-async function fetchChannelsFromDatabase() {
-    const query = `SELECT c.channel_id, c.name, c.maturity_rating, c.bio FROM Channels c`;
-    const [channels] = await db.query(query);
-    return channels;
-}
-
-
-async function fetchChannelDetailsWhenMiss(channelId) {
-    const query = `SELECT c.channel_id, c.name, c.maturity_rating, c.bio FROM Channels c WHERE c.channel_id = ?`;
-    const [results] = await db.query(query, [channelId]);
-    return results[0]; // Assuming the query returns one row per channel ID
-}
-
 
 app.post('/videos', async (req, res) => {
     const { channelId, timezone } = req.body;
     const currentTime = moment().tz(timezone).format('HH:mm:ss');
     const currentTimeMoment = moment().tz(timezone);
+    const dayOfWeek = currentTimeMoment.format('dddd');
+    //console.log("channelId: ", channelId);
+    
 
     try {
         //console.log("channelId: ", channelId);
-        const videoId = await getCurrentVideoIdFromCache(channelId, currentTimeMoment, timezone);
+        //const videoId = await getCurrentVideoIdFromCache(channelId, currentTimeMoment, timezone);
+        const videoId = await getCurrentVideoIdFromCache(channelId, currentTimeMoment, timezone, dayOfWeek);
         //console.log("video id: ", videoId);
 
         if (!videoId) {
@@ -201,7 +293,9 @@ app.post('/videos', async (req, res) => {
         }
 
         
-        const scheduleTimes = await fetchScheduleTimesForVideo(videoId, currentTimeMoment);
+        // const scheduleTimes = await fetchScheduleTimesForVideo(videoId, currentTimeMoment);
+        const scheduleTimes = await fetchScheduleTimesForVideo(videoId, channelId, currentTimeMoment);
+        console.log("scheduleTimes: ", scheduleTimes);
 
         res.json(formatVideoResponse(videoDetails, scheduleTimes)); // Send the video details to the client
     } catch (error) {
@@ -209,18 +303,6 @@ app.post('/videos', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
-
-
-async function fetchAllVideoDetailsFromDatabase() {
-    const query = `SELECT * FROM Videos`;
-    try {
-        const [videos] = await db.query(query);
-        return videos;
-    } catch (error) {
-        console.error("Error fetching video details from database:", error);
-        return [];
-    }
-}
 
 
 async function fetchVideoDetailsFromDatabase(channelId, currentTime) {
@@ -236,9 +318,10 @@ async function fetchVideoDetailsFromDatabase(channelId, currentTime) {
 }
 
 
-async function getCurrentVideoIdFromCache(channelId, currentTime, userTimeZone) {
+async function getCurrentVideoIdFromCache(channelId, currentTime, userTimeZone, dayOfWeek) {
     //console.log("channelId: ", channelId);
-    const scheduleKey = `schedule_channel_${channelId}`;
+    //const scheduleKey = `schedule_channel_${channelId}`;
+    const scheduleKey = `schedule_channel_${channelId}_${dayOfWeek}`;
     let scheduleData = await memcachedClient.get(scheduleKey);
     //console.log("current time: ", currentTime);
     //console.log("timezone: ", userTimeZone);
@@ -249,7 +332,6 @@ async function getCurrentVideoIdFromCache(channelId, currentTime, userTimeZone) 
         //console.log("schedule: ",schedule);
         
         const currentVideo = schedule.find(entry => {
-            //console.log("start time: ", moment.tz(entry.start_time, "HH:mm:ss", userTimeZone));
             const startTime = moment.tz(entry.start_time, "HH:mm:ss", userTimeZone);
             const endTime = moment.tz(entry.end_time, "HH:mm:ss", userTimeZone);
 
@@ -284,65 +366,71 @@ function formatVideoResponse(video, scheduleTimes) {
 }
 
 
-async function fetchScheduleTimesForVideo(videoId, currentTime) {
-    // Ensure currentTime is properly formatted as "HH:mm:ss"
-    const currentTimeFormatted = moment(currentTime, "HH:mm:ss").format("HH:mm:ss");
+async function fetchScheduleTimesForVideo(videoId, channelId, currentTime) {
+    const dayOfWeek = moment(currentTime).format('dddd');
+    const scheduleKey = `schedule_channel_${channelId}_${dayOfWeek}`;
+    let scheduleData = await memcachedClient.get(scheduleKey);
 
-    try {
-        // Adjust the query to order schedules based on the closest start time to the current time
-        const query = `
-            SELECT start_time, end_time
-            FROM Schedules
-            WHERE video_id = ?
-            ORDER BY ABS(TIMESTAMPDIFF(MINUTE, STR_TO_DATE(?, '%H:%i:%s'), start_time))
-            LIMIT 1`;
+    if (scheduleData && scheduleData.value) {
+        const schedules = JSON.parse(scheduleData.value.toString());
 
-        // Execute the query with the videoId and the currentTimeFormatted
-        const [results] = await db.execute(query, [videoId, currentTimeFormatted]);
-        
-        if (results.length > 0) {
-            const schedule = results[0];
-            
-            // Format start_time and end_time as "HH:mm:ss"
-            const formattedStartTime = moment(schedule.start_time, "HH:mm:ss").format("HH:mm:ss");
-            const formattedEndTime = moment(schedule.end_time, "HH:mm:ss").format("HH:mm:ss");
+        for (const schedule of schedules) {
+            // if (schedule.video_id === videoId) {
+            //     const startTime = schedule.start_time;
+            //     const endTime = schedule.end_time;
 
-            return {
-                start_time: formattedStartTime,
-                end_time: formattedEndTime
-            };
-        } else {
-            return null; // No schedule found for this videoId
+            //     // Ensure the current time is between the start and end times
+            //     if (currentTime >= startTime && currentTime <= endTime) {
+            //         return {
+            //             start_time: startTime,
+            //             end_time: endTime
+            //         };
+            //     }
+            // }
+            if (schedule.video_id === videoId) {
+                
+                const startTime = moment.tz(schedule.start_time, "HH:mm:ss", currentTime.tz());
+                const endTime = moment.tz(schedule.end_time, "HH:mm:ss", currentTime.tz());
+
+                if (currentTime.isBetween(startTime, endTime, null, '[]')) {
+                    return {
+                        start_time: schedule.start_time,
+                        end_time: schedule.end_time
+                    };
+                }
+            }
         }
-    } catch (error) {
-        console.error(`Error fetching schedule times for video ID ${videoId}:`, error);
-        return null;
     }
+    return null; // No matching schedule found
 }
 
 
 app.get('/schedules', async (req, res) => {
-    const channelId = req.query.channelId;
+    const { channelId, dayOfWeek } = req.query; 
     
-    if (!channelId) {
-        return res.status(400).json({ error: 'Channel ID is required' });
+    if (!channelId || !dayOfWeek) {
+        return res.status(400).json({ error: 'Channel ID and day of week are required' });
     }
 
-    try {
-        const query = `
-            SELECT s.video_id, v.title, v.description, s.start_time, s.end_time 
-            FROM Schedules s
-            JOIN Videos v ON s.video_id = v.video_id
-            WHERE s.channel_id = ?`;
-        const [schedules] = await db.execute(query, [channelId]);
+    const cacheKey = `schedule_channel_${channelId}_${dayOfWeek}`; 
 
-        res.json(schedules);
+    try {
+        let scheduleData = await memcachedClient.get(cacheKey);
+
+        if (scheduleData && scheduleData.value) {
+            const schedules = JSON.parse(scheduleData.value.toString());
+            res.json(schedules);
+        } else {
+            // If no data in cache, fetch from the database and update the cache
+            const schedules = await fetchScheduleDetailsForChannelAndDay(channelId, dayOfWeek);
+            await memcachedClient.set(cacheKey, JSON.stringify(schedules)); // Optionally set expiration
+            res.json(schedules);
+        }
     } catch (error) {
         console.error("Error fetching schedule:", error);
         res.status(500).send('Internal Server Error');
     }
 });
-
 
 
 
@@ -352,10 +440,9 @@ async function startServer() {
     await connectToDatabase();
     await preloadAllChannels();
     await preloadIndividualChannels();
+    await preloadChannelsByDay();
     await preloadAllVideoDetails();
     await preloadAndCacheSchedules();
-    // setInterval(preloadAllChannels, 3500 * 1000);
-    // setInterval(preloadIndividualChannels, 3500 * 1000);
     app.listen(PORT, () => {
         console.log(`Server started on http://localhost:${PORT}`);
     });

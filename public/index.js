@@ -30,6 +30,7 @@ function debounce(func, wait) {
     };
 }
 
+
 async function channelSelectionHandler(channel, element) {
     if (isLoading) return; // Prevent further interaction if already loading
     isLoading = true; // Set loading state to true
@@ -70,6 +71,7 @@ async function channelSelectionHandler(channel, element) {
     }
 }
 
+
 async function fetchChannelDetails(channelId) {
     try {
         const response = await fetch(`${API_BASE_URL}/channel/${channelId}`);
@@ -79,7 +81,7 @@ async function fetchChannelDetails(channelId) {
         }
         
         const channelDetails = await response.json();
-        // console.log("channel details: ", channelDetails);
+        console.log("channel details: ", channelDetails);
         // Update the UI with the detailed information about the channel
         updateChannelUI(channelDetails);
     } catch (error) {
@@ -130,9 +132,15 @@ async function defaultVideo(){
 }
 
 async function fetchChannels() {
+    const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const dayOfWeek = getCurrentDayOfWeek();
+
     try {
-        const response = await fetch(`${API_BASE_URL}/channels`); 
+        const response = await fetch(`${API_BASE_URL}/channels/dayoftheweek/${dayOfWeek}?timezone=${encodeURIComponent(userTimeZone)}`);
         const channels = await response.json();
+
+        //console.log("channel: ", channels);
+        
         const grid = document.getElementById('channelsGrid');
         grid.innerHTML = ''; // Clear the grid before adding new channels
         
@@ -240,14 +248,24 @@ function getChannelInfo(channel, styleClass) {
 }
 
 
+function getCurrentDayOfWeek() {
+    return new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(new Date());
+}
+
+
+
 async function fetchScheduleForChannel(channelId) {
     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+    const dayOfWeek = getCurrentDayOfWeek();
+
     try {
-        const response = await fetch(`${API_BASE_URL}/schedules?channelId=${channelId}`);
+        const response = await fetch(`${API_BASE_URL}/schedules?channelId=${channelId}&dayOfWeek=${dayOfWeek}&timezone=${encodeURIComponent(userTimeZone)}`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const schedule = await response.json();
+        //console.log("schedule: ", schedule);
         
         const currentTime = new Date();
 
@@ -269,6 +287,7 @@ async function fetchScheduleForChannel(channelId) {
             .slice(0, window.innerWidth <= 568 ? 2 : 4);
 
         channelSchedules[channelId] = relevantSchedules;
+        console.log("relevant schedules: ", relevantSchedules);
         return relevantSchedules;
     } catch (error) {
         console.error("Error fetching schedule:", error);
@@ -288,12 +307,14 @@ function createScheduleBlock(channelId, maturityRating, channelName="default") {
         const itemDiv = document.createElement('div');
         itemDiv.className = 'schedule-item';
         itemDiv.id = channelName;
+        //console.log("item: ", item);
 
         // Create a div for the title
         const titleDiv = document.createElement('div');
         titleDiv.className = 'schedule-title';
         titleDiv.id = channelName;
         titleDiv.textContent = item.title;
+        //console.log("titlediv: ", titleDiv.textContent);
         itemDiv.appendChild(titleDiv);
 
         // Create a div for the maturity rating
@@ -366,7 +387,7 @@ function checkForScheduledVideo() {
 
             // initialEndTime = convertTimeToTimezone(data.endTime, userTimeZone);
 
-            console.log("returned data: ", data);
+            //console.log("returned data: ", data);
             scheduledStartTime = convertToFullDateTime(data.startTime, userTimeZone);
             scheduledEndTime = convertToFullDateTime(data.endTime, userTimeZone);
             const currentTime = new Date();
@@ -408,6 +429,8 @@ function convertTimeToTimezone(timeString, targetTimezone) {
 
 async function getVideoCast(channelId) {
     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone; 
+
+    const dayOfWeek = getCurrentDayOfWeek();
     try {
         // Make a POST request to your endpoint that returns video details including the cast
         const response = await fetch(`${API_BASE_URL}/videos`, {
@@ -415,7 +438,7 @@ async function getVideoCast(channelId) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ channelId: channelId, timezone: userTimeZone})
+            body: JSON.stringify({ channelId: channelId, timezone: userTimeZone, dayOfWeek: dayOfWeek})
         });
 
         // Check if the request was successful
