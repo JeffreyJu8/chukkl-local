@@ -708,19 +708,59 @@ function setInitialVolume() {
 
 
 
-
 document.addEventListener("DOMContentLoaded", function() {
+    const fullscreenBtn = document.querySelector('.fullscreen-toggle'); 
+    const videoContainer = document.querySelector('#videoContainer');
+    
+    fullscreenBtn.addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        videoContainer.requestFullscreen().then(() => {
+            videoContainer.classList.add('fullscreen-mode'); 
+        }).catch(err => {
+          console.error(`Error attempting to enable fullscreen mode: ${err.message}`);
+        });
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen(); 
+        }
+      }
+    });
+    
+
     onYouTubeIframeAPIReady();
     selectChannel(9);
     defaultVideo();
     fetchChannels();
     getVideoCast(9);
-    // loadVolume();
-    // setInitialVolume();
 
     const muteButtonIcon = document.querySelector('.mute-toggle i');
     if (muteButtonIcon) {
         muteButtonIcon.classList.remove('fa-volume-up');
         muteButtonIcon.classList.add('fa-volume-mute');
     }
+
+   
 });
+
+
+window.addEventListener('resize', adjustVideoForOrientation);
+document.addEventListener('fullscreenchange', function () {
+    const videoContainer = document.querySelector('#videoContainer');
+    if (!document.fullscreenElement) {
+        // Remove fullscreen-specific classes
+        videoContainer.classList.remove('fullscreen-mode');
+        adjustVideoForOrientation(); 
+    }
+});
+
+
+function adjustVideoForOrientation() {
+    const videoContainer = document.querySelector('#videoContainer');
+    if (window.innerHeight > window.innerWidth) {
+      // Portrait orientation
+      videoContainer.classList.add('fullscreen-portrait');
+    } else {
+      // Landscape orientation
+      videoContainer.classList.remove('fullscreen-portrait');
+    }
+  }
