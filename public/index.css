@@ -3204,7 +3204,7 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     
     .video-overlay {
-        position: relative; 
+        position: fixed; 
         width: 76em;
         height: 45em;
         border-radius: 10px;
@@ -3214,7 +3214,7 @@ input[type="range"]::-webkit-slider-runnable-track {
     }
     
     #videoPlayer {
-        position: relative; 
+        position: fixed; 
         width: 76em;
         height: 45em;
         border-radius: 10px;

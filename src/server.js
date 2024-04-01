@@ -294,8 +294,11 @@ app.post('/videos', async (req, res) => {
 
         
         // const scheduleTimes = await fetchScheduleTimesForVideo(videoId, currentTimeMoment);
+        // console.log("currentTime: ", currentTimeMoment);
         const scheduleTimes = await fetchScheduleTimesForVideo(videoId, channelId, currentTimeMoment);
-        console.log("scheduleTimes: ", scheduleTimes);
+        // console.log("videoId: ", videoId);
+        // console.log("channelId: ", channelId);
+        // console.log("scheduleTimes: ", scheduleTimes);
 
         res.json(formatVideoResponse(videoDetails, scheduleTimes)); // Send the video details to the client
     } catch (error) {
@@ -370,29 +373,35 @@ async function fetchScheduleTimesForVideo(videoId, channelId, currentTime) {
     const dayOfWeek = moment(currentTime).format('dddd');
     const scheduleKey = `schedule_channel_${channelId}_${dayOfWeek}`;
     let scheduleData = await memcachedClient.get(scheduleKey);
+    //console.log("currTime: ", currentTime);
 
     if (scheduleData && scheduleData.value) {
         const schedules = JSON.parse(scheduleData.value.toString());
-
+        //console.log("schedules: ", schedules);
         for (const schedule of schedules) {
-            // if (schedule.video_id === videoId) {
-            //     const startTime = schedule.start_time;
-            //     const endTime = schedule.end_time;
-
-            //     // Ensure the current time is between the start and end times
-            //     if (currentTime >= startTime && currentTime <= endTime) {
-            //         return {
-            //             start_time: startTime,
-            //             end_time: endTime
-            //         };
-            //     }
-            // }
             if (schedule.video_id === videoId) {
-                
-                const startTime = moment.tz(schedule.start_time, "HH:mm:ss", currentTime.tz());
-                const endTime = moment.tz(schedule.end_time, "HH:mm:ss", currentTime.tz());
+                //console.log("here");
+                let startTime = moment.tz(schedule.start_time, "HH:mm:ss", currentTime.tz());
+                let endTime = moment.tz(schedule.end_time, "HH:mm:ss", currentTime.tz());
+
+                startTime = startTime.set({
+                    year: currentTime.year(),
+                    month: currentTime.month(),
+                    date: currentTime.date()
+                  });
+                  
+                  endTime = endTime.set({
+                    year: currentTime.year(),
+                    month: currentTime.month(),
+                    date: currentTime.date()
+                  });
+
+                // console.log("startTime: ", startTime);
+                // console.log("endTime: ", endTime);
+                // console.log("currTime: ", currentTime);
 
                 if (currentTime.isBetween(startTime, endTime, null, '[]')) {
+                    // console.log("return");
                     return {
                         start_time: schedule.start_time,
                         end_time: schedule.end_time
