@@ -431,8 +431,9 @@ app.get('/schedules', async (req, res) => {
             res.json(schedules);
         } else {
             // If no data in cache, fetch from the database and update the cache
+            console.log("schedule miss");
             const schedules = await fetchScheduleDetailsForChannelAndDay(channelId, dayOfWeek);
-            await memcachedClient.set(cacheKey, JSON.stringify(schedules)); // Optionally set expiration
+            await memcachedClient.set(cacheKey, JSON.stringify(schedules)); 
             res.json(schedules);
         }
     } catch (error) {

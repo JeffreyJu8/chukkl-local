@@ -25,11 +25,13 @@ body {
     font-size: 3.4vw;
     margin-left: 20px;
     flex-direction: row;
+    width: 100%;
 }
 
 #appTitle .letter {
     margin: -2.2px;
     font-weight: bolder;
+    
 }
 
 /* #appTitle .sub{
@@ -43,9 +45,9 @@ body {
 } */
 
 #appTitle .button-group {
-    display: flex; 
-    /* align-items: center;  */
-    margin-left: 830px;
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 70vw;
     gap: 10px;
 }
 
@@ -97,10 +99,10 @@ body {
 
 
 #appMoto .word:nth-child(1) {color:white}
-#appMoto .word:nth-child(2) {color:#8aefe7}
+#appMoto .word:nth-child(2) {color: white}
 #appMoto .word:nth-child(3) {color:white}
 #appMoto .word:nth-child(4) {color:white}
-#appMoto .word:nth-child(5) {color:white}
+#appMoto .word:nth-child(5) {color:#8aefe7}
 
 
 
@@ -141,23 +143,18 @@ body {
 #videoContainer.fullscreen-mode {
     width: 100vw;
     height: 100vh;
-    position: fixed;
+    position: fixed; 
     top: 0;
     left: 0;
-    margin: 0;
-    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #videoContainer.fullscreen-mode #videoPlayer,
 #videoContainer.fullscreen-mode .video-overlay {
     width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 0; 
+    height: 100vh;
 }
 
 
@@ -211,31 +208,28 @@ body {
     display: flex;
     flex-direction: row;
     margin-top: 10px;
-    margin-left: 33px;
+    margin-left: 7.5vw;
 }
 
 #channelBar .displays{
     font-size: 1vw;
-    margin-right: 27px;
+    margin-left: 15.6vw;
 }
 
+
 #channelBar .displays:nth-child(1) {
-    color:white; 
-    margin-right: 41px;
+    color:#8aefe7;
+    margin-left: 10vw;
 }
 #channelBar .displays:nth-child(2) {
-    color:#8aefe7;
-    margin-right: 210px;
+    color:white;
+    /* margin-right: 0vw; */
 }
 #channelBar .displays:nth-child(3) {
     color:white;
-    margin-right: 238px;
+    /* margin-right: 0.5vw; */
 }
-#channelBar .displays:nth-child(4) {
-    color:white;
-    margin-right: 236px;
-}
-#channelBar .displays:nth-child(5) {color:white}
+#channelBar .displays:nth-child(4) {color:white}
 
 
 #channelsGrid {
@@ -687,7 +681,7 @@ input[type="range"]::-webkit-slider-runnable-track {
     #appTitle .button-group {
         display: flex; 
         /* align-items: center;  */
-        margin-left: 18em;
+        margin-left: 70vw;
         gap: 10px;
     }
     
@@ -739,10 +733,10 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     
     #appMoto .word:nth-child(1) {color:white}
-    #appMoto .word:nth-child(2) {color:#8aefe7}
+    #appMoto .word:nth-child(2) {color: white}
     #appMoto .word:nth-child(3) {color:white}
     #appMoto .word:nth-child(4) {color:white}
-    #appMoto .word:nth-child(5) {color:white}
+    #appMoto .word:nth-child(5) {color:#8aefe7}
     
     
     
@@ -804,6 +798,19 @@ input[type="range"]::-webkit-slider-runnable-track {
         border-radius: 0;
     }
 
+    .fullscreen-fallback {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        background-color: black; 
+        object-fit:fill
+
+    }
     
     .channel-info{
         background-color: #373243; 
@@ -856,31 +863,28 @@ input[type="range"]::-webkit-slider-runnable-track {
         display: flex;
         flex-direction: row;
         margin-top: 10px;
-        margin-left: 3.5em;
+        margin-left: 7.5vw;
     }
     
     #channelBar .displays{
         font-size: 1vw;
-        margin-right: 1em;
+        margin-left: 15.6vw;
     }
     
+    
     #channelBar .displays:nth-child(1) {
-        color:white; 
-        margin-right: 3em;
+        color:#8aefe7;
+        margin-left: 10vw;
     }
     #channelBar .displays:nth-child(2) {
-        color:#8aefe7;
-        margin-right: 14.5em;
+        color:white;
+        /* margin-right: 0vw; */
     }
     #channelBar .displays:nth-child(3) {
         color:white;
-        margin-right: 16.7em;
+        /* margin-right: 0.5vw; */
     }
-    #channelBar .displays:nth-child(4) {
-        color:white;
-        margin-right: 16.7em;
-    }
-    #channelBar .displays:nth-child(5) {color:white}
+    #channelBar .displays:nth-child(4) {color:white}
     
     
     #channelsGrid {
@@ -1188,6 +1192,15 @@ input[type="range"]::-webkit-slider-runnable-track {
         color: white;
         border: none;
         
+    }
+
+    .fullscreen-toggle {
+        background-color: transparent;
+        color: white;
+        border: none;
+        font-size: 2.5em; 
+        /* margin-top: -11.1em;
+        margin-right: -5em; */
     }
     
     
@@ -1328,7 +1341,7 @@ input[type="range"]::-webkit-slider-runnable-track {
     #appTitle .button-group {
         display: flex; 
         /* align-items: center;  */
-        margin-left: 18em;
+        margin-left: 70vw;
         gap: 10px;
     }
     
@@ -1380,10 +1393,10 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     
     #appMoto .word:nth-child(1) {color:white}
-    #appMoto .word:nth-child(2) {color:#8aefe7}
+    #appMoto .word:nth-child(2) {color: white}
     #appMoto .word:nth-child(3) {color:white}
     #appMoto .word:nth-child(4) {color:white}
-    #appMoto .word:nth-child(5) {color:white}
+    #appMoto .word:nth-child(5) {color:#8aefe7}
     
     
     
@@ -1497,31 +1510,28 @@ input[type="range"]::-webkit-slider-runnable-track {
         display: flex;
         flex-direction: row;
         margin-top: 10px;
-        margin-left: 3.5em;
+        margin-left: 7.5vw;
     }
     
     #channelBar .displays{
         font-size: 1vw;
-        margin-right: 1em;
+        margin-left: 15.6vw;
     }
     
+    
     #channelBar .displays:nth-child(1) {
-        color:white; 
-        margin-right: 3em;
+        color:#8aefe7;
+        margin-left: 10vw;
     }
     #channelBar .displays:nth-child(2) {
-        color:#8aefe7;
-        margin-right: 14.5em;
+        color:white;
+        /* margin-right: 0vw; */
     }
     #channelBar .displays:nth-child(3) {
         color:white;
-        margin-right: 16.7em;
+        /* margin-right: 0.5vw; */
     }
-    #channelBar .displays:nth-child(4) {
-        color:white;
-        margin-right: 16.7em;
-    }
-    #channelBar .displays:nth-child(5) {color:white}
+    #channelBar .displays:nth-child(4) {color:white}
     
     
     #channelsGrid {
@@ -1830,6 +1840,15 @@ input[type="range"]::-webkit-slider-runnable-track {
         border: none;
         
     }
+
+    .fullscreen-toggle {
+        background-color: transparent;
+        color: white;
+        border: none;
+        font-size: 2.5em; 
+        /* margin-top: -11.1em;
+        margin-right: -5em; */
+    }
     
     
     /* Style the thumb */
@@ -1969,7 +1988,7 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     #appTitle .button-group {
         display: flex; 
-        margin-left: 60vw;
+        margin-left: 70vw;
         gap: 0.2em;
         margin-top: -0.4em;
     }
@@ -2016,15 +2035,15 @@ input[type="range"]::-webkit-slider-runnable-track {
         font-family: 'Poppins';
         font-size: 1.2vw;
         margin-left: 20px;
-        margin-top: -0.4vw;
+        margin-top: -13px;
     }
     
     
     #appMoto .word:nth-child(1) {color:white}
-    #appMoto .word:nth-child(2) {color:#8aefe7}
+    #appMoto .word:nth-child(2) {color: white}
     #appMoto .word:nth-child(3) {color:white}
     #appMoto .word:nth-child(4) {color:white}
-    #appMoto .word:nth-child(5) {color:white}
+    #appMoto .word:nth-child(5) {color:#8aefe7}
     
     
     
@@ -2126,43 +2145,32 @@ input[type="range"]::-webkit-slider-runnable-track {
         margin-top: 0px;
     }
     
-    #videoCast{
-        margin-left: 30px;
-        font-family: 'Poppins';
-        font-size: 1vw;
-        margin-right: 8px;
-    }
-    
-
     #channelBar {
         display: flex;
         flex-direction: row;
         margin-top: 10px;
-        margin-left: 2em;
+        margin-left: 7.5vw;
     }
     
     #channelBar .displays{
         font-size: 1vw;
-        margin-right: 1em;
+        margin-left: 15.6vw;
     }
     
+    
     #channelBar .displays:nth-child(1) {
-        color:white; 
-        margin-right: 2.5em;
+        color:#8aefe7;
+        margin-left: 10vw;
     }
     #channelBar .displays:nth-child(2) {
-        color:#8aefe7;
-        margin-right: 14em;
+        color:white;
+        /* margin-right: 0vw; */
     }
     #channelBar .displays:nth-child(3) {
         color:white;
-        margin-right: 16.3em;
+        /* margin-right: 0.5vw; */
     }
-    #channelBar .displays:nth-child(4) {
-        color:white;
-        margin-right: 16.5em;
-    }
-    #channelBar .displays:nth-child(5) {color:white}
+    #channelBar .displays:nth-child(4) {color:white}
     
     
     #channelsGrid {
@@ -2470,6 +2478,15 @@ input[type="range"]::-webkit-slider-runnable-track {
         color: white;
         border: none;
         
+    }
+
+    .fullscreen-toggle {
+        background-color: transparent;
+        color: white;
+        border: none;
+        font-size: 1em; 
+        /* margin-top: -11.1em;
+        margin-right: -5em; */
     }
     
     
@@ -2610,7 +2627,7 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     #appTitle .button-group {
         display: flex; 
-        margin-left: 60vw;
+        margin-left: 70vw;
         gap: 0.2em;
         margin-top: -0.4em;
     }
@@ -2657,15 +2674,15 @@ input[type="range"]::-webkit-slider-runnable-track {
         font-family: 'Poppins';
         font-size: 1.2vw;
         margin-left: 20px;
-        margin-top: 0.1em;
+        margin-top: -13px;
     }
     
     
     #appMoto .word:nth-child(1) {color:white}
-    #appMoto .word:nth-child(2) {color:#8aefe7}
+    #appMoto .word:nth-child(2) {color: white}
     #appMoto .word:nth-child(3) {color:white}
     #appMoto .word:nth-child(4) {color:white}
-    #appMoto .word:nth-child(5) {color:white}
+    #appMoto .word:nth-child(5) {color:#8aefe7}
     
     
     
@@ -2774,31 +2791,28 @@ input[type="range"]::-webkit-slider-runnable-track {
         display: flex;
         flex-direction: row;
         margin-top: 10px;
-        margin-left: 3.5em;
+        margin-left: 7.5vw;
     }
     
     #channelBar .displays{
         font-size: 1vw;
-        margin-right: 1em;
+        margin-left: 15.6vw;
     }
     
+    
     #channelBar .displays:nth-child(1) {
-        color:white; 
-        margin-right: 3em;
+        color:#8aefe7;
+        margin-left: 10vw;
     }
     #channelBar .displays:nth-child(2) {
-        color:#8aefe7;
-        margin-right: 14.5em;
+        color:white;
+        /* margin-right: 0vw; */
     }
     #channelBar .displays:nth-child(3) {
         color:white;
-        margin-right: 16.7em;
+        /* margin-right: 0.5vw; */
     }
-    #channelBar .displays:nth-child(4) {
-        color:white;
-        margin-right: 16.7em;
-    }
-    #channelBar .displays:nth-child(5) {color:white}
+    #channelBar .displays:nth-child(4) {color:white}
     
     
     #channelsGrid {
@@ -3105,9 +3119,17 @@ input[type="range"]::-webkit-slider-runnable-track {
         font-size: 1em;
         color: white;
         border: none;
-        
+
     }
     
+    .fullscreen-toggle {
+        background-color: transparent;
+        color: white;
+        border: none;
+        font-size: 1em; 
+        /* margin-top: -11.1em;
+        margin-right: -5em; */
+    }
     
     /* Style the thumb */
     input[type="range"]::-webkit-slider-thumb {
@@ -3211,7 +3233,7 @@ input[type="range"]::-webkit-slider-runnable-track {
         display: flex;
         flex-direction: column;
         height: 10em;
-        width: 80em;
+        width: 310vw;
         padding: 10px;
         background-color: black;
         margin-left: -20px;
@@ -3244,6 +3266,7 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     #appTitle .button-group {
         display: flex; 
+        margin-left: 250vw;
         gap: 5px;
     }
     
@@ -3290,17 +3313,17 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     #appMoto{
         font-family: 'Poppins';
-        font-size: 1.5em;
+        font-size: 9vw;
         margin-left: 20px;
-        margin-top: -1em;
+        margin-top: -13px;
     }
     
     
     #appMoto .word:nth-child(1) {color:white}
-    #appMoto .word:nth-child(2) {color:#8aefe7}
+    #appMoto .word:nth-child(2) {color: white}
     #appMoto .word:nth-child(3) {color:white}
     #appMoto .word:nth-child(4) {color:white}
-    #appMoto .word:nth-child(5) {color:white}
+    #appMoto .word:nth-child(5) {color:#8aefe7}
     
     
     #contentWrapper {
@@ -3326,6 +3349,7 @@ input[type="range"]::-webkit-slider-runnable-track {
         margin-top: -45em;
         z-index: 10;
         pointer-events: auto;
+        z-index: 1000;
     }
     
     #videoPlayer {
@@ -3333,6 +3357,7 @@ input[type="range"]::-webkit-slider-runnable-track {
         width: 76em;
         height: 45em;
         border-radius: 10px;
+        z-index: 999;
     }
 
     #videoContainer.fullscreen-mode {
@@ -3343,6 +3368,7 @@ input[type="range"]::-webkit-slider-runnable-track {
         left: 0;
         margin: 0;
         z-index: 9999;
+        background-color: black;
     }
     
     #videoContainer.fullscreen-mode #videoPlayer,
@@ -3355,6 +3381,16 @@ input[type="range"]::-webkit-slider-runnable-track {
         right: 0;
         bottom: 0;
         border-radius: 0; 
+    }
+
+    .fullscreen-fallback {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background-color: black; 
     }
 
     
@@ -3408,33 +3444,35 @@ input[type="range"]::-webkit-slider-runnable-track {
     #channelBar {
         display: flex;
         flex-direction: row;
-        margin-top: 10px;
-        margin-left: 3.5em;
+        margin-top: -5vh;
+        margin-left: 7.5vw;
+        width: 100vw
     }
     
     #channelBar .displays{
-        font-size: 1em;
-        margin-left: 3em;
-        white-space: nowrap;
+        font-size: 5vw;
+        margin-left: 15.6vw;
+        width: 30vw;
     }
     
+    
     #channelBar .displays:nth-child(1) {
-        color:white; 
-        margin-right: 2.2em;
+        color:#8aefe7;
+        margin-left: 85vw;
+        width: 30vw;
     }
     #channelBar .displays:nth-child(2) {
-        color:#8aefe7;
-        margin-right: 5em;
+        color:white;
+        margin-left: 39vw;
     }
     #channelBar .displays:nth-child(3) {
         color:white;
-        margin-right: 7em;
+        margin-left: 37vw;
     }
     #channelBar .displays:nth-child(4) {
         color:white;
-        margin-right: 7em;
+        margin-left: 37vw;
     }
-    #channelBar .displays:nth-child(5) {color:white}
     
     
     #channelsGrid {
@@ -3722,9 +3760,9 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     #volume-control-container {
         display: flex;
-        justify-content: flex-end; 
+        justify-content: flex-start; 
         padding-right: 20px;
-        margin-top: 10px; 
+        /* margin-top: 10px;  */
         margin-bottom: -5px;
         margin-left: 53em;
         width: 100%; 
@@ -3733,13 +3771,15 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     #volume-control {
         display: flex;
-        align-items: center; 
+        /* align-items: center;  */
+        justify-content: flex-start; 
         gap: 0px;
+        width: 5vw;
     }
     
     .mute-toggle {
         background-color: #1a1126;
-        font-size: 2.5em;
+        font-size: 5vw;
         color: white;
         border: none;
         
@@ -3749,8 +3789,7 @@ input[type="range"]::-webkit-slider-runnable-track {
         background-color: transparent;
         color: white;
         border: none;
-        cursor: pointer;
-        font-size: 2.5em; 
+        font-size: 5vw;
     }
     
     
@@ -3890,7 +3929,7 @@ input[type="range"]::-webkit-slider-runnable-track {
     #appTitle .button-group {
         display: flex;
         flex-direction: row;
-        margin-left: 33vw;
+        margin-left: 50vw;
         gap:10px;
 
     }
@@ -3952,24 +3991,43 @@ input[type="range"]::-webkit-slider-runnable-track {
     #videoContainer.fullscreen-mode {
         width: 100vw;
         height: 100vh;
-        position: fixed; 
+        position: fixed; /* Overlay on top of other content */
         top: 0;
         left: 0;
-        margin: 0;
-        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: black;
+        overflow: hidden;   
+        z-index: 9999;  
     }
     
     #videoContainer.fullscreen-mode #videoPlayer,
     #videoContainer.fullscreen-mode .video-overlay {
         width: 100%;
         height: 100%;
-        position: absolute;
+    }
+
+    .fullscreen-fallback {
+        /* position: fixed;
         top: 0;
         left: 0;
-        right: 0;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        background-color: black; 
+        object-fit:fill */
         bottom: 0;
-        border-radius: 0; 
+        left: 0;
+        margin-top: 40px;
+        overflow: auto;
+        position: absolute;
+        right: 0;
+        top:0
     }
+    
 
 
 
@@ -3985,29 +4043,26 @@ input[type="range"]::-webkit-slider-runnable-track {
     #channelBar {
         display: flex;
         flex-direction: row;
-        margin-top: -3px;
-        margin-left: 12px;
-        width: 360px;
-    }
-
-    #channelBar .displays{
-        white-space: nowrap;
+        margin-top: -1.5vh;
+        margin-left: 7.5vw;
     }
     
+    #channelBar .displays{
+        font-size: 4vw;
+        margin-left: 15.6vw;
+    }
+    
+    
     #channelBar .displays:nth-child(1) {
-        color:white; 
-        margin-right: 3vw;
-        font-size: 7px;
+        color:#8aefe7;
+        margin-left: 20vw;
     }
     #channelBar .displays:nth-child(2) {
-        color:#8aefe7;
-        margin-right: 24.5vw;
-        font-size: 7px;
-    }
-    #channelBar .displays:nth-child(3) {
         color:white;
-        font-size: 7px;
+        margin-left: 16vw;
     }
+    #channelBar .displays:nth-child(3) {display: none;}
+
     #channelBar .displays:nth-child(4) {display: none;}
     #channelBar .displays:nth-child(5) {display: none;}
 
@@ -4216,28 +4271,40 @@ input[type="range"]::-webkit-slider-runnable-track {
 
     #volume-control-container {
         display: flex;
-        justify-content: flex-end; 
-        padding-right: 20px;
+        justify-content: flex-start; 
+        padding-right: 0;
         margin-top: 10px; 
         margin-bottom: -5px;
         width: 100%; 
+        gap: 6vw;
     }
     
     
     #volume-control {
         display: flex;
         position: relative;
-        justify-content: center; 
+        /* justify-content: center;  */
+        justify-content: flex-start;
         gap: 0px;
+        width: 5vw;
     }
 
     #volume-control .mute-toggle {
         position: absolute;
-        right: 10px;
+        /* right: 10px; */
         background-color: #1a1126;
-        font-size: 13px;
+        font-size: 5vw;
         color: white;
         border: none;
+    }
+
+    .fullscreen-toggle {
+        background-color: transparent;
+        color: white;
+        border: none;
+        font-size: 5vw; 
+        /* margin-top: -11.1em;
+        margin-right: -5em; */
     }
 
 
@@ -4323,7 +4390,7 @@ input[type="range"]::-webkit-slider-runnable-track {
 
 
 
-@media (max-width: 375px) {
+@media (min-width: 321px) and (max-width: 375px) {
     body {
         padding: 10px; 
         overflow-x: hidden;
@@ -4335,7 +4402,7 @@ input[type="range"]::-webkit-slider-runnable-track {
         display: flex;
         flex-direction: column;
         height: 50px;
-        width: 100%;
+        width: 100vw;
         background-color: black;
         margin-bottom: 5px;
         margin-top: -20px;
@@ -4367,7 +4434,7 @@ input[type="range"]::-webkit-slider-runnable-track {
     #appTitle .button-group {
         display: flex;
         flex-direction: row;
-        margin-left: 33vw;
+        margin-left: 50vw;
         gap:10px;
 
     }
@@ -4432,21 +4499,28 @@ input[type="range"]::-webkit-slider-runnable-track {
         position: fixed; 
         top: 0;
         left: 0;
-        margin: 0;
-        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: black;
     }
     
     #videoContainer.fullscreen-mode #videoPlayer,
     #videoContainer.fullscreen-mode .video-overlay {
         width: 100%;
-        height: 100%;
-        position: absolute;
+        height: 100vh;
+    }
+
+    .fullscreen-fallback {
+        position: fixed;
         top: 0;
         left: 0;
-        right: 0;
-        bottom: 0;
-        border-radius: 0; 
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background-color: black; 
     }
+    
 
 
     #currChannelName {
@@ -4461,29 +4535,25 @@ input[type="range"]::-webkit-slider-runnable-track {
     #channelBar {
         display: flex;
         flex-direction: row;
-        margin-top: -3px;
-        margin-left: 12px;
-        width: 360px;
-    }
-
-    #channelBar .displays{
-        white-space: nowrap;
+        margin-top: -1.5vh;
+        margin-left: 7.5vw;
     }
     
+    #channelBar .displays{
+        font-size: 4vw;
+        margin-left: 20vw;
+    }
+    
+    
     #channelBar .displays:nth-child(1) {
-        color:white; 
-        margin-right: 3vw;
-        font-size: 7px;
+        color:#8aefe7;
+        margin-left: 23vw;
     }
     #channelBar .displays:nth-child(2) {
-        color:#8aefe7;
-        margin-right: 24.5vw;
-        font-size: 7px;
-    }
-    #channelBar .displays:nth-child(3) {
         color:white;
-        font-size: 7px;
+        margin-left: 13vw;
     }
+    #channelBar .displays:nth-child(3) {display: none;}
     #channelBar .displays:nth-child(4) {display: none;}
     #channelBar .displays:nth-child(5) {display: none;}
 
@@ -4692,33 +4762,33 @@ input[type="range"]::-webkit-slider-runnable-track {
 
     #volume-control-container {
         display: flex;
-        justify-content: flex-end; 
+        justify-content: flex-start; 
         padding-right: 20px;
         margin-bottom: -5px;
         width: 100%;
-        gap: 0.2em;
+        gap: 5vw;
     }
     
     .fullscreen-toggle {
         background-color: transparent;
         color: white;
         border: none;
-        cursor: pointer;
-        font-size: 13px; 
+        font-size: 5vw;
     }
     
     #volume-control {
         display: flex;
         position: relative;
-        justify-content: center; 
+        justify-content: flex-start; 
+        width: 5vw;
         gap: 0px;
     }
 
     #volume-control .mute-toggle {
         position: absolute;
-        right: 10px;
+        /* right: 10px; */
         background-color: #1a1126;
-        font-size: 13px;
+        font-size: 5vw;
         color: white;
         border: none;
     }
@@ -4805,6 +4875,7 @@ input[type="range"]::-webkit-slider-runnable-track {
 }
 
 
+
 @media (max-width: 320px) {
     body {
         padding: 10px; 
@@ -4817,7 +4888,7 @@ input[type="range"]::-webkit-slider-runnable-track {
         display: flex;
         flex-direction: column;
         height: 50px;
-        width: 100%;
+        width: 100vw;
         background-color: black;
         margin-bottom: 5px;
         margin-top: -20px;
@@ -4840,16 +4911,16 @@ input[type="range"]::-webkit-slider-runnable-track {
     } */
 
     #appMoto{
-        font-size: 10px;
-        margin-left: 10px;
-        margin-top: -4vw;
-        width: 300px;
+        font-family: 'Poppins';
+        font-size: 4vw;
+        
+        margin-top: -13px;
     }
 
     #appTitle .button-group {
         display: flex;
         flex-direction: row;
-        margin-left: 7em;
+        margin-left: 80vw;
         gap:10px;
 
     }
@@ -4880,9 +4951,9 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     #videoContainer {
         position: relative;
-        margin-top: 3em;
-        height: 20em;
-        max-width: 10em;
+        margin-top: 13vh;
+        height: 50vh;
+        width: 100vw;
     }
 
     .video-overlay {
@@ -4908,24 +4979,31 @@ input[type="range"]::-webkit-slider-runnable-track {
     #videoContainer.fullscreen-mode {
         width: 100vw;
         height: 100vh;
-        position: fixed; 
+        position: fixed;
         top: 0;
         left: 0;
-        margin: 0;
-        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: black;
     }
     
     #videoContainer.fullscreen-mode #videoPlayer,
     #videoContainer.fullscreen-mode .video-overlay {
         width: 100%;
-        height: 100%;
-        position: absolute;
+        height: 100vh;
+    }
+
+    .fullscreen-fallback {
+        position: fixed; 
         top: 0;
         left: 0;
-        right: 0;
-        bottom: 0;
-        border-radius: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9999; 
+        background-color: black; 
     }
+    
 
 
     #currChannelName {
@@ -4937,32 +5015,30 @@ input[type="range"]::-webkit-slider-runnable-track {
         font-size: 14px;
     }
 
+
     #channelBar {
         display: flex;
         flex-direction: row;
-        margin-top: -5em;
-        margin-left: 12px;
-        width: 360px;
-    }
-
-    #channelBar .displays{
-        white-space: nowrap;
+        margin-top: 10px;
+        margin-left: 25vw;
     }
     
+    #channelBar .displays{
+        font-size: 2vw;
+        margin-left: 33vw;
+    }
+    
+    
     #channelBar .displays:nth-child(1) {
-        color:white; 
-        margin-right: 7em;
-        font-size: 5px;
+        color:#8aefe7;
+        margin-left: 10vw;
     }
     #channelBar .displays:nth-child(2) {
-        color:#8aefe7;
-        margin-right: 19em;
-        font-size: 5px;
-    }
-    #channelBar .displays:nth-child(3) {
         color:white;
-        font-size: 5px;
+        /* margin-right: 0vw; */
     }
+
+    #channelBar .displays:nth-child(3) {display: none;}
     #channelBar .displays:nth-child(4) {display: none;}
     #channelBar .displays:nth-child(5) {display: none;}
 
@@ -5192,7 +5268,7 @@ input[type="range"]::-webkit-slider-runnable-track {
     #volume-control-container {
         display: flex;
         justify-content: flex-end; 
-        margin-right: -4em;
+        /* margin-right: -4em; */
         width: 100%; 
     }
     
@@ -5203,23 +5279,20 @@ input[type="range"]::-webkit-slider-runnable-track {
         position: relative;
         justify-content: center; 
         gap: 0px;
-        margin-top: -9.1em;
-       margin-right: -1em;
+        margin-right: -1em;
     }
 
     .fullscreen-toggle {
         background-color: transparent;
         color: white;
         border: none;
-        cursor: pointer;
         font-size: 13px; 
-        margin-top: -11.1em;
         margin-right: -5em;
     }
 
     #volume-control .mute-toggle {
         position: absolute;
-        right: 10px;
+        /* right: 10px; */
         background-color: #1a1126;
         font-size: 13px;
         color: white;
