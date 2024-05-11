@@ -44,7 +44,7 @@ body {
 #appTitle .button-group {
     display: flex; 
     /* align-items: center;  */
-    margin-left: 830px;
+    margin-left: 60vw;
     gap: 10px;
 }
 
@@ -335,7 +335,7 @@ body {
     #appTitle .button-group {
         display: flex; 
         /* align-items: center;  */
-        margin-left: 18em;
+        margin-left: 60vw;
         gap: 10px;
     }
     
@@ -624,7 +624,7 @@ body {
     #appTitle .button-group {
         display: flex; 
         /* align-items: center;  */
-        margin-left: 18em;
+        margin-left: 60vw;
         gap: 10px;
     }
     
@@ -1789,7 +1789,7 @@ body {
     #appTitle .button-group {
         display: flex;
         flex-direction: row;
-        margin-left: 33vw;
+        margin-left: 30vw;
         gap:10px;
 
     }
@@ -2042,7 +2042,7 @@ body {
     #appTitle .button-group {
         display: flex;
         flex-direction: row;
-        margin-left: 33vw;
+        margin-left: 30vw;
         gap:10px;
 
     }
@@ -2293,7 +2293,7 @@ body {
     #appTitle .button-group {
         display: flex;
         flex-direction: row;
-        margin-left: 7em;
+        margin-left: 20vw;
         gap:10px;
 
     }

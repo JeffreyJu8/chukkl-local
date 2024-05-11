@@ -113,14 +113,7 @@ async function defaultVideo(){
         grid.innerHTML = '';
 
         for (const [index, channel] of channels.entries()) {
-            // const channelBlock = document.createElement('div');
-            // channelBlock.id = channel.name
-            // channelBlock.className = 'channel-block';
-            // channelBlock.dataset.styleClass = 'channel-style-' + index;
-            //selectChannel(channel.channel_id);
-
-            if (index === 8) {
-                // selectChannel(channel.channel_id);
+            if (index === 0) {
                 getChannelInfo(channel, 'channel-style-' + index);
             }
         }
@@ -898,8 +891,8 @@ document.addEventListener("DOMContentLoaded", function() {
     // fetchChannels();
     // getVideoCast(9);
     fetchChannels().then(() => {
-        selectChannel(9);
-        getVideoCast(9);
+        selectChannel(1);
+        getVideoCast(1);
         
     });
     defaultVideo();
@@ -957,72 +950,45 @@ function handleFullscreenChange() {
 
 function toggleFullscreen() {
     const videoContainer = document.querySelector('#videoContainer');
-    
-    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+
+    // Check if we're in fullscreen mode (either via the API or our fallback)
+    const isInFullscreen = document.fullscreenElement || videoContainer.classList.contains('fullscreen-fallback');
+
+    if (!isInFullscreen) {
+        // Attempt to use the Fullscreen API first
         if (videoContainer.requestFullscreen) {
-            videoContainer.requestFullscreen().catch(err => {
-                console.error(`Error attempting to enable fullscreen mode: ${err.message}`);
-                videoContainer.classList.add('fullscreen-fallback');  // Fallback if Fullscreen API fails
-            });
+            videoContainer.requestFullscreen();
+            // .catch(err => {
+            //     console.error(`Error attempting to enable fullscreen mode: ${err.message}`);
+            //     // Fallback to fullscreen simulation if Fullscreen API fails
+            //     videoContainer.classList.add('fullscreen-fallback');
+            // });
         } else if (videoContainer.webkitRequestFullscreen) { // Safari
-            videoContainer.webkitRequestFullscreen().catch(err => {
-                console.error(`Error attempting to enable fullscreen mode: ${err.message}`);
-                videoContainer.classList.add('fullscreen-fallback');
-            });
+            videoContainer.webkitRequestFullscreen();
+            // .catch(err => {
+            //     console.error(`Error attempting to enable fullscreen mode: ${err.message}`);
+            //     videoContainer.classList.add('fullscreen-fallback');
+            // });
         } else {
-            videoContainer.classList.add('fullscreen-fallback'); // Fallback if Fullscreen API is not available
+            // If Fullscreen API is not available, use the fallback
+            videoContainer.classList.add('fullscreen-fallback');
         }
     } else {
+        // Exiting fullscreen
         if (document.exitFullscreen) {
-            document.exitFullscreen();
+            document.exitFullscreen().catch(() => {
+                videoContainer.classList.remove('fullscreen-fallback');
+            });
         } else if (document.webkitExitFullscreen) { // Safari
-            document.webkitExitFullscreen();
+            document.webkitExitFullscreen().catch(() => {
+                videoContainer.classList.remove('fullscreen-fallback');
+            });
+        } else {
+            // Remove fallback class if Fullscreen API is not available
+            videoContainer.classList.remove('fullscreen-fallback');
         }
     }
 }
-
-
-// function toggleFullscreen() {
-//     const videoContainer = document.querySelector('#videoContainer');
-
-//     // Check if we're in fullscreen mode (either via the API or our fallback)
-//     const isInFullscreen = document.fullscreenElement || videoContainer.classList.contains('fullscreen-fallback');
-
-//     if (!isInFullscreen) {
-//         // Attempt to use the Fullscreen API first
-//         if (videoContainer.requestFullscreen) {
-//             videoContainer.requestFullscreen();
-//             // .catch(err => {
-//             //     console.error(`Error attempting to enable fullscreen mode: ${err.message}`);
-//             //     // Fallback to fullscreen simulation if Fullscreen API fails
-//             //     videoContainer.classList.add('fullscreen-fallback');
-//             // });
-//         } else if (videoContainer.webkitRequestFullscreen) { // Safari
-//             videoContainer.webkitRequestFullscreen();
-//             // .catch(err => {
-//             //     console.error(`Error attempting to enable fullscreen mode: ${err.message}`);
-//             //     videoContainer.classList.add('fullscreen-fallback');
-//             // });
-//         } else {
-//             // If Fullscreen API is not available, use the fallback
-//             videoContainer.classList.add('fullscreen-fallback');
-//         }
-//     } else {
-//         // Exiting fullscreen
-//         if (document.exitFullscreen) {
-//             document.exitFullscreen().catch(() => {
-//                 videoContainer.classList.remove('fullscreen-fallback');
-//             });
-//         } else if (document.webkitExitFullscreen) { // Safari
-//             document.webkitExitFullscreen().catch(() => {
-//                 videoContainer.classList.remove('fullscreen-fallback');
-//             });
-//         } else {
-//             // Remove fallback class if Fullscreen API is not available
-//             videoContainer.classList.remove('fullscreen-fallback');
-//         }
-//     }
-// }
 
 
 
@@ -1058,23 +1024,10 @@ document.addEventListener('fullscreenchange', function () {
 function adjustVideoForOrientation() {
     const videoContainer = document.querySelector('#videoContainer');
     if (window.innerHeight > window.innerWidth) {
-        videoContainer.classList.add('fullscreen-portrait');
+      // Portrait orientation
+      videoContainer.classList.add('fullscreen-portrait');
     } else {
-        videoContainer.classList.remove('fullscreen-portrait');
+      // Landscape orientation
+      videoContainer.classList.remove('fullscreen-portrait');
     }
-}
-
-window.addEventListener('resize', adjustVideoForOrientation);
-
-
-
-// function adjustVideoForOrientation() {
-//     const videoContainer = document.querySelector('#videoContainer');
-//     if (window.innerHeight > window.innerWidth) {
-//       // Portrait orientation
-//       videoContainer.classList.add('fullscreen-portrait');
-//     } else {
-//       // Landscape orientation
-//       videoContainer.classList.remove('fullscreen-portrait');
-//     }
-//   }
+  }

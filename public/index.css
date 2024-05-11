@@ -47,7 +47,7 @@ body {
 #appTitle .button-group {
     display: flex;
     justify-content: flex-end;
-    margin-left: 70vw;
+    margin-left: 60vw;
     gap: 10px;
 }
 
@@ -415,6 +415,55 @@ body {
     align-items: center; 
 }
 
+
+.channel-style-11 {
+    font-family: 'Fredoka One';
+    font-size: 28px;
+    display: flex;
+    gap: 5px;
+    justify-content: center; 
+    align-items: center; 
+}
+
+
+.channel-style-12 {
+    font-family: 'Fredoka One';
+    font-size: 28px;
+    display: flex;
+    gap: 5px;
+    justify-content: center; 
+    align-items: center; 
+}
+
+
+.channel-style-13 {
+    font-family: 'Fredoka One';
+    font-size: 28px;
+    display: flex;
+    gap: 5px;
+    justify-content: center; 
+    align-items: center; 
+}
+
+
+.channel-style-14 {
+    font-family: 'Fredoka One';
+    font-size: 28px;
+    display: flex;
+    gap: 5px;
+    justify-content: center; 
+    align-items: center; 
+}
+
+
+.channel-style-15 {
+    font-family: 'Fredoka One';
+    font-size: 28px;
+    display: flex;
+    gap: 5px;
+    justify-content: center; 
+    align-items: center; 
+}
 /* .name-of-channel {
     font-size: normal;
     line-height: 1; 
@@ -681,7 +730,7 @@ input[type="range"]::-webkit-slider-runnable-track {
     #appTitle .button-group {
         display: flex; 
         /* align-items: center;  */
-        margin-left: 70vw;
+        margin-left: 60vw;
         gap: 10px;
     }
     
@@ -1341,7 +1390,7 @@ input[type="range"]::-webkit-slider-runnable-track {
     #appTitle .button-group {
         display: flex; 
         /* align-items: center;  */
-        margin-left: 70vw;
+        margin-left: 60vw;
         gap: 10px;
     }
     
@@ -1988,7 +2037,7 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     #appTitle .button-group {
         display: flex; 
-        margin-left: 70vw;
+        margin-left: 60vw;
         gap: 0.2em;
         margin-top: -0.4em;
     }
@@ -2627,7 +2676,7 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     #appTitle .button-group {
         display: flex; 
-        margin-left: 70vw;
+        margin-left: 60vw;
         gap: 0.2em;
         margin-top: -0.4em;
     }
@@ -3266,7 +3315,7 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     #appTitle .button-group {
         display: flex; 
-        margin-left: 250vw;
+        margin-left: 200vw;
         gap: 5px;
     }
     
@@ -3929,7 +3978,7 @@ input[type="range"]::-webkit-slider-runnable-track {
     #appTitle .button-group {
         display: flex;
         flex-direction: row;
-        margin-left: 50vw;
+        margin-left: 40vw;
         gap:10px;
 
     }
@@ -4434,7 +4483,7 @@ input[type="range"]::-webkit-slider-runnable-track {
     #appTitle .button-group {
         display: flex;
         flex-direction: row;
-        margin-left: 50vw;
+        margin-left: 40vw;
         gap:10px;
 
     }
@@ -4920,7 +4969,7 @@ input[type="range"]::-webkit-slider-runnable-track {
     #appTitle .button-group {
         display: flex;
         flex-direction: row;
-        margin-left: 80vw;
+        margin-left: 60vw;
         gap:10px;
 
     }
