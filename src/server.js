@@ -45,6 +45,13 @@ async function connectToDatabase() {
     }
 }
 
+const publicDirectoryPath = path.join(__dirname, '..', 'public');
+app.use(express.static(publicDirectoryPath));
+
+// Route for "/about"
+app.get('/about', (req, res) => {
+    res.sendFile(path.join(publicDirectoryPath, 'about_us.html'));
+});
 
 async function preloadAllChannels() {
     const channels = await fetchChannelsFromDatabase();

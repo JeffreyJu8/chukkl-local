@@ -4,6 +4,7 @@ body {
     color: white;
     margin: 0;
     padding: 20px;
+    min-height: 100vh;
 }
 
 #header{
@@ -44,7 +45,7 @@ body {
 #appTitle .button-group {
     display: flex; 
     /* align-items: center;  */
-    margin-left: 60vw;
+    margin-left: 50vw;
     gap: 10px;
 }
 
@@ -96,15 +97,15 @@ body {
 
 
 #appMoto .word:nth-child(1) {color:white}
-#appMoto .word:nth-child(2) {color:#8aefe7}
+#appMoto .word:nth-child(2) {color: #8aefe7}
 #appMoto .word:nth-child(3) {color:white}
 #appMoto .word:nth-child(4) {color:white}
-#appMoto .word:nth-child(5) {color:white}
+#appMoto .word:nth-child(5) {color: white}
 
 
 #Description {
     text-align: left; 
-    margin-top: 40px;
+    margin-top: 20vh;
     margin-left: 150px;
 }
 
@@ -224,21 +225,29 @@ body {
 
 #footer {
     display: flex; 
-    flex-direction: column; 
+    flex: 1;
+    flex-direction: row; 
     align-items: center; 
     justify-content: space-between;
     background-color: #222; 
     color: white;
-    padding: 20px;
     width: 100%;
-    margin-left: -20px;
-    margin-bottom: -20px;
-    margin-top: 40px;
+    padding: 0.5vw;
+    left: 0;
+    right: 0;
+    margin-top: 2vw;
 }
 
-#footer .social-links {
-    align-self: start;
-    margin-bottom: 20px;
+.footer-group{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+
+.footer-group.left {
+    flex: 0 0 25%;
+    justify-content: flex-start; 
+    align-items: center;
 }
 
 #footer .social-links a {
@@ -252,10 +261,11 @@ body {
     color: #8aefe7; 
 }
 
-#footer .application-form {
-    align-self: flex-end;
-    margin-top: -55px;
-    width: 200px;
+.footer-group.center {
+    flex: 0 0 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
 }
 
 #footer .application-form button {
@@ -270,21 +280,41 @@ body {
 }
 
 #footer .application-form button:hover {
-    background-color: #8aefe7; 
+    background-color: black; 
 }
 
-#footer .email-contact {
-    align-self: center;
-    margin-top: -30px;
-    font-size: 1vw;
+.footer-group.right {
+    flex: 0 0 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
 }
 
-#footer .email-contact a {
+#footer .terms-conditions a {
     color: #8aefe7; 
     text-decoration: none;
 }
 
-#footer .email-contact a:hover {
+#footer .terms-conditions a:hover {
+    text-decoration: underline;
+}
+
+#footer .privacy-policy a {
+    color: #8aefe7; 
+    text-decoration: none;
+}
+
+#footer .privacy-policy a:hover {
+    text-decoration: underline;
+}
+
+#footer .content-preferences a {
+    color: #8aefe7; 
+    text-decoration: none;
+}
+
+#footer .content-preferences a:hover {
     text-decoration: underline;
 }
 
@@ -295,6 +325,7 @@ body {
         color: white;
         margin: 0;
         padding: 20px;
+        min-height: 100vh;
     }
     
     #header{
@@ -322,20 +353,10 @@ body {
         font-weight: bolder;
     }
     
-    /* #appTitle .sub{
-        font-family: "Poppins", sans-serif;
-        font-weight: 100;
-        font-style: normal;
-        font-size: 1.3vw;
-        color: #8aefe7;
-        margin-top: 1.4em;
-        margin-left: 7px;
-    } */
     
     #appTitle .button-group {
         display: flex; 
-        /* align-items: center;  */
-        margin-left: 60vw;
+        margin-left: 50vw;
         gap: 10px;
     }
     
@@ -510,6 +531,9 @@ body {
     
     
     #footer {
+        position: absolute;
+        left: 0;
+        bottom: 0;
         display: flex; 
         flex-direction: column; 
         align-items: center; 
@@ -518,10 +542,6 @@ body {
         color: white;
         padding: 20px;
         width: 100%;
-        height: 3em;
-        margin-left: -20px;
-        margin-bottom: -20px;
-        margin-top: 40px;
     }
     
     #footer .social-links {
@@ -624,7 +644,7 @@ body {
     #appTitle .button-group {
         display: flex; 
         /* align-items: center;  */
-        margin-left: 60vw;
+        margin-left: 50vw;
         gap: 10px;
     }
     
@@ -892,7 +912,7 @@ body {
     #appTitle {
         font-family: 'Aileron', sans-serif;                
         display: flex;
-        font-size: 3em;
+        font-size: 3vw;
         margin-left: 20px;
         flex-direction: row;
     }
@@ -902,32 +922,23 @@ body {
         font-weight: bolder;
     }
     
-    /* #appTitle .sub{
-        font-family: "Poppins", sans-serif;
-        font-weight: 100;
-        font-style: normal;
-        font-size: 1.3vw;
-        color: #8aefe7;
-        margin-top: 2.5vw;
-    } */
-    
     #appTitle .button-group {
-        display: flex; 
-        margin-left: 60vw;
-        gap: 0.2em;
-        margin-top: -0.4em;
+        display: flex;
+        justify-content: flex-end;
+        margin-left: 55vw;
+        gap: 10px;
     }
     
     
-    #appTitle .return {
-        font-size: 0.2em;
+    .return {
+        font-size: 1vw;
         color: white;
-        width: 9em;
+        width: 150px;
+        margin-top: 3vh;
         background-color: black;
-        border: 0.2em solid #8aefe7;
-        border-radius: 0.8em;
-        height: 4em;
-        margin-top: 3em;
+        border: 3px solid #8aefe7;
+        border-radius: 10px;
+        height: 50px;
     }
     
     .return:hover {
@@ -935,17 +946,14 @@ body {
     }
     
     #appTitle .feedback{
-        font-size: 0.2em;
+        font-size: 1vw;
         color: white;
-        width: 9em;
+        width: 150px;
+
         background-color: black;
-        border: 0.2em solid #8aefe7;
-        border-radius: 0.8em;
-        height: 4em;
-    }
-    
-    .feedback:hover {
-        cursor: pointer; 
+        border: 3px solid #8aefe7;
+        border-radius: 10px;
+        height: 50px;
     }
     
     
@@ -960,7 +968,7 @@ body {
         font-family: 'Poppins';
         font-size: 1.2vw;
         margin-left: 20px;
-        margin-top: -0.4vw;
+        margin-top: -4vh;
     }
     
     
@@ -979,49 +987,13 @@ body {
     }
     
     
-    #Description #companymoto {
-        font-family: 'Fredoka One';
-        font-size: 6vw; 
-        font-weight: bold;
-        margin-bottom: 2vw; 
-    }
-    
-    
-    #Description #companymoto .word {
-        color: white;
-        margin-right: 1px; 
-    }
-    #Description #companymoto .word:nth-child(3) {
-        color: #8aefe7; 
-        font-weight: bold;
-    }
-    
-    
-    #Description figure {
-        margin-left: 0; 
-    }
-
-    #Description img {
-        margin-top: 1vw;
-        align-self: center;
-        width: 85vw;
-    }
-    
-    #Description figcaption{
-        font-family: "Poppins";
-        font-size: 1.5vw;
-        align-self: center;
-        margin-bottom: 5vw;
-    }
-    
-    
     #Description h3:nth-of-type(1){
         margin-top: 5vw;
     }
     
     
     #Description p:nth-of-type(1) {
-        font-size: 2.5vw; 
+        font-size: 1.5vw; 
         font-weight: bolder;
         text-align: Left; 
         color: grey;
@@ -1030,17 +1002,17 @@ body {
     }
     
     #Description p:nth-of-type(2) {
-        font-size: 2vw; 
+        font-size: 1.5vw; 
         font-weight: medium;
         text-align: Left; 
         color: white;
         max-width: 85vw;
         line-height: 1.6;
-        margin-bottom: 10vw;
+        margin-bottom: 3vw;
     }
     
     #Description p:nth-of-type(3) {
-        font-size: 2vw; 
+        font-size: 1.5vw; 
         font-weight: medium;
         text-align: Left; 
         color: white;
@@ -1050,7 +1022,7 @@ body {
     }
     
     #Description p:nth-of-type(4) {
-        font-size: 2vw; 
+        font-size: 1vw; 
         font-weight: medium;
         text-align: Left; 
         color: white;
@@ -1092,40 +1064,47 @@ body {
 
     #footer {
         display: flex; 
-        flex-direction: column; 
+        flex: 1;
+        flex-direction: row; 
         align-items: center; 
         justify-content: space-between;
         background-color: #222; 
         color: white;
-        padding: 20px;
         width: 100%;
-        height: 1vh;
-        margin-left: -20px;
-        margin-bottom: -20px;
-        margin-top: 40px;
+        padding: 0.5vw;
+        left: 0;
+        right: 0;
+        margin-top: 2vw;
     }
     
-    #footer .social-links {
-        align-self: start;
-        margin-top: -1vw;
-        margin-bottom: 14vw;
+    .footer-group{
+        display: flex;
+        justify-content: center;
+        align-items:center;
+    }
+    
+    .footer-group.left {
+        flex: 0 0 25%;
+        justify-content: flex-start; 
+        align-items: center;
     }
     
     #footer .social-links a {
         color: white;
         margin: 0 10px;
         text-decoration: none;
-        font-size: 2vw;
+        font-size: 1.2vw;
     }
     
     #footer .social-links a:hover {
         color: #8aefe7; 
     }
     
-    #footer .application-form {
-        align-self: flex-end;
-        margin-top: -15.5vw;
-        width: 20vw;
+    .footer-group.center {
+        flex: 0 0 25%;
+        display: flex;
+        justify-content: center;
+        align-items: center; 
     }
     
     #footer .application-form button {
@@ -1136,24 +1115,45 @@ body {
         border-radius: 5px;
         cursor: pointer;
         font-size: 1vw;
-        width: 20vw;
+        width: 200px;
     }
     
     #footer .application-form button:hover {
-        background-color: #8aefe7; 
+        background-color: black; 
     }
     
-    #footer .email-contact {
-        align-self: center;
-        font-size: 1.5vw;
+    .footer-group.right {
+        flex: 0 0 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; 
     }
     
-    #footer .email-contact a {
+    #footer .terms-conditions a {
         color: #8aefe7; 
         text-decoration: none;
     }
     
-    #footer .email-contact a:hover {
+    #footer .terms-conditions a:hover {
+        text-decoration: underline;
+    }
+    
+    #footer .privacy-policy a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .privacy-policy a:hover {
+        text-decoration: underline;
+    }
+    
+    #footer .content-preferences a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .content-preferences a:hover {
         text-decoration: underline;
     }
 }
@@ -1206,7 +1206,7 @@ body {
     
     #appTitle .button-group {
         display: flex; 
-        margin-left: 60vw;
+        margin-left: 40vw;
         gap: 0.2em;
         margin-top: -0.4em;
     }
@@ -1462,77 +1462,50 @@ body {
     }
     
     #header{
+        position: fixed;
+        z-index: 1000;
         display: flex;
         flex-direction: column;
-        height: 10em;
-        width: 80em;
-        padding: 10px;
+        height: 50px;
+        width: 100%;
         background-color: black;
-        margin-left: -20px;
-        margin-right: -20px;
         margin-bottom: 5px;
         margin-top: -20px;
+        margin-left: -10px;
     }
-    
+
     #appTitle {
-        font-family: 'Aileron', sans-serif;                
-        display: flex;
-        font-size: 5em;
-        margin-left: 20px;
-        flex-direction: row;
+        font-size: 5vw;
+        margin-left: 10px;
     }
-    
+
     #appTitle .letter {
-        margin: -2.2px;
-        font-weight: bolder;
+        margin: 0; 
+        margin-top: 5px;
     }
-    
-    /* #appTitle .sub{
-        font-family: "Poppins", sans-serif;
-        font-weight: 100;
-        font-style: normal;
-        font-size: 0.25em;
-        color: #8aefe7;
-        margin-top: 2.7em;
-    } */
-    
+
     #appTitle .button-group {
-        display: flex; 
-        gap: 5px;
+        display: flex;
+        flex-direction: row;
+        margin-left: 35vw;
+        gap:10px;
+
     }
-    
-    
-    .about-us {
-        font-size: 0.3em;
-        color: white;
-        height: 4em;
-        width: 6em;
-        margin-top: 1.5em;
-        background-color: black;
-        border: 0.2em solid #8aefe7;
-        border-radius: 0.8em;
-        margin-left: -12em;
-    }
-    
-    .about-us:hover {
-        cursor: pointer; 
+
+    #appTitle .return{
+        font-size: 2vw;
+        width: 55px; 
+        height: 30px;
+        margin-top: 5vw;
     }
     
     #appTitle .feedback{
-        font-size: 0.3em;
-        color: white;
-        height: 4em;
-        width: 6em;
-        margin-top: -20em;
-        background-color: black;
-        border: 0.2em solid #8aefe7;
-        border-radius: 0.8em;
-        margin-left: -4em;
+        font-size: 2vw;
+        width: 55px; 
+        height: 30px;
+        margin-top: 5vw;
     }
-    
-    .feedback:hover {
-        cursor: pointer; 
-    }
+
     
     
     #appTitle .letter:nth-child(1) { color: #8aefe7; }    /* First letter 'c' */
@@ -1544,13 +1517,13 @@ body {
     
     #appMoto{
         font-family: 'Poppins';
-        font-size: 1.5em;
-        margin-left: 20px;
+        font-size: 2vw;
+        margin-left: 3vw;
         margin-top: -1em;
     }
     
     
-    #appMoto .word:nth-child(1) {color:white}
+    #appMoto .word:nth-child(1) {color:#8aefe7}
     #appMoto .word:nth-child(2) {color:#8aefe7}
     #appMoto .word:nth-child(3) {color:white}
     #appMoto .word:nth-child(4) {color:white}
@@ -1558,46 +1531,15 @@ body {
 
 
     #Description {
-        text-align: left; 
-        margin-top: 9vw;
-
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+        /* align-items: center; */
+        height: 100vh;
+        width: 100vw;
+        margin: 0;
     }
     
-    
-    #Description #companymoto {
-        font-family: 'Fredoka One';
-        font-size: 6vw; 
-        font-weight: bold;
-        margin-bottom: 2vw; 
-    }
-    
-    
-    #Description #companymoto .word {
-        color: white;
-        margin-right: 1px; 
-    }
-    #Description #companymoto .word:nth-child(3) {
-        color: #8aefe7; 
-        font-weight: bold;
-    }
-    
-    
-    #Description figure {
-        margin-left: 0; 
-    }
-
-    #Description img {
-        margin-top: 1vw;
-        align-self: center;
-        width: 85vw;
-    }
-    
-    #Description figcaption{
-        font-family: "Poppins";
-        font-size: 1.5vw;
-        align-self: center;
-        margin-bottom: 5vw;
-    }
     
     
     #Description h3:nth-of-type(1){
@@ -1608,7 +1550,7 @@ body {
     #Description p:nth-of-type(1) {
         font-size: 2.5vw; 
         font-weight: bolder;
-        text-align: Left; 
+        text-align: left; 
         color: grey;
         max-width: 80vw;
         line-height: 1.6;
@@ -1789,7 +1731,7 @@ body {
     #appTitle .button-group {
         display: flex;
         flex-direction: row;
-        margin-left: 30vw;
+        margin-left: 35vw;
         gap:10px;
 
     }
@@ -1810,46 +1752,15 @@ body {
 
 
     #Description {
-        text-align: left; 
-        margin-top: 9vw;
-
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+        /* align-items: center; */
+        height: 100vh;
+        width: 100vw;
+        margin: 0;
     }
     
-    
-    #Description #companymoto {
-        font-family: 'Fredoka One';
-        font-size: 6vw; 
-        font-weight: bold;
-        margin-bottom: 2vw; 
-    }
-    
-    
-    #Description #companymoto .word {
-        color: white;
-        margin-right: 1px; 
-    }
-    #Description #companymoto .word:nth-child(3) {
-        color: #8aefe7; 
-        font-weight: bold;
-    }
-    
-    
-    #Description figure {
-        margin-left: 0; 
-    }
-
-    #Description img {
-        margin-top: 1vw;
-        align-self: center;
-        width: 85vw;
-    }
-    
-    #Description figcaption{
-        font-family: "Poppins";
-        font-size: 1.5vw;
-        align-self: center;
-        margin-bottom: 5vw;
-    }
     
     
     #Description h3:nth-of-type(1){
@@ -1860,7 +1771,7 @@ body {
     #Description p:nth-of-type(1) {
         font-size: 2.5vw; 
         font-weight: bolder;
-        text-align: Left; 
+        text-align: left; 
         color: grey;
         max-width: 80vw;
         line-height: 1.6;
@@ -1929,40 +1840,47 @@ body {
 
     #footer {
         display: flex; 
-        flex-direction: column; 
+        flex: 1;
+        flex-direction: row; 
         align-items: center; 
         justify-content: space-between;
         background-color: #222; 
         color: white;
-        padding: 20px;
         width: 100%;
-        height: 1vh;
-        margin-left: -20px;
-        margin-bottom: -20px;
-        margin-top: 40px;
+        padding: 0.5vw;
+        left: 0;
+        right: 0;
+        margin-top: 2vw;
     }
     
-    #footer .social-links {
-        align-self: start;
-        margin-top: -1vw;
-        margin-bottom: 14vw;
+    .footer-group{
+        display: flex;
+        justify-content: center;
+        align-items:center;
+    }
+    
+    .footer-group.left {
+        flex: 0 0 25%;
+        justify-content: flex-start; 
+        align-items: center;
+        white-space: nowrap; 
     }
     
     #footer .social-links a {
         color: white;
-        margin: 0 10px;
         text-decoration: none;
-        font-size: 2vw;
+        font-size: 4vw;
     }
     
     #footer .social-links a:hover {
         color: #8aefe7; 
     }
     
-    #footer .application-form {
-        align-self: flex-end;
-        margin-top: -15.5vw;
-        width: 20vw;
+    .footer-group.center {
+        flex: 0 0 30%;
+        display: flex;
+        justify-content: center;
+        align-items: center; 
     }
     
     #footer .application-form button {
@@ -1972,33 +1890,57 @@ body {
         padding: 10px 20px;
         border-radius: 5px;
         cursor: pointer;
-        font-size: 1vw;
+        font-size: 2vw;
         width: 20vw;
+        margin-left: 15vw;
+        margin-top: 10vh;
     }
     
     #footer .application-form button:hover {
-        background-color: #8aefe7; 
+        background-color: black; 
     }
     
-    #footer .email-contact {
-        align-self: center;
-        font-size: 1.5vw;
+    .footer-group.right {
+        flex: 0 0 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; 
+        font-size: 2.5vw;
+        white-space: nowrap; 
     }
     
-    #footer .email-contact a {
+    #footer .terms-conditions a {
         color: #8aefe7; 
         text-decoration: none;
     }
     
-    #footer .email-contact a:hover {
+    #footer .terms-conditions a:hover {
         text-decoration: underline;
     }
-
+    
+    #footer .privacy-policy a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .privacy-policy a:hover {
+        text-decoration: underline;
+    }
+    
+    #footer .content-preferences a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .content-preferences a:hover {
+        text-decoration: underline;
+    }
 
 }
 
 
-@media (max-width: 375px) {
+@media (max-width: 374px) {
     body {
         padding: 10px; 
         overflow-x: hidden;

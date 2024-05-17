@@ -47,7 +47,7 @@ body {
 #appTitle .button-group {
     display: flex;
     justify-content: flex-end;
-    margin-left: 60vw;
+    margin-left: 55vw;
     gap: 10px;
 }
 
@@ -99,10 +99,10 @@ body {
 
 
 #appMoto .word:nth-child(1) {color:white}
-#appMoto .word:nth-child(2) {color: white}
+#appMoto .word:nth-child(2) {color:#8aefe7}
 #appMoto .word:nth-child(3) {color:white}
 #appMoto .word:nth-child(4) {color:white}
-#appMoto .word:nth-child(5) {color:#8aefe7}
+#appMoto .word:nth-child(5) {color:white}
 
 
 
@@ -302,7 +302,7 @@ body {
 
 
 .channel-style-1 {
-    font-family: 'Koulen';
+    font-family: 'Fredoka One';
     font-size: 25px;
     display: flex;
     gap: 5px;
@@ -313,7 +313,7 @@ body {
 
 
 .channel-style-2 {
-    font-family: 'Koulen';
+    font-family: 'Fredoka One';
     font-size: 25px;
     display: flex;
     height: 68px;
@@ -325,8 +325,8 @@ body {
 }
 
 .channel-style-3 {
-    font-family: 'Lilita One';
-    font-size: 35px;
+    font-family: 'Fredoka One';
+    font-size: 2vw;
     display: flex;
     gap: 10px;
     justify-content: center; 
@@ -335,8 +335,8 @@ body {
 }
 
 .channel-style-4 {
-    font-family: 'Karantina';
-    font-size: 55px;
+    font-family: 'Fredoka One';
+    font-size: 2vw;
     display: flex;
     gap: 10px;
     justify-content: center; 
@@ -345,28 +345,16 @@ body {
 
 
 .channel-style-5 {
-    font-family: 'Kaushan Script';
-    font-size: 30px;
+    font-family: 'Fredoka One';
+    font-size: 1.8vw;
     display: flex;
     gap: 5px;
     justify-content: center; 
     align-items: center; 
 }
 
-/* .channel-style-6 {
-    display: flex;
-    font-family: 'luckiest guy';
-    font-size: 28px;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
-    
-} */
-
 .channel-style-6 {
-    font-family: 'luckiest guy';
+    font-family: 'Fredoka One';
     font-size: 28px;
     gap: 5px;
     display: flex;
@@ -377,8 +365,8 @@ body {
 
 
 .channel-style-7 {
-    font-family: 'Fredoka';
-    font-size: 35px;
+    font-family: 'Fredoka One';
+    font-size: 1.8vw;
     display: flex;
     gap: 10px;
     justify-content: center; 
@@ -386,8 +374,8 @@ body {
 }
 
 .channel-style-8 {
-    font-family: 'Lilita One';
-    font-size: 28px;
+    font-family: 'Fredoka One';
+    font-size: 2vw;
     display: flex;
     gap: 3px;
     justify-content: center; 
@@ -464,12 +452,87 @@ body {
     justify-content: center; 
     align-items: center; 
 }
-/* .name-of-channel {
-    font-size: normal;
-    line-height: 1; 
-    margin: 0; 
-    padding: 0; 
-} */
+
+.channel-style-16 {
+    font-family: 'Fredoka One';
+    font-size: 28px;
+    display: flex;
+    gap: 5px;
+    justify-content: center; 
+    align-items: center; 
+}
+
+.channel-style-17 {
+    font-family: 'Fredoka One';
+    font-size: 28px;
+    display: flex;
+    gap: 5px;
+    justify-content: center; 
+    align-items: center; 
+}
+
+.channel-style-18 {
+    font-family: 'Fredoka One';
+    font-size: 28px;
+    display: flex;
+    gap: 5px;
+    justify-content: center; 
+    align-items: center; 
+}
+
+.channel-style-19 {
+    font-family: 'Fredoka One';
+    font-size: 28px;
+    display: flex;
+    gap: 5px;
+    justify-content: center; 
+    align-items: center; 
+}
+
+.channel-style-20 {
+    font-family: 'Fredoka One';
+    font-size: 28px;
+    display: flex;
+    gap: 5px;
+    justify-content: center; 
+    align-items: center; 
+}
+
+.channel-style-21 {
+    font-family: 'Fredoka One';
+    font-size: 28px;
+    display: flex;
+    gap: 5px;
+    justify-content: center; 
+    align-items: center; 
+}
+
+.channel-style-22 {
+    font-family: 'Fredoka One';
+    font-size: 28px;
+    display: flex;
+    gap: 5px;
+    justify-content: center; 
+    align-items: center; 
+}
+
+.channel-style-23 {
+    font-family: 'Fredoka One';
+    font-size: 28px;
+    display: flex;
+    gap: 5px;
+    justify-content: center; 
+    align-items: center; 
+}
+
+.channel-style-24 {
+    font-family: 'Fredoka One';
+    font-size: 1.8vw;
+    display: flex;
+    gap: 5px;
+    justify-content: center; 
+    align-items: center; 
+}
 
 
 .channel-name-expanded {
@@ -616,21 +679,29 @@ input[type="range"]::-webkit-slider-runnable-track {
 
 #footer {
     display: flex; 
-    flex-direction: column; 
+    flex: 1;
+    flex-direction: row; 
     align-items: center; 
     justify-content: space-between;
     background-color: #222; 
     color: white;
-    padding: 20px;
     width: 100%;
-    margin-left: -20px;
-    margin-bottom: -20px;
-    margin-top: 40px;
+    padding: 0.5vw;
+    left: 0;
+    right: 0;
+    margin-top: 2vw;
 }
 
-#footer .social-links {
-    align-self: start;
-    margin-bottom: 20px;
+.footer-group{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+
+.footer-group.left {
+    flex: 0 0 25%;
+    justify-content: flex-start; 
+    align-items: center;
 }
 
 #footer .social-links a {
@@ -644,10 +715,11 @@ input[type="range"]::-webkit-slider-runnable-track {
     color: #8aefe7; 
 }
 
-#footer .application-form {
-    align-self: flex-end;
-    margin-top: -55px;
-    width: 200px;
+.footer-group.center {
+    flex: 0 0 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
 }
 
 #footer .application-form button {
@@ -662,21 +734,41 @@ input[type="range"]::-webkit-slider-runnable-track {
 }
 
 #footer .application-form button:hover {
-    background-color: #8aefe7; 
+    background-color: black; 
 }
 
-#footer .email-contact {
-    align-self: center;
-    margin-top: -30px;
-    font-size: 1vw;
+.footer-group.right {
+    flex: 0 0 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
 }
 
-#footer .email-contact a {
+#footer .terms-conditions a {
     color: #8aefe7; 
     text-decoration: none;
 }
 
-#footer .email-contact a:hover {
+#footer .terms-conditions a:hover {
+    text-decoration: underline;
+}
+
+#footer .privacy-policy a {
+    color: #8aefe7; 
+    text-decoration: none;
+}
+
+#footer .privacy-policy a:hover {
+    text-decoration: underline;
+}
+
+#footer .content-preferences a {
+    color: #8aefe7; 
+    text-decoration: none;
+}
+
+#footer .content-preferences a:hover {
     text-decoration: underline;
 }
 
@@ -730,7 +822,7 @@ input[type="range"]::-webkit-slider-runnable-track {
     #appTitle .button-group {
         display: flex; 
         /* align-items: center;  */
-        margin-left: 60vw;
+        margin-left: 50vw;
         gap: 10px;
     }
     
@@ -782,10 +874,10 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     
     #appMoto .word:nth-child(1) {color:white}
-    #appMoto .word:nth-child(2) {color: white}
+    #appMoto .word:nth-child(2) {color: #8aefe7}
     #appMoto .word:nth-child(3) {color:white}
     #appMoto .word:nth-child(4) {color:white}
-    #appMoto .word:nth-child(5) {color:#8aefe7}
+    #appMoto .word:nth-child(5) {color:white}
     
     
     
@@ -994,152 +1086,246 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     .channel-style-0 {
         font-family: 'Kavoon', sans-serif;
-        font-size: 1.65em;
+        font-size: 25px;
         display: flex;
         flex-direction: column;
         justify-content: center; 
         align-items: center; 
     }
-
-    .channel-style-0 .name-of-channel{
-        font-size: 1.5em;
-    }
+    
     
     .channel-style-1 {
-        font-family: 'Koulen';
-        font-size: 1.65em;
+        font-family: 'Fredoka One';
+        font-size: 25px;
         display: flex;
-        gap: 0.3em;
+        gap: 5px;
         justify-content: center; 
         text-align: center;
         align-items: center;
     }
-
-    .channel-style-1 .name-of-channel{
-        font-size: 1.8em;
-    }
+    
     
     .channel-style-2 {
-        font-family: 'Koulen';
-        font-size: 1.65em;
+        font-family: 'Fredoka One';
+        font-size: 25px;
         display: flex;
-        gap: 0.3em;
+        height: 68px;
+        gap: 5px;
         justify-content: center; 
         text-align: center;
         align-items: center;
         /* margin-top: 0.25px; */
     }
-
-    .channel-style-2 .name-of-channel{
-        font-size: 1.8em;
-    }
-
+    
     .channel-style-3 {
-        font-family: 'Lilita One';
-        font-size: 1.65em;
+        font-family: 'Fredoka One';
+        font-size: 2vw;
         display: flex;
-        gap: 0.3em;
+        gap: 10px;
         justify-content: center; 
         text-align: center;
         align-items: center;
     }
-
-    .channel-style-3 .name-of-channel{
-        font-size: 2em;
-    }
     
     .channel-style-4 {
-        font-family: 'Karantina';
-        font-size: 1.65em;
-        display: flex;
-        gap: 0.3em;
-        justify-content: center; 
-        align-items: center; 
-    }
-
-    .channel-style-4 .name-of-channel{
-        font-size: 3em;
-    }
-    
-    
-    .channel-style-5 {
-        font-family: 'Kaushan Script';
-        font-size: 1.65em;
-        display: flex;
-        gap: 5px;
-        justify-content: center; 
-        align-items: center; 
-    }
-
-    .channel-style-5 .name-of-channel{
-        font-size: 2em;
-    }
-    
-    .channel-style-6 {
-        font-family: 'luckiest guy';
-        font-size: 1.65em;
-        gap: 0.3em;
-        display: flex;
-        flex-direction: row;
-        justify-content: center; 
-        align-items: center; 
-    }
-
-    .channel-style-6 .name-of-channel{
-        font-size: 1.6em;
-    }
-    
-    .channel-style-7 {
-        font-family: 'Fredoka';
-        font-size: 1.65em;
+        font-family: 'Fredoka One';
+        font-size: 2vw;
         display: flex;
         gap: 10px;
         justify-content: center; 
         align-items: center; 
     }
-
-    .channel-style-7 .name-of-channel{
-        font-size: 2em;
-    }
     
-    .channel-style-8 {
-        font-family: 'Lilita One';
-        font-size: 1.65em;
-        display: flex;
-        gap: 0.3em;
-        justify-content: center; 
-        align-items: center; 
-    }
-
-    .channel-style-8 .name-of-channel{
-        font-size: 1.8em;
-    }
     
-    .channel-style-9 {
-        font-family: 'Lilita One';
-        font-size: 1.65em;
-        display: flex;
-        gap: 0.3em;
-        justify-content: center; 
-        align-items: center; 
-    }
-
-    .channel-style-9 .name-of-channel{
-        font-size: 2em;
-    }
-    
-    .channel-style-10 {
+    .channel-style-5 {
         font-family: 'Fredoka One';
-        font-size: 1.65em;
+        font-size: 1.8vw;
         display: flex;
         gap: 5px;
         justify-content: center; 
         align-items: center; 
     }
     
-    /* .name-of-channel {
-        font-size: 1.8em;
-    } */
+    .channel-style-6 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        gap: 5px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-7 {
+        font-family: 'Fredoka One';
+        font-size: 1.8vw;
+        display: flex;
+        gap: 10px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-8 {
+        font-family: 'Fredoka One';
+        font-size: 2vw;
+        display: flex;
+        gap: 3px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    
+    .channel-style-9 {
+        font-family: 'Lilita One';
+        font-size: 30px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-10 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-11 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-12 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-13 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-14 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-15 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-16 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-17 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-18 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-19 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-20 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-21 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-22 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-23 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-24 {
+        font-family: 'Fredoka One';
+        font-size: 1.8vw;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
     
     
     .channel-name-expanded {
@@ -1390,7 +1576,7 @@ input[type="range"]::-webkit-slider-runnable-track {
     #appTitle .button-group {
         display: flex; 
         /* align-items: center;  */
-        margin-left: 60vw;
+        margin-left: 50vw;
         gap: 10px;
     }
     
@@ -1442,10 +1628,10 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     
     #appMoto .word:nth-child(1) {color:white}
-    #appMoto .word:nth-child(2) {color: white}
+    #appMoto .word:nth-child(2) {color: #8aefe7}
     #appMoto .word:nth-child(3) {color:white}
     #appMoto .word:nth-child(4) {color:white}
-    #appMoto .word:nth-child(5) {color:#8aefe7}
+    #appMoto .word:nth-child(5) {color:white}
     
     
     
@@ -1641,152 +1827,246 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     .channel-style-0 {
         font-family: 'Kavoon', sans-serif;
-        font-size: 1.65em;
+        font-size: 25px;
         display: flex;
         flex-direction: column;
         justify-content: center; 
         align-items: center; 
     }
-
-    .channel-style-0 .name-of-channel{
-        font-size: 1.5em;
-    }
+    
     
     .channel-style-1 {
-        font-family: 'Koulen';
-        font-size: 1.65em;
+        font-family: 'Fredoka One';
+        font-size: 25px;
         display: flex;
-        gap: 0.3em;
+        gap: 5px;
         justify-content: center; 
         text-align: center;
         align-items: center;
     }
-
-    .channel-style-1 .name-of-channel{
-        font-size: 1.8em;
-    }
+    
     
     .channel-style-2 {
-        font-family: 'Koulen';
-        font-size: 1.65em;
+        font-family: 'Fredoka One';
+        font-size: 25px;
         display: flex;
-        gap: 0.3em;
+        height: 68px;
+        gap: 5px;
         justify-content: center; 
         text-align: center;
         align-items: center;
         /* margin-top: 0.25px; */
     }
-
-    .channel-style-2 .name-of-channel{
-        font-size: 1.8em;
-    }
-
+    
     .channel-style-3 {
-        font-family: 'Lilita One';
-        font-size: 1.65em;
+        font-family: 'Fredoka One';
+        font-size: 2vw;
         display: flex;
-        gap: 0.3em;
+        gap: 10px;
         justify-content: center; 
         text-align: center;
         align-items: center;
     }
-
-    .channel-style-3 .name-of-channel{
-        font-size: 2em;
-    }
     
     .channel-style-4 {
-        font-family: 'Karantina';
-        font-size: 1.65em;
-        display: flex;
-        gap: 0.3em;
-        justify-content: center; 
-        align-items: center; 
-    }
-
-    .channel-style-4 .name-of-channel{
-        font-size: 3em;
-    }
-    
-    
-    .channel-style-5 {
-        font-family: 'Kaushan Script';
-        font-size: 1.65em;
-        display: flex;
-        gap: 5px;
-        justify-content: center; 
-        align-items: center; 
-    }
-
-    .channel-style-5 .name-of-channel{
-        font-size: 2em;
-    }
-    
-    .channel-style-6 {
-        font-family: 'luckiest guy';
-        font-size: 1.65em;
-        gap: 0.3em;
-        display: flex;
-        flex-direction: row;
-        justify-content: center; 
-        align-items: center; 
-    }
-
-    .channel-style-6 .name-of-channel{
-        font-size: 1.6em;
-    }
-    
-    .channel-style-7 {
-        font-family: 'Fredoka';
-        font-size: 1.65em;
+        font-family: 'Fredoka One';
+        font-size: 2vw;
         display: flex;
         gap: 10px;
         justify-content: center; 
         align-items: center; 
     }
-
-    .channel-style-7 .name-of-channel{
-        font-size: 2em;
-    }
     
-    .channel-style-8 {
-        font-family: 'Lilita One';
-        font-size: 1.65em;
-        display: flex;
-        gap: 0.3em;
-        justify-content: center; 
-        align-items: center; 
-    }
-
-    .channel-style-8 .name-of-channel{
-        font-size: 1.8em;
-    }
     
-    .channel-style-9 {
-        font-family: 'Lilita One';
-        font-size: 1.65em;
-        display: flex;
-        gap: 0.3em;
-        justify-content: center; 
-        align-items: center; 
-    }
-
-    .channel-style-9 .name-of-channel{
-        font-size: 2em;
-    }
-    
-    .channel-style-10 {
+    .channel-style-5 {
         font-family: 'Fredoka One';
-        font-size: 1.65em;
+        font-size: 1.8vw;
         display: flex;
         gap: 5px;
         justify-content: center; 
         align-items: center; 
     }
     
-    /* .name-of-channel {
-        font-size: 1.8em;
-    } */
+    .channel-style-6 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        gap: 5px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-7 {
+        font-family: 'Fredoka One';
+        font-size: 1.8vw;
+        display: flex;
+        gap: 10px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-8 {
+        font-family: 'Fredoka One';
+        font-size: 2vw;
+        display: flex;
+        gap: 3px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    
+    .channel-style-9 {
+        font-family: 'Lilita One';
+        font-size: 30px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-10 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-11 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-12 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-13 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-14 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-15 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-16 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-17 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-18 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-19 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-20 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-21 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-22 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-23 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-24 {
+        font-family: 'Fredoka One';
+        font-size: 1.8vw;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
     
     
     .channel-name-expanded {
@@ -2026,32 +2306,24 @@ input[type="range"]::-webkit-slider-runnable-track {
         font-weight: bolder;
     }
     
-    /* #appTitle .sub{
-        font-family: "Poppins", sans-serif;
-        font-weight: 100;
-        font-style: normal;
-        font-size: 1.3vw;
-        color: #8aefe7;
-        margin-top: 2.5vw;
-    } */
     
     #appTitle .button-group {
-        display: flex; 
-        margin-left: 60vw;
-        gap: 0.2em;
-        margin-top: -0.4em;
+        display: flex;
+        justify-content: flex-end;
+        margin-left: 55vw;
+        gap: 10px;
     }
     
     
-    #appTitle .about-us {
-        font-size: 0.2em;
+    .about-us {
+        font-size: 1vw;
         color: white;
-        width: 9em;
+        width: 150px;
+        margin-top: 10px;
         background-color: black;
-        border: 0.2em solid #8aefe7;
-        border-radius: 0.8em;
-        height: 4em;
-        margin-top: 3em;
+        border: 3px solid #8aefe7;
+        border-radius: 10px;
+        height: 50px;
     }
     
     .about-us:hover {
@@ -2059,17 +2331,14 @@ input[type="range"]::-webkit-slider-runnable-track {
     }
     
     #appTitle .feedback{
-        font-size: 0.2em;
+        font-size: 1vw;
         color: white;
-        width: 9em;
+        width: 150px;
+        margin-top: 18px;
         background-color: black;
-        border: 0.2em solid #8aefe7;
-        border-radius: 0.8em;
-        height: 4em;
-    }
-    
-    .feedback:hover {
-        cursor: pointer; 
+        border: 3px solid #8aefe7;
+        border-radius: 10px;
+        height: 50px;
     }
     
     
@@ -2089,10 +2358,10 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     
     #appMoto .word:nth-child(1) {color:white}
-    #appMoto .word:nth-child(2) {color: white}
+    #appMoto .word:nth-child(2) {color: #8aefe7}
     #appMoto .word:nth-child(3) {color:white}
     #appMoto .word:nth-child(4) {color:white}
-    #appMoto .word:nth-child(5) {color:#8aefe7}
+    #appMoto .word:nth-child(5) {color: white}
     
     
     
@@ -2264,13 +2533,13 @@ input[type="range"]::-webkit-slider-runnable-track {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        /* border: 2px solid transparent; */
+        border: 2px solid transparent;
         background-color: #000000;
-        height: 5.5em;
-        border-radius: 0.5em;
-        padding: 0.1em 1em;
-        width: 10em;
-        margin-top: -0.2em;
+        height: 15vh;
+        border-radius: 0.5vw;
+        padding: 5px 15px;
+        width: 250px;
+        margin-top: -1px;
     }
     
     .channel-name:hover {
@@ -2281,152 +2550,247 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     .channel-style-0 {
         font-family: 'Kavoon', sans-serif;
-        font-size: 1em;
+        font-size: 25px;
         display: flex;
         flex-direction: column;
         justify-content: center; 
         align-items: center; 
     }
-
-    .channel-style-0 .name-of-channel{
-        font-size: 1.5em;
-    }
+    
     
     .channel-style-1 {
-        font-family: 'Koulen';
-        font-size: 1em;
+        font-family: 'Fredoka One';
+        font-size: 25px;
         display: flex;
-        gap: 0.3em;
+        gap: 5px;
         justify-content: center; 
         text-align: center;
         align-items: center;
     }
-
-    .channel-style-1 .name-of-channel{
-        font-size: 1.5em;
-    }
+    
     
     .channel-style-2 {
-        font-family: 'Koulen';
-        font-size: 1em;
+        font-family: 'Fredoka One';
+        font-size: 25px;
         display: flex;
-        gap: 0.3em;
+
+        gap: 5px;
         justify-content: center; 
         text-align: center;
         align-items: center;
         /* margin-top: 0.25px; */
     }
-
-    .channel-style-2 .name-of-channel{
-        font-size: 1.5em;
-    }
-
+    
     .channel-style-3 {
-        font-family: 'Lilita One';
-        font-size: 1em;
+        font-family: 'Fredoka One';
+        font-size: 2vw;
         display: flex;
-        gap: 0.3em;
+        gap: 10px;
         justify-content: center; 
         text-align: center;
         align-items: center;
     }
-
-    .channel-style-3 .name-of-channel{
-        font-size: 1.5em;
-    }
     
     .channel-style-4 {
-        font-family: 'Karantina';
-        font-size: 1em;
-        display: flex;
-        gap: 0.3em;
-        justify-content: center; 
-        align-items: center; 
-    }
-
-    .channel-style-4 .name-of-channel{
-        font-size: 1.6em;
-    }
-    
-    
-    .channel-style-5 {
-        font-family: 'Kaushan Script';
-        font-size: 1em;
-        display: flex;
-        gap: 5px;
-        justify-content: center; 
-        align-items: center; 
-    }
-
-    .channel-style-5 .name-of-channel{
-        font-size: 1.3em;
-    }
-    
-    .channel-style-6 {
-        font-family: 'luckiest guy';
-        font-size: 1em;
-        gap: 0.3em;
-        display: flex;
-        flex-direction: row;
-        justify-content: center; 
-        align-items: center; 
-    }
-
-    .channel-style-6 .name-of-channel{
-        font-size: 1.5em;
-    }
-    
-    .channel-style-7 {
-        font-family: 'Fredoka';
-        font-size: 1em;
+        font-family: 'Fredoka One';
+        font-size: 2vw;
         display: flex;
         gap: 10px;
         justify-content: center; 
         align-items: center; 
     }
-
-    .channel-style-7 .name-of-channel{
-        font-size: 1.5em;
-    }
     
-    .channel-style-8 {
-        font-family: 'Lilita One';
-        font-size: 1em;
-        display: flex;
-        gap: 0.3em;
-        justify-content: center; 
-        align-items: center; 
-    }
-
-    .channel-style-8 .name-of-channel{
-        font-size: 1.5em;
-    }
     
-    .channel-style-9 {
-        font-family: 'Lilita One';
-        font-size: 1em;
-        display: flex;
-        gap: 0.3em;
-        justify-content: center; 
-        align-items: center; 
-    }
-
-    .channel-style-9 .name-of-channel{
-        font-size: 1.5em;
-    }
-    
-    .channel-style-10 {
+    .channel-style-5 {
         font-family: 'Fredoka One';
-        font-size: 1em;
+        font-size: 1.8vw;
         display: flex;
         gap: 5px;
         justify-content: center; 
         align-items: center; 
     }
     
-    /* .name-of-channel {
-        font-size: 1.8em;
-    } */
+    .channel-style-6 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        gap: 5px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-7 {
+        font-family: 'Fredoka One';
+        font-size: 1.8vw;
+        display: flex;
+        gap: 10px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-8 {
+        font-family: 'Fredoka One';
+        font-size: 2vw;
+        display: flex;
+        gap: 3px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    
+    .channel-style-9 {
+        font-family: 'Lilita One';
+        font-size: 30px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-10 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-11 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-12 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-13 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-14 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-15 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-16 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-17 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-18 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-19 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-20 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-21 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-22 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-23 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-24 {
+        font-family: 'Fredoka One';
+        font-size: 1.8vw;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
     
     
     .channel-name-expanded {
@@ -2562,22 +2926,29 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     #footer {
         display: flex; 
-        flex-direction: column; 
+        flex: 1;
+        flex-direction: row; 
         align-items: center; 
         justify-content: space-between;
         background-color: #222; 
         color: white;
-        padding: 20px;
         width: 100%;
-        height: 1em;
-        margin-left: -20px;
-        margin-bottom: -20px;
-        margin-top: 40px;
+        padding: 0.5vw;
+        left: 0;
+        right: 0;
+        margin-top: 2vw;
     }
     
-    #footer .social-links {
-        align-self: start;
-        margin-bottom: 20px;
+    .footer-group{
+        display: flex;
+        justify-content: center;
+        align-items:center;
+    }
+    
+    .footer-group.left {
+        flex: 0 0 25%;
+        justify-content: flex-start; 
+        align-items: center;
     }
     
     #footer .social-links a {
@@ -2591,39 +2962,60 @@ input[type="range"]::-webkit-slider-runnable-track {
         color: #8aefe7; 
     }
     
-    #footer .application-form {
-        align-self: flex-end;
-        width: 10em;
+    .footer-group.center {
+        flex: 0 0 25%;
+        display: flex;
+        justify-content: center;
+        align-items: center; 
     }
     
     #footer .application-form button {
         background-color: #373243; 
         color: white;
         border: none;
-        border-radius: 0.5em;
+        padding: 10px 20px;
+        border-radius: 5px;
         cursor: pointer;
         font-size: 1vw;
-        margin-top: -0.6em;
-        margin-right: 1em;
-        width: 10em;
-        height: 4em;
+        width: 200px;
     }
     
     #footer .application-form button:hover {
-        background-color: #8aefe7; 
+        background-color: black; 
     }
     
-    #footer .email-contact {
-        align-self: center;
-        font-size: 1vw;
+    .footer-group.right {
+        flex: 0 0 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; 
     }
     
-    #footer .email-contact a {
+    #footer .terms-conditions a {
         color: #8aefe7; 
         text-decoration: none;
     }
     
-    #footer .email-contact a:hover {
+    #footer .terms-conditions a:hover {
+        text-decoration: underline;
+    }
+    
+    #footer .privacy-policy a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .privacy-policy a:hover {
+        text-decoration: underline;
+    }
+    
+    #footer .content-preferences a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .content-preferences a:hover {
         text-decoration: underline;
     }
 }
@@ -2676,7 +3068,7 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     #appTitle .button-group {
         display: flex; 
-        margin-left: 60vw;
+        margin-left: 40vw;
         gap: 0.2em;
         margin-top: -0.4em;
     }
@@ -2728,10 +3120,10 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     
     #appMoto .word:nth-child(1) {color:white}
-    #appMoto .word:nth-child(2) {color: white}
+    #appMoto .word:nth-child(2) {color: #8aefe7}
     #appMoto .word:nth-child(3) {color:white}
     #appMoto .word:nth-child(4) {color:white}
-    #appMoto .word:nth-child(5) {color:#8aefe7}
+    #appMoto .word:nth-child(5) {color: white}
     
     
     
@@ -2923,152 +3315,246 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     .channel-style-0 {
         font-family: 'Kavoon', sans-serif;
-        font-size: 1em;
+        font-size: 25px;
         display: flex;
         flex-direction: column;
         justify-content: center; 
         align-items: center; 
     }
-
-    .channel-style-0 .name-of-channel{
-        font-size: 1.5em;
-    }
+    
     
     .channel-style-1 {
-        font-family: 'Koulen';
-        font-size: 1em;
+        font-family: 'Fredoka One';
+        font-size: 25px;
         display: flex;
-        gap: 0.3em;
+        gap: 5px;
         justify-content: center; 
         text-align: center;
         align-items: center;
     }
-
-    .channel-style-1 .name-of-channel{
-        font-size: 1.5em;
-    }
+    
     
     .channel-style-2 {
-        font-family: 'Koulen';
-        font-size: 1em;
+        font-family: 'Fredoka One';
+        font-size: 25px;
         display: flex;
-        gap: 0.3em;
+        height: 68px;
+        gap: 5px;
         justify-content: center; 
         text-align: center;
         align-items: center;
         /* margin-top: 0.25px; */
     }
-
-    .channel-style-2 .name-of-channel{
-        font-size: 1.5em;
-    }
-
+    
     .channel-style-3 {
-        font-family: 'Lilita One';
-        font-size: 1em;
+        font-family: 'Fredoka One';
+        font-size: 2vw;
         display: flex;
-        gap: 0.3em;
+        gap: 10px;
         justify-content: center; 
         text-align: center;
         align-items: center;
     }
-
-    .channel-style-3 .name-of-channel{
-        font-size: 1.5em;
-    }
     
     .channel-style-4 {
-        font-family: 'Karantina';
-        font-size: 1em;
-        display: flex;
-        gap: 0.3em;
-        justify-content: center; 
-        align-items: center; 
-    }
-
-    .channel-style-4 .name-of-channel{
-        font-size: 1.6em;
-    }
-    
-    
-    .channel-style-5 {
-        font-family: 'Kaushan Script';
-        font-size: 1em;
-        display: flex;
-        gap: 5px;
-        justify-content: center; 
-        align-items: center; 
-    }
-
-    .channel-style-5 .name-of-channel{
-        font-size: 1.3em;
-    }
-    
-    .channel-style-6 {
-        font-family: 'luckiest guy';
-        font-size: 1em;
-        gap: 0.3em;
-        display: flex;
-        flex-direction: row;
-        justify-content: center; 
-        align-items: center; 
-    }
-
-    .channel-style-6 .name-of-channel{
-        font-size: 1.5em;
-    }
-    
-    .channel-style-7 {
-        font-family: 'Fredoka';
-        font-size: 1em;
+        font-family: 'Fredoka One';
+        font-size: 2vw;
         display: flex;
         gap: 10px;
         justify-content: center; 
         align-items: center; 
     }
-
-    .channel-style-7 .name-of-channel{
-        font-size: 1.5em;
-    }
     
-    .channel-style-8 {
-        font-family: 'Lilita One';
-        font-size: 1em;
-        display: flex;
-        gap: 0.3em;
-        justify-content: center; 
-        align-items: center; 
-    }
-
-    .channel-style-8 .name-of-channel{
-        font-size: 1.5em;
-    }
     
-    .channel-style-9 {
-        font-family: 'Lilita One';
-        font-size: 1em;
-        display: flex;
-        gap: 0.3em;
-        justify-content: center; 
-        align-items: center; 
-    }
-
-    .channel-style-9 .name-of-channel{
-        font-size: 1.5em;
-    }
-    
-    .channel-style-10 {
+    .channel-style-5 {
         font-family: 'Fredoka One';
-        font-size: 1em;
+        font-size: 1.8vw;
         display: flex;
         gap: 5px;
         justify-content: center; 
         align-items: center; 
     }
     
-    /* .name-of-channel {
-        font-size: 1.8em;
-    } */
+    .channel-style-6 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        gap: 5px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-7 {
+        font-family: 'Fredoka One';
+        font-size: 1.8vw;
+        display: flex;
+        gap: 10px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-8 {
+        font-family: 'Fredoka One';
+        font-size: 2vw;
+        display: flex;
+        gap: 3px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    
+    .channel-style-9 {
+        font-family: 'Lilita One';
+        font-size: 30px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-10 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-11 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-12 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-13 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-14 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-15 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-16 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-17 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-18 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-19 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-20 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-21 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-22 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-23 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-24 {
+        font-family: 'Fredoka One';
+        font-size: 1.8vw;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
     
     
     .channel-name-expanded {
@@ -3269,7 +3755,7 @@ input[type="range"]::-webkit-slider-runnable-track {
 }
 
 /*media query for large phones monitor*/
-@media screen and (-webkit-min-device-pixel-ratio: 1) and (min-device-width: 400px) and (max-device-width: 760px){
+@media screen and (-webkit-min-device-pixel-ratio: 1) and (min-device-width: 400px) and (max-device-width: 430px){
     body {
         font-family: 'Arial', sans-serif;
         background: #1a1126;
@@ -3315,7 +3801,7 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     #appTitle .button-group {
         display: flex; 
-        margin-left: 200vw;
+        margin-left: 180vw;
         gap: 5px;
     }
     
@@ -3369,10 +3855,10 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     
     #appMoto .word:nth-child(1) {color:white}
-    #appMoto .word:nth-child(2) {color: white}
+    #appMoto .word:nth-child(2) {color: #8aefe7}
     #appMoto .word:nth-child(3) {color:white}
     #appMoto .word:nth-child(4) {color:white}
-    #appMoto .word:nth-child(5) {color:#8aefe7}
+    #appMoto .word:nth-child(5) {color: white}
     
     
     #contentWrapper {
@@ -3566,12 +4052,8 @@ input[type="range"]::-webkit-slider-runnable-track {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        /* border: 2px solid transparent; */
         background-color: #000000;
-        height: 6.3em;
-        border-radius: 0.5em;
-        padding: 0.1em 1em;
-        width: 17em;
+        width: 90px;
     }
     
     .channel-name:hover {
@@ -3582,152 +4064,246 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     .channel-style-0 {
         font-family: 'Kavoon', sans-serif;
-        font-size: 1.65em;
+        font-size: 25px;
         display: flex;
         flex-direction: column;
         justify-content: center; 
         align-items: center; 
     }
-
-    .channel-style-0 .name-of-channel{
-        font-size: 1.5em;
-    }
+    
     
     .channel-style-1 {
-        font-family: 'Koulen';
-        font-size: 1.65em;
+        font-family: 'Fredoka One';
+        font-size: 25px;
         display: flex;
-        gap: 0.3em;
+        gap: 5px;
         justify-content: center; 
         text-align: center;
         align-items: center;
     }
-
-    .channel-style-1 .name-of-channel{
-        font-size: 1.8em;
-    }
+    
     
     .channel-style-2 {
-        font-family: 'Koulen';
-        font-size: 1.65em;
+        font-family: 'Fredoka One';
+        font-size: 25px;
         display: flex;
-        gap: 0.3em;
+        height: 68px;
+        gap: 5px;
         justify-content: center; 
         text-align: center;
         align-items: center;
         /* margin-top: 0.25px; */
     }
-
-    .channel-style-2 .name-of-channel{
-        font-size: 1.8em;
-    }
-
+    
     .channel-style-3 {
-        font-family: 'Lilita One';
-        font-size: 1.65em;
+        font-family: 'Fredoka One';
+        font-size: 2vw;
         display: flex;
-        gap: 0.3em;
+        gap: 10px;
         justify-content: center; 
         text-align: center;
         align-items: center;
     }
-
-    .channel-style-3 .name-of-channel{
-        font-size: 2em;
-    }
     
     .channel-style-4 {
-        font-family: 'Karantina';
-        font-size: 1.65em;
-        display: flex;
-        gap: 0.3em;
-        justify-content: center; 
-        align-items: center; 
-    }
-
-    .channel-style-4 .name-of-channel{
-        font-size: 3em;
-    }
-    
-    
-    .channel-style-5 {
-        font-family: 'Kaushan Script';
-        font-size: 1.65em;
-        display: flex;
-        gap: 5px;
-        justify-content: center; 
-        align-items: center; 
-    }
-
-    .channel-style-5 .name-of-channel{
-        font-size: 2em;
-    }
-    
-    .channel-style-6 {
-        font-family: 'luckiest guy';
-        font-size: 1.65em;
-        gap: 0.3em;
-        display: flex;
-        flex-direction: row;
-        justify-content: center; 
-        align-items: center; 
-    }
-
-    .channel-style-6 .name-of-channel{
-        font-size: 1.6em;
-    }
-    
-    .channel-style-7 {
-        font-family: 'Fredoka';
-        font-size: 1.65em;
+        font-family: 'Fredoka One';
+        font-size: 2vw;
         display: flex;
         gap: 10px;
         justify-content: center; 
         align-items: center; 
     }
-
-    .channel-style-7 .name-of-channel{
-        font-size: 2em;
-    }
     
-    .channel-style-8 {
-        font-family: 'Lilita One';
-        font-size: 1.65em;
-        display: flex;
-        gap: 0.3em;
-        justify-content: center; 
-        align-items: center; 
-    }
-
-    .channel-style-8 .name-of-channel{
-        font-size: 1.8em;
-    }
     
-    .channel-style-9 {
-        font-family: 'Lilita One';
-        font-size: 1.65em;
-        display: flex;
-        gap: 0.3em;
-        justify-content: center; 
-        align-items: center; 
-    }
-
-    .channel-style-9 .name-of-channel{
-        font-size: 2em;
-    }
-    
-    .channel-style-10 {
+    .channel-style-5 {
         font-family: 'Fredoka One';
-        font-size: 1.65em;
+        font-size: 1.8vw;
         display: flex;
         gap: 5px;
         justify-content: center; 
         align-items: center; 
     }
     
-    /* .name-of-channel {
-        font-size: 1.8em;
-    } */
+    .channel-style-6 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        gap: 5px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-7 {
+        font-family: 'Fredoka One';
+        font-size: 1.8vw;
+        display: flex;
+        gap: 10px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-8 {
+        font-family: 'Fredoka One';
+        font-size: 2vw;
+        display: flex;
+        gap: 3px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    
+    .channel-style-9 {
+        font-family: 'Lilita One';
+        font-size: 30px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-10 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-11 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-12 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-13 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-14 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-15 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-16 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-17 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-18 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-19 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-20 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-21 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-22 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-23 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-24 {
+        font-family: 'Fredoka One';
+        font-size: 1.8vw;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
     
     
     .channel-name-expanded {
@@ -3866,68 +4442,98 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     #footer {
         display: flex; 
-        flex-direction: column; 
+        flex: 1;
+        flex-direction: row; 
         align-items: center; 
         justify-content: space-between;
         background-color: #222; 
         color: white;
-        padding: 20px;
-        width: 80em;
-        height: 3em;
-        margin-left: -20px;
-        margin-bottom: -20px;
-        margin-top: 40px;
+        width: 100%;
+        padding: 0.5vw;
+        left: 0;
+        right: 0;
+        margin-top: 2vw;
     }
     
-    #footer .social-links {
-        align-self: start;
-        margin-bottom: 20px;
+    .footer-group{
+        display: flex;
+        justify-content: center;
+        align-items:center;
+    }
+    
+    .footer-group.left {
+        flex: 0 0 25%;
+        justify-content: flex-start; 
+        align-items: center;
+        white-space: nowrap; 
     }
     
     #footer .social-links a {
         color: white;
-        margin: 0 10px;
         text-decoration: none;
-        font-size: 3em;
+        font-size: 4vw;
     }
     
     #footer .social-links a:hover {
         color: #8aefe7; 
     }
     
-    #footer .application-form {
-        align-self: flex-end;
-        width: 10em;
-        margin-top: -5.5em;
+    .footer-group.center {
+        flex: 0 0 30%;
+        display: flex;
+        justify-content: center;
+        align-items: center; 
     }
     
     #footer .application-form button {
         background-color: #373243; 
         color: white;
         border: none;
-        border-radius: 0.5em;
+        padding: 10px 20px;
+        border-radius: 5px;
         cursor: pointer;
-        font-size: 1em;
-        margin-left: -3em;
-        width: 10em;
-        height: 5em;
+        font-size: 2vw;
+        width: 20vw;
     }
     
     #footer .application-form button:hover {
-        background-color: #8aefe7; 
+        background-color: black; 
     }
     
-    #footer .email-contact {
-        align-self: center;
-        font-size: 2em;
+    .footer-group.right {
+        flex: 0 0 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; 
+        font-size: 2.5vw;
+        white-space: nowrap; 
     }
     
-    #footer .email-contact a {
+    #footer .terms-conditions a {
         color: #8aefe7; 
         text-decoration: none;
     }
     
-    #footer .email-contact a:hover {
+    #footer .terms-conditions a:hover {
+        text-decoration: underline;
+    }
+    
+    #footer .privacy-policy a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .privacy-policy a:hover {
+        text-decoration: underline;
+    }
+    
+    #footer .content-preferences a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .content-preferences a:hover {
         text-decoration: underline;
     }
 }
@@ -3954,6 +4560,8 @@ input[type="range"]::-webkit-slider-runnable-track {
     }
 
     #appTitle {
+        display: flex;
+        justify-content: space-between;
         font-size: 6vw;
         margin-left: 10px;
     }
@@ -3963,11 +4571,6 @@ input[type="range"]::-webkit-slider-runnable-track {
         margin-top: 5px;
     }
 
-    /* #appTitle .sub {
-        font-size: 12px; 
-        margin-top: 3.7vw;
-    } */
-
     #appMoto{
         font-size: 10px;
         margin-left: 10px;
@@ -3975,12 +4578,20 @@ input[type="range"]::-webkit-slider-runnable-track {
         width: 300px;
     }
 
+    #appMoto .word:nth-child(1) {color:white}
+    #appMoto .word:nth-child(2) {color: #8aefe7}
+    #appMoto .word:nth-child(3) {color:white}
+    #appMoto .word:nth-child(4) {color:white}
+    #appMoto .word:nth-child(5) {color: white}
+
     #appTitle .button-group {
         display: flex;
         flex-direction: row;
-        margin-left: 40vw;
-        gap:10px;
-
+        justify-content: center;
+        gap: 10px;
+        margin-left: auto;
+        margin-right: 7vw;
+       
     }
 
     #appTitle .about-us{
@@ -4058,16 +4669,6 @@ input[type="range"]::-webkit-slider-runnable-track {
     }
 
     .fullscreen-fallback {
-        /* position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-        background-color: black; 
-        object-fit:fill */
         bottom: 0;
         left: 0;
         margin-top: 40px;
@@ -4077,8 +4678,6 @@ input[type="range"]::-webkit-slider-runnable-track {
         top:0
     }
     
-
-
 
     #currChannelName {
         font-size: 10px; 
@@ -4119,17 +4718,13 @@ input[type="range"]::-webkit-slider-runnable-track {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        border: 2px solid transparent;
         background-color: #000000;
-        height: 68px;
-        border-radius: 5px;
-        width: 80px;
-        margin-top: -1px;
+        width: 90px;
     }
 
     .channel-style-0 {
-        font-family: 'Kavoon', sans-serif;
-        font-size: 15px;
+        font-family: 'Fredoka One';
+        font-size: 3.5vw;
         display: flex;
         flex-direction: column;
         justify-content: center; 
@@ -4138,104 +4733,228 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     
     .channel-style-1 {
-        font-family: 'Koulen';
-        font-size: 15px;
+        font-family: 'Fredoka One';
+        font-size: 5vw;
         display: flex;
-        gap: 5px;
+        flex-direction: column;
         justify-content: center; 
-        text-align: center;
         align-items: center;
     }
     
     
     .channel-style-2 {
-        font-family: 'Koulen';
-        font-size: 15px;
+        font-family: 'Fredoka One';
+        font-size: 4vw;
         display: flex;
-        height: 68px;
-        gap: 5px;
+        flex-direction: column;
         justify-content: center; 
-        text-align: center;
         align-items: center;
     }
     
     .channel-style-3 {
-        font-family: 'Lilita One';
-        font-size: 15px;
+        font-family: 'Fredoka One';
+        font-size: 3vw;
         display: flex;
-        gap: 10px;
+        flex-direction: column;
         justify-content: center; 
-        text-align: center;
         align-items: center;
     }
     
     .channel-style-4 {
-        font-family: 'Karantina';
-        font-size: 25px;
+        font-family: 'Fredoka One';
+        font-size: 3vw;
         display: flex;
-        gap: 10px;
+        flex-direction: column;
         justify-content: center; 
-        align-items: center; 
+        align-items: center;
     }
     
     
     .channel-style-5 {
-        font-family: 'Kaushan Script';
-        font-size: 15px;
+        font-family: 'Fredoka One';
+        font-size: 3vw;
         display: flex;
-        gap: 5px;
+        flex-direction: column;
         justify-content: center; 
-        align-items: center; 
+        align-items: center;
     }
     
     .channel-style-6 {
+        font-family: 'Fredoka One';
+        font-size: 3vw;
         display: flex;
-        font-family: 'luckiest guy';
-        font-size: 15px;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 10px;
-        justify-content: center;
+        flex-direction: column;
+        justify-content: center; 
         align-items: center;
     }
     
     
     .channel-style-7 {
-        font-family: 'Fredoka';
-        font-size: 15px;
+        font-family: 'Fredoka One';
+        font-size: 3vw;
         display: flex;
-        gap: 10px;
+        flex-direction: column;
         justify-content: center; 
-        align-items: center; 
+        align-items: center;
     }
     
     .channel-style-8 {
-        font-family: 'Lilita One';
-        font-size: 15px;
+        font-family: 'Fredoka One';
+        font-size: 3vw;
         display: flex;
-        gap: 3px;
+        flex-direction: column;
         justify-content: center; 
-        align-items: center; 
+        align-items: center;
     }
     
-    
     .channel-style-9 {
-        font-family: 'Lilita One';
-        font-size: 15px;
+        font-family: 'Fredoka One';
+        font-size: 3.5vw;
         display: flex;
-        gap: 5px;
+        flex-direction: column;
         justify-content: center; 
-        align-items: center; 
+        align-items: center;
     }
     
     
     .channel-style-10 {
         font-family: 'Fredoka One';
-        font-size: 15px;
+        font-size: 5vw;
         display: flex;
-        gap: 5px;
+        flex-direction: column;
         justify-content: center; 
-        align-items: center; 
+        align-items: center;
+    }
+    
+    
+    .channel-style-11 {
+        font-family: 'Fredoka One';
+        font-size: 4vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+        align-items: center;
+    }
+    
+    
+    .channel-style-12 {
+        font-family: 'Fredoka One';
+        font-size: 5vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+        align-items: center;
+    }
+    
+    
+    .channel-style-13 {
+        font-family: 'Fredoka One';
+        font-size: 5vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+        align-items: center;
+    }
+    
+    
+    .channel-style-14 {
+        font-family: 'Fredoka One';
+        font-size: 5vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+        align-items: center;
+    }
+    
+    
+    .channel-style-15 {
+        font-family: 'Fredoka One';
+        font-size: 2vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+        align-items: center;
+    }
+    
+    .channel-style-16 {
+        font-family: 'Fredoka One';
+        font-size: 2vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+        align-items: center;
+    }
+    
+    .channel-style-17 {
+        font-family: 'Fredoka One';
+        font-size: 3.5vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+        align-items: center;
+    }
+    
+    .channel-style-18 {
+        font-family: 'Fredoka One';
+        font-size: 3.5vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+        align-items: center;
+    }
+    
+    .channel-style-19 {
+        font-family: 'Fredoka One';
+        font-size: 3vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+        align-items: center;
+    }
+    
+    .channel-style-20 {
+        font-family: 'Fredoka One';
+        font-size: 4vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+        align-items: center;
+    }
+    
+    .channel-style-21 {
+        font-family: 'Fredoka One';
+        font-size: 5vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+        align-items: center;
+    }
+    
+    .channel-style-22 {
+        font-family: 'Fredoka One';
+        font-size: 4.5vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+        align-items: center;
+    }
+    
+    .channel-style-23 {
+        font-family: 'Fredoka One';
+        font-size: 5vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+        align-items: center;
+    }
+    
+    .channel-style-24 {
+        font-family: 'Fredoka One';
+        font-size: 4.5vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+        align-items: center;
     }
 
     .name-of-channel {
@@ -4370,27 +5089,34 @@ input[type="range"]::-webkit-slider-runnable-track {
 
     #footer {
         display: flex; 
-        flex-direction: column; 
+        flex: 1;
+        flex-direction: row; 
         align-items: center; 
         justify-content: space-between;
         background-color: #222; 
         color: white;
-        padding: 20px;
         width: 100%;
-        margin-left: -20px;
-        margin-bottom: -20px;
-        margin-top: 10px;
+        padding: 0.5vw;
+        left: 0;
+        right: 0;
+        margin-top: 2vw;
     }
     
-    #footer .social-links {
-        align-self: start;
-        margin-top: -2vw;
-        margin-bottom: 14vw;
+    .footer-group{
+        display: flex;
+        justify-content: center;
+        align-items:center;
+    }
+    
+    .footer-group.left {
+        flex: 0 0 25%;
+        justify-content: flex-start; 
+        align-items: center;
+        white-space: nowrap; 
     }
     
     #footer .social-links a {
         color: white;
-        margin: 0 10px;
         text-decoration: none;
         font-size: 4vw;
     }
@@ -4399,10 +5125,11 @@ input[type="range"]::-webkit-slider-runnable-track {
         color: #8aefe7; 
     }
     
-    #footer .application-form {
-        align-self: flex-end;
-        margin-top: -23.5vw;
-        width: 20vw;
+    .footer-group.center {
+        flex: 0 0 30%;
+        display: flex;
+        justify-content: center;
+        align-items: center; 
     }
     
     #footer .application-form button {
@@ -4412,26 +5139,48 @@ input[type="range"]::-webkit-slider-runnable-track {
         padding: 10px 20px;
         border-radius: 5px;
         cursor: pointer;
-        font-size: 1.5vw;
+        font-size: 2vw;
         width: 20vw;
     }
     
     #footer .application-form button:hover {
-        background-color: #8aefe7; 
+        background-color: black; 
     }
     
-    #footer .email-contact {
-        align-self: center;
-        margin-top: -10vw;
-        font-size: 3vw;
+    .footer-group.right {
+        flex: 0 0 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; 
+        font-size: 2.5vw;
+        white-space: nowrap; 
     }
     
-    #footer .email-contact a {
+    #footer .terms-conditions a {
         color: #8aefe7; 
         text-decoration: none;
     }
     
-    #footer .email-contact a:hover {
+    #footer .terms-conditions a:hover {
+        text-decoration: underline;
+    }
+    
+    #footer .privacy-policy a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .privacy-policy a:hover {
+        text-decoration: underline;
+    }
+    
+    #footer .content-preferences a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .content-preferences a:hover {
         text-decoration: underline;
     }
     
@@ -4439,7 +5188,7 @@ input[type="range"]::-webkit-slider-runnable-track {
 
 
 
-@media (min-width: 321px) and (max-width: 375px) {
+@media (min-width: 321px) and (max-width: 374px) {
     body {
         padding: 10px; 
         overflow-x: hidden;
@@ -4461,6 +5210,8 @@ input[type="range"]::-webkit-slider-runnable-track {
     #appTitle {
         font-size: 6vw;
         margin-left: 10px;
+        justify-content: space-between; 
+        width: 100%;
     }
 
     #appTitle .letter {
@@ -4468,10 +5219,6 @@ input[type="range"]::-webkit-slider-runnable-track {
         margin-top: 5px;
     }
 
-    /* #appTitle .sub {
-        font-size: 12px; 
-        margin-top: 3.7vw;
-    } */
 
     #appMoto{
         font-size: 10px;
@@ -4480,12 +5227,19 @@ input[type="range"]::-webkit-slider-runnable-track {
         width: 300px;
     }
 
+    #appMoto .word:nth-child(1) {color:white}
+    #appMoto .word:nth-child(2) {color: #8aefe7}
+    #appMoto .word:nth-child(3) {color:white}
+    #appMoto .word:nth-child(4) {color:white}
+    #appMoto .word:nth-child(5) {color: white}
+
     #appTitle .button-group {
         display: flex;
         flex-direction: row;
-        margin-left: 40vw;
-        gap:10px;
-
+        justify-content: flex-end; 
+        gap: 10px; 
+        margin-left: auto; 
+        margin-right: 7vw;
     }
 
     #appTitle .about-us{
@@ -4620,7 +5374,7 @@ input[type="range"]::-webkit-slider-runnable-track {
 
     .channel-style-0 {
         font-family: 'Kavoon', sans-serif;
-        font-size: 15px;
+        font-size: 25px;
         display: flex;
         flex-direction: column;
         justify-content: center; 
@@ -4629,8 +5383,8 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     
     .channel-style-1 {
-        font-family: 'Koulen';
-        font-size: 15px;
+        font-family: 'Fredoka One';
+        font-size: 25px;
         display: flex;
         gap: 5px;
         justify-content: center; 
@@ -4640,19 +5394,20 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     
     .channel-style-2 {
-        font-family: 'Koulen';
-        font-size: 15px;
+        font-family: 'Fredoka One';
+        font-size: 25px;
         display: flex;
         height: 68px;
         gap: 5px;
         justify-content: center; 
         text-align: center;
         align-items: center;
+        /* margin-top: 0.25px; */
     }
     
     .channel-style-3 {
-        font-family: 'Lilita One';
-        font-size: 15px;
+        font-family: 'Fredoka One';
+        font-size: 2vw;
         display: flex;
         gap: 10px;
         justify-content: center; 
@@ -4661,8 +5416,8 @@ input[type="range"]::-webkit-slider-runnable-track {
     }
     
     .channel-style-4 {
-        font-family: 'Karantina';
-        font-size: 25px;
+        font-family: 'Fredoka One';
+        font-size: 2vw;
         display: flex;
         gap: 10px;
         justify-content: center; 
@@ -4671,8 +5426,8 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     
     .channel-style-5 {
-        font-family: 'Kaushan Script';
-        font-size: 15px;
+        font-family: 'Fredoka One';
+        font-size: 1.8vw;
         display: flex;
         gap: 5px;
         justify-content: center; 
@@ -4680,20 +5435,19 @@ input[type="range"]::-webkit-slider-runnable-track {
     }
     
     .channel-style-6 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        gap: 5px;
         display: flex;
-        font-family: 'luckiest guy';
-        font-size: 15px;
         flex-direction: row;
-        flex-wrap: wrap;
-        gap: 10px;
-        justify-content: center;
-        align-items: center;
+        justify-content: center; 
+        align-items: center; 
     }
     
     
     .channel-style-7 {
-        font-family: 'Fredoka';
-        font-size: 15px;
+        font-family: 'Fredoka One';
+        font-size: 1.8vw;
         display: flex;
         gap: 10px;
         justify-content: center; 
@@ -4701,8 +5455,8 @@ input[type="range"]::-webkit-slider-runnable-track {
     }
     
     .channel-style-8 {
-        font-family: 'Lilita One';
-        font-size: 15px;
+        font-family: 'Fredoka One';
+        font-size: 2vw;
         display: flex;
         gap: 3px;
         justify-content: center; 
@@ -4710,9 +5464,10 @@ input[type="range"]::-webkit-slider-runnable-track {
     }
     
     
+    
     .channel-style-9 {
         font-family: 'Lilita One';
-        font-size: 15px;
+        font-size: 30px;
         display: flex;
         gap: 5px;
         justify-content: center; 
@@ -4722,7 +5477,138 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     .channel-style-10 {
         font-family: 'Fredoka One';
-        font-size: 15px;
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-11 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-12 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-13 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-14 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-15 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-16 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-17 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-18 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-19 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-20 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-21 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-22 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-23 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-24 {
+        font-family: 'Fredoka One';
+        font-size: 1.8vw;
         display: flex;
         gap: 5px;
         justify-content: center; 
@@ -4954,22 +5840,17 @@ input[type="range"]::-webkit-slider-runnable-track {
         margin-top: 5px;
     }
 
-    /* #appTitle .sub {
-        font-size: 12px; 
-        margin-top: 3.7vw;
-    } */
-
     #appMoto{
         font-family: 'Poppins';
-        font-size: 4vw;
-        
-        margin-top: -13px;
+        font-size: 3vw;
+        /* margin-top: -13px; */
+        margin-left: -2vw;
     }
 
     #appTitle .button-group {
         display: flex;
         flex-direction: row;
-        margin-left: 60vw;
+        margin-left: 40vw;
         gap:10px;
 
     }
@@ -5116,44 +5997,42 @@ input[type="range"]::-webkit-slider-runnable-track {
         align-items: center; 
     }
 
-    .channel-style-0 .name-of-channel{
-        font-size: 1.5em;
+    .channel-style-0 {
+        font-family: 'Kavoon', sans-serif;
+        font-size: 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+        align-items: center; 
     }
     
     
     .channel-style-1 {
-        font-family: 'Koulen';
-        font-size: 2em;
+        font-family: 'Fredoka One';
+        font-size: 25px;
         display: flex;
         gap: 5px;
         justify-content: center; 
         text-align: center;
         align-items: center;
     }
-
-    .channel-style-1 .name-of-channel{
-        font-size: 0.5em;
-    }
     
     
     .channel-style-2 {
-        font-family: 'Koulen';
-        font-size: 1.7em;
+        font-family: 'Fredoka One';
+        font-size: 25px;
         display: flex;
         height: 68px;
         gap: 5px;
         justify-content: center; 
         text-align: center;
         align-items: center;
-    }
-
-    .channel-style-2 .name-of-channel{
-        font-size: 0.5em;
+        /* margin-top: 0.25px; */
     }
     
     .channel-style-3 {
-        font-family: 'Lilita One';
-        font-size: 15px;
+        font-family: 'Fredoka One';
+        font-size: 2vw;
         display: flex;
         gap: 10px;
         justify-content: center; 
@@ -5162,8 +6041,8 @@ input[type="range"]::-webkit-slider-runnable-track {
     }
     
     .channel-style-4 {
-        font-family: 'Karantina';
-        font-size: 25px;
+        font-family: 'Fredoka One';
+        font-size: 2vw;
         display: flex;
         gap: 10px;
         justify-content: center; 
@@ -5172,8 +6051,8 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     
     .channel-style-5 {
-        font-family: 'Kaushan Script';
-        font-size: 15px;
+        font-family: 'Fredoka One';
+        font-size: 1.8vw;
         display: flex;
         gap: 5px;
         justify-content: center; 
@@ -5181,20 +6060,19 @@ input[type="range"]::-webkit-slider-runnable-track {
     }
     
     .channel-style-6 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        gap: 5px;
         display: flex;
-        font-family: 'luckiest guy';
-        font-size: 15px;
         flex-direction: row;
-        flex-wrap: wrap;
-        gap: 10px;
-        justify-content: center;
-        align-items: center;
+        justify-content: center; 
+        align-items: center; 
     }
     
     
     .channel-style-7 {
-        font-family: 'Fredoka';
-        font-size: 15px;
+        font-family: 'Fredoka One';
+        font-size: 1.8vw;
         display: flex;
         gap: 10px;
         justify-content: center; 
@@ -5202,8 +6080,8 @@ input[type="range"]::-webkit-slider-runnable-track {
     }
     
     .channel-style-8 {
-        font-family: 'Lilita One';
-        font-size: 15px;
+        font-family: 'Fredoka One';
+        font-size: 2vw;
         display: flex;
         gap: 3px;
         justify-content: center; 
@@ -5211,9 +6089,10 @@ input[type="range"]::-webkit-slider-runnable-track {
     }
     
     
+    
     .channel-style-9 {
         font-family: 'Lilita One';
-        font-size: 15px;
+        font-size: 30px;
         display: flex;
         gap: 5px;
         justify-content: center; 
@@ -5223,7 +6102,138 @@ input[type="range"]::-webkit-slider-runnable-track {
     
     .channel-style-10 {
         font-family: 'Fredoka One';
-        font-size: 15px;
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-11 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-12 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-13 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-14 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-15 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-16 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-17 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-18 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-19 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-20 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-21 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-22 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-23 {
+        font-family: 'Fredoka One';
+        font-size: 28px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .channel-style-24 {
+        font-family: 'Fredoka One';
+        font-size: 1.8vw;
         display: flex;
         gap: 5px;
         justify-content: center; 
