@@ -235,7 +235,7 @@ body {
     padding: 0.5vw;
     left: 0;
     right: 0;
-    margin-top: 2vw;
+    margin: 0;
 }
 
 .footer-group{
@@ -531,22 +531,30 @@ body {
     
     
     #footer {
-        position: absolute;
-        left: 0;
-        bottom: 0;
         display: flex; 
-        flex-direction: column; 
+        flex: 1;
+        flex-direction: row; 
         align-items: center; 
         justify-content: space-between;
         background-color: #222; 
         color: white;
-        padding: 20px;
         width: 100%;
+        padding: 0.5vw;
+        left: 0;
+        right: 0;
+        margin-top: 2vw;
     }
     
-    #footer .social-links {
-        align-self: start;
-        margin-bottom: 20px;
+    .footer-group{
+        display: flex;
+        justify-content: center;
+        align-items:center;
+    }
+    
+    .footer-group.left {
+        flex: 0 0 25%;
+        justify-content: flex-start; 
+        align-items: center;
     }
     
     #footer .social-links a {
@@ -560,38 +568,60 @@ body {
         color: #8aefe7; 
     }
     
-    #footer .application-form {
-        align-self: flex-end;
-        width: 10em;
+    .footer-group.center {
+        flex: 0 0 25%;
+        display: flex;
+        justify-content: center;
+        align-items: center; 
     }
     
     #footer .application-form button {
         background-color: #373243; 
         color: white;
         border: none;
-        border-radius: 0.5em;
+        padding: 10px 20px;
+        border-radius: 5px;
         cursor: pointer;
         font-size: 1vw;
-        margin-top: -0.6em;
-        margin-left: -3em;
-        width: 8em;
+        width: 200px;
     }
     
     #footer .application-form button:hover {
-        background-color: #8aefe7; 
+        background-color: black; 
     }
     
-    #footer .email-contact {
-        align-self: center;
-        font-size: 1vw;
+    .footer-group.right {
+        flex: 0 0 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; 
     }
     
-    #footer .email-contact a {
+    #footer .terms-conditions a {
         color: #8aefe7; 
         text-decoration: none;
     }
     
-    #footer .email-contact a:hover {
+    #footer .terms-conditions a:hover {
+        text-decoration: underline;
+    }
+    
+    #footer .privacy-policy a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .privacy-policy a:hover {
+        text-decoration: underline;
+    }
+    
+    #footer .content-preferences a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .content-preferences a:hover {
         text-decoration: underline;
     }
 }
@@ -821,40 +851,47 @@ body {
 
     #footer {
         display: flex; 
-        flex-direction: column; 
+        flex: 1;
+        flex-direction: row; 
         align-items: center; 
         justify-content: space-between;
         background-color: #222; 
         color: white;
-        padding: 20px;
         width: 100%;
-        height: 1vh;
-        margin-left: -20px;
-        margin-bottom: -20px;
-        margin-top: 40px;
+        padding: 0.5vw;
+        left: 0;
+        right: 0;
+        margin-top: 2vw;
     }
     
-    #footer .social-links {
-        align-self: start;
-        margin-top: -1vw;
-        margin-bottom: 14vw;
+    .footer-group{
+        display: flex;
+        justify-content: center;
+        align-items:center;
+    }
+    
+    .footer-group.left {
+        flex: 0 0 25%;
+        justify-content: flex-start; 
+        align-items: center;
     }
     
     #footer .social-links a {
         color: white;
         margin: 0 10px;
         text-decoration: none;
-        font-size: 2vw;
+        font-size: 1.2vw;
     }
     
     #footer .social-links a:hover {
         color: #8aefe7; 
     }
     
-    #footer .application-form {
-        align-self: flex-end;
-        margin-top: -15.5vw;
-        width: 20vw;
+    .footer-group.center {
+        flex: 0 0 25%;
+        display: flex;
+        justify-content: center;
+        align-items: center; 
     }
     
     #footer .application-form button {
@@ -865,24 +902,45 @@ body {
         border-radius: 5px;
         cursor: pointer;
         font-size: 1vw;
-        width: 20vw;
+        width: 200px;
     }
     
     #footer .application-form button:hover {
-        background-color: #8aefe7; 
+        background-color: black; 
     }
     
-    #footer .email-contact {
-        align-self: center;
-        font-size: 1.5vw;
+    .footer-group.right {
+        flex: 0 0 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; 
     }
     
-    #footer .email-contact a {
+    #footer .terms-conditions a {
         color: #8aefe7; 
         text-decoration: none;
     }
     
-    #footer .email-contact a:hover {
+    #footer .terms-conditions a:hover {
+        text-decoration: underline;
+    }
+    
+    #footer .privacy-policy a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .privacy-policy a:hover {
+        text-decoration: underline;
+    }
+    
+    #footer .content-preferences a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .content-preferences a:hover {
         text-decoration: underline;
     }
 }
@@ -1452,15 +1510,12 @@ body {
 }
 
 
-@media screen and (-webkit-min-device-pixel-ratio: 1) and (min-device-width: 400px) and (max-device-width: 760px){
+@media (min-width: 400px) and (max-width: 500px) {
     body {
-        font-family: 'Arial', sans-serif;
-        background: #1a1126;
-        color: white;
-        margin: 0;
-        padding: 20px;
+        padding: 10px; 
+        overflow-x: hidden;
     }
-    
+
     #header{
         position: fixed;
         z-index: 1000;
@@ -1475,13 +1530,25 @@ body {
     }
 
     #appTitle {
-        font-size: 5vw;
+        font-size: 6vw;
         margin-left: 10px;
     }
 
     #appTitle .letter {
         margin: 0; 
         margin-top: 5px;
+    }
+
+    /* #appTitle .sub {
+        font-size: 12px; 
+        margin-top: 3.7vw;
+    } */
+
+    #appMoto{
+        font-size: 10px;
+        margin-left: 10px;
+        margin-top: -4vw;
+        width: 300px;
     }
 
     #appTitle .button-group {
@@ -1505,29 +1572,6 @@ body {
         height: 30px;
         margin-top: 5vw;
     }
-
-    
-    
-    #appTitle .letter:nth-child(1) { color: #8aefe7; }    /* First letter 'c' */
-    #appTitle .letter:nth-child(2) { color: #8aefe7; } /* Second letter 'h' */
-    #appTitle .letter:nth-child(3) { color: white; } /* Third letter 'u' */
-    #appTitle .letter:nth-child(4) { color: white; }  /* Fourth letter 'k' */
-    #appTitle .letter:nth-child(5) { color: white; }   /* Fifth letter 'k' */
-    #appTitle .letter:nth-child(6) { color: white; } /* Sixth letter 'l' */
-    
-    #appMoto{
-        font-family: 'Poppins';
-        font-size: 2vw;
-        margin-left: 3vw;
-        margin-top: -1em;
-    }
-    
-    
-    #appMoto .word:nth-child(1) {color:#8aefe7}
-    #appMoto .word:nth-child(2) {color:#8aefe7}
-    #appMoto .word:nth-child(3) {color:white}
-    #appMoto .word:nth-child(4) {color:white}
-    #appMoto .word:nth-child(5) {color:white}
 
 
     #Description {
@@ -1619,40 +1663,47 @@ body {
 
     #footer {
         display: flex; 
-        flex-direction: column; 
+        flex: 1;
+        flex-direction: row; 
         align-items: center; 
         justify-content: space-between;
         background-color: #222; 
         color: white;
-        padding: 20px;
         width: 100%;
-        height: 1vh;
-        margin-left: -20px;
-        margin-bottom: -20px;
-        margin-top: 40px;
+        padding: 0.5vw;
+        left: 0;
+        right: 0;
+        margin-top: 2vw;
     }
     
-    #footer .social-links {
-        align-self: start;
-        margin-top: -1vw;
-        margin-bottom: 14vw;
+    .footer-group{
+        display: flex;
+        justify-content: center;
+        align-items:center;
+    }
+    
+    .footer-group.left {
+        flex: 0 0 25%;
+        justify-content: flex-start; 
+        align-items: center;
+        white-space: nowrap; 
     }
     
     #footer .social-links a {
         color: white;
-        margin: 0 10px;
         text-decoration: none;
-        font-size: 2vw;
+        font-size: 4vw;
     }
     
     #footer .social-links a:hover {
         color: #8aefe7; 
     }
     
-    #footer .application-form {
-        align-self: flex-end;
-        margin-top: -15.5vw;
-        width: 20vw;
+    .footer-group.center {
+        flex: 0 0 30%;
+        display: flex;
+        justify-content: center;
+        align-items: center; 
     }
     
     #footer .application-form button {
@@ -1662,28 +1713,51 @@ body {
         padding: 10px 20px;
         border-radius: 5px;
         cursor: pointer;
-        font-size: 1vw;
+        font-size: 2vw;
         width: 20vw;
     }
     
     #footer .application-form button:hover {
-        background-color: #8aefe7; 
+        background-color: black; 
     }
     
-    #footer .email-contact {
-        align-self: center;
-        font-size: 1.5vw;
+    .footer-group.right {
+        flex: 0 0 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; 
+        font-size: 2.5vw;
+        white-space: nowrap; 
     }
     
-    #footer .email-contact a {
+    #footer .terms-conditions a {
         color: #8aefe7; 
         text-decoration: none;
     }
     
-    #footer .email-contact a:hover {
+    #footer .terms-conditions a:hover {
         text-decoration: underline;
     }
     
+    #footer .privacy-policy a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .privacy-policy a:hover {
+        text-decoration: underline;
+    }
+    
+    #footer .content-preferences a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .content-preferences a:hover {
+        text-decoration: underline;
+    }
+
 }
 
 

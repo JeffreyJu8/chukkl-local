@@ -273,7 +273,7 @@ function createScheduleBlock(channelId, maturityRating, channelName="default") {
     scheduleBlock.className = 'channel-schedule';
 
     const displayedItems = channelSchedules[channelId] || [];
-    const currentTime = new Date();
+    let currentTime = new Date();
 
     // Filter schedules that haven't ended yet
     const relevantSchedules = displayedItems.filter(item => {
@@ -291,7 +291,7 @@ function createScheduleBlock(channelId, maturityRating, channelName="default") {
         return total + (end - start);
     }, 0);
 
-    limitedSchedules.forEach(item => {
+    limitedSchedules.forEach((item, index) => {
         const itemDiv = document.createElement('div');
         itemDiv.className = 'schedule-item';
         itemDiv.id = channelName;
@@ -318,6 +318,31 @@ function createScheduleBlock(channelId, maturityRating, channelName="default") {
         maturityDiv.textContent = maturityRating;
         itemDiv.appendChild(maturityDiv);
 
+        const timeDiv = document.createElement('div');
+        timeDiv.className = index === 0 ? 'schedule-remaining-time' : 'schedule-time';
+        timeDiv.id = channelName;
+
+        if (index === 0) {
+            // Show remaining time for the currently playing video
+            const updateRemainingTime = () => {
+                currentTime = new Date();
+                const remainingTimeMs = end - currentTime.getTime();
+                const remainingHours = Math.floor((remainingTimeMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const remainingMinutes = Math.floor((remainingTimeMs % (1000 * 60 * 60)) / (1000 * 60));
+                timeDiv.textContent = `${remainingHours}hr ${remainingMinutes}min left`;
+            };
+
+            updateRemainingTime(); // Initial call to set the remaining time
+            setInterval(updateRemainingTime, 5000); // Update every second
+        } else {
+            // Show scheduled start and end times for upcoming videos
+            const startTimeStr = new Date(item.start_time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
+            const endTimeStr = new Date(item.end_time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
+            timeDiv.textContent = `${startTimeStr} - ${endTimeStr}`;
+        }
+
+        itemDiv.appendChild(timeDiv);
+
         const descriptionDiv = document.createElement('div');
         descriptionDiv.className = 'schedule-video-description';
         descriptionDiv.id = channelName;
@@ -330,6 +355,74 @@ function createScheduleBlock(channelId, maturityRating, channelName="default") {
 
     return scheduleBlock;
 }
+
+
+
+
+
+
+// function createScheduleBlock(channelId, maturityRating, channelName="default") {
+//     const scheduleBlock = document.createElement('div');
+//     scheduleBlock.className = 'channel-schedule';
+
+//     const displayedItems = channelSchedules[channelId] || [];
+//     const currentTime = new Date();
+
+//     // Filter schedules that haven't ended yet
+//     const relevantSchedules = displayedItems.filter(item => {
+//         const endTime = new Date(item.end_time);
+//         return endTime > currentTime;
+//     });
+
+//     // Limit the number of displayed items based on device width
+//     const limitedSchedules = relevantSchedules.slice(0, window.innerWidth <= 568 ? 2 : 4);
+
+//     // Calculate the total duration of these limited schedules in milliseconds
+//     const totalDurationMs = limitedSchedules.reduce((total, item) => {
+//         const start = new Date(item.start_time).getTime();
+//         const end = new Date(item.end_time).getTime();
+//         return total + (end - start);
+//     }, 0);
+
+//     limitedSchedules.forEach(item => {
+//         const itemDiv = document.createElement('div');
+//         itemDiv.className = 'schedule-item';
+//         itemDiv.id = channelName;
+
+//         // Calculate this item's duration as a percentage of the total duration
+//         const start = new Date(item.start_time).getTime();
+//         const end = new Date(item.end_time).getTime();
+//         const itemDurationMs = end - start;
+//         const durationPercentage = (itemDurationMs / totalDurationMs) * 100;
+
+//         // Set the width (or height) of the item based on its duration percentage
+//         itemDiv.style.width = `${durationPercentage}%`;
+
+//         // Append child elements to itemDiv
+//         const titleDiv = document.createElement('div');
+//         titleDiv.className = 'schedule-title';
+//         titleDiv.id = channelName;
+//         titleDiv.textContent = item.title;
+//         itemDiv.appendChild(titleDiv);
+
+//         const maturityDiv = document.createElement('div');
+//         maturityDiv.className = 'schedule-maturity-rating';
+//         maturityDiv.id = channelName;
+//         maturityDiv.textContent = maturityRating;
+//         itemDiv.appendChild(maturityDiv);
+
+//         const descriptionDiv = document.createElement('div');
+//         descriptionDiv.className = 'schedule-video-description';
+//         descriptionDiv.id = channelName;
+//         descriptionDiv.textContent = item.description;
+//         descriptionDiv.style.display = 'none'; // Initially hidden
+//         itemDiv.appendChild(descriptionDiv);
+
+//         scheduleBlock.appendChild(itemDiv);
+//     });
+
+//     return scheduleBlock;
+// }
 
 
 // function createScheduleBlock(channelId, maturityRating, channelName="default") {
@@ -867,19 +960,38 @@ function scheduleNextUpdate() {
     }, delay);
 }
 
-function updateTimeIntervals() {
+
+function updateCurrentTime() {
     const now = moment.tz(moment.tz.guess());
-    let currentIntervalTime = now.clone().subtract(now.minute() % 15, 'minutes').seconds(0).milliseconds(0);
+    const currentTime = now.format('hh:mm A');
 
     const channelBar = document.getElementById('channelBar');
-    const displays = channelBar.getElementsByClassName('displays');
+    const display = channelBar.querySelector('.displays');
 
-    for (let i = 0; i < displays.length; i++) {
-        let displayTime = currentIntervalTime.format('hh:mm A');
-        displays[i].textContent = displayTime;
-        currentIntervalTime.add(15, 'minutes');
+    if (display) {
+        display.textContent = `Now: ${currentTime}`;
     }
 }
+
+// Call updateCurrentTime immediately to set the initial time
+updateCurrentTime();
+
+// Set an interval to update the time every minute (60000 milliseconds)
+setInterval(updateCurrentTime, 5000);
+
+// function updateTimeIntervals() {
+//     const now = moment.tz(moment.tz.guess());
+//     let currentIntervalTime = now.clone().subtract(now.minute() % 15, 'minutes').seconds(0).milliseconds(0);
+
+//     const channelBar = document.getElementById('channelBar');
+//     const displays = channelBar.getElementsByClassName('displays');
+
+//     for (let i = 0; i < displays.length; i++) {
+//         let displayTime = currentIntervalTime.format('hh:mm A');
+//         displays[i].textContent = displayTime;
+//         currentIntervalTime.add(15, 'minutes');
+//     }
+// }
 
 
 
@@ -1030,4 +1142,4 @@ function adjustVideoForOrientation() {
       // Landscape orientation
       videoContainer.classList.remove('fullscreen-portrait');
     }
-  }
+  } 
