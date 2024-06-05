@@ -109,11 +109,15 @@ async function defaultVideo(){
     try {
         const response = await fetch(`${API_BASE_URL}/channels`); 
         const channels = await response.json();
+        const limitedChannels = channels.slice(25, 50);
         const grid = document.getElementById('channelsGrid');
         grid.innerHTML = '';
+        // console.log("kids channels: ", limitedChannels);
 
-        for (const [index, channel] of channels.entries()) {
+        for (const [index, channel] of limitedChannels.entries()) {
+            // console.log("loop index: ", index);
             if (index === 0) {
+                console.log("default channel: ", channel);
                 getChannelInfo(channel, 'channel-style-' + index);
             }
         }
@@ -124,7 +128,6 @@ async function defaultVideo(){
     localStorage.setItem('defaultVideoCalled', 'true');
 }
 
-
 async function fetchChannels() {
     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const dayOfWeek = getCurrentDayOfWeek();
@@ -134,7 +137,7 @@ async function fetchChannels() {
         const channels = await response.json();
 
         // Grab only the first 25 channels
-        const limitedChannels = channels.slice(0, 25);
+        const limitedChannels = channels.slice(25, 50);
 
         console.log("channel: ", limitedChannels);
 
@@ -683,6 +686,7 @@ async function getVideoCast(channelId) {
         const data = await response.json();
         
         const videoCast = data.video_cast;
+        console.log("video cast: ", videoCast);
 
         // Update the global 'currVideoCast' variable
         currVideoCast = videoCast;
@@ -989,173 +993,46 @@ setInterval(updateCurrentTime, 5000);
 
 
 
-// document.addEventListener("DOMContentLoaded", function() {
-
-//     onYouTubeIframeAPIReady();
-//     //selectChannel(9);
-    
-//     // fetchChannels();
-//     // getVideoCast(9);
-//     fetchChannels().then(() => {
-//         selectChannel(1);
-//         getVideoCast(1);
-        
-//     });
-//     defaultVideo();
-
-//     const fullscreenBtn = document.querySelector('.fullscreen-toggle'); 
-//     //const videoContainer = document.querySelector('#videoContainer');
-    
-//     // fullscreenBtn.addEventListener('click', () => {
-//     //   if (!document.fullscreenElement) {
-//     //     videoContainer.requestFullscreen().then(() => {
-//     //         videoContainer.classList.add('fullscreen-mode'); 
-//     //     }).catch(err => {
-//     //       console.error(`Error attempting to enable fullscreen mode: ${err.message}`);
-//     //     });
-//     //   } else {
-//     //     if (document.exitFullscreen) {
-//     //       document.exitFullscreen(); 
-//     //     }
-//     //   }
-//     // });
-
-//     fullscreenBtn.addEventListener('click', toggleFullscreen);
-
-//     fullscreenBtn.addEventListener('touchstart', function(event) {
-//         event.preventDefault(); 
-//         toggleFullscreen();
-//     });
-
-
-    
-
-//     const muteButtonIcon = document.querySelector('.mute-toggle i');
-//     if (muteButtonIcon) {
-//         muteButtonIcon.classList.remove('fa-volume-up');
-//         muteButtonIcon.classList.add('fa-volume-mute');
-//     }
-
-//     updateTimeIntervals(); // Initialize the time intervals
-//     scheduleNextUpdate();
-
-//     document.addEventListener('fullscreenchange', handleFullscreenChange);
-//     document.addEventListener('webkitfullscreenchange', handleFullscreenChange); // Safari
-
-   
-// });
-
-
-// function handleFullscreenChange() {
-//     const videoContainer = document.querySelector('#videoContainer');
-//     if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-//         videoContainer.classList.remove('fullscreen-mode');
-//         adjustVideoForOrientation(); // Ensure you call adjustVideoForOrientation function correctly
-//     }
-// }
-
-// function toggleFullscreen() {
-//     const videoContainer = document.querySelector('#videoContainer');
-
-//     // Check if we're in fullscreen mode (either via the API or our fallback)
-//     const isInFullscreen = document.fullscreenElement || videoContainer.classList.contains('fullscreen-fallback');
-
-//     if (!isInFullscreen) {
-//         // Attempt to use the Fullscreen API first
-//         if (videoContainer.requestFullscreen) {
-//             videoContainer.requestFullscreen();
-//             // .catch(err => {
-//             //     console.error(`Error attempting to enable fullscreen mode: ${err.message}`);
-//             //     // Fallback to fullscreen simulation if Fullscreen API fails
-//             //     videoContainer.classList.add('fullscreen-fallback');
-//             // });
-//         } else if (videoContainer.webkitRequestFullscreen) { // Safari
-//             videoContainer.webkitRequestFullscreen();
-//             // .catch(err => {
-//             //     console.error(`Error attempting to enable fullscreen mode: ${err.message}`);
-//             //     videoContainer.classList.add('fullscreen-fallback');
-//             // });
-//         } else {
-//             // If Fullscreen API is not available, use the fallback
-//             videoContainer.classList.add('fullscreen-fallback');
-//         }
-//     } else {
-//         // Exiting fullscreen
-//         if (document.exitFullscreen) {
-//             document.exitFullscreen().catch(() => {
-//                 videoContainer.classList.remove('fullscreen-fallback');
-//             });
-//         } else if (document.webkitExitFullscreen) { // Safari
-//             document.webkitExitFullscreen().catch(() => {
-//                 videoContainer.classList.remove('fullscreen-fallback');
-//             });
-//         } else {
-//             // Remove fallback class if Fullscreen API is not available
-//             videoContainer.classList.remove('fullscreen-fallback');
-//         }
-//     }
-// }
-
-
-
-// // function toggleFullscreen() {
-// //     const videoContainer = document.querySelector('#videoContainer');
-// //     if (!document.fullscreenElement && !document.webkitFullscreenElement) { // webkit prefix for Safari
-// //         if (videoContainer.requestFullscreen) {
-// //             videoContainer.requestFullscreen();
-// //         } else if (videoContainer.webkitRequestFullscreen) { // Safari
-// //             videoContainer.webkitRequestFullscreen();
-// //         }
-// //     } else {
-// //         if (document.exitFullscreen) {
-// //             document.exitFullscreen();
-// //         } else if (document.webkitExitFullscreen) { // Safari
-// //             document.webkitExitFullscreen();
-// //         }
-// //     }
-// // }
-
-
-// window.addEventListener('resize', adjustVideoForOrientation);
-// document.addEventListener('fullscreenchange', function () {
-//     const videoContainer = document.querySelector('#videoContainer');
-//     if (!document.fullscreenElement) {
-//         // Remove fullscreen-specific classes
-//         videoContainer.classList.remove('fullscreen-mode');
-//         adjustVideoForOrientation(); 
-//     }
-// });
-
-
-// function adjustVideoForOrientation() {
-//     const videoContainer = document.querySelector('#videoContainer');
-//     if (window.innerHeight > window.innerWidth) {
-//       // Portrait orientation
-//       videoContainer.classList.add('fullscreen-portrait');
-//     } else {
-//       // Landscape orientation
-//       videoContainer.classList.remove('fullscreen-portrait');
-//     }
-// } 
-
-
 document.addEventListener("DOMContentLoaded", function() {
+
     onYouTubeIframeAPIReady();
+    //selectChannel(9);
+    
+    // fetchChannels();
+    // getVideoCast(9);
     fetchChannels().then(() => {
-        selectChannel(1);
-        getVideoCast(1);
+        selectChannel(26);
+        getVideoCast(26);
+        
     });
     defaultVideo();
 
-    const fullscreenBtn = document.querySelector('.fullscreen-toggle');
+    const fullscreenBtn = document.querySelector('.fullscreen-toggle'); 
+    //const videoContainer = document.querySelector('#videoContainer');
+    
+    // fullscreenBtn.addEventListener('click', () => {
+    //   if (!document.fullscreenElement) {
+    //     videoContainer.requestFullscreen().then(() => {
+    //         videoContainer.classList.add('fullscreen-mode'); 
+    //     }).catch(err => {
+    //       console.error(`Error attempting to enable fullscreen mode: ${err.message}`);
+    //     });
+    //   } else {
+    //     if (document.exitFullscreen) {
+    //       document.exitFullscreen(); 
+    //     }
+    //   }
+    // });
 
     fullscreenBtn.addEventListener('click', toggleFullscreen);
 
-    // Using touchend instead of touchstart for better compatibility
-    fullscreenBtn.addEventListener('touchend', function(event) {
-        event.preventDefault();
+    fullscreenBtn.addEventListener('touchstart', function(event) {
+        event.preventDefault(); 
         toggleFullscreen();
     });
+
+
+    
 
     const muteButtonIcon = document.querySelector('.mute-toggle i');
     if (muteButtonIcon) {
@@ -1163,40 +1040,51 @@ document.addEventListener("DOMContentLoaded", function() {
         muteButtonIcon.classList.add('fa-volume-mute');
     }
 
-    updateTimeIntervals();
+    updateTimeIntervals(); // Initialize the time intervals
     scheduleNextUpdate();
 
     document.addEventListener('fullscreenchange', handleFullscreenChange);
     document.addEventListener('webkitfullscreenchange', handleFullscreenChange); // Safari
+
+   
 });
+
 
 function handleFullscreenChange() {
     const videoContainer = document.querySelector('#videoContainer');
     if (!document.fullscreenElement && !document.webkitFullscreenElement) {
         videoContainer.classList.remove('fullscreen-mode');
-        adjustVideoForOrientation();
+        adjustVideoForOrientation(); // Ensure you call adjustVideoForOrientation function correctly
     }
 }
 
 function toggleFullscreen() {
     const videoContainer = document.querySelector('#videoContainer');
+
+    // Check if we're in fullscreen mode (either via the API or our fallback)
     const isInFullscreen = document.fullscreenElement || videoContainer.classList.contains('fullscreen-fallback');
 
     if (!isInFullscreen) {
+        // Attempt to use the Fullscreen API first
         if (videoContainer.requestFullscreen) {
-            videoContainer.requestFullscreen().catch(err => {
-                console.error(`Error attempting to enable fullscreen mode: ${err.message}`);
-                videoContainer.classList.add('fullscreen-fallback');
-            });
+            videoContainer.requestFullscreen();
+            // .catch(err => {
+            //     console.error(`Error attempting to enable fullscreen mode: ${err.message}`);
+            //     // Fallback to fullscreen simulation if Fullscreen API fails
+            //     videoContainer.classList.add('fullscreen-fallback');
+            // });
         } else if (videoContainer.webkitRequestFullscreen) { // Safari
-            videoContainer.webkitRequestFullscreen().catch(err => {
-                console.error(`Error attempting to enable fullscreen mode: ${err.message}`);
-                videoContainer.classList.add('fullscreen-fallback');
-            });
+            videoContainer.webkitRequestFullscreen();
+            // .catch(err => {
+            //     console.error(`Error attempting to enable fullscreen mode: ${err.message}`);
+            //     videoContainer.classList.add('fullscreen-fallback');
+            // });
         } else {
+            // If Fullscreen API is not available, use the fallback
             videoContainer.classList.add('fullscreen-fallback');
         }
     } else {
+        // Exiting fullscreen
         if (document.exitFullscreen) {
             document.exitFullscreen().catch(() => {
                 videoContainer.classList.remove('fullscreen-fallback');
@@ -1206,25 +1094,50 @@ function toggleFullscreen() {
                 videoContainer.classList.remove('fullscreen-fallback');
             });
         } else {
+            // Remove fallback class if Fullscreen API is not available
             videoContainer.classList.remove('fullscreen-fallback');
         }
     }
 }
 
+
+
+// function toggleFullscreen() {
+//     const videoContainer = document.querySelector('#videoContainer');
+//     if (!document.fullscreenElement && !document.webkitFullscreenElement) { // webkit prefix for Safari
+//         if (videoContainer.requestFullscreen) {
+//             videoContainer.requestFullscreen();
+//         } else if (videoContainer.webkitRequestFullscreen) { // Safari
+//             videoContainer.webkitRequestFullscreen();
+//         }
+//     } else {
+//         if (document.exitFullscreen) {
+//             document.exitFullscreen();
+//         } else if (document.webkitExitFullscreen) { // Safari
+//             document.webkitExitFullscreen();
+//         }
+//     }
+// }
+
+
 window.addEventListener('resize', adjustVideoForOrientation);
 document.addEventListener('fullscreenchange', function () {
     const videoContainer = document.querySelector('#videoContainer');
     if (!document.fullscreenElement) {
+        // Remove fullscreen-specific classes
         videoContainer.classList.remove('fullscreen-mode');
-        adjustVideoForOrientation();
+        adjustVideoForOrientation(); 
     }
 });
+
 
 function adjustVideoForOrientation() {
     const videoContainer = document.querySelector('#videoContainer');
     if (window.innerHeight > window.innerWidth) {
-        videoContainer.classList.add('fullscreen-portrait');
+      // Portrait orientation
+      videoContainer.classList.add('fullscreen-portrait');
     } else {
-        videoContainer.classList.remove('fullscreen-portrait');
+      // Landscape orientation
+      videoContainer.classList.remove('fullscreen-portrait');
     }
-}
+  } 

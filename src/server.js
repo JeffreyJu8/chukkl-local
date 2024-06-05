@@ -53,6 +53,11 @@ app.get('/about', (req, res) => {
     res.sendFile(path.join(publicDirectoryPath, 'about_us.html'));
 });
 
+// Route for "/kids"
+app.get('/kids', (req, res) => {
+    res.sendFile(path.join(publicDirectoryPath, 'index_kids.html'));
+});
+
 async function preloadAllChannels() {
     const channels = await fetchChannelsFromDatabase();
     const cacheKey = 'all_channels';
