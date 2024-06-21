@@ -249,7 +249,7 @@ app.post('/videos', async (req, res) => {
 
 async function fetchVideoDetailsFromDatabase(channelId, currentTime) {
     const query = `
-        SELECT v.url, v.cast, v.video_id, v.channel_id, s.start_time, s.end_time 
+        SELECT v.url, v.people, v.video_id, v.channel_id, s.start_time, s.end_time 
         FROM Schedules s
         JOIN Videos v ON s.video_id = v.video_id
         WHERE s.channel_id = $1
@@ -295,7 +295,7 @@ function formatVideoResponse(video, scheduleTimes) {
         startTime: scheduleTimes ? scheduleTimes.start_time : video.start_time,
         vChannelId: video.channel_id,
         category: video.category_id,
-        video_cast: video.cast
+        video_cast: video.people
     };
 }
 
@@ -366,11 +366,11 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 async function startServer() {
     await connectToDatabase();
-    await preloadAllChannels();
-    await preloadIndividualChannels();
-    await preloadChannelsByDay();
-    await preloadAllVideoDetails();
-    await preloadAndCacheSchedules();
+    // await preloadAllChannels();
+    // await preloadIndividualChannels();
+    // await preloadChannelsByDay();
+    // await preloadAllVideoDetails();
+    // await preloadAndCacheSchedules();
     app.listen(PORT, () => {
         console.log(`Server started on http://localhost:${PORT}`);
     });

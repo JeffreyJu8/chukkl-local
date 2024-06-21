@@ -681,9 +681,11 @@ async function getVideoCast(channelId) {
         }
 
         const data = await response.json();
+        console.log("video data: ", data);
         
         const videoCast = data.video_cast;
 
+        console.log("video cast: ", videoCast);
         // Update the global 'currVideoCast' variable
         currVideoCast = videoCast;
 
