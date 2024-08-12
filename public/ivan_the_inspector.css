@@ -1,0 +1,215 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: #1a1126;
+    color: white;
+    margin: 0;
+}
+
+#header{
+    display: flex;
+    flex-direction: column;
+    height: 80px;
+    background-color: black;
+    margin-bottom: 5px; 
+}
+
+#appTitle {
+    font-family: 'Aileron', sans-serif;                
+    display: flex;
+    font-size: 3.4vw;
+    margin-left: 20px;
+    flex-direction: row;
+    width: 100%;
+}
+
+#appTitle .letter {
+    margin: -2.2px;
+    font-weight: bolder;
+    
+}
+
+/* #appTitle .sub{
+    font-family: "Poppins", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 1.3vw;
+    color: #8aefe7;
+    margin-top: 26px;
+    margin-left: 7px;
+} */
+
+#appTitle .button-group {
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 55vw;
+    gap: 10px;
+}
+
+
+.about-us {
+    font-size: 1vw;
+    color: white;
+    width: 150px;
+    margin-top: 10px;
+    background-color: black;
+    border: 3px solid #8aefe7;
+    border-radius: 10px;
+    height: 50px;
+}
+
+.about-us:hover {
+    cursor: pointer; 
+}
+
+#appTitle .feedback{
+    font-size: 1vw;
+    color: white;
+    width: 150px;
+    margin-top: 18px;
+    background-color: black;
+    border: 3px solid #8aefe7;
+    border-radius: 10px;
+    height: 50px;
+}
+
+.feedback:hover {
+    cursor: pointer; 
+}
+
+
+#appTitle .letter:nth-child(1) { color: #8aefe7; }    /* First letter 'c' */
+#appTitle .letter:nth-child(2) { color: #8aefe7; } /* Second letter 'h' */
+#appTitle .letter:nth-child(3) { color: white; } /* Third letter 'u' */
+#appTitle .letter:nth-child(4) { color: white; }  /* Fourth letter 'k' */
+#appTitle .letter:nth-child(5) { color: white; }   /* Fifth letter 'k' */
+#appTitle .letter:nth-child(6) { color: white; } /* Sixth letter 'l' */
+
+#appMoto{
+    font-family: 'Poppins';
+    font-size: 1.2vw;
+    margin-left: 20px;
+    margin-top: -13px;
+}
+
+
+#appMoto .word:nth-child(1) {color:white}
+#appMoto .word:nth-child(2) {color:#8aefe7}
+#appMoto .word:nth-child(3) {color:white}
+#appMoto .word:nth-child(4) {color:white}
+#appMoto .word:nth-child(5) {color:white}
+
+.hero {
+    position: relative;
+    color: #fff;
+    height: 40vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Aligns content to the bottom */
+    text-align: left;
+  }
+  
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./images/ivan_the_inspector_background.jpeg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.5;
+    z-index: -1;
+  }
+  
+  .hero h1 {
+    font-family: "Poppins";
+    font-size: 48px;
+    font-weight: 900; /* Maximum valid font weight */
+    margin-bottom: 20px;
+    color: white; /* Set text color */
+    -webkit-text-stroke-width: 2px; /* Text stroke */
+    -webkit-text-stroke-color: black;
+    text-shadow: 
+      -1px -1px 0 #000,  
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      1px 1px 0 #000; /* Text shadow for added thickness */
+  }
+  
+  
+  .hero p {
+    font-size: 18px;
+    margin-bottom: 40px;
+  }
+  
+  .video-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .video-item {
+    display: flex;
+    background-color: #373243; 
+    border: 2px solid transparent;
+    padding: 10px;
+    border-radius: 5px;
+    align-items: center;
+    position: relative;
+  }
+  
+  .video-thumbnail {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin-right: 20px;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .video-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    padding: 10px;
+  }
+  
+  .video-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .video-info h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.5vw;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+    color: #fff;
+  }
+  
+  .video-info p {
+    font-size: 2vw;
+    margin: 0 0 10px 0;
+    color: #aaa;
+  }
+  
+  .duration {
+    font-size: 1.8vw;
+    color: #aaaaaa;
+    margin-top: 5px;
+  }
+  

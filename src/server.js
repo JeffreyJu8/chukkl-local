@@ -66,6 +66,16 @@ app.get('/kids/about', (req, res) => {
     res.sendFile(path.join(publicDirectoryPath, 'about_us_kids.html'));
 });
 
+// Route for "/on_demand"
+app.get('/on_demand', (req, res) => {
+    res.sendFile(path.join(publicDirectoryPath, 'on_demand.html'));
+});
+
+// Route for Ivan the Inspector
+app.get('/on_demand/ivan_the_inspector', (req, res) => {
+    res.sendFile(path.join(publicDirectoryPath, 'on_demand.html'));
+});
+
 async function fetchChannelsFromDatabase() {
     const query = `SELECT c.channel_id, c.name, c.maturity_rating, c.bio FROM Channels c`;
     try {

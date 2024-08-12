@@ -1,0 +1,192 @@
+    /* Global Styles */
+    body {
+        font-family: 'Arial', sans-serif;
+        background: #1a1126;
+        color: white;
+        margin: 0;
+        padding: 20px;
+    }
+  
+    #header{
+        display: flex;
+        flex-direction: column;
+        height: 80px;
+        padding: 10px;
+        background-color: black;
+        margin-left: -20px;
+        margin-right: -20px;
+        margin-bottom: 5px;
+        margin-top: -20px;
+    }
+
+    #appTitle {
+        font-family: 'Aileron', sans-serif;                
+        display: flex;
+        font-size: 3.4vw;
+        margin-left: 20px;
+        flex-direction: row;
+        width: 100%;
+    }
+
+    #appTitle .letter {
+        margin: -2.2px;
+        font-weight: bolder;
+        
+    }
+
+    /* #appTitle .sub{
+        font-family: "Poppins", sans-serif;
+        font-weight: 100;
+        font-style: normal;
+        font-size: 1.3vw;
+        color: #8aefe7;
+        margin-top: 26px;
+        margin-left: 7px;
+    } */
+
+    #appTitle .button-group {
+        display: flex;
+        justify-content: flex-end;
+        margin-left: 55vw;
+        gap: 10px;
+    }
+
+
+    .about-us {
+        font-size: 1vw;
+        color: white;
+        width: 150px;
+        margin-top: 10px;
+        background-color: black;
+        border: 3px solid #8aefe7;
+        border-radius: 10px;
+        height: 50px;
+    }
+
+    .about-us:hover {
+        cursor: pointer; 
+    }
+
+    #appTitle .feedback{
+        font-size: 1vw;
+        color: white;
+        width: 150px;
+        margin-top: 18px;
+        background-color: black;
+        border: 3px solid #8aefe7;
+        border-radius: 10px;
+        height: 50px;
+    }
+
+    .feedback:hover {
+        cursor: pointer; 
+    }
+
+
+    #appTitle .letter:nth-child(1) { color: #8aefe7; }    /* First letter 'c' */
+    #appTitle .letter:nth-child(2) { color: #8aefe7; } /* Second letter 'h' */
+    #appTitle .letter:nth-child(3) { color: white; } /* Third letter 'u' */
+    #appTitle .letter:nth-child(4) { color: white; }  /* Fourth letter 'k' */
+    #appTitle .letter:nth-child(5) { color: white; }   /* Fifth letter 'k' */
+    #appTitle .letter:nth-child(6) { color: white; } /* Sixth letter 'l' */
+
+    #appMoto{
+        font-family: 'Poppins';
+        font-size: 1.2vw;
+        margin-left: 20px;
+        margin-top: -13px;
+    }
+
+
+    #appMoto .word:nth-child(1) {color:white}
+    #appMoto .word:nth-child(2) {color:#8aefe7}
+    #appMoto .word:nth-child(3) {color:white}
+    #appMoto .word:nth-child(4) {color:white}
+    #appMoto .word:nth-child(5) {color:white}
+
+  
+  nav ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+  }
+  
+  .auth-buttons {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .register-btn,
+  .login-btn {
+    background-color: #1e90ff;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+  }
+
+  .search-container {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem;
+  }
+  
+  .search-bar {
+    width: 250px;
+    padding: 0.5rem 1rem;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    font-size: 1rem;
+    background-color: #1a1126;
+    color: #fff;
+    /* placeholder-color: #fff; */
+  }
+  
+  .search-bar::placeholder {
+    color: #fff;
+  }
+  
+  /* Main Content Styles */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* height: calc(100vh - 4rem); */
+  }
+  
+  .hero h1 {
+    font-size: 3rem;
+    font-weight: bolder;
+    margin-bottom: 3rem;
+    color: #8aefe7
+  }
+  
+  /* .hero-button {
+    display: block;
+    width: 200px;
+    height: 200px;
+    background-color: #1e90ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  } */
+  
+  .hero-button:hover {
+    transform: scale(1.1);
+  }
+  
+  .hero-button img {
+    width: 18vw;
+    height: 28vh;
+    border-radius: 10px;
+  }
