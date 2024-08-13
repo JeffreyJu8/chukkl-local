@@ -127,20 +127,46 @@
     font-size: 18px;
     margin-bottom: 40px;
   }
+
+  .start-watching-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px;
+    height: 50px;
+}
+
+.text {
+    color: white; 
+    font-weight: 500;
+    font-size: 36px; 
+    font-family: Arial, sans-serif;
+}
+
+.line {
+    flex-grow: 1;
+    margin-left: 20px;
+    height: 1px;
+    background-color: #aaa;
+}
   
   .video-list {
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
     gap: 20px;
-    padding: 20px;
   }
   
   .video-item {
     display: flex;
+    width: 90vw;
+    align-items: center;
+    text-decoration: none;
     background-color: #373243; 
     border: 2px solid transparent;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 10px;
     align-items: center;
     position: relative;
   }
