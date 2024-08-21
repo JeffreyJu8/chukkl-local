@@ -103,33 +103,28 @@
     color: #fff;
   }
   
-  /* Main Content Styles */
+
   .hero {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* height: calc(100vh - 4rem); */
   }
   
   .hero h1 {
     font-size: 3rem;
     font-weight: bolder;
     margin-bottom: 3rem;
-    color: #8aefe7
+    color: #8aefe7;
+    text-align: center;
   }
   
-  /* .hero-button {
-    display: block;
-    width: 200px;
-    height: 200px;
-    background-color: #1e90ff;
-    border-radius: 50%;
+  .hero-buttons-container {
     display: flex;
-    align-items: center;
+    flex-direction: row; /* Aligns buttons horizontally */
+    gap: 2rem; /* Adds space between the images */
     justify-content: center;
-    transition: transform 0.3s ease;
-  } */
+  }
   
   .hero-button:hover {
     transform: scale(1.1);
@@ -140,3 +135,4 @@
     height: 28vh;
     border-radius: 10px;
   }
+  
