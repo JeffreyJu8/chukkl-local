@@ -1,13 +1,15 @@
 const { Pool } = require('pg');
+const { MongoClient, ServerApiVersion } = require('mongodb');
 const moment = require('moment-timezone');
 require('dotenv').config({ path: 'src/.env' });
 const path = require('path');
 const express = require('express');
 const compression = require('compression');
 const memjs = require('memjs');
-const NodeCache = require('node-cache'); // Import node-cache
+const NodeCache = require('node-cache');
 const cluster = require('cluster');
 const os = require('os');
+const bcrypt = require('bcrypt');
 
 const app = express();
 const cors = require('cors');
@@ -17,6 +19,7 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 3003;
 
+// PostgreSQL configuration
 const dbConfig = {
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -24,12 +27,34 @@ const dbConfig = {
     database: process.env.DB_DATABASE,
     port: process.env.DB_PORT,
     ssl: { rejectUnauthorized: false },
-    max: 20, // Increase if necessary
+    max: 20,
     idleTimeoutMillis: 30000,
     connectionTimeoutMillis: 2000,
 };
 
 const db = new Pool(dbConfig);
+
+// MongoDB Atlas connection
+const mongoUri = process.env.MONGO_URI; 
+const mongoClient = new MongoClient(mongoUri, {
+    serverApi: {
+        version: ServerApiVersion.v1,
+        strict: true,
+        deprecationErrors: true,
+    }
+});
+
+let mongoDB;
+
+async function connectToMongoDB() {
+    try {
+        await mongoClient.connect();
+        mongoDB = mongoClient.db(process.env.MONGO_DB_NAME);  
+        console.log("Connected to MongoDB Atlas.");
+    } catch (error) {
+        console.error("Failed to connect to MongoDB Atlas:", error);
+    }
+}
 
 const memcachedClient = memjs.Client.create(process.env.MEMCACHED_SERVERS, {
     username: process.env.MEMCACHED_USERNAME,
@@ -37,7 +62,7 @@ const memcachedClient = memjs.Client.create(process.env.MEMCACHED_SERVERS, {
     timeout: 5000,
 });
 
-const localCache = new NodeCache({ stdTTL: 3600 }); // Local in-memory cache with TTL of 1 hour
+const localCache = new NodeCache({ stdTTL: 3600 });
 
 async function connectToDatabase() {
     try {
@@ -51,7 +76,72 @@ async function connectToDatabase() {
 const publicDirectoryPath = path.join(__dirname, '..', 'public');
 app.use(express.static(publicDirectoryPath));
 
-// Route for "/about"
+// Route for registeration
+app.get('/register', (req, res) => {
+    res.sendFile(path.join(publicDirectoryPath, 'register.html'));
+});
+
+app.post('/register', async (req, res) => {
+    const { email, phone, password } = req.body;
+
+    try {
+        const userCollection = mongoDB.collection('users');
+        const existingUser = await userCollection.findOne({ email });
+
+        if (existingUser) {
+            return res.status(409).json({ message: 'Email already exists' });
+        }
+
+        // Hash the password before storing it
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const newUser = {
+            email,
+            phone,
+            password: hashedPassword, // Store the hashed password
+            createdAt: new Date(),
+        };
+
+        await userCollection.insertOne(newUser);
+        res.status(201).json({ message: 'User registered successfully' });
+    } catch (error) {
+        console.error("Error registering user:", error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+// Route for login
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(publicDirectoryPath, 'login.html'));
+});
+
+app.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        const userCollection = mongoDB.collection('users');
+        const user = await userCollection.findOne({ email });
+
+        if (!user) {
+            return res.status(401).json({ message: 'Invalid email or password' });
+        }
+
+        // Compare the provided password with the stored hashed password
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if (!isMatch) {
+            return res.status(401).json({ message: 'Invalid email or password' });
+        }
+
+        res.status(200).json({ message: 'Login successful' });
+    } catch (error) {
+        console.error("Error logging in user:", error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+
+// Route for about page
 app.get('/about', (req, res) => {
     res.sendFile(path.join(publicDirectoryPath, 'about_us.html'));
 });
@@ -411,10 +501,13 @@ app.get('/schedules', async (req, res) => {
     }
 });
 
+
 app.use(express.static(path.join(__dirname, '../public')));
 
+
 async function startServer() {
-    await connectToDatabase();
+    await connectToDatabase();  // Connect to PostgreSQL
+    await connectToMongoDB();   // Connect to MongoDB Atlas
     const server = app.listen(PORT, () => {
         console.log(`Server started on http://localhost:${PORT}`);
     });
@@ -442,6 +535,9 @@ process.on('SIGINT', async () => {
     console.log('Shutting down server...');
     if (db) {
         await db.end();
+    }
+    if (mongoClient) {
+        await mongoClient.close();
     }
     process.exit(0);
 });

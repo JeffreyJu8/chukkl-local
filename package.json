@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
     "dotenv": "^16.4.3",
@@ -18,6 +19,7 @@
     "memjs": "^1.3.2",
     "moment": "^2.30.1",
     "moment-timezone": "^0.5.45",
+    "mongodb": "^6.8.0",
     "mysql2": "^3.6.2",
     "newrelic": "^11.12.0",
     "node-cache": "^5.1.2",
