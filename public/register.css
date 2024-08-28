@@ -28,6 +28,7 @@ label {
 input[type="text"],
 input[type="email"],
 input[type="tel"],
+input[type="date"],
 input[type="password"] {
     width: 95%;
     padding: 8px;
@@ -35,6 +36,28 @@ input[type="password"] {
     border: none;
     border-radius: 10px;
     border: 2px solid #8aefe7;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background-color: #8aefe7;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    background-color: #7b67b9;
+}
+
+.terms-label a {
+    color: #8aefe7; 
+    text-decoration: none;
+}
+
+.terms-label a:hover {
+    color: #7b67b9;
+    text-decoration: underline;
 }
 
 button {

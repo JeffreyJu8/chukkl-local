@@ -10,6 +10,9 @@ const NodeCache = require('node-cache');
 const cluster = require('cluster');
 const os = require('os');
 const bcrypt = require('bcrypt');
+const crypto = require('crypto');
+const formData = require('form-data');
+const Mailgun = require('mailgun.js');
 
 const app = express();
 const cors = require('cors');
@@ -76,45 +79,139 @@ async function connectToDatabase() {
 const publicDirectoryPath = path.join(__dirname, '..', 'public');
 app.use(express.static(publicDirectoryPath));
 
-// Route for registeration
+// Mailgun configuration
+const mailgun = new Mailgun(formData);
+const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY});
+const MAILGUN_DOMAIN = process.env.MAILGUN_DOMAIN;
+
+// Function to send email using Mailgun or fallback to console.log
+async function sendEmail(to, subject, text, html) {
+    if (process.env.NODE_ENV === 'production') {
+        try {
+            const msg = await mg.messages.create(MAILGUN_DOMAIN, {
+                from: `Chukkl Team <mailgun@${MAILGUN_DOMAIN}>`,
+                to: [to],
+                subject: subject,
+                text: text,
+                html: html
+            });
+            console.log('Email sent:', msg);
+            return msg;
+        } catch (error) {
+            console.error('Error sending email:', error);
+            throw error;
+        }
+    } else {
+        // In development, log the email content instead of sending
+        console.log('Email content (DEV MODE):');
+        console.log('To:', to);
+        console.log('Subject:', subject);
+        console.log('Text:', text);
+        console.log('HTML:', html);
+    }
+}
+
+// Function to generate a random token
+function generateToken() {
+    return crypto.randomBytes(32).toString('hex');
+}
+
+// Route for registration page
 app.get('/register', (req, res) => {
     res.sendFile(path.join(publicDirectoryPath, 'register.html'));
 });
 
+// Route for handling registration
 app.post('/register', async (req, res) => {
-    const { email, phone, password } = req.body;
+    const { fullname, email, phone, dob, password } = req.body;
 
     try {
-        const userCollection = mongoDB.collection('users');
-        const existingUser = await userCollection.findOne({ email });
-
-        if (existingUser) {
-            return res.status(409).json({ message: 'Email already exists' });
+        if (!fullname || !email || !phone || !dob || !password) {
+            return res.status(400).json({ message: 'All fields are required' });
         }
 
-        // Hash the password before storing it
+        const userCollection = mongoDB.collection('users');
+        const existingUser = await userCollection.findOne({ $or: [{ email }, { phone }] });
+
+        if (existingUser) {
+            if (existingUser.email === email) {
+                return res.status(409).json({ message: 'Email already exists' });
+            } else if (existingUser.phone === phone) {
+                return res.status(409).json({ message: 'Phone number already exists' });
+            }
+        }
+
         const hashedPassword = await bcrypt.hash(password, 10);
+        const emailToken = generateToken();
+        const confirmationLink = `http://your-domain.com/confirm-email?token=${emailToken}`;
 
         const newUser = {
+            fullname: fullname.toString(),
             email,
             phone,
-            password: hashedPassword, // Store the hashed password
+            dob: new Date(dob),
+            password: hashedPassword,
+            emailToken,
+            isConfirmed: false,
             createdAt: new Date(),
         };
 
-        await userCollection.insertOne(newUser);
-        res.status(201).json({ message: 'User registered successfully' });
+        const result = await userCollection.insertOne(newUser);
+
+        if (!result.acknowledged) {
+            throw new Error('Failed to insert user into database');
+        }
+
+        // Attempt to send confirmation email
+        try {
+            await sendEmail(
+                email,
+                'Chukkl: Confirm your Email',
+                `Hi ${fullname},\n\nThank you for registering. Please click the link below to confirm your email address:\n\n${confirmationLink}`,
+                `<p>Hi ${fullname},</p>
+                 <p>Thank you for registering. Please click the link below to confirm your email address:</p>
+                 <a href="${confirmationLink}">Confirm Email</a>`
+            );
+            res.status(201).json({ message: 'User registered successfully. Please check your email to confirm your registration.' });
+        } catch (emailError) {
+            console.error("Error sending confirmation email:", emailError);
+            res.status(201).json({ 
+                message: 'User registered successfully. Email confirmation is currently unavailable. Please contact support to confirm your account.' 
+            });
+        }
     } catch (error) {
         console.error("Error registering user:", error);
+        res.status(500).json({ message: 'Internal Server Error', error: error.message });
+    }
+});
+
+// Route for email confirmation
+app.get('/confirm-email', async (req, res) => {
+    const { token } = req.query;
+
+    try {
+        const userCollection = mongoDB.collection('users');
+        const user = await userCollection.findOne({ emailToken: token });
+
+        if (!user) {
+            return res.status(400).json({ message: 'Invalid token' });
+        }
+
+        await userCollection.updateOne({ _id: user._id }, { $set: { isConfirmed: true, emailToken: null } });
+
+        res.status(200).json({ message: 'Email confirmed successfully' });
+    } catch (error) {
+        console.error("Error confirming email:", error);
         res.status(500).json({ message: 'Internal Server Error' });
     }
 });
 
-// Route for login
+// Route for login page
 app.get('/login', (req, res) => {
     res.sendFile(path.join(publicDirectoryPath, 'login.html'));
 });
 
+// User cannot login until email is confirmed
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
@@ -126,16 +223,43 @@ app.post('/login', async (req, res) => {
             return res.status(401).json({ message: 'Invalid email or password' });
         }
 
-        // Compare the provided password with the stored hashed password
-        const isMatch = await bcrypt.compare(password, user.password);
+        if (!user.isConfirmed) {
+            return res.status(403).json({ message: 'Please confirm your email to log in' });
+        }
 
-        if (!isMatch) {
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+
+        if (!isPasswordValid) {
             return res.status(401).json({ message: 'Invalid email or password' });
         }
 
+        // Proceed with login logic (e.g., generating a session or JWT)
         res.status(200).json({ message: 'Login successful' });
     } catch (error) {
-        console.error("Error logging in user:", error);
+        console.error("Error during login:", error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+app.post('/check-registration', async (req, res) => {
+    const { email, phone } = req.body;
+
+    try {
+        const userCollection = mongoDB.collection('users');
+
+        const emailExists = await userCollection.findOne({ email });
+        if (emailExists) {
+            return res.status(409).json({ exists: true, message: 'Email already registered' });
+        }
+
+        const phoneExists = await userCollection.findOne({ phone });
+        if (phoneExists) {
+            return res.status(409).json({ exists: true, message: 'Phone number already registered' });
+        }
+
+        res.status(200).json({ exists: false, message: 'Email and phone are available' });
+    } catch (error) {
+        console.error("Error checking registration:", error);
         res.status(500).json({ message: 'Internal Server Error' });
     }
 });
