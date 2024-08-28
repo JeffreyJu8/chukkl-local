@@ -162,9 +162,25 @@ app.get('/on_demand', (req, res) => {
 });
 
 // Route for Ivan the Inspector
-app.get('/on_demand/ivan_the_inspector', (req, res) => {
-    res.sendFile(path.join(publicDirectoryPath, 'on_demand.html'));
+app.get('/ivan_the_inspector', (req, res) => {
+    res.sendFile(path.join(publicDirectoryPath, 'ivan_the_inspector.html'));
 });
+
+// Route for Art with Ashley
+app.get('/art_with_ashley', (req, res) => {
+    res.sendFile(path.join(publicDirectoryPath, 'art_with_ashley.html'));
+});
+
+// Route for Miss Linky
+app.get('/miss_linky', (req, res) => {
+    res.sendFile(path.join(publicDirectoryPath, 'miss_linky.html'));
+});
+
+// Route for GoGarbage
+app.get('/gogarbage', (req, res) => {
+    res.sendFile(path.join(publicDirectoryPath, 'gogarbage.html'));
+});
+
 
 async function fetchChannelsFromDatabase() {
     const query = `SELECT c.channel_id, c.name, c.maturity_rating, c.bio FROM Channels c`;
