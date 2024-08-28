@@ -52,8 +52,18 @@ button:hover {
     background-color: #7b67b9;
 }
 
-p#message {
+p {
     text-align: center;
     margin-top: 20px;
     font-size: 14px;
+    
+}
+
+p a {
+    color: #8aefe7;
+    text-decoration: none;
+}
+
+p a:hover {
+    text-decoration: underline;
 }
