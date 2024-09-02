@@ -89,7 +89,7 @@ async function sendEmail(to, subject, text, html) {
     if (process.env.NODE_ENV === 'production') {
         try {
             const msg = await mg.messages.create(MAILGUN_DOMAIN, {
-                from: `Chukkl Team <mailgun@${MAILGUN_DOMAIN}>`,
+                from: `Chukkl Team <team@chukkl.com>`, 
                 to: [to],
                 subject: subject,
                 text: text,
@@ -143,10 +143,10 @@ app.post('/register', async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
         const emailToken = generateToken();
-        const confirmationLink = `http://chukkl.com/confirm-email?token=${emailToken}`;
+        const confirmationLink = `chukkl.com/confirm-email?token=${emailToken}`;
 
         const newUser = {
-            fullname: fullname.toString(),
+            fullname: fullname,
             email,
             phone,
             dob: new Date(dob),

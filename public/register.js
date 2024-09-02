@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('registrationForm').addEventListener('submit', async function(event) {
         event.preventDefault();
-
+        
+        const fullname = document.getElementById('fullname').value;
         const email = document.getElementById('email').value;
         const phone = document.getElementById('phone').value;
         const password = document.getElementById('password').value;
