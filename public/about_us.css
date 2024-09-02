@@ -1,0 +1,2517 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: #1a1126;
+    color: white;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+#header{
+    display: flex;
+    flex-direction: column;
+    height: 80px;
+    padding: 10px;
+    background-color: black;
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-bottom: 5px;
+    margin-top: -20px;
+}
+
+#appTitle {
+    font-family: 'Aileron', sans-serif;                
+    display: flex;
+    font-size: 3.4vw;
+    margin-left: 20px;
+    flex-direction: row;
+}
+
+#appTitle .letter {
+    margin: -2.2px;
+    font-weight: bolder;
+}
+/* 
+#appTitle .sub{
+    font-family: "Poppins", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 1.3vw;
+    color: #8aefe7;
+    margin-top: 26px;
+    margin-left: 7px;
+} */
+
+#appTitle .button-group {
+    display: flex; 
+    /* align-items: center;  */
+    margin-left: 50vw;
+    gap: 10px;
+}
+
+
+.return {
+    font-size: 1vw;
+    color: white;
+    width: 150px;
+    margin-top: 10px;
+    background-color: black;
+    border: 3px solid #8aefe7;
+    border-radius: 10px;
+    height: 50px;
+}
+
+.return:hover {
+    cursor: pointer; 
+}
+
+#appTitle .feedback{
+    font-size: 1vw;
+    color: white;
+    width: 150px;
+    margin-top: 18px;
+    background-color: black;
+    border: 3px solid #8aefe7;
+    border-radius: 10px;
+    height: 50px;
+}
+
+.feedback:hover {
+    cursor: pointer; 
+}
+
+
+#appTitle .letter:nth-child(1) { color: #8aefe7; }    /* First letter 'c' */
+#appTitle .letter:nth-child(2) { color: #8aefe7; } /* Second letter 'h' */
+#appTitle .letter:nth-child(3) { color: white; } /* Third letter 'u' */
+#appTitle .letter:nth-child(4) { color: white; }  /* Fourth letter 'k' */
+#appTitle .letter:nth-child(5) { color: white; }   /* Fifth letter 'k' */
+#appTitle .letter:nth-child(6) { color: white; } /* Sixth letter 'l' */
+
+#appMoto{
+    font-family: 'Poppins';
+    font-size: 1.2vw;
+    margin-left: 20px;
+    margin-top: -13px;
+}
+
+
+#appMoto .word:nth-child(1) {color:white}
+#appMoto .word:nth-child(2) {color: #8aefe7}
+#appMoto .word:nth-child(3) {color:white}
+#appMoto .word:nth-child(4) {color:white}
+#appMoto .word:nth-child(5) {color: white}
+
+
+#Description {
+    text-align: left; 
+    margin-top: 20vh;
+    margin-left: 150px;
+}
+
+
+#Description #companymoto {
+    font-family: 'Fredoka One';
+    font-size: 3.5vw; 
+    font-weight: bold;
+    margin-bottom: 20px; 
+}
+
+
+#Description #companymoto .word {
+    color: white;
+    margin-right: 1px; 
+}
+#Description #companymoto .word:nth-child(3) {
+    color: #8aefe7; 
+    font-weight: bold;
+}
+
+
+#Description figure {
+    max-width: 800px; 
+    display: block; 
+    margin-left: 150px;
+    
+}
+
+#Description img {
+    width: 100%; 
+    height: auto; 
+    border-radius: 10px; 
+    margin-top: 40px;
+}
+
+#Description figcaption{
+    font-family: "Poppins";
+}
+
+
+#Description h3:nth-of-type(1){
+    margin-top: -5px;
+}
+
+
+#Description p:nth-of-type(1) {
+    font-size: 1.5vw; 
+    font-weight: bolder;
+    margin-bottom: 20px; 
+    text-align: Left; 
+    color: grey;
+    max-width: 800px;
+    line-height: 1.6;
+    margin-top: -10px;
+    margin-bottom: 30px;
+}
+
+#Description p:nth-of-type(2) {
+    font-size: 1.2vw; 
+    font-weight: medium;
+    text-align: Left; 
+    color: white;
+    max-width: 1100px;
+    line-height: 1.6;
+}
+
+#Description p:nth-of-type(3) {
+    font-size: 1.2vw; 
+    font-weight: medium;
+    text-align: Left; 
+    color: white;
+    max-width: 1100px;
+    line-height: 1.6;
+}
+
+#Description p:nth-of-type(4) {
+    font-size: 1.2vw; 
+    font-weight: medium;
+    text-align: Left; 
+    color: white;
+    max-width: 1100px;
+    line-height: 1.6;
+}
+
+#Description p:nth-of-type(5) {
+    margin-top: 60px;
+}
+
+
+#Description h3:first-of-type {
+    font-family: 'Fredoka One';
+    color: white;
+    font-size: 1.7vw; 
+    font-weight: bold; 
+    margin-top: 50px;
+    margin-bottom: 20px; 
+    border-radius: 10px; 
+    
+}
+
+
+#Description h3:nth-of-type(2) {
+    font-family: 'Fredoka One';
+    color: white;
+    font-size: 1.7vw; 
+    font-weight: bold; 
+    margin-top: 50px;
+    margin-bottom: 20px; 
+    border-radius: 10px; 
+}
+
+.highlight {
+    color: #8aefe7; 
+}
+
+
+#footer {
+    display: flex; 
+    flex: 1;
+    flex-direction: row; 
+    align-items: center; 
+    justify-content: space-between;
+    background-color: #222; 
+    color: white;
+    width: 100%;
+    padding: 0.5vw;
+    left: 0;
+    right: 0;
+    margin: 0;
+}
+
+.footer-group{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+
+.footer-group.left {
+    flex: 0 0 25%;
+    justify-content: flex-start; 
+    align-items: center;
+}
+
+#footer .social-links a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+    font-size: 1.2vw;
+}
+
+#footer .social-links a:hover {
+    color: #8aefe7; 
+}
+
+.footer-group.center {
+    flex: 0 0 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+#footer .application-form button {
+    background-color: #373243; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1vw;
+    width: 200px;
+}
+
+#footer .application-form button:hover {
+    background-color: black; 
+}
+
+.footer-group.right {
+    flex: 0 0 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+}
+
+#footer .terms-conditions a {
+    color: #8aefe7; 
+    text-decoration: none;
+}
+
+#footer .terms-conditions a:hover {
+    text-decoration: underline;
+}
+
+#footer .privacy-policy a {
+    color: #8aefe7; 
+    text-decoration: none;
+}
+
+#footer .privacy-policy a:hover {
+    text-decoration: underline;
+}
+
+#footer .content-preferences a {
+    color: #8aefe7; 
+    text-decoration: none;
+}
+
+#footer .content-preferences a:hover {
+    text-decoration: underline;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 1) and (min-width: 2160px){
+    body {
+        font-family: 'Arial', sans-serif;
+        background: #1a1126;
+        color: white;
+        margin: 0;
+        padding: 20px;
+        min-height: 100vh;
+    }
+    
+    #header{
+        display: flex;
+        flex-direction: column;
+        height: 10em;
+        padding: 10px;
+        background-color: black;
+        margin-left: -20px;
+        margin-right: -20px;
+        margin-bottom: 5px;
+        margin-top: -20px;
+    }
+    
+    #appTitle {
+        font-family: 'Aileron', sans-serif;                
+        display: flex;
+        font-size: 3.4vw;
+        margin-left: 20px;
+        flex-direction: row;
+    }
+    
+    #appTitle .letter {
+        margin: -2.2px;
+        font-weight: bolder;
+    }
+    
+    
+    #appTitle .button-group {
+        display: flex; 
+        margin-left: 50vw;
+        gap: 10px;
+    }
+    
+    
+    .return {
+        font-size: 1vw;
+        color: white;
+        width: 9em;
+        margin-top: 10px;
+        background-color: black;
+        border: 0.2em solid #8aefe7;
+        border-radius: 0.8em;
+        height: 3em;
+    }
+    
+    .return:hover {
+        cursor: pointer; 
+    }
+    
+    #appTitle .feedback{
+        font-size: 1vw;
+        color: white;
+        width: 9em;
+        margin-top: 18px;
+        background-color: black;
+        border: 0.2em solid #8aefe7;
+        border-radius: 0.8em;
+        height: 3em;
+    }
+    
+    .feedback:hover {
+        cursor: pointer; 
+    }
+    
+    
+    #appTitle .letter:nth-child(1) { color: #8aefe7; }    /* First letter 'c' */
+    #appTitle .letter:nth-child(2) { color: #8aefe7; } /* Second letter 'h' */
+    #appTitle .letter:nth-child(3) { color: white; } /* Third letter 'u' */
+    #appTitle .letter:nth-child(4) { color: white; }  /* Fourth letter 'k' */
+    #appTitle .letter:nth-child(5) { color: white; }   /* Fifth letter 'k' */
+    #appTitle .letter:nth-child(6) { color: white; } /* Sixth letter 'l' */
+    
+    #appMoto{
+        font-family: 'Poppins';
+        font-size: 1.2vw;
+        margin-left: 20px;
+        margin-top: -13px;
+    }
+    
+    
+    #appMoto .word:nth-child(1) {color:white}
+    #appMoto .word:nth-child(2) {color:#8aefe7}
+    #appMoto .word:nth-child(3) {color:white}
+    #appMoto .word:nth-child(4) {color:white}
+    #appMoto .word:nth-child(5) {color:white}
+    
+
+    #Description {
+        text-align: left;
+    }
+    
+    
+    #Description #companymoto {
+        font-family: 'Fredoka One';
+        font-size: 7em; 
+        font-weight: bold;
+        margin-bottom: 0.2em; 
+    }
+    
+    
+    #Description #companymoto .word {
+        color: white;
+        margin-right: 1px; 
+    }
+    #Description #companymoto .word:nth-child(3) {
+        color: #8aefe7; 
+        font-weight: bold;
+    }
+    
+    
+    #Description figure {
+        width: 200em;
+        display: block; 
+        margin-left: 150px;
+        
+    }
+    
+    #Description img {
+        width: 120em; 
+        height: auto; 
+        border-radius: 2em; 
+        margin-top: 40px;
+    }
+    
+    #Description figcaption{
+        font-family: "Poppins";
+        font-size: 2em;
+    }
+    
+    
+    #Description h3:nth-of-type(1){
+        margin-top: -5px;
+    }
+    
+    
+    #Description p:nth-of-type(1) {
+        font-size: 3em; 
+        font-weight: bolder;
+        margin-bottom: 2em; 
+        text-align: Left; 
+        color: grey;
+        white-space: nowrap; 
+    }
+    
+    #Description p:nth-of-type(2) {
+        font-size: 2em; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 70em;
+        line-height: 1.6;
+    }
+    
+    #Description p:nth-of-type(3) {
+        font-size: 1.2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 70em;
+        line-height: 1.6;
+    }
+    
+    #Description p:nth-of-type(4) {
+        font-size: 1.2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 70em;
+        line-height: 1.6;
+    }
+    
+    #Description p:nth-of-type(5) {
+        margin-top: 60px;
+    }
+    
+    
+    #Description h3:first-of-type {
+        font-family: 'Fredoka One';
+        color: white;
+        font-size: 4em; 
+        font-weight: bold; 
+        margin-top: 2em;
+        margin-bottom: 20px; 
+        border-radius: 10px; 
+        
+    }
+    
+    
+    #Description h3:nth-of-type(2) {
+        font-family: 'Fredoka One';
+        color: white;
+        font-size: 1.7vw; 
+        font-weight: bold; 
+        margin-top: 2em;
+        margin-bottom: 20px; 
+        border-radius: 10px; 
+    }
+    
+    .highlight {
+        color: #8aefe7; 
+    }
+    
+    
+    #footer {
+        display: flex; 
+        flex: 1;
+        flex-direction: row; 
+        align-items: center; 
+        justify-content: space-between;
+        background-color: #222; 
+        color: white;
+        width: 100%;
+        padding: 0.5vw;
+        left: 0;
+        right: 0;
+        margin-top: 2vw;
+    }
+    
+    .footer-group{
+        display: flex;
+        justify-content: center;
+        align-items:center;
+    }
+    
+    .footer-group.left {
+        flex: 0 0 25%;
+        justify-content: flex-start; 
+        align-items: center;
+    }
+    
+    #footer .social-links a {
+        color: white;
+        margin: 0 10px;
+        text-decoration: none;
+        font-size: 1.2vw;
+    }
+    
+    #footer .social-links a:hover {
+        color: #8aefe7; 
+    }
+    
+    .footer-group.center {
+        flex: 0 0 25%;
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+    }
+    
+    #footer .application-form button {
+        background-color: #373243; 
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1vw;
+        width: 200px;
+    }
+    
+    #footer .application-form button:hover {
+        background-color: black; 
+    }
+    
+    .footer-group.right {
+        flex: 0 0 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; 
+    }
+    
+    #footer .terms-conditions a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .terms-conditions a:hover {
+        text-decoration: underline;
+    }
+    
+    #footer .privacy-policy a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .privacy-policy a:hover {
+        text-decoration: underline;
+    }
+    
+    #footer .content-preferences a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .content-preferences a:hover {
+        text-decoration: underline;
+    }
+}
+
+
+@media screen and (-webkit-min-device-pixel-ratio: 1) and (min-width: 1680px) and (max-width: 2160px){
+    body {
+        font-family: 'Arial', sans-serif;
+        background: #1a1126;
+        color: white;
+        margin: 0;
+        padding: 20px;
+    }
+    
+    #header{
+        display: flex;
+        flex-direction: column;
+        height: 10em;
+        padding: 10px;
+        background-color: black;
+        margin-left: -20px;
+        margin-right: -20px;
+        margin-bottom: 5px;
+        margin-top: -20px;
+    }
+    
+    #appTitle {
+        font-family: 'Aileron', sans-serif;                
+        display: flex;
+        font-size: 3.4vw;
+        margin-left: 20px;
+        flex-direction: row;
+    }
+    
+    #appTitle .letter {
+        margin: -2.2px;
+        font-weight: bolder;
+    }
+/*     
+    #appTitle .sub{
+        font-family: "Poppins", sans-serif;
+        font-weight: 100;
+        font-style: normal;
+        font-size: 1.3vw;
+        color: #8aefe7;
+        margin-top: 1.4em;
+        margin-left: 7px;
+    } */
+    
+    #appTitle .button-group {
+        display: flex; 
+        /* align-items: center;  */
+        margin-left: 50vw;
+        gap: 10px;
+    }
+    
+    
+    .return {
+        font-size: 1vw;
+        color: white;
+        width: 9em;
+        margin-top: 10px;
+        background-color: black;
+        border: 0.2em solid #8aefe7;
+        border-radius: 0.8em;
+        height: 3em;
+    }
+    
+    .return:hover {
+        cursor: pointer; 
+    }
+    
+    #appTitle .feedback{
+        font-size: 1vw;
+        color: white;
+        width: 9em;
+        margin-top: 18px;
+        background-color: black;
+        border: 0.2em solid #8aefe7;
+        border-radius: 0.8em;
+        height: 3em;
+    }
+    
+    .feedback:hover {
+        cursor: pointer; 
+    }
+    
+    
+    #appTitle .letter:nth-child(1) { color: #8aefe7; }    /* First letter 'c' */
+    #appTitle .letter:nth-child(2) { color: #8aefe7; } /* Second letter 'h' */
+    #appTitle .letter:nth-child(3) { color: white; } /* Third letter 'u' */
+    #appTitle .letter:nth-child(4) { color: white; }  /* Fourth letter 'k' */
+    #appTitle .letter:nth-child(5) { color: white; }   /* Fifth letter 'k' */
+    #appTitle .letter:nth-child(6) { color: white; } /* Sixth letter 'l' */
+    
+    #appMoto{
+        font-family: 'Poppins';
+        font-size: 1.2vw;
+        margin-left: 20px;
+        margin-top: -13px;
+    }
+    
+    
+    #appMoto .word:nth-child(1) {color:white}
+    #appMoto .word:nth-child(2) {color:#8aefe7}
+    #appMoto .word:nth-child(3) {color:white}
+    #appMoto .word:nth-child(4) {color:white}
+    #appMoto .word:nth-child(5) {color:white}
+    
+
+    #Description {
+        text-align: left; 
+        margin-top: 9vw;
+
+    }
+    
+    
+    #Description #companymoto {
+        font-family: 'Fredoka One';
+        font-size: 6vw; 
+        font-weight: bold;
+        margin-bottom: 2vw; 
+    }
+    
+    
+    #Description #companymoto .word {
+        color: white;
+        margin-right: 1px; 
+    }
+    #Description #companymoto .word:nth-child(3) {
+        color: #8aefe7; 
+        font-weight: bold;
+    }
+    
+    
+    #Description figure {
+        margin-left: 0; 
+    }
+
+    #Description img {
+        margin-top: 1vw;
+        align-self: center;
+        width: 85vw;
+    }
+    
+    #Description figcaption{
+        font-family: "Poppins";
+        font-size: 1.5vw;
+        align-self: center;
+        margin-bottom: 5vw;
+    }
+    
+    
+    #Description h3:nth-of-type(1){
+        margin-top: 5vw;
+    }
+    
+    
+    #Description p:nth-of-type(1) {
+        font-size: 2.5vw; 
+        font-weight: bolder;
+        text-align: Left; 
+        color: grey;
+        max-width: 80vw;
+        line-height: 1.6;
+    }
+    
+    #Description p:nth-of-type(2) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+        margin-bottom: 10vw;
+    }
+    
+    #Description p:nth-of-type(3) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+        margin-bottom: 5vw;
+    }
+    
+    #Description p:nth-of-type(4) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+    }
+    
+    #Description p:nth-of-type(5) {
+        margin-top: 60px;
+    }
+    
+    
+    #Description h3:first-of-type {
+        font-family: 'Fredoka One';
+        color: white;
+        font-size: 3.5vw; 
+        font-weight: bold; 
+        margin-top: 50px;
+        margin-bottom: 20px; 
+        border-radius: 10px; 
+        
+    }
+    
+    
+    #Description h3:nth-of-type(2) {
+        font-family: 'Fredoka One';
+        color: white;
+        font-size: 3.5vw; 
+        font-weight: bold; 
+        margin-top: 50px;
+        margin-bottom: 20px; 
+        border-radius: 10px; 
+    }
+    
+    .highlight {
+        color: #8aefe7; 
+    }
+
+    #footer {
+        display: flex; 
+        flex: 1;
+        flex-direction: row; 
+        align-items: center; 
+        justify-content: space-between;
+        background-color: #222; 
+        color: white;
+        width: 100%;
+        padding: 0.5vw;
+        left: 0;
+        right: 0;
+        margin-top: 2vw;
+    }
+    
+    .footer-group{
+        display: flex;
+        justify-content: center;
+        align-items:center;
+    }
+    
+    .footer-group.left {
+        flex: 0 0 25%;
+        justify-content: flex-start; 
+        align-items: center;
+    }
+    
+    #footer .social-links a {
+        color: white;
+        margin: 0 10px;
+        text-decoration: none;
+        font-size: 1.2vw;
+    }
+    
+    #footer .social-links a:hover {
+        color: #8aefe7; 
+    }
+    
+    .footer-group.center {
+        flex: 0 0 25%;
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+    }
+    
+    #footer .application-form button {
+        background-color: #373243; 
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1vw;
+        width: 200px;
+    }
+    
+    #footer .application-form button:hover {
+        background-color: black; 
+    }
+    
+    .footer-group.right {
+        flex: 0 0 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; 
+    }
+    
+    #footer .terms-conditions a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .terms-conditions a:hover {
+        text-decoration: underline;
+    }
+    
+    #footer .privacy-policy a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .privacy-policy a:hover {
+        text-decoration: underline;
+    }
+    
+    #footer .content-preferences a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .content-preferences a:hover {
+        text-decoration: underline;
+    }
+}
+
+
+@media screen and (-webkit-min-device-pixel-ratio: 1) and (min-width: 1021px) and (max-width: 1400px){
+    body {
+        font-family: 'Arial', sans-serif;
+        background: #1a1126;
+        color: white;
+        margin: 0;
+        padding: 20px;
+    }
+    
+    #header{
+        display: flex;
+        flex-direction: column;
+        height: 4em;
+        padding: 10px;
+        background-color: black;
+        margin-left: -20px;
+        margin-right: -20px;
+        margin-bottom: 5px;
+        margin-top: -20px;
+    }
+    
+    #appTitle {
+        font-family: 'Aileron', sans-serif;                
+        display: flex;
+        font-size: 3vw;
+        margin-left: 20px;
+        flex-direction: row;
+    }
+    
+    #appTitle .letter {
+        margin: -2.2px;
+        font-weight: bolder;
+    }
+    
+    #appTitle .button-group {
+        display: flex;
+        justify-content: flex-end;
+        margin-left: 55vw;
+        gap: 10px;
+    }
+    
+    
+    .return {
+        font-size: 1vw;
+        color: white;
+        width: 150px;
+        margin-top: 3vh;
+        background-color: black;
+        border: 3px solid #8aefe7;
+        border-radius: 10px;
+        height: 50px;
+    }
+    
+    .return:hover {
+        cursor: pointer; 
+    }
+    
+    #appTitle .feedback{
+        font-size: 1vw;
+        color: white;
+        width: 150px;
+
+        background-color: black;
+        border: 3px solid #8aefe7;
+        border-radius: 10px;
+        height: 50px;
+    }
+    
+    
+    #appTitle .letter:nth-child(1) { color: #8aefe7; }    /* First letter 'c' */
+    #appTitle .letter:nth-child(2) { color: #8aefe7; } /* Second letter 'h' */
+    #appTitle .letter:nth-child(3) { color: white; } /* Third letter 'u' */
+    #appTitle .letter:nth-child(4) { color: white; }  /* Fourth letter 'k' */
+    #appTitle .letter:nth-child(5) { color: white; }   /* Fifth letter 'k' */
+    #appTitle .letter:nth-child(6) { color: white; } /* Sixth letter 'l' */
+    
+    #appMoto{
+        font-family: 'Poppins';
+        font-size: 1.2vw;
+        margin-left: 20px;
+        margin-top: -4vh;
+    }
+    
+    
+    #appMoto .word:nth-child(1) {color:white}
+    #appMoto .word:nth-child(2) {color:#8aefe7}
+    #appMoto .word:nth-child(3) {color:white}
+    #appMoto .word:nth-child(4) {color:white}
+    #appMoto .word:nth-child(5) {color:white}
+    
+    
+
+    #Description {
+        text-align: left; 
+        margin-top: 9vw;
+
+    }
+    
+    
+    #Description h3:nth-of-type(1){
+        margin-top: 5vw;
+    }
+    
+    
+    #Description p:nth-of-type(1) {
+        font-size: 1.5vw; 
+        font-weight: bolder;
+        text-align: Left; 
+        color: grey;
+        max-width: 80vw;
+        line-height: 1.6;
+    }
+    
+    #Description p:nth-of-type(2) {
+        font-size: 1.5vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+        margin-bottom: 3vw;
+    }
+    
+    #Description p:nth-of-type(3) {
+        font-size: 1.5vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+        margin-bottom: 5vw;
+    }
+    
+    #Description p:nth-of-type(4) {
+        font-size: 1vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+    }
+    
+    #Description p:nth-of-type(5) {
+        margin-top: 60px;
+    }
+    
+    
+    #Description h3:first-of-type {
+        font-family: 'Fredoka One';
+        color: white;
+        font-size: 3.5vw; 
+        font-weight: bold; 
+        margin-top: 50px;
+        margin-bottom: 20px; 
+        border-radius: 10px; 
+        
+    }
+    
+    
+    #Description h3:nth-of-type(2) {
+        font-family: 'Fredoka One';
+        color: white;
+        font-size: 3.5vw; 
+        font-weight: bold; 
+        margin-top: 50px;
+        margin-bottom: 20px; 
+        border-radius: 10px; 
+    }
+    
+    .highlight {
+        color: #8aefe7; 
+    }
+
+
+    #footer {
+        display: flex; 
+        flex: 1;
+        flex-direction: row; 
+        align-items: center; 
+        justify-content: space-between;
+        background-color: #222; 
+        color: white;
+        width: 100%;
+        padding: 0.5vw;
+        left: 0;
+        right: 0;
+        margin-top: 2vw;
+    }
+    
+    .footer-group{
+        display: flex;
+        justify-content: center;
+        align-items:center;
+    }
+    
+    .footer-group.left {
+        flex: 0 0 25%;
+        justify-content: flex-start; 
+        align-items: center;
+    }
+    
+    #footer .social-links a {
+        color: white;
+        margin: 0 10px;
+        text-decoration: none;
+        font-size: 1.2vw;
+    }
+    
+    #footer .social-links a:hover {
+        color: #8aefe7; 
+    }
+    
+    .footer-group.center {
+        flex: 0 0 25%;
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+    }
+    
+    #footer .application-form button {
+        background-color: #373243; 
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1vw;
+        width: 200px;
+    }
+    
+    #footer .application-form button:hover {
+        background-color: black; 
+    }
+    
+    .footer-group.right {
+        flex: 0 0 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; 
+    }
+    
+    #footer .terms-conditions a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .terms-conditions a:hover {
+        text-decoration: underline;
+    }
+    
+    #footer .privacy-policy a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .privacy-policy a:hover {
+        text-decoration: underline;
+    }
+    
+    #footer .content-preferences a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .content-preferences a:hover {
+        text-decoration: underline;
+    }
+}
+
+
+@media screen and (-webkit-min-device-pixel-ratio: 1) and (min-width: 760px) and (max-width: 1020px){
+    body {
+        font-family: 'Arial', sans-serif;
+        background: #1a1126;
+        color: white;
+        margin: 0;
+        padding: 20px;
+        width: 100%;
+    }
+    
+    #header{
+        display: flex;
+        flex-direction: column;
+        height: 4em;
+        padding: 10px;
+        background-color: black;
+        margin-left: -20px;
+        margin-right: -20px;
+        margin-bottom: 5px;
+        margin-top: -20px;
+    }
+    
+    #appTitle {
+        font-family: 'Aileron', sans-serif;                
+        display: flex;
+        font-size: 3em;
+        margin-left: 20px;
+        flex-direction: row;
+    }
+    
+    #appTitle .letter {
+        margin: -2.2px;
+        font-weight: bolder;
+    }
+    
+    /* #appTitle .sub{
+        font-family: "Poppins", sans-serif;
+        font-weight: 100;
+        font-style: normal;
+        font-size: 1.3vw;
+        color: #8aefe7;
+        margin-top: 3.7vw;
+        margin-left: 7px;
+    } */
+    
+    #appTitle .button-group {
+        display: flex; 
+        margin-left: 40vw;
+        gap: 0.2em;
+        margin-top: -0.4em;
+    }
+    
+    
+    #appTitle .return {
+        font-size: 0.2em;
+        color: white;
+        width: 9em;
+        background-color: black;
+        border: 0.2em solid #8aefe7;
+        border-radius: 0.8em;
+        height: 4em;
+        margin-top: 3em;
+    }
+    
+    .return:hover {
+        cursor: pointer; 
+    }
+    
+    #appTitle .feedback{
+        font-size: 0.2em;
+        color: white;
+        width: 9em;
+        background-color: black;
+        border: 0.2em solid #8aefe7;
+        border-radius: 0.8em;
+        height: 4em;
+    }
+    
+    .feedback:hover {
+        cursor: pointer; 
+    }
+    
+    
+    #appTitle .letter:nth-child(1) { color: #8aefe7; }    /* First letter 'c' */
+    #appTitle .letter:nth-child(2) { color: #8aefe7; } /* Second letter 'h' */
+    #appTitle .letter:nth-child(3) { color: white; } /* Third letter 'u' */
+    #appTitle .letter:nth-child(4) { color: white; }  /* Fourth letter 'k' */
+    #appTitle .letter:nth-child(5) { color: white; }   /* Fifth letter 'k' */
+    #appTitle .letter:nth-child(6) { color: white; } /* Sixth letter 'l' */
+    
+    #appMoto{
+        font-family: 'Poppins';
+        font-size: 1.2vw;
+        margin-left: 20px;
+        margin-top: 0.1em;
+    }
+    
+    
+    #appMoto .word:nth-child(1) {color:white}
+    #appMoto .word:nth-child(2) {color:#8aefe7}
+    #appMoto .word:nth-child(3) {color:white}
+    #appMoto .word:nth-child(4) {color:white}
+    #appMoto .word:nth-child(5) {color:white}
+
+    #Description {
+        text-align: left; 
+        margin-top: 9vw;
+
+    }
+    
+    
+    #Description #companymoto {
+        font-family: 'Fredoka One';
+        font-size: 6vw; 
+        font-weight: bold;
+        margin-bottom: 2vw; 
+    }
+    
+    
+    #Description #companymoto .word {
+        color: white;
+        margin-right: 1px; 
+    }
+    #Description #companymoto .word:nth-child(3) {
+        color: #8aefe7; 
+        font-weight: bold;
+    }
+    
+    
+    #Description figure {
+        margin-left: 0; 
+    }
+
+    #Description img {
+        margin-top: 1vw;
+        align-self: center;
+        width: 85vw;
+    }
+    
+    #Description figcaption{
+        font-family: "Poppins";
+        font-size: 1.5vw;
+        align-self: center;
+        margin-bottom: 5vw;
+    }
+    
+    
+    #Description h3:nth-of-type(1){
+        margin-top: 5vw;
+    }
+    
+    
+    #Description p:nth-of-type(1) {
+        font-size: 2.5vw; 
+        font-weight: bolder;
+        text-align: Left; 
+        color: grey;
+        max-width: 80vw;
+        line-height: 1.6;
+    }
+    
+    #Description p:nth-of-type(2) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+        margin-bottom: 10vw;
+    }
+    
+    #Description p:nth-of-type(3) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+        margin-bottom: 5vw;
+    }
+    
+    #Description p:nth-of-type(4) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+    }
+    
+    #Description p:nth-of-type(5) {
+        margin-top: 60px;
+    }
+    
+    
+    #Description h3:first-of-type {
+        font-family: 'Fredoka One';
+        color: white;
+        font-size: 3.5vw; 
+        font-weight: bold; 
+        margin-top: 50px;
+        margin-bottom: 20px; 
+        border-radius: 10px; 
+        
+    }
+    
+    
+    #Description h3:nth-of-type(2) {
+        font-family: 'Fredoka One';
+        color: white;
+        font-size: 3.5vw; 
+        font-weight: bold; 
+        margin-top: 50px;
+        margin-bottom: 20px; 
+        border-radius: 10px; 
+    }
+    
+    .highlight {
+        color: #8aefe7; 
+    }
+
+
+    #footer {
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        justify-content: space-between;
+        background-color: #222; 
+        color: white;
+        padding: 20px;
+        width: 100%;
+        height: 1vh;
+        margin-left: -20px;
+        margin-bottom: -20px;
+        margin-top: 40px;
+    }
+    
+    #footer .social-links {
+        align-self: start;
+        margin-top: -1vw;
+        margin-bottom: 14vw;
+    }
+    
+    #footer .social-links a {
+        color: white;
+        margin: 0 10px;
+        text-decoration: none;
+        font-size: 2vw;
+    }
+    
+    #footer .social-links a:hover {
+        color: #8aefe7; 
+    }
+    
+    #footer .application-form {
+        align-self: flex-end;
+        margin-top: -15.5vw;
+        width: 20vw;
+    }
+    
+    #footer .application-form button {
+        background-color: #373243; 
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1vw;
+        width: 20vw;
+    }
+    
+    #footer .application-form button:hover {
+        background-color: #8aefe7; 
+    }
+    
+    #footer .email-contact {
+        align-self: center;
+        font-size: 1.5vw;
+    }
+    
+    #footer .email-contact a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .email-contact a:hover {
+        text-decoration: underline;
+    }
+    
+
+}
+
+
+@media (min-width: 400px) and (max-width: 500px) {
+    body {
+        padding: 10px; 
+        overflow-x: hidden;
+    }
+
+    #header{
+        position: fixed;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        height: 50px;
+        width: 100%;
+        background-color: black;
+        margin-bottom: 5px;
+        margin-top: -20px;
+        margin-left: -10px;
+    }
+
+    #appTitle {
+        font-size: 6vw;
+        margin-left: 10px;
+    }
+
+    #appTitle .letter {
+        margin: 0; 
+        margin-top: 5px;
+    }
+
+    /* #appTitle .sub {
+        font-size: 12px; 
+        margin-top: 3.7vw;
+    } */
+
+    #appMoto{
+        font-size: 10px;
+        margin-left: 10px;
+        margin-top: -4vw;
+        width: 300px;
+    }
+
+    #appTitle .button-group {
+        display: flex;
+        flex-direction: row;
+        margin-left: 35vw;
+        gap:10px;
+
+    }
+
+    #appTitle .return{
+        font-size: 2vw;
+        width: 55px; 
+        height: 30px;
+        margin-top: 5vw;
+    }
+    
+    #appTitle .feedback{
+        font-size: 2vw;
+        width: 55px; 
+        height: 30px;
+        margin-top: 5vw;
+    }
+
+
+    #Description {
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+        /* align-items: center; */
+        height: 100vh;
+        width: 100vw;
+        margin: 0;
+    }
+    
+    
+    
+    #Description h3:nth-of-type(1){
+        margin-top: 5vw;
+    }
+    
+    
+    #Description p:nth-of-type(1) {
+        font-size: 2.5vw; 
+        font-weight: bolder;
+        text-align: left; 
+        color: grey;
+        max-width: 80vw;
+        line-height: 1.6;
+    }
+    
+    #Description p:nth-of-type(2) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+        margin-bottom: 10vw;
+    }
+    
+    #Description p:nth-of-type(3) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+        margin-bottom: 5vw;
+    }
+    
+    #Description p:nth-of-type(4) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+    }
+    
+    #Description p:nth-of-type(5) {
+        margin-top: 60px;
+    }
+    
+    
+    #Description h3:first-of-type {
+        font-family: 'Fredoka One';
+        color: white;
+        font-size: 3.5vw; 
+        font-weight: bold; 
+        margin-top: 50px;
+        margin-bottom: 20px; 
+        border-radius: 10px; 
+        
+    }
+    
+    
+    #Description h3:nth-of-type(2) {
+        font-family: 'Fredoka One';
+        color: white;
+        font-size: 3.5vw; 
+        font-weight: bold; 
+        margin-top: 50px;
+        margin-bottom: 20px; 
+        border-radius: 10px; 
+    }
+    
+    .highlight {
+        color: #8aefe7; 
+    }
+
+
+    #footer {
+        display: flex; 
+        flex: 1;
+        flex-direction: row; 
+        align-items: center; 
+        justify-content: space-between;
+        background-color: #222; 
+        color: white;
+        width: 100%;
+        padding: 0.5vw;
+        left: 0;
+        right: 0;
+        margin-top: 2vw;
+    }
+    
+    .footer-group{
+        display: flex;
+        justify-content: center;
+        align-items:center;
+    }
+    
+    .footer-group.left {
+        flex: 0 0 25%;
+        justify-content: flex-start; 
+        align-items: center;
+        white-space: nowrap; 
+    }
+    
+    #footer .social-links a {
+        color: white;
+        text-decoration: none;
+        font-size: 4vw;
+    }
+    
+    #footer .social-links a:hover {
+        color: #8aefe7; 
+    }
+    
+    .footer-group.center {
+        flex: 0 0 30%;
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+    }
+    
+    #footer .application-form button {
+        background-color: #373243; 
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 2vw;
+        width: 20vw;
+    }
+    
+    #footer .application-form button:hover {
+        background-color: black; 
+    }
+    
+    .footer-group.right {
+        flex: 0 0 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; 
+        font-size: 2.5vw;
+        white-space: nowrap; 
+    }
+    
+    #footer .terms-conditions a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .terms-conditions a:hover {
+        text-decoration: underline;
+    }
+    
+    #footer .privacy-policy a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .privacy-policy a:hover {
+        text-decoration: underline;
+    }
+    
+    #footer .content-preferences a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .content-preferences a:hover {
+        text-decoration: underline;
+    }
+
+}
+
+
+@media (min-width: 375px) and (max-width: 399px) {
+    body {
+        padding: 10px; 
+        overflow-x: hidden;
+    }
+
+    #header{
+        position: fixed;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        height: 50px;
+        width: 100%;
+        background-color: black;
+        margin-bottom: 5px;
+        margin-top: -20px;
+        margin-left: -10px;
+    }
+
+    #appTitle {
+        font-size: 6vw;
+        margin-left: 10px;
+    }
+
+    #appTitle .letter {
+        margin: 0; 
+        margin-top: 5px;
+    }
+
+    /* #appTitle .sub {
+        font-size: 12px; 
+        margin-top: 3.7vw;
+    } */
+
+    #appMoto{
+        font-size: 10px;
+        margin-left: 10px;
+        margin-top: -4vw;
+        width: 300px;
+    }
+
+    #appTitle .button-group {
+        display: flex;
+        flex-direction: row;
+        margin-left: 35vw;
+        gap:10px;
+
+    }
+
+    #appTitle .return{
+        font-size: 2vw;
+        width: 55px; 
+        height: 30px;
+        margin-top: 5vw;
+    }
+    
+    #appTitle .feedback{
+        font-size: 2vw;
+        width: 55px; 
+        height: 30px;
+        margin-top: 5vw;
+    }
+
+
+    #Description {
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+        /* align-items: center; */
+        height: 100vh;
+        width: 100vw;
+        margin: 0;
+    }
+    
+    
+    
+    #Description h3:nth-of-type(1){
+        margin-top: 5vw;
+    }
+    
+    
+    #Description p:nth-of-type(1) {
+        font-size: 2.5vw; 
+        font-weight: bolder;
+        text-align: left; 
+        color: grey;
+        max-width: 80vw;
+        line-height: 1.6;
+    }
+    
+    #Description p:nth-of-type(2) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+        margin-bottom: 10vw;
+    }
+    
+    #Description p:nth-of-type(3) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+        margin-bottom: 5vw;
+    }
+    
+    #Description p:nth-of-type(4) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+    }
+    
+    #Description p:nth-of-type(5) {
+        margin-top: 60px;
+    }
+    
+    
+    #Description h3:first-of-type {
+        font-family: 'Fredoka One';
+        color: white;
+        font-size: 3.5vw; 
+        font-weight: bold; 
+        margin-top: 50px;
+        margin-bottom: 20px; 
+        border-radius: 10px; 
+        
+    }
+    
+    
+    #Description h3:nth-of-type(2) {
+        font-family: 'Fredoka One';
+        color: white;
+        font-size: 3.5vw; 
+        font-weight: bold; 
+        margin-top: 50px;
+        margin-bottom: 20px; 
+        border-radius: 10px; 
+    }
+    
+    .highlight {
+        color: #8aefe7; 
+    }
+
+
+    #footer {
+        display: flex; 
+        flex: 1;
+        flex-direction: row; 
+        align-items: center; 
+        justify-content: space-between;
+        background-color: #222; 
+        color: white;
+        width: 100%;
+        padding: 0.5vw;
+        left: 0;
+        right: 0;
+        margin-top: 2vw;
+    }
+    
+    .footer-group{
+        display: flex;
+        justify-content: center;
+        align-items:center;
+    }
+    
+    .footer-group.left {
+        flex: 0 0 25%;
+        justify-content: flex-start; 
+        align-items: center;
+        white-space: nowrap; 
+    }
+    
+    #footer .social-links a {
+        color: white;
+        text-decoration: none;
+        font-size: 4vw;
+    }
+    
+    #footer .social-links a:hover {
+        color: #8aefe7; 
+    }
+    
+    .footer-group.center {
+        flex: 0 0 30%;
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+    }
+    
+    #footer .application-form button {
+        background-color: #373243; 
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 2vw;
+        width: 20vw;
+        margin-left: 15vw;
+        margin-top: 10vh;
+    }
+    
+    #footer .application-form button:hover {
+        background-color: black; 
+    }
+    
+    .footer-group.right {
+        flex: 0 0 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; 
+        font-size: 2.5vw;
+        white-space: nowrap; 
+    }
+    
+    #footer .terms-conditions a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .terms-conditions a:hover {
+        text-decoration: underline;
+    }
+    
+    #footer .privacy-policy a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .privacy-policy a:hover {
+        text-decoration: underline;
+    }
+    
+    #footer .content-preferences a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .content-preferences a:hover {
+        text-decoration: underline;
+    }
+
+}
+
+
+@media (max-width: 374px) {
+    body {
+        padding: 10px; 
+        overflow-x: hidden;
+    }
+
+    #header{
+        position: fixed;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        height: 50px;
+        width: 100%;
+        background-color: black;
+        margin-bottom: 5px;
+        margin-top: -20px;
+        margin-left: -10px;
+    }
+
+    #appTitle {
+        font-size: 6vw;
+        margin-left: 10px;
+    }
+
+    #appTitle .letter {
+        margin: 0; 
+        margin-top: 5px;
+    }
+
+    /* #appTitle .sub {
+        font-size: 12px; 
+        margin-top: 3.7vw;
+    } */
+
+    #appMoto{
+        font-size: 10px;
+        margin-left: 10px;
+        margin-top: -4vw;
+        width: 300px;
+    }
+
+    #appTitle .button-group {
+        display: flex;
+        flex-direction: row;
+        margin-left: 30vw;
+        gap:10px;
+
+    }
+
+    #appTitle .return{
+        font-size: 2vw;
+        width: 55px; 
+        height: 30px;
+        margin-top: 5vw;
+    }
+    
+    #appTitle .feedback{
+        font-size: 2vw;
+        width: 55px; 
+        height: 30px;
+        margin-top: 5vw;
+    }
+
+    #Description {
+        text-align: left; 
+        margin-top: 9vw;
+    }
+    
+    
+    #Description #companymoto {
+        font-family: 'Fredoka One';
+        font-size: 6vw; 
+        font-weight: bold;
+        margin-bottom: 2vw; 
+    }
+    
+    
+    #Description #companymoto .word {
+        color: white;
+        margin-right: 1px; 
+    }
+    #Description #companymoto .word:nth-child(3) {
+        color: #8aefe7; 
+        font-weight: bold;
+    }
+    
+    
+    #Description figure {
+        margin-left: 0; 
+    }
+
+    #Description img {
+        margin-top: 1vw;
+        align-self: center;
+        width: 85vw;
+    }
+    
+    #Description figcaption{
+        font-family: "Poppins";
+        font-size: 1.5vw;
+        align-self: center;
+        margin-bottom: 5vw;
+    }
+    
+    
+    #Description h3:nth-of-type(1){
+        margin-top: 5vw;
+    }
+    
+    
+    #Description p:nth-of-type(1) {
+        font-size: 2.5vw; 
+        font-weight: bolder;
+        text-align: Left; 
+        color: grey;
+        max-width: 80vw;
+        line-height: 1.6;
+    }
+    
+    #Description p:nth-of-type(2) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+        margin-bottom: 10vw;
+    }
+    
+    #Description p:nth-of-type(3) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+        margin-bottom: 5vw;
+    }
+    
+    #Description p:nth-of-type(4) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+    }
+    
+    #Description p:nth-of-type(5) {
+        margin-top: 60px;
+    }
+    
+    
+    #Description h3:first-of-type {
+        font-family: 'Fredoka One';
+        color: white;
+        font-size: 3.5vw; 
+        font-weight: bold; 
+        margin-top: 50px;
+        margin-bottom: 20px; 
+        border-radius: 10px; 
+        
+    }
+    
+    
+    #Description h3:nth-of-type(2) {
+        font-family: 'Fredoka One';
+        color: white;
+        font-size: 3.5vw; 
+        font-weight: bold; 
+        margin-top: 50px;
+        margin-bottom: 20px; 
+        border-radius: 10px; 
+    }
+    
+    .highlight {
+        color: #8aefe7; 
+    }
+
+
+    #footer {
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        justify-content: space-between;
+        background-color: #222; 
+        color: white;
+        padding: 20px;
+        width: 100%;
+        height: 1vh;
+        margin-left: -20px;
+        margin-bottom: -20px;
+        margin-top: 40px;
+    }
+    
+    #footer .social-links {
+        align-self: start;
+        margin-top: -1vw;
+        margin-bottom: 14vw;
+    }
+    
+    #footer .social-links a {
+        color: white;
+        margin: 0 10px;
+        text-decoration: none;
+        font-size: 2vw;
+    }
+    
+    #footer .social-links a:hover {
+        color: #8aefe7; 
+    }
+    
+    #footer .application-form {
+        align-self: flex-end;
+        margin-top: -15.5vw;
+        width: 20vw;
+    }
+    
+    #footer .application-form button {
+        background-color: #373243; 
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1vw;
+        width: 20vw;
+    }
+    
+    #footer .application-form button:hover {
+        background-color: #8aefe7; 
+    }
+    
+    #footer .email-contact {
+        align-self: center;
+        font-size: 1.5vw;
+    }
+    
+    #footer .email-contact a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .email-contact a:hover {
+        text-decoration: underline;
+    }
+
+
+}
+
+
+@media (max-width: 320px) {
+    body {
+        padding: 10px; 
+        overflow-x: hidden;
+    }
+
+    #header{
+        position: fixed;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        height: 50px;
+        width: 100%;
+        background-color: black;
+        margin-bottom: 5px;
+        margin-top: -20px;
+        margin-left: -10px;
+    }
+
+    #appTitle {
+        font-size: 6vw;
+        margin-left: 10px;
+    }
+
+    #appTitle .letter {
+        margin: 0; 
+        margin-top: 5px;
+    }
+
+    /* #appTitle .sub {
+        font-size: 12px; 
+        margin-top: 3.7vw;
+    } */
+
+    #appMoto{
+        font-size: 10px;
+        margin-left: 10px;
+        margin-top: -4vw;
+        width: 300px;
+    }
+
+    #appTitle .button-group {
+        display: flex;
+        flex-direction: row;
+        margin-left: 20vw;
+        gap:10px;
+
+    }
+
+    #appTitle .return{
+        font-size: 2vw;
+        width: 55px; 
+        height: 30px;
+        margin-top: 5vw;
+    }
+    
+    #appTitle .feedback{
+        font-size: 2vw;
+        width: 55px; 
+        height: 30px;
+        margin-top: 5vw;
+    }
+
+
+    #Description {
+        text-align: left; 
+        margin-top: 9vw;
+
+    }
+    
+    
+    #Description #companymoto {
+        font-family: 'Fredoka One';
+        font-size: 6vw; 
+        font-weight: bold;
+        margin-bottom: 2vw; 
+    }
+    
+    
+    #Description #companymoto .word {
+        color: white;
+        margin-right: 1px; 
+    }
+    #Description #companymoto .word:nth-child(3) {
+        color: #8aefe7; 
+        font-weight: bold;
+    }
+    
+    
+    #Description figure {
+        margin-left: 0; 
+    }
+
+    #Description img {
+        margin-top: 1vw;
+        align-self: center;
+        width: 85vw;
+    }
+    
+    #Description figcaption{
+        font-family: "Poppins";
+        font-size: 1.5vw;
+        align-self: center;
+        margin-bottom: 5vw;
+    }
+    
+    
+    #Description h3:nth-of-type(1){
+        margin-top: 5vw;
+    }
+    
+    
+    #Description p:nth-of-type(1) {
+        font-size: 2.5vw; 
+        font-weight: bolder;
+        text-align: Left; 
+        color: grey;
+        max-width: 80vw;
+        line-height: 1.6;
+    }
+    
+    #Description p:nth-of-type(2) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+        margin-bottom: 10vw;
+    }
+    
+    #Description p:nth-of-type(3) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+        margin-bottom: 5vw;
+    }
+    
+    #Description p:nth-of-type(4) {
+        font-size: 2vw; 
+        font-weight: medium;
+        text-align: Left; 
+        color: white;
+        max-width: 85vw;
+        line-height: 1.6;
+    }
+    
+    #Description p:nth-of-type(5) {
+        margin-top: 60px;
+    }
+    
+    
+    #Description h3:first-of-type {
+        font-family: 'Fredoka One';
+        color: white;
+        font-size: 3.5vw; 
+        font-weight: bold; 
+        margin-top: 50px;
+        margin-bottom: 20px; 
+        border-radius: 10px; 
+        
+    }
+    
+    
+    #Description h3:nth-of-type(2) {
+        font-family: 'Fredoka One';
+        color: white;
+        font-size: 3.5vw; 
+        font-weight: bold; 
+        margin-top: 50px;
+        margin-bottom: 20px; 
+        border-radius: 10px; 
+    }
+    
+    .highlight {
+        color: #8aefe7; 
+    }
+
+
+    #footer {
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        justify-content: space-between;
+        background-color: #222; 
+        color: white;
+        padding: 20px;
+        width: 100%;
+        height: 1vh;
+        margin-left: -20px;
+        margin-bottom: -20px;
+        margin-top: 40px;
+    }
+    
+    #footer .social-links {
+        align-self: start;
+        margin-top: -1vw;
+        margin-bottom: 14vw;
+    }
+    
+    #footer .social-links a {
+        color: white;
+        margin: 0 10px;
+        text-decoration: none;
+        font-size: 2vw;
+    }
+    
+    #footer .social-links a:hover {
+        color: #8aefe7; 
+    }
+    
+    #footer .application-form {
+        align-self: flex-end;
+        margin-top: -15.5vw;
+        width: 20vw;
+    }
+    
+    #footer .application-form button {
+        background-color: #373243; 
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1vw;
+        width: 20vw;
+    }
+    
+    #footer .application-form button:hover {
+        background-color: #8aefe7; 
+    }
+    
+    #footer .email-contact {
+        align-self: center;
+        font-size: 1.5vw;
+    }
+    
+    #footer .email-contact a {
+        color: #8aefe7; 
+        text-decoration: none;
+    }
+    
+    #footer .email-contact a:hover {
+        text-decoration: underline;
+    }
+
+}
