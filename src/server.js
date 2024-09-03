@@ -312,6 +312,10 @@ app.post('/forgot-password', async (req, res) => {
     }
 });
 
+// Route for password reset
+app.get('/reset-password', (req, res) => {
+    res.sendFile(path.join(publicDirectoryPath, 'reset-password.html'));
+});
 
 // Route to handle password reset
 app.post('/reset-password', async (req, res) => {
