@@ -289,8 +289,8 @@ app.post('/forgot-password', async (req, res) => {
             { $set: { resetPasswordToken: resetToken, resetPasswordExpires: resetTokenExpiry } }
         );
 
-        // const resetLink = `http://chukkl.com/reset-password?token=${resetToken}`;
-        const resetLink = `/reset-password?token=${resetToken}`;
+        const resetLink = `http://chukkl.com/reset-password?token=${resetToken}`;
+        // const resetLink = `/reset-password?token=${resetToken}`;
 
         try {
             await sendEmail(
@@ -314,12 +314,18 @@ app.post('/forgot-password', async (req, res) => {
 
 // Route for password reset
 app.get('/reset-password', (req, res) => {
+    const { token } = req.query;
+    if (!token) {
+        return res.status(400).send('Invalid or expired token');
+    }
     res.sendFile(path.join(publicDirectoryPath, 'reset-password.html'));
 });
+
 
 // Route to handle password reset
 app.post('/reset-password', async (req, res) => {
     const { token, password, confirmPassword } = req.body;
+    console.log('Token received:', token);
 
     if (password !== confirmPassword) {
         return res.status(400).json({ message: 'Passwords do not match' });
@@ -328,19 +334,20 @@ app.post('/reset-password', async (req, res) => {
     try {
         const userCollection = mongoDB.collection('users');
         const user = await userCollection.findOne({
-            resetPasswordToken: token,
-            resetPasswordExpires: { $gt: Date.now() } // Ensure token hasn't expired
+        resetPasswordToken: token,
+        resetPasswordExpires: { $gt: Date.now() } // Ensure token hasn't expired
         });
 
         if (!user) {
-            return res.status(400).json({ message: 'Invalid or expired token' });
+        console.error('Invalid or expired token.');
+        return res.status(400).json({ message: 'Invalid or expired token' });
         }
 
+        console.log('Token is valid. Proceeding with password reset.');
         const hashedPassword = await bcrypt.hash(password, 10);
-
         await userCollection.updateOne(
-            { _id: user._id },
-            { $set: { password: hashedPassword, resetPasswordToken: null, resetPasswordExpires: null } }
+        { _id: user._id },
+        { $set: { password: hashedPassword, resetPasswordToken: null, resetPasswordExpires: null } }
         );
 
         res.status(200).json({ message: 'Password reset successfully' });
