@@ -269,7 +269,7 @@ app.get('/forgot-password', (req, res) => {
     res.sendFile(path.join(publicDirectoryPath, 'forgot-password.html'));
 });
 
-// Route to handle forgot password requests
+// Route for post request of forgot password
 app.post('/forgot-password', async (req, res) => {
     const { email } = req.body;
 
@@ -278,7 +278,7 @@ app.post('/forgot-password', async (req, res) => {
         const user = await userCollection.findOne({ email });
 
         if (!user) {
-            return res.status(404).json({ message: 'No user found with that email address' });
+            return res.status(404).json({ message: 'No user found with that email address. Please register first.' });
         }
 
         const resetToken = generateToken();
@@ -289,9 +289,9 @@ app.post('/forgot-password', async (req, res) => {
             { $set: { resetPasswordToken: resetToken, resetPasswordExpires: resetTokenExpiry } }
         );
 
-        const resetLink = `http://chukkl.com/reset-password?token=${resetToken}`;
+        // const resetLink = `http://chukkl.com/reset-password?token=${resetToken}`;
+        const resetLink = `/reset-password?token=${resetToken}`;
 
-        // Attempt to send reset password email
         try {
             await sendEmail(
                 email,
@@ -312,9 +312,14 @@ app.post('/forgot-password', async (req, res) => {
     }
 });
 
+
 // Route to handle password reset
 app.post('/reset-password', async (req, res) => {
-    const { token, password } = req.body;
+    const { token, password, confirmPassword } = req.body;
+
+    if (password !== confirmPassword) {
+        return res.status(400).json({ message: 'Passwords do not match' });
+    }
 
     try {
         const userCollection = mongoDB.collection('users');
