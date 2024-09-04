@@ -15,12 +15,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Check if the token exists in the URL
     if (token) {
-        // Set the token value in the hidden input field
         const tokenInput = document.querySelector('input[name="token"]');
         tokenInput.value = token;
         console.log("Token set in hidden input field:", tokenInput.value);
     } else {
-        // If no token is found, display an error message and disable the form
         messageElement.textContent = "Invalid or expired token.";
         resetPasswordForm.querySelector('button[type="submit"]').disabled = true;
         console.log("No token found in URL. Form disabled.");
@@ -36,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log("Password:", password);
         console.log("Confirm Password:", confirmPassword);
 
-        // Basic password validation
+        // Password validation
         if (password !== confirmPassword) {
             messageElement.textContent = "Passwords do not match!";
             console.log("Passwords do not match.");
@@ -57,7 +55,6 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log("Response from server:", result);
 
             if (response.ok) {
-                // Display success message and possibly redirect to login page
                 messageElement.style.color = 'green';
                 messageElement.textContent = "Password reset successfully. Redirecting to login...";
                 console.log("Password reset successful. Redirecting to login...");
@@ -65,7 +62,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     window.location.href = '/login';
                 }, 2000);
             } else {
-                // Display error message returned from the server
                 messageElement.style.color = 'red';
                 messageElement.textContent = result.message || "An error occurred. Please try again.";
                 console.log("Error from server:", result.message || "An error occurred.");

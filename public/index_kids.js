@@ -16,6 +16,54 @@ const API_BASE_URL = window.location.hostname.includes('localhost')
     : 'https://chukkl-heroku-839b30d27713.herokuapp.com';
 
 
+window.onload = checkLoginStatus;
+
+async function checkLoginStatus() {
+    try {
+        const response = await fetch('/api/user');
+        if (response.ok) {
+        const data = await response.json();
+        updateUIForLoggedInUser(data.user);
+        return true;
+        } else {
+        updateUIForLoggedOutUser();
+        return false;
+        }
+    } catch (error) {
+        console.error('Error checking login status:', error);
+        updateUIForLoggedOutUser();
+        return false;
+    }
+}
+    
+function updateUIForLoggedInUser(user) {
+    document.getElementById('loginButton').style.display = 'none';
+    document.getElementById('registerButton').style.display = 'none';
+    document.getElementById('signOutButton').style.display = 'block';
+    // console.log(`Logged in as ${user.fullname}`);
+}
+    
+function updateUIForLoggedOutUser() {
+    document.getElementById('loginButton').style.display = 'block';
+    document.getElementById('registerButton').style.display = 'block';
+    document.getElementById('signOutButton').style.display = 'none';
+}
+
+document.getElementById('signOutButton').addEventListener('click', async function(event) {
+    event.preventDefault();
+    try {
+        const response = await fetch('/signout', { method: 'POST' });
+        if (response.ok) {
+        await checkLoginStatus(); 
+        } else {
+        console.error('Failed to sign out');
+        }
+    } catch (error) {
+        console.error('Error signing out:', error);
+    }
+});
+
+
 function debounce(func, wait) {
     let timeout;
 
@@ -32,7 +80,7 @@ function debounce(func, wait) {
 
 
 async function channelSelectionHandler(channel, element) {
-    if (isLoading) return; // Prevent further interaction if already loading
+    if (isLoading) return; 
     isLoading = true; // Set loading state to true
 
     if (currentlyExpandedChannel && currentlyExpandedChannel !== element) {
@@ -41,8 +89,8 @@ async function channelSelectionHandler(channel, element) {
 
     try {
         await fetchChannelDetails(channel.channel_id);
-        await getVideoCast(channel.channel_id); // Ensure this completes before proceeding
-        selectChannel(channel.channel_id); // triggers the video change
+        await getVideoCast(channel.channel_id);
+        selectChannel(channel.channel_id); 
 
         element.classList.toggle('channel-block-expanded');
         const channelName = element.querySelector('.channel-name');
@@ -65,9 +113,9 @@ async function channelSelectionHandler(channel, element) {
         currentlyExpandedChannel = element.classList.contains('channel-block-expanded') ? element : null;
     } catch (error) {
         console.error("Error during channel selection:", error);
-        // Handle the error appropriately (e.g., show an error message to the user)
+        
     } finally {
-        isLoading = false; // Reset loading state regardless of success or failure
+        isLoading = false; // Reset loading state
     }
 }
 
@@ -91,7 +139,6 @@ async function fetchChannelDetails(channelId) {
 
 
 function updateChannelUI(details) {
-    // Update the UI with the channel's detailed information
     const bioElement = document.getElementById('channelBio'); 
     if (bioElement) {
         bioElement.textContent = details.bio;
@@ -142,7 +189,7 @@ async function fetchChannels() {
         console.log("channel: ", limitedChannels);
 
         const grid = document.getElementById('channelsGrid');
-        grid.innerHTML = ''; // Clear the grid before adding new channels
+        grid.innerHTML = ''; 
 
         for (const [index, channel] of limitedChannels.entries()) {
             const channelBlock = document.createElement('div');
@@ -224,7 +271,6 @@ function collapseChannel(channelElement) {
 function getChannelInfo(channel, styleClass) {
     // console.log("video details", currentVideoDetails); 
     const videoInfoDiv = document.getElementById('channelInfo');
-    // Display both the description and the bio of the channel
     videoInfoDiv.innerHTML = `
         <h3 id="nowPlayingTitle">Now Playing</h3>
         <h3 id="currChannelName">${channel.name}</h3>
@@ -281,7 +327,6 @@ function createScheduleBlock(channelId, maturityRating, channelName="default") {
     // Limit the number of displayed items based on device width
     const limitedSchedules = relevantSchedules.slice(0, window.innerWidth <= 568 ? 2 : 4);
 
-    // Calculate the total duration of these limited schedules in milliseconds
     const totalDurationMs = limitedSchedules.reduce((total, item) => {
         const start = new Date(item.start_time).getTime();
         const end = new Date(item.end_time).getTime();
@@ -293,16 +338,13 @@ function createScheduleBlock(channelId, maturityRating, channelName="default") {
         itemDiv.className = 'schedule-item';
         itemDiv.id = channelName;
 
-        // Calculate this item's duration as a percentage of the total duration
         const start = new Date(item.start_time).getTime();
         const end = new Date(item.end_time).getTime();
         const itemDurationMs = end - start;
         const durationPercentage = (itemDurationMs / totalDurationMs) * 100;
 
-        // Set the width (or height) of the item based on its duration percentage
         itemDiv.style.width = `${durationPercentage}%`;
 
-        // Append child elements to itemDiv
         const titleDiv = document.createElement('div');
         titleDiv.className = 'schedule-title';
         titleDiv.id = channelName;
@@ -319,8 +361,8 @@ function createScheduleBlock(channelId, maturityRating, channelName="default") {
         timeDiv.className = index === 0 ? 'schedule-remaining-time' : 'schedule-time';
         timeDiv.id = channelName;
 
+        // Time display
         if (index === 0) {
-            // Show remaining time for the currently playing video
             const updateRemainingTime = () => {
                 currentTime = new Date();
                 const remainingTimeMs = end - currentTime.getTime();
@@ -329,10 +371,9 @@ function createScheduleBlock(channelId, maturityRating, channelName="default") {
                 timeDiv.textContent = `${remainingHours}hr ${remainingMinutes}min left`;
             };
 
-            updateRemainingTime(); // Initial call to set the remaining time
-            setInterval(updateRemainingTime, 5000); // Update every second
+            updateRemainingTime();
+            setInterval(updateRemainingTime, 5000); 
         } else {
-            // Show scheduled start and end times for upcoming videos
             const startTimeStr = new Date(item.start_time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
             const endTimeStr = new Date(item.end_time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
             timeDiv.textContent = `${startTimeStr} - ${endTimeStr}`;
@@ -344,7 +385,7 @@ function createScheduleBlock(channelId, maturityRating, channelName="default") {
         descriptionDiv.className = 'schedule-video-description';
         descriptionDiv.id = channelName;
         descriptionDiv.textContent = item.description;
-        descriptionDiv.style.display = 'none'; // Initially hidden
+        descriptionDiv.style.display = 'none'; 
         itemDiv.appendChild(descriptionDiv);
 
         scheduleBlock.appendChild(itemDiv);
@@ -352,235 +393,6 @@ function createScheduleBlock(channelId, maturityRating, channelName="default") {
 
     return scheduleBlock;
 }
-
-
-
-
-
-
-// function createScheduleBlock(channelId, maturityRating, channelName="default") {
-//     const scheduleBlock = document.createElement('div');
-//     scheduleBlock.className = 'channel-schedule';
-
-//     const displayedItems = channelSchedules[channelId] || [];
-//     const currentTime = new Date();
-
-//     // Filter schedules that haven't ended yet
-//     const relevantSchedules = displayedItems.filter(item => {
-//         const endTime = new Date(item.end_time);
-//         return endTime > currentTime;
-//     });
-
-//     // Limit the number of displayed items based on device width
-//     const limitedSchedules = relevantSchedules.slice(0, window.innerWidth <= 568 ? 2 : 4);
-
-//     // Calculate the total duration of these limited schedules in milliseconds
-//     const totalDurationMs = limitedSchedules.reduce((total, item) => {
-//         const start = new Date(item.start_time).getTime();
-//         const end = new Date(item.end_time).getTime();
-//         return total + (end - start);
-//     }, 0);
-
-//     limitedSchedules.forEach(item => {
-//         const itemDiv = document.createElement('div');
-//         itemDiv.className = 'schedule-item';
-//         itemDiv.id = channelName;
-
-//         // Calculate this item's duration as a percentage of the total duration
-//         const start = new Date(item.start_time).getTime();
-//         const end = new Date(item.end_time).getTime();
-//         const itemDurationMs = end - start;
-//         const durationPercentage = (itemDurationMs / totalDurationMs) * 100;
-
-//         // Set the width (or height) of the item based on its duration percentage
-//         itemDiv.style.width = `${durationPercentage}%`;
-
-//         // Append child elements to itemDiv
-//         const titleDiv = document.createElement('div');
-//         titleDiv.className = 'schedule-title';
-//         titleDiv.id = channelName;
-//         titleDiv.textContent = item.title;
-//         itemDiv.appendChild(titleDiv);
-
-//         const maturityDiv = document.createElement('div');
-//         maturityDiv.className = 'schedule-maturity-rating';
-//         maturityDiv.id = channelName;
-//         maturityDiv.textContent = maturityRating;
-//         itemDiv.appendChild(maturityDiv);
-
-//         const descriptionDiv = document.createElement('div');
-//         descriptionDiv.className = 'schedule-video-description';
-//         descriptionDiv.id = channelName;
-//         descriptionDiv.textContent = item.description;
-//         descriptionDiv.style.display = 'none'; // Initially hidden
-//         itemDiv.appendChild(descriptionDiv);
-
-//         scheduleBlock.appendChild(itemDiv);
-//     });
-
-//     return scheduleBlock;
-// }
-
-
-// function createScheduleBlock(channelId, maturityRating, channelName="default") {
-//     const scheduleBlock = document.createElement('div');
-//     scheduleBlock.className = 'channel-schedule';
-
-//     const displayedItems = channelSchedules[channelId] || [];
-    
-//     // Get the current time and the time one hour from now
-//     const currentTime = new Date();
-//     const oneHourLater = new Date(currentTime.getTime() + (60 * 60 * 1000)); // Adds one hour in milliseconds
-
-//     // Filter schedules to only those starting within the next hour
-//     const itemsWithinNextHour = displayedItems.filter(item => {
-//         const startTime = new Date(item.start_time);
-//         return startTime >= currentTime && startTime <= oneHourLater;
-//     });
-
-//     // Calculate the total duration of filtered schedules in milliseconds
-//     const totalDurationMs = itemsWithinNextHour.reduce((total, item) => {
-//         const start = new Date(item.start_time).getTime();
-//         const end = new Date(item.end_time).getTime();
-//         return total + (end - start);
-//     }, 0);
-
-
-//     itemsWithinNextHour.forEach(item => {
-//         const itemDiv = document.createElement('div');
-//         itemDiv.className = 'schedule-item';
-//         itemDiv.id = channelName;
-
-//         // Calculate this item's duration as a percentage of the total duration
-//         const start = new Date(item.start_time).getTime();
-//         const end = new Date(item.end_time).getTime();
-//         const itemDurationMs = end - start;
-//         const durationPercentage = (itemDurationMs / totalDurationMs) * 100;
-
-//         // Set the width (or height) of the item based on its duration percentage
-//         itemDiv.style.width = `${durationPercentage}%`;
-
-//         // Append child elements to itemDiv
-//         const titleDiv = document.createElement('div');
-//         titleDiv.className = 'schedule-title';
-//         titleDiv.id = channelName;
-//         titleDiv.textContent = item.title;
-//         itemDiv.appendChild(titleDiv);
-
-//         const maturityDiv = document.createElement('div');
-//         maturityDiv.className = 'schedule-maturity-rating';
-//         maturityDiv.id = channelName;
-//         maturityDiv.textContent = maturityRating;
-//         itemDiv.appendChild(maturityDiv);
-
-//         const descriptionDiv = document.createElement('div');
-//         descriptionDiv.className = 'schedule-video-description';
-//         descriptionDiv.id = channelName;
-//         descriptionDiv.textContent = item.description;
-//         descriptionDiv.style.display = 'none'; // Initially hidden
-//         itemDiv.appendChild(descriptionDiv);
-
-//         scheduleBlock.appendChild(itemDiv);
-//     });
-
-//     return scheduleBlock;
-// }
-
-
-
-
-
-
-// async function fetchScheduleForChannel(channelId) {
-//     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-//     const dayOfWeek = getCurrentDayOfWeek();
-
-//     try {
-//         const response = await fetch(`${API_BASE_URL}/schedules?channelId=${channelId}&dayOfWeek=${dayOfWeek}&timezone=${encodeURIComponent(userTimeZone)}`);
-//         if (!response.ok) {
-//             throw new Error(`HTTP error! status: ${response.status}`);
-//         }
-//         const schedule = await response.json();
-//         //console.log("schedule: ", schedule);
-        
-//         const currentTime = new Date();
-
-//         // console.log("User Time Zone:", userTimeZone);
-
-//         // Convert each schedule time to the user's local time zone
-//         const convertedSchedules = schedule.map(item => ({
-//             ...item,
-//             start_time: convertToFullDateTime(item.start_time, userTimeZone),
-//             end_time: convertToFullDateTime(item.end_time, userTimeZone)
-//         }));
-
-//         // Debugging: Print converted start times
-//         // convertedSchedules.forEach(item => console.log("Converted Start Time:", item.start_time));
-
-//         // Filter schedules that haven't ended yet and adjust number based on device width
-//         const relevantSchedules = convertedSchedules
-//             .filter(item => new Date(item.end_time) > currentTime)
-//             .slice(0, window.innerWidth <= 568 ? 2 : 4);
-
-//         channelSchedules[channelId] = relevantSchedules;
-//         console.log("relevant schedules: ", relevantSchedules);
-//         return relevantSchedules;
-//     } catch (error) {
-//         console.error("Error fetching schedule:", error);
-//         return []; // Return an empty array in case of error
-//     }
-// }
-
-
-
-// function createScheduleBlock(channelId, maturityRating, channelName="default") {
-//     const scheduleBlock = document.createElement('div');
-//     scheduleBlock.className = 'channel-schedule';
-
-//     const displayedItems = channelSchedules[channelId] || [];
-
-//     displayedItems.forEach(item => {
-//         const itemDiv = document.createElement('div');
-//         itemDiv.className = 'schedule-item';
-//         itemDiv.id = channelName;
-//         //console.log("item: ", item);
-
-//         // Create a div for the title
-//         const titleDiv = document.createElement('div');
-//         titleDiv.className = 'schedule-title';
-//         titleDiv.id = channelName;
-//         titleDiv.textContent = item.title;
-//         //console.log("titlediv: ", titleDiv.textContent);
-//         itemDiv.appendChild(titleDiv);
-
-//         // Create a div for the maturity rating
-//         const maturityDiv = document.createElement('div');
-//         maturityDiv.className = 'schedule-maturity-rating';
-//         maturityDiv.id = channelName;
-//         maturityDiv.textContent = maturityRating;
-//         itemDiv.appendChild(maturityDiv);
-
-//         // Create a div for the time
-//         // const timeDiv = document.createElement('div');
-//         // timeDiv.className = 'schedule-time';
-//         // timeDiv.textContent = `${item.start_time} - ${item.end_time}`;
-//         // itemDiv.appendChild(timeDiv);
-
-//         // Create a div for video description
-//         const descriptionDiv = document.createElement('div');
-//         descriptionDiv.className = 'schedule-video-description';
-//         descriptionDiv.id = channelName;
-//         descriptionDiv.textContent = item.description;
-//         descriptionDiv.style.display = 'none'; // Initially hidden
-//         itemDiv.appendChild(descriptionDiv);
-
-//         scheduleBlock.appendChild(itemDiv);
-//     });
-
-//     return scheduleBlock;
-// }
-
 
 
 function onYouTubeIframeAPIReady() {
@@ -648,12 +460,10 @@ function checkForScheduledVideo() {
 
 function convertTimeToTimezone(timeString, targetTimezone) {
     const currentDate = new Date().toISOString().slice(0, 10); // YYYY-MM-DD format
-    const dateTimeString = `${currentDate}T${timeString}Z`; // Assuming timeString is in UTC for this example
+    const dateTimeString = `${currentDate}T${timeString}Z`;
 
-    // Create a Date object in the local timezone based on the input UTC time
     const dateInUTC = new Date(dateTimeString);
 
-    // Format the date in the target timezone
     const options = {
         hour: '2-digit', minute: '2-digit', second: '2-digit',
         timeZone: targetTimezone, hour12: false
@@ -669,7 +479,6 @@ async function getVideoCast(channelId) {
 
     const dayOfWeek = getCurrentDayOfWeek();
     try {
-        // Make a POST request to your endpoint that returns video details including the cast
         const response = await fetch(`${API_BASE_URL}/videos`, {
             method: 'POST',
             headers: {
@@ -678,7 +487,6 @@ async function getVideoCast(channelId) {
             body: JSON.stringify({ channelId: channelId, timezone: userTimeZone, dayOfWeek: dayOfWeek})
         });
 
-        // Check if the request was successful
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -688,7 +496,6 @@ async function getVideoCast(channelId) {
         const videoCast = data.video_cast;
         console.log("video cast: ", videoCast);
 
-        // Update the global 'currVideoCast' variable
         currVideoCast = videoCast;
 
         updateCastUI(videoCast);
@@ -699,7 +506,6 @@ async function getVideoCast(channelId) {
 }
 
 function updateCastUI(cast) {
-    // Assuming you have an element with id 'videoCast' to display the cast
     const castElement = document.getElementById('videoCast');
     if (castElement) {
         castElement.innerHTML = `<strong>Cast:</strong> ${cast || 'N/A'}`;
@@ -744,11 +550,6 @@ function loadVideo(channelId) {
     .then(data => {
         console.log("loaded video: ", data);
 
-        // const initialStart = convertTimeToTimezone(data.startTime, userTimeZone);
-        // const initialEnd = convertTimeToTimezone(data.endTime, userTimeZone);
-
-        // console.log("initial start: ", initialStart);
-
         scheduledStartTime = convertToFullDateTime(data.startTime, userTimeZone);
         scheduledEndTime = convertToFullDateTime(data.endTime, userTimeZone);
 
@@ -761,35 +562,26 @@ function loadVideo(channelId) {
             channelId: channelId,
             startTime: scheduledStartTime,
             endTime: scheduledEndTime,
-            videoId: extractVideoID(data.embedUrl),
+            videoId: extractVimeoID(data.embedUrl),
         };
 
         if (!player) {
-            player = new YT.Player('videoPlayer', {
-                videoId: extractVideoID(data.embedUrl),
-                playerVars: {
-                    controls: 0,
-                    autoplay: 1,
-                    mute: 1,
-                    start: startTimes,
-                    disablekb: 1,
-                    modestbranding: 1
-                },
-                events: {
-                    'onReady': function(event) {
-                        // Once the player is ready, apply startSeconds parameter
-                        event.target.loadVideoById({
-                            videoId: extractVideoID(data.embedUrl),
-                            startSeconds: startTimes
-                        });
-                    },
-                    'onStateChange': onPlayerStateChange
-                }
+            player = new Vimeo.Player('videoPlayer', {
+                id: extractVimeoID(data.embedUrl),
+                autopause: false,
+                autoplay: true,
+                muted: true,
+                start: startTimes
             });
+
+            player.on('loaded', function() {
+                player.setCurrentTime(startTimes);
+            });
+
+            player.on('ended', onPlayerStateChange);
         } else {
-            player.loadVideoById({
-                videoId: extractVideoID(data.embedUrl),
-                startSeconds: startTimes
+            player.loadVideo(extractVimeoID(data.embedUrl)).then(function() {
+                player.setCurrentTime(startTimes);
             });
         }
 
@@ -803,20 +595,143 @@ function loadVideo(channelId) {
 }
 
 
-function convertToFullDateTime(timeString, timeZone) {
-    // Assuming moment and moment-timezone libraries are imported
+function setVideoPlayerHeight() {
+    const videoPlayerDiv = document.getElementById('videoPlayer');
 
-    // Get the current date in the local timezone
+    const playerWidth = videoPlayerDiv.offsetWidth;
+
+    const playerHeight = playerWidth * (9 / 16);
+    
+    videoPlayerDiv.style.height = `${playerHeight}px`;
+}
+
+function loadRestrictedVimeoVideo(vimeoUrl) {
+    const playerDiv = document.getElementById('videoPlayer');
+    const videoContainer = document.getElementById('videoContainer');
+    const channelInfo = document.getElementById('channelInfo');
+  
+    // Initialize Vimeo player
+    const player = new Vimeo.Player(playerDiv, {
+      url: vimeoUrl,
+      responsive: true,
+      autoplay: true,
+      muted: true,
+      keyboard: false,
+      control: false,
+      backgroun: false
+    });
+  
+    // Disable pausing
+    player.on('pause', function() {
+      player.play();
+    });
+  
+    // Disable fast forwarding and skipping by monitoring time updates
+    player.on('timeupdate', function(event) {
+      const currentTime = event.seconds;
+      player.getDuration().then(duration => {
+        if (currentTime < player.lastTime || currentTime > player.lastTime + 2) {
+          player.setCurrentTime(player.lastTime);
+        }
+      });
+      player.lastTime = currentTime; 
+    });
+  
+    // Store the initial time
+    player.getCurrentTime().then(time => {
+      player.lastTime = time;
+    });
+  
+    // Prevent skipping with arrow keys
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight' || event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+        event.preventDefault();
+      }
+    });
+  
+    function setVideoPlayerHeight() {
+      const playerWidth = playerDiv.offsetWidth;
+      playerDiv.style.height = (playerWidth * 9 / 16) + 'px'; // Maintain 16:9 aspect ratio
+    }
+
+    setVideoPlayerHeight();
+  
+    function matchHeights() {
+      const videoHeight = videoContainer.offsetHeight;
+      channelInfo.style.height = `${videoHeight}px`;
+    }
+
+    matchHeights();
+  
+    window.addEventListener('resize', function() {
+      setVideoPlayerHeight();
+      matchHeights();
+    });
+  }
+
+
+
+
+
+// function extractVimeoID(url) {
+//     const regex = /vimeo\.com\/(\d+)/;
+//     const match = url.match(regex);
+//     return match ? match[1] : null;
+// }
+
+
+// function loadTestVideo(channelId, vimeoUrl) {
+//     isLoading = true;
+
+//     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+//     // Hardcoded video data for testing purposes
+//     const data = {
+//         embedUrl: vimeoUrl,
+//         startTime: "00:00:00",  // Example start time
+//         endTime: "00:05:00"     // Example end time (5 minutes after start)
+//     };
+
+//     scheduledStartTime = convertToFullDateTime(data.startTime, userTimeZone);
+//     scheduledEndTime = convertToFullDateTime(data.endTime, userTimeZone);
+
+//     const currentTime = new Date();
+//     const timeElapsed = (currentTime - scheduledStartTime) / 1000;
+//     const initialStartTime = 0; // Assuming you start at the beginning for the test
+//     const startTimes = initialStartTime + timeElapsed;
+
+//     if (!player) {
+//         player = new Vimeo.Player('videoPlayer', {
+//             url: vimeoUrl, // Use the input URL directly
+//             autopause: false,
+//             autoplay: true,
+//             muted: true,
+//         });
+
+//         player.on('loaded', function() {
+//             player.setCurrentTime(startTimes);
+//         });
+
+//         player.on('ended', onPlayerStateChange);
+//     } else {
+//         player.loadVideo(vimeoUrl).then(function() {
+//             player.setCurrentTime(startTimes);
+//         });
+//     }
+
+//     // Simulate fetching the video cast, etc.
+//     getVideoCast(channelId);
+//     checkForScheduledEnding();
+// }
+
+
+function convertToFullDateTime(timeString, timeZone) {
     const today = moment();
 
-    // Combine the current date with the input timeString
-    // Assuming timeString is in "HH:mm:ss" format
     const dateTimeString = today.format('YYYY-MM-DD') + ' ' + timeString;
 
-    // Parse the dateTimeString in the local timezone, then convert it to the target timezone
     const convertedDate = moment.tz(dateTimeString, "YYYY-MM-DD HH:mm:ss", moment.tz.guess()).tz(timeZone);
 
-    // Return the Date object of the converted date
     return convertedDate.toDate();
 }
 
@@ -848,8 +763,7 @@ function onPlayerStateChange(event) {
 
 // updates the schedule display after each video 
 function updateNewSchedule(channelId) { 
-    // Remove the first item and fetch the next upcoming video
-    channelSchedules[channelId].shift(); // Remove the first element
+    channelSchedules[channelId].shift(); 
     fetchScheduleForChannel(channelId).then(() => {
         const channelBlock = document.querySelector(`[data-channel-id="${channelId}"]`);
         if (channelBlock) {
@@ -879,84 +793,83 @@ function extractStartTime(url) {
     return match ? match[1] : '0';
 }
 
-function toggleMute() {
-    if (player.isMuted()) {
-        player.unMute();
-        document.querySelector('.mute-toggle i').classList.remove('fa-volume-mute');
-        document.querySelector('.mute-toggle i').classList.add('fa-volume-up');
-    } else {
-        player.mute();
-        document.querySelector('.mute-toggle i').classList.remove('fa-volume-up');
-        document.querySelector('.mute-toggle i').classList.add('fa-volume-mute');
-    }
-}
+// function toggleMute() {
+//     if (player.isMuted()) {
+//         player.unMute();
+//         document.querySelector('.mute-toggle i').classList.remove('fa-volume-mute');
+//         document.querySelector('.mute-toggle i').classList.add('fa-volume-up');
+//     } else {
+//         player.mute();
+//         document.querySelector('.mute-toggle i').classList.remove('fa-volume-up');
+//         document.querySelector('.mute-toggle i').classList.add('fa-volume-mute');
+//     }
+// }
 
 
-function toggleMute() {
-    if (player) {
-        if (player.isMuted()) {
-            player.unMute();
-            document.querySelector('.mute-toggle i').classList.replace('fa-volume-mute', 'fa-volume-up');
-        } else {
-            player.mute();
-            document.querySelector('.mute-toggle i').classList.replace('fa-volume-up', 'fa-volume-mute');
-        }
-    }
-}
+// function toggleMute() {
+//     if (player) {
+//         if (player.isMuted()) {
+//             player.unMute();
+//             document.querySelector('.mute-toggle i').classList.replace('fa-volume-mute', 'fa-volume-up');
+//         } else {
+//             player.mute();
+//             document.querySelector('.mute-toggle i').classList.replace('fa-volume-up', 'fa-volume-mute');
+//         }
+//     }
+// }
 
 
 
 // Save volume to localStorage
-function saveVolume(volume) {
-    localStorage.setItem('userVolume', volume);
-}
+// function saveVolume(volume) {
+//     localStorage.setItem('userVolume', volume);
+// }
 
-// Load volume from localStorage
-function loadVolume() {
-    var volume = localStorage.getItem('userVolume');
-    if (volume !== null) {
-        document.getElementById('volumeSlider').value = volume;
-        player.setVolume(volume);
-    }
-}
-
-
-
-document.querySelector('.mute-toggle').addEventListener('click', toggleMute);
+// // Load volume from localStorage
+// function loadVolume() {
+//     var volume = localStorage.getItem('userVolume');
+//     if (volume !== null) {
+//         document.getElementById('volumeSlider').value = volume;
+//         player.setVolume(volume);
+//     }
+// }
 
 
-// Update volume control and player volume when the slider is adjusted
-document.getElementById('volumeSlider').addEventListener('input', function() {
-    var volume = this.value;
-    player.setVolume(volume);
-    if (volume == 0) {
-        document.querySelector('.mute-toggle i').classList.replace('fa-volume-up', 'fa-volume-mute');
-    } else {
-        document.querySelector('.mute-toggle i').classList.replace('fa-volume-mute', 'fa-volume-up');
-    }
-});
+
+// document.querySelector('.mute-toggle').addEventListener('click', toggleMute);
 
 
-function setInitialVolume() {
-    var initialVolume = document.getElementById('volumeSlider').value;
-    if (player && initialVolume) {
-        player.setVolume(initialVolume);
-    }
-}
+// // Update volume control and player volume when the slider is adjusted
+// document.getElementById('volumeSlider').addEventListener('input', function() {
+//     var volume = this.value;
+//     player.setVolume(volume);
+//     if (volume == 0) {
+//         document.querySelector('.mute-toggle i').classList.replace('fa-volume-up', 'fa-volume-mute');
+//     } else {
+//         document.querySelector('.mute-toggle i').classList.replace('fa-volume-mute', 'fa-volume-up');
+//     }
+// });
 
 
-function scheduleNextUpdate() {
-    // Calculate the delay until the next 15-minute mark
-    const now = moment();
-    const nextQuarterHour = now.clone().add(15 - (now.minute() % 15), 'minutes').startOf('minute');
-    const delay = nextQuarterHour.diff(now);
+// function setInitialVolume() {
+//     var initialVolume = document.getElementById('volumeSlider').value;
+//     if (player && initialVolume) {
+//         player.setVolume(initialVolume);
+//     }
+// }
 
-    // Schedule the first update
-    setTimeout(() => {
-        updateTimeIntervals(); // Update at the next 15-minute mark
-        setInterval(updateTimeIntervals, 15 * 60 * 1000); // Continue updating every 15 minutes
-    }, delay);
-}
+
+// function scheduleNextUpdate() {
+//     const now = moment();
+//     const nextQuarterHour = now.clone().add(15 - (now.minute() % 15), 'minutes').startOf('minute');
+//     const delay = nextQuarterHour.diff(now);
+
+//     // Schedule the first update
+//     setTimeout(() => {
+//         updateTimeIntervals(); // Update at the next 15-minute mark
+//         setInterval(updateTimeIntervals, 15 * 60 * 1000); // Continue updating every 15 minutes
+//     }, delay);
+// }
 
 
 function updateCurrentTime() {
@@ -971,11 +884,16 @@ function updateCurrentTime() {
     }
 }
 
-// Call updateCurrentTime immediately to set the initial time
 updateCurrentTime();
 
-// Set an interval to update the time every minute (60000 milliseconds)
 setInterval(updateCurrentTime, 5000);
+
+document.addEventListener('DOMContentLoaded', function() {
+    // const vimeoUrl = 'https://player.vimeo.com/video/999294023?h=fa1e62e655&badge=0&autopause=0&player_id=0&app_id=58479&dnt=1&muted=1&autoplay=1&background=1&control=0&keyboard=0';
+
+    const vimeoUrl = 'https://player.vimeo.com/video/999284559?h=6008d8725c&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479'
+    loadRestrictedVimeoVideo(vimeoUrl);
+});
 
 // function updateTimeIntervals() {
 //     const now = moment.tz(moment.tz.guess());
@@ -993,112 +911,113 @@ setInterval(updateCurrentTime, 5000);
 
 
 
-document.addEventListener("DOMContentLoaded", function() {
+// document.addEventListener("DOMContentLoaded", function() {
+//     const vimeoUrl = 'https://player.vimeo.com/video/999284559?h=6008d8725c';
+//     loadRestrictedVimeoVideo(vimeoUrl);
 
-    onYouTubeIframeAPIReady();
-    //selectChannel(9);
+//     // onYouTubeIframeAPIReady();
+//     // //selectChannel(9);
     
-    // fetchChannels();
-    // getVideoCast(9);
-    fetchChannels().then(() => {
-        selectChannel(26);
-        getVideoCast(26);
+//     // // fetchChannels();
+//     // // getVideoCast(9);
+//     // fetchChannels().then(() => {
+//     //     selectChannel(26);
+//     //     getVideoCast(26);
         
-    });
-    defaultVideo();
+//     // });
+//     // defaultVideo();
 
-    const fullscreenBtn = document.querySelector('.fullscreen-toggle'); 
-    //const videoContainer = document.querySelector('#videoContainer');
+//     // const fullscreenBtn = document.querySelector('.fullscreen-toggle'); 
+//     // //const videoContainer = document.querySelector('#videoContainer');
     
-    // fullscreenBtn.addEventListener('click', () => {
-    //   if (!document.fullscreenElement) {
-    //     videoContainer.requestFullscreen().then(() => {
-    //         videoContainer.classList.add('fullscreen-mode'); 
-    //     }).catch(err => {
-    //       console.error(`Error attempting to enable fullscreen mode: ${err.message}`);
-    //     });
-    //   } else {
-    //     if (document.exitFullscreen) {
-    //       document.exitFullscreen(); 
-    //     }
-    //   }
-    // });
+//     // // fullscreenBtn.addEventListener('click', () => {
+//     // //   if (!document.fullscreenElement) {
+//     // //     videoContainer.requestFullscreen().then(() => {
+//     // //         videoContainer.classList.add('fullscreen-mode'); 
+//     // //     }).catch(err => {
+//     // //       console.error(`Error attempting to enable fullscreen mode: ${err.message}`);
+//     // //     });
+//     // //   } else {
+//     // //     if (document.exitFullscreen) {
+//     // //       document.exitFullscreen(); 
+//     // //     }
+//     // //   }
+//     // // });
 
-    fullscreenBtn.addEventListener('click', toggleFullscreen);
+//     // fullscreenBtn.addEventListener('click', toggleFullscreen);
 
-    fullscreenBtn.addEventListener('touchstart', function(event) {
-        event.preventDefault(); 
-        toggleFullscreen();
-    });
+//     // fullscreenBtn.addEventListener('touchstart', function(event) {
+//     //     event.preventDefault(); 
+//     //     toggleFullscreen();
+//     // });
 
 
     
 
-    const muteButtonIcon = document.querySelector('.mute-toggle i');
-    if (muteButtonIcon) {
-        muteButtonIcon.classList.remove('fa-volume-up');
-        muteButtonIcon.classList.add('fa-volume-mute');
-    }
+//     // const muteButtonIcon = document.querySelector('.mute-toggle i');
+//     // if (muteButtonIcon) {
+//     //     muteButtonIcon.classList.remove('fa-volume-up');
+//     //     muteButtonIcon.classList.add('fa-volume-mute');
+//     // }
 
-    updateTimeIntervals(); // Initialize the time intervals
-    scheduleNextUpdate();
+//     // updateTimeIntervals(); // Initialize the time intervals
+//     // scheduleNextUpdate();
 
-    document.addEventListener('fullscreenchange', handleFullscreenChange);
-    document.addEventListener('webkitfullscreenchange', handleFullscreenChange); // Safari
+//     // document.addEventListener('fullscreenchange', handleFullscreenChange);
+//     // document.addEventListener('webkitfullscreenchange', handleFullscreenChange); // Safari
 
    
-});
+// });
 
 
-function handleFullscreenChange() {
-    const videoContainer = document.querySelector('#videoContainer');
-    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-        videoContainer.classList.remove('fullscreen-mode');
-        adjustVideoForOrientation(); // Ensure you call adjustVideoForOrientation function correctly
-    }
-}
 
-function toggleFullscreen() {
-    const videoContainer = document.querySelector('#videoContainer');
+// function handleFullscreenChange() {
+//     const videoContainer = document.querySelector('#videoContainer');
+//     if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+//         videoContainer.classList.remove('fullscreen-mode');
+//         adjustVideoForOrientation();
+//     }
+// }
 
-    // Check if we're in fullscreen mode (either via the API or our fallback)
-    const isInFullscreen = document.fullscreenElement || videoContainer.classList.contains('fullscreen-fallback');
+// function toggleFullscreen() {
+//     const videoContainer = document.querySelector('#videoContainer');
 
-    if (!isInFullscreen) {
-        // Attempt to use the Fullscreen API first
-        if (videoContainer.requestFullscreen) {
-            videoContainer.requestFullscreen();
-            // .catch(err => {
-            //     console.error(`Error attempting to enable fullscreen mode: ${err.message}`);
-            //     // Fallback to fullscreen simulation if Fullscreen API fails
-            //     videoContainer.classList.add('fullscreen-fallback');
-            // });
-        } else if (videoContainer.webkitRequestFullscreen) { // Safari
-            videoContainer.webkitRequestFullscreen();
-            // .catch(err => {
-            //     console.error(`Error attempting to enable fullscreen mode: ${err.message}`);
-            //     videoContainer.classList.add('fullscreen-fallback');
-            // });
-        } else {
-            // If Fullscreen API is not available, use the fallback
-            videoContainer.classList.add('fullscreen-fallback');
-        }
-    } else {
-        // Exiting fullscreen
-        if (document.exitFullscreen) {
-            document.exitFullscreen().catch(() => {
-                videoContainer.classList.remove('fullscreen-fallback');
-            });
-        } else if (document.webkitExitFullscreen) { // Safari
-            document.webkitExitFullscreen().catch(() => {
-                videoContainer.classList.remove('fullscreen-fallback');
-            });
-        } else {
-            // Remove fallback class if Fullscreen API is not available
-            videoContainer.classList.remove('fullscreen-fallback');
-        }
-    }
-}
+//     const isInFullscreen = document.fullscreenElement || videoContainer.classList.contains('fullscreen-fallback');
+
+//     if (!isInFullscreen) {
+//         if (videoContainer.requestFullscreen) {
+//             videoContainer.requestFullscreen();
+//             // .catch(err => {
+//             //     console.error(`Error attempting to enable fullscreen mode: ${err.message}`);
+//             //     // Fallback to fullscreen simulation if Fullscreen API fails
+//             //     videoContainer.classList.add('fullscreen-fallback');
+//             // });
+//         } else if (videoContainer.webkitRequestFullscreen) { // Safari
+//             videoContainer.webkitRequestFullscreen();
+//             // .catch(err => {
+//             //     console.error(`Error attempting to enable fullscreen mode: ${err.message}`);
+//             //     videoContainer.classList.add('fullscreen-fallback');
+//             // });
+//         } else {
+//             // If Fullscreen API is not available, use the fallback
+//             videoContainer.classList.add('fullscreen-fallback');
+//         }
+//     } else {
+//         // Exiting fullscreen
+//         if (document.exitFullscreen) {
+//             document.exitFullscreen().catch(() => {
+//                 videoContainer.classList.remove('fullscreen-fallback');
+//             });
+//         } else if (document.webkitExitFullscreen) { // Safari
+//             document.webkitExitFullscreen().catch(() => {
+//                 videoContainer.classList.remove('fullscreen-fallback');
+//             });
+//         } else {
+//             // Remove fallback class if Fullscreen API is not available
+//             videoContainer.classList.remove('fullscreen-fallback');
+//         }
+//     }
+// }
 
 
 
@@ -1120,24 +1039,24 @@ function toggleFullscreen() {
 // }
 
 
-window.addEventListener('resize', adjustVideoForOrientation);
-document.addEventListener('fullscreenchange', function () {
-    const videoContainer = document.querySelector('#videoContainer');
-    if (!document.fullscreenElement) {
-        // Remove fullscreen-specific classes
-        videoContainer.classList.remove('fullscreen-mode');
-        adjustVideoForOrientation(); 
-    }
-});
+// window.addEventListener('resize', adjustVideoForOrientation);
+// document.addEventListener('fullscreenchange', function () {
+//     const videoContainer = document.querySelector('#videoContainer');
+//     if (!document.fullscreenElement) {
+//         // Remove fullscreen-specific classes
+//         videoContainer.classList.remove('fullscreen-mode');
+//         adjustVideoForOrientation(); 
+//     }
+// });
 
 
-function adjustVideoForOrientation() {
-    const videoContainer = document.querySelector('#videoContainer');
-    if (window.innerHeight > window.innerWidth) {
-      // Portrait orientation
-      videoContainer.classList.add('fullscreen-portrait');
-    } else {
-      // Landscape orientation
-      videoContainer.classList.remove('fullscreen-portrait');
-    }
-  } 
+// function adjustVideoForOrientation() {
+//     const videoContainer = document.querySelector('#videoContainer');
+//     if (window.innerHeight > window.innerWidth) {
+//       // Portrait orientation
+//       videoContainer.classList.add('fullscreen-portrait');
+//     } else {
+//       // Landscape orientation
+//       videoContainer.classList.remove('fullscreen-portrait');
+//     }
+//   } 

@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const email = document.getElementById('email').value;
 
-        // Basic email format validation
+        // Email format validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             errorMessageElement.textContent = "Please enter a valid email address.";
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         try {
-            // Send the email to the server to initiate the reset process
+            // Send the email to the server
             const response = await fetch('/forgot-password', {
                 method: 'POST',
                 headers: {
@@ -28,11 +28,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const result = await response.json();
 
             if (response.ok) {
-                // Display success message
                 messageElement.textContent = result.message;
                 errorMessageElement.textContent = '';
             } else {
-                // Display error message returned from the server
                 errorMessageElement.textContent = result.message || "An error occurred. Please try again.";
                 messageElement.textContent = '';
             }

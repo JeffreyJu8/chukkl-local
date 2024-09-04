@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const messageElement = document.getElementById('message');
         const errorMessageElement = document.getElementById('errorMessage');
 
-        // Ensure errorMessageElement exists
         if (!errorMessageElement) {
             console.error('Error: #errorMessage element not found.');
             return;

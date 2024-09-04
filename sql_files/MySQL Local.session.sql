@@ -273,3 +273,12 @@ DELETE FROM Videos WHERE video_id = 1;
 
 
 SELECT * FROM Categories FOR JSON AUTO;
+
+
+TRUNCATE TABLE Categories;
+TRUNCATE TABLE Videos;
+TRUNCATE TABLE Schedules;
+
+SELECT * FROM Categories;
+
+Select * FROM Schedules;

@@ -1,108 +1,99 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Curated Entertainment</title>
-        <link rel="icon" type="image/x-icon" href="images/favicon.jpeg">
-      
-        <!-- Preload Fonts -->
-        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Kavoon&display=swap" as="font" type="font/woff2" crossorigin>
-        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" as="font" type="font/woff2" crossorigin>
-        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" as="font" type="font/woff2" crossorigin>
-      
-        <!-- External CSS and Fonts -->
-        <link rel="stylesheet" href="ivan_the_inspector.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-        <link href="https://fonts.cdnfonts.com/css/aileron" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Kavoon&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Karantina&family=Lilita+One&family=Lobster+Two&family=Luckiest+Guy&family=Poppins&family=Fredoka+One&family=Koulen&display=swap" rel="stylesheet">
-      
-        <!-- External JavaScript -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.33/moment-timezone-with-data-10-year-range.min.js"></script>
-        <script type="text/javascript" src="https://www.youtube.com/iframe_api"></script>
-      
-        <!-- Google Tag Manager -->
-        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-NDVJPP49');</script>
-        <!-- End Google Tag Manager -->
-      </head>
-      <div id="header">
-        <div id="titleContainer">
-            <div id="appTitle">
-                <span class="letter">c</span>
-                <span class="letter">h</span>
-                <span class="letter">u</span>
-                <span class="letter">k</span>
-                <span class="letter">k</span>
-                <span class="letter">l</span>
-            </div>
-            <div id="appMoto">
-                <span class="word">Safe & </span>
-                <span class="word">enjoyable </span>
-                <span class="word">streaming </span>
-                <span class="word">for </span>
-                <span class="word">free.</span>
-            </div>
-        </div>
-        
-        <div class="button-group">
-            <a href="/on_demand">
-                <button class="on-demand">On Demand</button>
-            </a>
-            <a href="/">
-                <button class="live-tv">Live TV</button>
-            </a>
-        </div>
 
-        <div class="button-group1">
-            <a href="/login">
-                <button class="login">Login</button>
-            </a>
-      
-            <a href="/register">
-              <button class="register">Register</button>
-            </a>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Curated Entertainment</title>
+    <link href="images/favicon.jpeg" rel="icon" type="image/x-icon"/>
+    <!-- Preload Fonts -->
+    <link as="font" crossorigin="" href="https://fonts.googleapis.com/css2?family=Kavoon&amp;display=swap" rel="preload" type="font/woff2"/>
+    <link as="font" crossorigin="" href="https://fonts.googleapis.com/css2?family=Kaushan+Script&amp;display=swap" rel="preload" type="font/woff2"/>
+    <link as="font" crossorigin="" href="https://fonts.googleapis.com/css2?family=Open+Sans&amp;display=swap" rel="preload" type="font/woff2"/>
+    <!-- External CSS and Fonts -->
+    <link href="ivan_the_inspector.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.cdnfonts.com/css/aileron" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Kavoon&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&amp;family=Karantina&amp;family=Lilita+One&amp;family=Lobster+Two&amp;family=Luckiest+Guy&amp;family=Poppins&amp;family=Fredoka+One&amp;family=Koulen&amp;display=swap" rel="stylesheet"/>
+    <!-- External JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.33/moment-timezone-with-data-10-year-range.min.js"></script>
+    <script src="https://www.youtube.com/iframe_api" type="text/javascript"></script>
+    <!-- Google Tag Manager -->
+    <script>
+    (function(w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+            'gtm.start':
+            new Date().getTime(),
+            event: 'gtm.js'
+        });
+        var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s),
+            dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src =
+        'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-NDVJPP49');
+    </script>
+    <!-- End Google Tag Manager -->
+</head>
+<div id="header">
+    <div id="titleContainer">
+        <div id="appTitle">
+            <span class="letter">c</span>
+            <span class="letter">h</span>
+            <span class="letter">u</span>
+            <span class="letter">k</span>
+            <span class="letter">k</span>
+            <span class="letter">l</span>
+        </div>
+        <div id="appMoto">
+            <span class="word">Safe &amp; </span>
+            <span class="word">enjoyable </span>
+            <span class="word">streaming </span>
+            <span class="word">for </span>
+            <span class="word">free.</span>
         </div>
     </div>
-  
-  <main>
+    <div class="button-group">
+        <a href="/on_demand">
+            <button class="on-demand">On Demand</button>
+        </a>
+        <a href="/">
+            <button class="live-tv">Live TV</button>
+        </a>
+    </div>
+    <div class="button-group1">
+        <a href="/login">
+            <button class="login">Login</button>
+        </a>
+        <a href="/register">
+            <button class="register">Register</button>
+        </a>
+    </div>
+</div>
+<main>
     <section class="hero">
-      <h1>Ivan The Inspector</h1>
-      <p>Come learn about new things in the world with your new friend, Ivan the Inspector! Learn about ice fishing, rock climbing, tools and more!</p>
+        <h1>Ivan The Inspector</h1>
+        <p>Come learn about new things in the world with your new friend, Ivan the Inspector! Learn about ice fishing, rock climbing, tools and more!</p>
     </section>
-
     <div class="start-watching-container">
         <div class="text">Start Watching</div>
         <div class="line"></div>
     </div>
-    
     <section class="video-list">
-        <a href="https://vimeo.com/998847182/8ea628f78e?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1gnzF_Y3HlrJOZEJwVP5K0n4x6Til9pKJ&sz=w1000" alt="5 Easy Christmas Crafts">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
-                </div>
-            </div>
-            <div class="video-info">
-                <h3>5 Easy Christmas Crafts</h3>
-                <p>Fun Christmas crafts to make with kids.</p>
-                <span class="duration">13:39</span>
-            </div>
-        </a>
-    
-        <a href="https://vimeo.com/998849150/b9d999d456?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1NdxbDdU3QTmevWi7QLzkE9fP6YQfW3b4&sz=w1000" alt="Alphabet For Kids">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        <div class="video-item" onclick="playVideo('https://vimeo.com/999279142/ef3369142b')">
+            <div id="video-container-1">
+                <div class="video-thumbnail">
+                    <img alt="Alphabet For Kids" src="https://drive.google.com/thumbnail?id=1NdxbDdU3QTmevWi7QLzkE9fP6YQfW3b4&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -110,13 +101,15 @@
                 <p>Ivan Inspects The Alphabet</p>
                 <span class="duration">14:25</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998849150/b9d999d456?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1QHpXJKJ7G9lhDhbUR7F6l6rP2lsiu5ww&sz=w1000" alt="Apple Picking!">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998849150/b9d999d456?autoplay=1')">
+            <div id="video-container-2">
+                <div class="video-thumbnail">
+                    <img alt="Apple Picking!" src="https://drive.google.com/thumbnail?id=1QHpXJKJ7G9lhDhbUR7F6l6rP2lsiu5ww&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -124,13 +117,15 @@
                 <p>Join Ivan in an apple-picking adventure.</p>
                 <span class="duration">12:05</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998849498/5b27c2446d?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=16zn9ZHp2P6a3Mt5F4cE-S0R1HExiQ5Th&sz=w1000" alt="Ivan Inspects ATVs!">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998849498/5b27c2446d?autoplay=1')">
+            <div id="video-container-3">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects ATVs!" src="https://drive.google.com/thumbnail?id=16zn9ZHp2P6a3Mt5F4cE-S0R1HExiQ5Th&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -138,13 +133,15 @@
                 <p>Explore ATVs and their cool features.</p>
                 <span class="duration">8:27</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998849615/658c7885f7?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1P3TJeE1aaKsN97XRYVAx2DvmJgQeWLIB&sz=w1000" alt="Baking Cookies For Kids!">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998849615/658c7885f7?autoplay=1')">
+            <div id="video-container-4">
+                <div class="video-thumbnail">
+                    <img alt="Baking Cookies For Kids!" src="https://drive.google.com/thumbnail?id=1P3TJeE1aaKsN97XRYVAx2DvmJgQeWLIB&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -152,13 +149,15 @@
                 <p>Ivan bakes delicious cookies with kids.</p>
                 <span class="duration">19:44</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998849758/f2a8979b9a?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1cAR_iN4VTvix45Jm2m6IfDidstbvNbxQ&sz=w1000" alt="Big Vehicles for Kids!">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998849758/f2a8979b9a?autoplay=1')">
+            <div id="video-container-5">
+                <div class="video-thumbnail">
+                    <img alt="Big Vehicles for Kids!" src="https://drive.google.com/thumbnail?id=1cAR_iN4VTvix45Jm2m6IfDidstbvNbxQ&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -166,13 +165,15 @@
                 <p>Ivan Inspects Big Vehicles</p>
                 <span class="duration">7:25</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998849845/fa34a77a3c?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1nBZ0YiYWo8EKjLBXlD_kDrUHGKVr7cca&sz=w1000" alt="Coloring for Kids with Ivan the Inspector!">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998849845/fa34a77a3c?autoplay=1')">
+            <div id="video-container-6">
+                <div class="video-thumbnail">
+                    <img alt="Coloring for Kids with Ivan the Inspector!" src="https://drive.google.com/thumbnail?id=1nBZ0YiYWo8EKjLBXlD_kDrUHGKVr7cca&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -180,13 +181,15 @@
                 <p>Creative coloring fun with Ivan.</p>
                 <span class="duration">11:56</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998849960/dc6c33f26a?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1y-MHL115Xv-IrKYVqMJoCn4Yo4ggqygM&sz=w1000" alt="Cross Country Skiing for Kids with Ivan the Inspector!">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998849960/dc6c33f26a?autoplay=1')">
+            <div id="video-container-7">
+                <div class="video-thumbnail">
+                    <img alt="Cross Country Skiing for Kids with Ivan the Inspector!" src="https://drive.google.com/thumbnail?id=1y-MHL115Xv-IrKYVqMJoCn4Yo4ggqygM&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -194,13 +197,15 @@
                 <p>Learn about cross-country skiing with Ivan.</p>
                 <span class="duration">11:22</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998856790/028d2133ab?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1MheXos0bqIIzBPyKbz6qUTnOj01q2R_K&sz=w1000" alt="Excavators for Kids!">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998856790/028d2133ab?autoplay=1')">
+            <div id="video-container-8">
+                <div class="video-thumbnail">
+                    <img alt="Excavators for Kids!" src="https://drive.google.com/thumbnail?id=1MheXos0bqIIzBPyKbz6qUTnOj01q2R_K&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -208,13 +213,15 @@
                 <p>Ivan inspects powerful excavators.</p>
                 <span class="duration">13:29</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998857057/a9beafd710?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1RM2rBBMLrySEDlyW4scMWv1DYvPRPN6S&sz=w1000" alt="How to Carve A Pumpkin">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998857057/a9beafd710?autoplay=1')">
+            <div id="video-container-9">
+                <div class="video-thumbnail">
+                    <img alt="How to Carve A Pumpkin" src="https://drive.google.com/thumbnail?id=1RM2rBBMLrySEDlyW4scMWv1DYvPRPN6S&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -222,13 +229,15 @@
                 <p>Ivan teaches pumpkin carving for Halloween.</p>
                 <span class="duration">11:50</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998857186/602b39dda1?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=13hvHHZknCrJzio7NRrjQPdZt1qXkhmdS&sz=w1000" alt="How To Make A Thankful Turkey">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998857186/602b39dda1?autoplay=1')">
+            <div id="video-container-10">
+                <div class="video-thumbnail">
+                    <img alt="How To Make A Thankful Turkey" src="https://drive.google.com/thumbnail?id=13hvHHZknCrJzio7NRrjQPdZt1qXkhmdS&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -236,13 +245,15 @@
                 <p>Create a Thankful Turkey craft with Ivan.</p>
                 <span class="duration">14:51</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998859459/3503d5f65c?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=158Qtt8bvkenqNZCa21wYimcL9dlYFn50&sz=w1000" alt="Ivan Inspects A Beach">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998859459/3503d5f65c?autoplay=1')">
+            <div id="video-container-11">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects A Beach" src="https://drive.google.com/thumbnail?id=158Qtt8bvkenqNZCa21wYimcL9dlYFn50&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -250,13 +261,15 @@
                 <p>Join Ivan on a beach adventure.</p>
                 <span class="duration">13:27</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998859745/a6860751bc?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1Tj4NSwRaeGyTqIwTLa_xj0S5XPRhX8lv&sz=w1000" alt="Ivan Inspects A Hair Cut">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998859745/a6860751bc?autoplay=1')">
+            <div id="video-container-12">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects A Hair Cut" src="https://drive.google.com/thumbnail?id=1Tj4NSwRaeGyTqIwTLa_xj0S5XPRhX8lv&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -264,13 +277,15 @@
                 <p>Ivan explores what happens during a haircut.</p>
                 <span class="duration">11:28</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998859880/959db3541a?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1HyElHKTwCe6CAVvKQq7E1HMA2vmYLMiR&sz=w1000" alt="Ivan Inspects A Lift Bridge">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998859880/959db3541a?autoplay=1')">
+            <div id="video-container-13">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects A Lift Bridge" src="https://drive.google.com/thumbnail?id=1HyElHKTwCe6CAVvKQq7E1HMA2vmYLMiR&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -278,13 +293,15 @@
                 <p>Learn how a lift bridge works with Ivan.</p>
                 <span class="duration">9:56</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998860225/35ffb358df?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1s2wuBZVZCQ1OXLSIYZLJJ9QsOkpdMlRH&sz=w1000" alt="Ivan Inspects Alpacas">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998860225/35ffb358df?autoplay=1')">
+            <div id="video-container-14">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects Alpacas" src="https://drive.google.com/thumbnail?id=1s2wuBZVZCQ1OXLSIYZLJJ9QsOkpdMlRH&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -292,13 +309,15 @@
                 <p>Meet alpacas and learn about them with Ivan.</p>
                 <span class="duration">11:59</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998860047/d42b00ed27?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1J9so3auayYKmqPUxxOtvLNOdn0hnBC7f&sz=w1000" alt="Ivan Inspects A Playground">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998860047/d42b00ed27?autoplay=1')">
+            <div id="video-container-15">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects A Playground" src="https://drive.google.com/thumbnail?id=1J9so3auayYKmqPUxxOtvLNOdn0hnBC7f&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -306,13 +325,15 @@
                 <p>Ivan explores a fun playground.</p>
                 <span class="duration">15:35</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998860440/1bba90040f?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=13amBg_mVVwxnCrfwgOaqaoGuSHfHj3Vr&sz=w1000" alt="Ivan Inspects Baby Chicks">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998860440/1bba90040f?autoplay=1')">
+            <div id="video-container-16">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects Baby Chicks" src="https://drive.google.com/thumbnail?id=13amBg_mVVwxnCrfwgOaqaoGuSHfHj3Vr&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -320,13 +341,15 @@
                 <p>Discover baby chicks with Ivan.</p>
                 <span class="duration">10:52</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998861116/abba4d461c?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1Y9DFk8xZouMoLm0_c9WZ-b-TBOQekC_o&sz=w1000" alt="Ivan Inspects Canoes">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998861116/abba4d461c?autoplay=1')">
+            <div id="video-container-17">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects Canoes" src="https://drive.google.com/thumbnail?id=1Y9DFk8xZouMoLm0_c9WZ-b-TBOQekC_o&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -334,13 +357,15 @@
                 <p>Learn about canoes and paddling with Ivan.</p>
                 <span class="duration">11:11</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998861320/469e2ab74a?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1QfMF0sEG0QJpjogLXmqR05RH1iQmCGDv&sz=w1000" alt="Ivan Inspects Chainsaws">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998861320/469e2ab74a?autoplay=1')">
+            <div id="video-container-18">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects Chainsaws" src="https://drive.google.com/thumbnail?id=1QfMF0sEG0QJpjogLXmqR05RH1iQmCGDv&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -348,13 +373,15 @@
                 <p>Ivan explores the power of chainsaws.</p>
                 <span class="duration">14:47</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998861555/9e2224238c?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1v6UWf56SAr9LBOt3gJismb2piXTsJrDX&sz=w1000" alt="Ivan Inspects Chickens">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998861555/9e2224238c?autoplay=1')">
+            <div id="video-container-19">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects Chickens" src="https://drive.google.com/thumbnail?id=1v6UWf56SAr9LBOt3gJismb2piXTsJrDX&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -362,13 +389,15 @@
                 <p>Meet chickens and learn about them with Ivan.</p>
                 <span class="duration">12:21</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998861711/c8b7427f4f?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1Gvzh997mp_Mgt9T4QMFG6SF796uMgicz&sz=w1000" alt="Ivan Inspects Christmas Lights">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998861711/c8b7427f4f?autoplay=1')">
+            <div id="video-container-20">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects Christmas Lights" src="https://drive.google.com/thumbnail?id=1Gvzh997mp_Mgt9T4QMFG6SF796uMgicz&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -376,13 +405,15 @@
                 <p>Ivan explores the magic of Christmas lights.</p>
                 <span class="duration">9:41</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998861814/c3184e5087?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=16cqTfzLd6cLXM2nbPfBFdFUVNC4SZur4&sz=w1000" alt="Ivan Inspects Colors">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998861814/c3184e5087?autoplay=1')">
+            <div id="video-container-21">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects Colors" src="https://drive.google.com/thumbnail?id=16cqTfzLd6cLXM2nbPfBFdFUVNC4SZur4&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -390,13 +421,15 @@
                 <p>Learn about different colors with Ivan.</p>
                 <span class="duration">8:26</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998861947/b934b5575a?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1E8G1qYU2MHkJBszALbRNMzezJUZw6JS1&sz=w1000" alt="Ivan Inspects Cutting Down A Christmas Tree">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998861947/b934b5575a?autoplay=1')">
+            <div id="video-container-22">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects Cutting Down A Christmas Tree" src="https://drive.google.com/thumbnail?id=1E8G1qYU2MHkJBszALbRNMzezJUZw6JS1&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -404,13 +437,15 @@
                 <p>Ivan shows how to cut down a Christmas tree.</p>
                 <span class="duration">10:44</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998862102/e9166b1abf?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1jEYPEyLPz8D24Fg9wNFe24Ngf-iT9lI7&sz=w1000" alt="Ivan Inspects Decorating A Christmas Tree">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998862102/e9166b1abf?autoplay=1')">
+            <div id="video-container-23">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects Decorating A Christmas Tree" src="https://drive.google.com/thumbnail?id=1jEYPEyLPz8D24Fg9wNFe24Ngf-iT9lI7&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -418,13 +453,15 @@
                 <p>Ivan decorates a Christmas tree.</p>
                 <span class="duration">10:17</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998862229/1d66a76553?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1bgX33xUxhwi8uF5oqJqIjqcKovZ6lYM-&sz=w1000" alt="Ivan Inspects Drones">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998862229/1d66a76553?autoplay=1')">
+            <div id="video-container-24">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects Drones" src="https://drive.google.com/thumbnail?id=1bgX33xUxhwi8uF5oqJqIjqcKovZ6lYM-&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -432,13 +469,15 @@
                 <p>Discover the world of drones with Ivan.</p>
                 <span class="duration">8:13</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998862323/b6cc43227f?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1EEir_RfOusEspQT8c1jbFVYGJfZbO3B-&sz=w1000" alt="Ivan Inspects Dyeing Eggs">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998862323/b6cc43227f?autoplay=1')">
+            <div id="video-container-25">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects Dyeing Eggs" src="https://drive.google.com/thumbnail?id=1EEir_RfOusEspQT8c1jbFVYGJfZbO3B-&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -446,13 +485,15 @@
                 <p>Learn how to dye eggs with Ivan.</p>
                 <span class="duration">9:00</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998862413/d2352fc4c4?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1OQZzv2j0ciZ0LCCt_-9gZG119dT1bPji&sz=w1000" alt="Ivan Inspects Extreme Sledding">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998862413/d2352fc4c4?autoplay=1')">
+            <div id="video-container-26">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects Extreme Sledding" src="https://drive.google.com/thumbnail?id=1OQZzv2j0ciZ0LCCt_-9gZG119dT1bPji&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -460,13 +501,15 @@
                 <p>Ivan goes extreme sledding for winter fun.</p>
                 <span class="duration">8:33</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998862670/f87a48482c?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1RS8xXLbfVLjaVF7HgmyhtPVC5jL9IA6b&sz=w1000" alt="Ivan Inspects Fall Crafts">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998862670/f87a48482c?autoplay=1')">
+            <div id="video-container-27">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects Fall Crafts" src="https://drive.google.com/thumbnail?id=1RS8xXLbfVLjaVF7HgmyhtPVC5jL9IA6b&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -474,13 +517,15 @@
                 <p>Create fun fall crafts with Ivan.</p>
                 <span class="duration">15:17</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998862858/4ffc76e27c?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1B0zD5pnuWxDTLou4EuCb6xdditD_DG5S&sz=w1000" alt="Ivan Inspects Freezing Things">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998862858/4ffc76e27c?autoplay=1')">
+            <div id="video-container-28">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects Freezing Things" src="https://drive.google.com/thumbnail?id=1B0zD5pnuWxDTLou4EuCb6xdditD_DG5S&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -488,13 +533,15 @@
                 <p>Explore the science of freezing with Ivan.</p>
                 <span class="duration">8:59</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998862966/c207db4ca3?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1hA-Zkm8_RGQ-ABqooBdZiy6RRsKa5G1I&sz=w1000" alt="Ivan Inspects Goats">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998862966/c207db4ca3?autoplay=1')">
+            <div id="video-container-29">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects Goats" src="https://drive.google.com/thumbnail?id=1hA-Zkm8_RGQ-ABqooBdZiy6RRsKa5G1I&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -502,13 +549,15 @@
                 <p>Meet and learn about goats with Ivan.</p>
                 <span class="duration">11:19</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998863096/334a21a16d?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1ZoEma6HxBr7MQI1CIGHyE3fm8eU752cZ&sz=w1000" alt="Ivan Inspects Harvesting A Garden">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998863096/334a21a16d?autoplay=1')">
+            <div id="video-container-30">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects Harvesting A Garden" src="https://drive.google.com/thumbnail?id=1ZoEma6HxBr7MQI1CIGHyE3fm8eU752cZ&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -516,13 +565,15 @@
                 <p>Ivan teaches how to harvest a garden.</p>
                 <span class="duration">11:03</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998863260/19bfeadbce?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1cJjT8uetb-bOa05sMGkWMFFkPYh3Qsdd&sz=w1000" alt="Ivan Inspects Horses">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998863260/19bfeadbce?autoplay=1')">
+            <div id="video-container-31">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects Horses" src="https://drive.google.com/thumbnail?id=1cJjT8uetb-bOa05sMGkWMFFkPYh3Qsdd&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -530,13 +581,15 @@
                 <p>Learn about horses and riding with Ivan.</p>
                 <span class="duration">8:55</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998863360/2ef252263f?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1PfrgG566rkhMzRMFTx681LwxV-MvzR2E&sz=w1000" alt="Ivan Inspects Ice Fishing">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998863360/2ef252263f?autoplay=1')">
+            <div id="video-container-32">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects Ice Fishing" src="https://drive.google.com/thumbnail?id=1PfrgG566rkhMzRMFTx681LwxV-MvzR2E&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -544,13 +597,15 @@
                 <p>Ivan goes ice fishing and explores the process.</p>
                 <span class="duration">14:29</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998863479/c078e0e613?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1dSZoMrm-XdtSmZmIRfRcQX-2GWnQOGwd&sz=w1000" alt="Ivan Inspects Maple Syrup">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998863479/c078e0e613?autoplay=1')">
+            <div id="video-container-33">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects Maple Syrup" src="https://drive.google.com/thumbnail?id=1dSZoMrm-XdtSmZmIRfRcQX-2GWnQOGwd&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -558,13 +613,15 @@
                 <p>Learn how maple syrup is made with Ivan.</p>
                 <span class="duration">10:13</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998863601/fd7a9c092f?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1u8BingWqxC1CFGKB6Fav8-tTr2V_Q68A&sz=w1000" alt="Ivan Inspects Milking Cows">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998863601/fd7a9c092f?autoplay=1')">
+            <div id="video-container-34">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects Milking Cows" src="https://drive.google.com/thumbnail?id=1u8BingWqxC1CFGKB6Fav8-tTr2V_Q68A&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -572,13 +629,15 @@
                 <p>Discover how to milk cows with Ivan.</p>
                 <span class="duration">10:59</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998863729/807a896b4c?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1a6zAfINa0Y4sAN5Otmi3oLyRUZwtqYd2&sz=w1000" alt="Ivan Inspects Mountain Biking">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998863729/807a896b4c?autoplay=1')">
+            <div id="video-container-35">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects Mountain Biking" src="https://drive.google.com/thumbnail?id=1a6zAfINa0Y4sAN5Otmi3oLyRUZwtqYd2&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -586,13 +645,15 @@
                 <p>Ivan explores mountain biking for kids.</p>
                 <span class="duration">13:17</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998863917/dcba5fe2a4?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1di2n-hllcQ5xXh-gEBSwCPA6591FhS55&sz=w1000" alt="Ivan Inspects Paddle Boards">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998863917/dcba5fe2a4?autoplay=1')">
+            <div id="video-container-36">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects Paddle Boards" src="https://drive.google.com/thumbnail?id=1di2n-hllcQ5xXh-gEBSwCPA6591FhS55&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -600,13 +661,15 @@
                 <p>Learn how to paddle board with Ivan.</p>
                 <span class="duration">9:10</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998864040/1f7a52b818?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=18PGsrUoEvqbgY1lbReL44OgOHUedcrkO&sz=w1000" alt="Ivan Inspects Planting A Garden">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998864040/1f7a52b818?autoplay=1')">
+            <div id="video-container-37">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects Planting A Garden" src="https://drive.google.com/thumbnail?id=18PGsrUoEvqbgY1lbReL44OgOHUedcrkO&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -614,13 +677,15 @@
                 <p>Ivan teaches how to plant a garden.</p>
                 <span class="duration">11:15</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998864199/a2dc662dea?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=17OYHaZZ80uCQMhiTT81itWYfGi9IUb5I&sz=w1000" alt="Ivan Inspects Rock Climbing">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998864199/a2dc662dea?autoplay=1')">
+            <div id="video-container-38">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects Rock Climbing" src="https://drive.google.com/thumbnail?id=17OYHaZZ80uCQMhiTT81itWYfGi9IUb5I&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -628,13 +693,15 @@
                 <p>Ivan explores the world of rock climbing.</p>
                 <span class="duration">9:07</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998864328/37bccf9e9e?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1HX9zlt-kg3TWb_VZnyffv2TkF5DUTwWH&sz=w1000" alt="Ivan Inspects Skid Loaders">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998864328/37bccf9e9e?autoplay=1')">
+            <div id="video-container-39">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects Skid Loaders" src="https://drive.google.com/thumbnail?id=1HX9zlt-kg3TWb_VZnyffv2TkF5DUTwWH&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -642,13 +709,15 @@
                 <p>Learn about skid loaders with Ivan.</p>
                 <span class="duration">10:50</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998864477/b0bc5ea848?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1uvwgG8lPJfmrTGM4OefcgM3hg5OsO2Ps&sz=w1000" alt="Ivan Inspects Sledding">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998864477/b0bc5ea848?autoplay=1')">
+            <div id="video-container-40">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects Sledding" src="https://drive.google.com/thumbnail?id=1uvwgG8lPJfmrTGM4OefcgM3hg5OsO2Ps&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -656,13 +725,15 @@
                 <p>Join Ivan for fun sledding adventures.</p>
                 <span class="duration">11:22</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998864631/eddaa35aff?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1P9diuXRpJ8noLJUTFL0IXafq4uuAf6VE&sz=w1000" alt="Ivan Inspects Snowmobiles">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998864631/eddaa35aff?autoplay=1')">
+            <div id="video-container-41">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects Snowmobiles" src="https://drive.google.com/thumbnail?id=1P9diuXRpJ8noLJUTFL0IXafq4uuAf6VE&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -670,13 +741,15 @@
                 <p>Ivan explores snowmobiles for winter fun.</p>
                 <span class="duration">8:56</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998866290/c0b0040f3c?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1H0Tc56e_Y0GptihzzXt2SuenkClRr_zO&sz=w1000" alt="Kids Show All About Horses with Ivan the Inspector!">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998866290/c0b0040f3c?autoplay=1')">
+            <div id="video-container-42">
+                <div class="video-thumbnail">
+                    <img alt="Kids Show All About Horses with Ivan the Inspector!" src="https://drive.google.com/thumbnail?id=1H0Tc56e_Y0GptihzzXt2SuenkClRr_zO&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -684,13 +757,15 @@
                 <p>A fun show all about horses with Ivan.</p>
                 <span class="duration">11:08</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998866476/c46f55cbfe?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1ls1U7a8NQbgD_Q8gamgLMIYPbIIBHc59&sz=w1000" alt="Leaf Blowers Are Fun!">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998866476/c46f55cbfe?autoplay=1')">
+            <div id="video-container-43">
+                <div class="video-thumbnail">
+                    <img alt="Leaf Blowers Are Fun!" src="https://drive.google.com/thumbnail?id=1ls1U7a8NQbgD_Q8gamgLMIYPbIIBHc59&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -698,13 +773,15 @@
                 <p>Ivan explores the use of leaf blowers.</p>
                 <span class="duration">9:50</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998866591/1c0a91fe04?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1LGG_2O9zvIgdoffKl4jJbGqu1CcyHMmJ&sz=w1000" alt="Learn about Snowblowers with Ivan the Inspector!">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998866591/1c0a91fe04?autoplay=1')">
+            <div id="video-container-44">
+                <div class="video-thumbnail">
+                    <img alt="Learn about Snowblowers with Ivan the Inspector!" src="https://drive.google.com/thumbnail?id=1LGG_2O9zvIgdoffKl4jJbGqu1CcyHMmJ&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -712,13 +789,15 @@
                 <p>Discover how snowblowers work with Ivan.</p>
                 <span class="duration">15:12</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998866727/fc829868e0?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=10itzkNxSVkuGNw0xpmuuoxo_9KcGhYm4&sz=w1000" alt="Learning about Lawn Mowers with Ivan the Inspector">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998866727/fc829868e0?autoplay=1')">
+            <div id="video-container-45">
+                <div class="video-thumbnail">
+                    <img alt="Learning about Lawn Mowers with Ivan the Inspector" src="https://drive.google.com/thumbnail?id=10itzkNxSVkuGNw0xpmuuoxo_9KcGhYm4&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -726,13 +805,15 @@
                 <p>Ivan teaches about different lawn mowers.</p>
                 <span class="duration">10:56</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998866854/2fcfa4e97c?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1EmhRAQyC7RtqMhTqK6RLWwrrhjs5pU1_&sz=w1000" alt="Learning about powersports vehicles with Ivan the Inspector!">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998866854/2fcfa4e97c?autoplay=1')">
+            <div id="video-container-46">
+                <div class="video-thumbnail">
+                    <img alt="Learning about powersports vehicles with Ivan the Inspector!" src="https://drive.google.com/thumbnail?id=1EmhRAQyC7RtqMhTqK6RLWwrrhjs5pU1_&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -740,13 +821,15 @@
                 <p>Explore powersports vehicles with Ivan.</p>
                 <span class="duration">12:05</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998867022/a8f47817df?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1UkwiaObyMFefkAwIy0uZCwGAYn8gwB8m&sz=w1000" alt="Musical Instruments For Kids!">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998867022/a8f47817df?autoplay=1')">
+            <div id="video-container-47">
+                <div class="video-thumbnail">
+                    <img alt="Musical Instruments For Kids!" src="https://drive.google.com/thumbnail?id=1UkwiaObyMFefkAwIy0uZCwGAYn8gwB8m&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -754,13 +837,15 @@
                 <p>Ivan introduces different musical instruments.</p>
                 <span class="duration">11:41</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998375632/3549dd4c73?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=12b0rdUrkEPqWZl6zm2l7GZSncLwLdjR2&sz=w1000" alt="Outdoor Toys for Kids!">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998375632/3549dd4c73?autoplay=1')">
+            <div id="video-container-48">
+                <div class="video-thumbnail">
+                    <img alt="Outdoor Toys for Kids!" src="https://drive.google.com/thumbnail?id=12b0rdUrkEPqWZl6zm2l7GZSncLwLdjR2&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -768,13 +853,15 @@
                 <p>Ivan explores fun outdoor toys for kids.</p>
                 <span class="duration">12:11</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998867182/03d2984b1b?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1PzLjacWxr5hqyv60DQBJMokD29OP-ELT&sz=w1000" alt="Planting Seeds For Kids">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998867182/03d2984b1b?autoplay=1')">
+            <div id="video-container-49">
+                <div class="video-thumbnail">
+                    <img alt="Planting Seeds For Kids" src="https://drive.google.com/thumbnail?id=1PzLjacWxr5hqyv60DQBJMokD29OP-ELT&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -782,13 +869,15 @@
                 <p>Learn how to plant seeds with Ivan.</p>
                 <span class="duration">10:33</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998867290/2a4df0ddf5?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1iTA4o0YFod39UrQjW0ZwqrvIg3H-vNs3&sz=w1000" alt="Playing In The Snow with Ivan The Inspector!">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998867290/2a4df0ddf5?autoplay=1')">
+            <div id="video-container-50">
+                <div class="video-thumbnail">
+                    <img alt="Playing In The Snow with Ivan The Inspector!" src="https://drive.google.com/thumbnail?id=1iTA4o0YFod39UrQjW0ZwqrvIg3H-vNs3&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -796,13 +885,15 @@
                 <p>Join Ivan for snowy outdoor fun.</p>
                 <span class="duration">10:07</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998867413/15958f0129?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1omDAcdHeQ9YXRmCF7E6s02zIyHfE2wgD&sz=w1000" alt="Puzzles For Kids">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998867413/15958f0129?autoplay=1')">
+            <div id="video-container-51">
+                <div class="video-thumbnail">
+                    <img alt="Puzzles For Kids" src="https://drive.google.com/thumbnail?id=1omDAcdHeQ9YXRmCF7E6s02zIyHfE2wgD&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -810,13 +901,15 @@
                 <p>Ivan explores fun puzzles for kids.</p>
                 <span class="duration">18:17</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998347788/d98e5a5a52?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=18CT2ysp9Fzn5qTz3hc0uATXQBkBkM7AP&sz=w1000" alt="Recycling Trucks For Kids!">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998347788/d98e5a5a52?autoplay=1')">
+            <div id="video-container-52">
+                <div class="video-thumbnail">
+                    <img alt="Recycling Trucks For Kids!" src="https://drive.google.com/thumbnail?id=18CT2ysp9Fzn5qTz3hc0uATXQBkBkM7AP&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -824,13 +917,15 @@
                 <p>Ivan inspects recycling trucks and their purpose.</p>
                 <span class="duration">10:53</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998867632/25c3169d45?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1Ck9IkT072B_R3W6YIG9aVTCKC2CxvOen&sz=w1000" alt="Science Experiments For Kids">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998867632/25c3169d45?autoplay=1')">
+            <div id="video-container-53">
+                <div class="video-thumbnail">
+                    <img alt="Science Experiments For Kids" src="https://drive.google.com/thumbnail?id=1Ck9IkT072B_R3W6YIG9aVTCKC2CxvOen&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -838,13 +933,15 @@
                 <p>Ivan conducts exciting science experiments.</p>
                 <span class="duration">12:00</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998867793/8ed34e7302?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1UFLhuvI7x5tKeG7PRbn1WTLaZkt91PBE&sz=w1000" alt="Ivan Inspects Semi Trucks!">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998867793/8ed34e7302?autoplay=1')">
+            <div id="video-container-54">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects Semi Trucks!" src="https://drive.google.com/thumbnail?id=1UFLhuvI7x5tKeG7PRbn1WTLaZkt91PBE&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -852,13 +949,15 @@
                 <p>Discover semi trucks with Ivan.</p>
                 <span class="duration">9:26</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998867863/fc6a64ab28?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1mnJgPGnaktQwa9EBj-E5LoTyQMku0T-E&sz=w1000" alt="Side-by-side learning for kids with Ivan the Inspector!">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998867863/fc6a64ab28?autoplay=1')">
+            <div id="video-container-55">
+                <div class="video-thumbnail">
+                    <img alt="Side-by-side learning for kids with Ivan the Inspector!" src="https://drive.google.com/thumbnail?id=1mnJgPGnaktQwa9EBj-E5LoTyQMku0T-E&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -866,13 +965,15 @@
                 <p>Learn about side-by-side vehicles with Ivan.</p>
                 <span class="duration">8:48</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998867955/3f1edb1dc9?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1cym91UGbBzo01aatDbfUCK0kxPj_XXWG&sz=w1000" alt="Snow Activities for Kids!">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998867955/3f1edb1dc9?autoplay=1')">
+            <div id="video-container-56">
+                <div class="video-thumbnail">
+                    <img alt="Snow Activities for Kids!" src="https://drive.google.com/thumbnail?id=1cym91UGbBzo01aatDbfUCK0kxPj_XXWG&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -880,13 +981,15 @@
                 <p>Ivan explores snow painting and more.</p>
                 <span class="duration">14:23</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998868092/c0d6a8f0bb?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1ePgwCkS9SLX_ZtmzfwLqLvZkFPWYb2qR&sz=w1000" alt="Snowmobiles, Ice Fishing, Sledding and More for Kids!">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998868092/c0d6a8f0bb?autoplay=1')">
+            <div id="video-container-57">
+                <div class="video-thumbnail">
+                    <img alt="Snowmobiles, Ice Fishing, Sledding and More for Kids!" src="https://drive.google.com/thumbnail?id=1ePgwCkS9SLX_ZtmzfwLqLvZkFPWYb2qR&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -894,13 +997,15 @@
                 <p>Winter fun with snowmobiles, ice fishing, and sledding.</p>
                 <span class="duration">1:02:23</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998869448/7058296e5c?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1aUbP7OKL4IvCUqZikcaa9zIRauCOTXaS&sz=w1000" alt="Snowshoeing for Kids with Ivan the Inspector!">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998869448/7058296e5c?autoplay=1')">
+            <div id="video-container-58">
+                <div class="video-thumbnail">
+                    <img alt="Snowshoeing for Kids with Ivan the Inspector!" src="https://drive.google.com/thumbnail?id=1aUbP7OKL4IvCUqZikcaa9zIRauCOTXaS&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -908,13 +1013,15 @@
                 <p>Learn snowshoeing with Ivan.</p>
                 <span class="duration">11:00</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998869576/edaf71e0b7?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1B496TJdyr7lyCkfSbB6CENyjxJApgNxH&sz=w1000" alt="Soccer for Kids!">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998869576/edaf71e0b7?autoplay=1')">
+            <div id="video-container-59">
+                <div class="video-thumbnail">
+                    <img alt="Soccer for Kids!" src="https://drive.google.com/thumbnail?id=1B496TJdyr7lyCkfSbB6CENyjxJApgNxH&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -922,13 +1029,15 @@
                 <p>Ivan explores the basics of soccer.</p>
                 <span class="duration">9:06</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998869688/566bad9f82?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1Zep44FyyfHQmV78Fl7uylH77xqc5NwLi&sz=w1000" alt="Toys for Kids!">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998869688/566bad9f82?autoplay=1')">
+            <div id="video-container-60">
+                <div class="video-thumbnail">
+                    <img alt="Toys for Kids!" src="https://drive.google.com/thumbnail?id=1Zep44FyyfHQmV78Fl7uylH77xqc5NwLi&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -936,13 +1045,15 @@
                 <p>Explore fun toys with Ivan.</p>
                 <span class="duration">19:29</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998870064/28ab54be25?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=12bNpA_N3sjDSbystffx4B9CJ4VjgdvV1&sz=w1000" alt="Weed Whackers for Kids!">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998870064/28ab54be25?autoplay=1')">
+            <div id="video-container-61">
+                <div class="video-thumbnail">
+                    <img alt="Weed Whackers for Kids!" src="https://drive.google.com/thumbnail?id=12bNpA_N3sjDSbystffx4B9CJ4VjgdvV1&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -950,13 +1061,15 @@
                 <p>Learn about weed whackers with Ivan.</p>
                 <span class="duration">8:34</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998870163/a88fd7f73d?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1YbfvNBYJQtQx9U6yrI3gzQIoT5QOFC7_&sz=w1000" alt="Weed Whackers, Leaf Blowers, Lawn Mowers and more for kids!">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998870163/a88fd7f73d?autoplay=1')">
+            <div id="video-container-62">
+                <div class="video-thumbnail">
+                    <img alt="Weed Whackers, Leaf Blowers, Lawn Mowers and more for kids!" src="https://drive.google.com/thumbnail?id=1YbfvNBYJQtQx9U6yrI3gzQIoT5QOFC7_&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -964,13 +1077,15 @@
                 <p>Ivan explores various yard tools for kids.</p>
                 <span class="duration">1:05:32</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998872367/25c7eae975?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1RMoA_mI8K5S1PuHKOcSl-PJ2XDaq7kWt&sz=w1000" alt="Ivan Inspects All Kinds Of Wheels">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998872367/25c7eae975?autoplay=1')">
+            <div id="video-container-63">
+                <div class="video-thumbnail">
+                    <img alt="Ivan Inspects All Kinds Of Wheels" src="https://drive.google.com/thumbnail?id=1RMoA_mI8K5S1PuHKOcSl-PJ2XDaq7kWt&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -978,13 +1093,15 @@
                 <p>Discover different kinds of wheels with Ivan.</p>
                 <span class="duration">9:02</span>
             </div>
-        </a>
-    
-        <a href="https://vimeo.com/998872477/c248841b63?autoplay=1" class="video-item" target="_blank">
-            <div class="video-thumbnail">
-                <img src="https://drive.google.com/thumbnail?id=1LOvJ8SxEpWMKxG5s1PNjHbwnpUIdoD1q&sz=w1000" alt="Zero Turn Lawn Mowers, Riding Lawn Mowers, Tractors and so much more!">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
+        </div>
+
+        <div class="video-item" onclick="playVideo('https://vimeo.com/998872477/c248841b63?autoplay=1')">
+            <div id="video-container-64">
+                <div class="video-thumbnail">
+                    <img alt="Zero Turn Lawn Mowers, Riding Lawn Mowers, Tractors and so much more!" src="https://drive.google.com/thumbnail?id=1LOvJ8SxEpWMKxG5s1PNjHbwnpUIdoD1q&amp;sz=w1000"/>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="video-info">
@@ -992,14 +1109,13 @@
                 <p>Ivan explores a variety of lawn equipment.</p>
                 <span class="duration">59:18</span>
             </div>
-        </a>
-      </section>      
-  </main>
-  
-  <footer>
-    <p>&copy; 2024 Ivan the Inspector. All rights reserved.</p>
-  </footer>
-  
-  <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
-</body>
+        </div>
+    </section>
+</main>
+<footer>
+    <p>© 2024 Ivan the Inspector. All rights reserved.</p>
+</footer>
+<script crossorigin="anonymous" src="https://kit.fontawesome.com/your-font-awesome-kit.js"></script>
+<script src="ivan_the_inspector.js"></script>
+
 </html>

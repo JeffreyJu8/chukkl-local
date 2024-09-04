@@ -114,7 +114,86 @@ color: #8aefe7;
 }
 
 
+
+/* Content Wrapper: Place channel info and video container side by side */
 #contentWrapper {
+    margin-top: 2vh;
+    display: flex;
+    justify-content: center; /* Center the items horizontally */
+    align-items: flex-start; /* Align items to the top */
+    gap: 20px; /* Space between the channel-info and video player */
+}
+
+/* Channel Info Styling */
+.channel-info {
+    background-color: #373243; 
+    width: 40%; 
+    height: auto;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+
+/* Video Container Styling */
+#videoContainer {
+    position: relative;
+    width: 60%; 
+    max-width: 830px; 
+    height: auto; 
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+}
+
+/* Video Player Styling */
+#videoPlayer {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Maintain 16:9 ratio */
+    border-radius: 10px;
+    position: relative;
+}
+
+/* Fullscreen mode for video container */
+#videoContainer.fullscreen-mode {
+    width: 100vw;
+    height: 100vh;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+}
+
+#videoContainer.fullscreen-mode #videoPlayer {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+}
+
+/* Volume control container positioned below the video */
+#volume-control-container {
+    width: 100%;
+    max-width: 830px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Volume slider styling */
+#volume-control {
+    display: flex;
+    align-items: center;
+}
+
+#fullscreenBtn {
+    cursor: pointer;
+}
+
+
+
+/* #contentWrapper {
     margin-top: 2vh;
     display: flex;
     justify-content: center; 
@@ -132,7 +211,7 @@ color: #8aefe7;
 }
 
 
-.video-overlay {
+/* .video-overlay {
     position: absolute; 
     top: 0;
     left: 0;
@@ -140,12 +219,12 @@ color: #8aefe7;
     bottom: 0;
     z-index: 10;
     pointer-events: auto;
-}
+} */
 
-#videoPlayer {
+/* #videoPlayer {
     position: absolute; 
     width: 100%;
-    height: 100%;
+    aspect-ratio: 16 / 9;
     border-radius: 10px;
 }
 
@@ -164,10 +243,10 @@ color: #8aefe7;
 #videoContainer.fullscreen-mode .video-overlay {
     width: 100%;
     height: 100vh;
-}
+}  */
 
 
-.channel-info{
+/* .channel-info{
     background-color: #373243; 
     width: 40%;
     height: 400px;
@@ -203,7 +282,7 @@ color: #8aefe7;
     margin-left: 30px;
     margin-right: 8px;
     margin-top: 0px;
-}
+} */
 
 #videoCast{
     margin-left: 30px;
@@ -633,14 +712,13 @@ color: #8aefe7;
 }
 
 
-#volume-control-container {
+/* #volume-control-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 10px auto;
     display: flex;
-    justify-content: flex-end; 
-    padding-right: 20px;
-    margin-top: 10px; 
-    margin-bottom: -5px;
-    width: 100%; 
-    gap: 1em;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .fullscreen-toggle {
@@ -672,7 +750,7 @@ color: #8aefe7;
 
 .mute-toggle:hover{
     cursor: pointer;
-}
+} */
 
 
 /* Style the thumb */

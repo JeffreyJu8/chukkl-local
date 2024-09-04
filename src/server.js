@@ -13,12 +13,23 @@ const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const formData = require('form-data');
 const Mailgun = require('mailgun.js');
+const session = require('express-session');
+// const { isAuthenticated } = require('./middleware/auth');
 
 const app = express();
 const cors = require('cors');
 app.use(cors());
 app.use(compression());
 app.use(express.json());
+
+
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: process.env.NODE_ENV === 'production' }
+}));
+
 
 const PORT = process.env.PORT || 3003;
 
@@ -84,7 +95,7 @@ const mailgun = new Mailgun(formData);
 const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY});
 const MAILGUN_DOMAIN = process.env.MAILGUN_DOMAIN;
 
-// Function to send email using Mailgun or fallback to console.log
+// Function to send email using Mailgun
 async function sendEmail(to, subject, text, html) {
     if (process.env.NODE_ENV === 'production') {
         try {
@@ -102,7 +113,6 @@ async function sendEmail(to, subject, text, html) {
             throw error;
         }
     } else {
-        // In development, log the email content instead of sending
         console.log('Email content (DEV MODE):');
         console.log('To:', to);
         console.log('Subject:', subject);
@@ -162,7 +172,7 @@ app.post('/register', async (req, res) => {
             throw new Error('Failed to insert user into database');
         }
 
-        // Attempt to send confirmation email
+        // Confirmation email
         try {
             await sendEmail(
                 email,
@@ -206,6 +216,7 @@ app.get('/confirm-email', async (req, res) => {
     }
 });
 
+
 // Route for login page
 app.get('/login', (req, res) => {
     res.sendFile(path.join(publicDirectoryPath, 'login.html'));
@@ -220,7 +231,7 @@ app.post('/login', async (req, res) => {
         const user = await userCollection.findOne({ email });
 
         if (!user) {
-            return res.status(401).json({ message: 'Invalid email or password' });
+            return res.status(401).json({ message: 'Invalid email' });
         }
 
         if (!user.isConfirmed) {
@@ -230,16 +241,71 @@ app.post('/login', async (req, res) => {
         const isPasswordValid = await bcrypt.compare(password, user.password);
 
         if (!isPasswordValid) {
-            return res.status(401).json({ message: 'Invalid email or password' });
+            return res.status(401).json({ message: 'Invalid password' });
         }
 
-        // Proceed with login logic (e.g., generating a session or JWT)
+        // Store user info in session
+        req.session.user = {
+            id: user._id,
+            email: user.email,
+            fullname: user.fullname
+        };
+
+        console.log('Session after login:', req.session);
+
         res.status(200).json({ message: 'Login successful' });
+
+        // Save the session
+        req.session.save(err => {
+            if (err) {
+                console.error('Session save error:', err);
+                return res.status(500).json({ message: 'Internal Server Error' });
+            }
+            res.status(200).json({ message: 'Login successful' });
+        });
+
     } catch (error) {
         console.error("Error during login:", error);
         res.status(500).json({ message: 'Internal Server Error' });
     }
 });
+
+const isAuthenticated = (req, res, next) => {
+    if (req.session.user) {
+      next();
+    } else {
+      res.status(401).json({ message: 'Not authenticated' });
+    }
+  };
+
+// Use the middleware in a route
+// app.get('/protected-route', isAuthenticated, (req, res) => {
+//     res.send(`Hello, ${req.session.user.fullname}`);
+// });
+
+// Route for checking login
+app.get('/api/user', isAuthenticated, (req, res) => {
+    res.json({
+        isLoggedIn: true,
+        user: {
+        id: req.session.user.id,
+        email: req.session.user.email,
+        fullname: req.session.user.fullname
+        }
+    });
+});
+
+
+// POST request for signout
+app.post('/signout', (req, res) => {
+    req.session.destroy((err) => {
+      if (err) {
+        return res.status(500).json({ message: 'Could not log out, please try again' });
+      }
+      res.clearCookie('connect.sid'); // Clear the session cookie
+      return res.json({ message: 'Logout successful' });
+    });
+  });
 
 app.post('/check-registration', async (req, res) => {
     const { email, phone } = req.body;
@@ -282,7 +348,7 @@ app.post('/forgot-password', async (req, res) => {
         }
 
         const resetToken = generateToken();
-        const resetTokenExpiry = Date.now() + 3600000; // 1 hour from now
+        const resetTokenExpiry = Date.now() + 3600000; // 1 hour
 
         await userCollection.updateOne(
             { _id: user._id },
@@ -355,6 +421,17 @@ app.post('/reset-password', async (req, res) => {
         console.error("Error handling password reset:", error);
         res.status(500).json({ message: 'Internal Server Error' });
     }
+});
+
+
+// POST endpoint for signing out
+app.post('/signout', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            return res.status(500).json({ message: 'Sign out failed' });
+        }
+        res.status(200).json({ message: 'Sign out successful' });
+    });
 });
 
 
@@ -740,8 +817,8 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 
 async function startServer() {
-    await connectToDatabase();  // Connect to PostgreSQL
-    await connectToMongoDB();   // Connect to MongoDB Atlas
+    await connectToDatabase();  
+    await connectToMongoDB();   
     const server = app.listen(PORT, () => {
         console.log(`Server started on http://localhost:${PORT}`);
     });
