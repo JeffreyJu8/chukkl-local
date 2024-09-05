@@ -125,8 +125,8 @@
     width: 100%;
     height: 100%;
     background-image: url('./images/miss_linky_background.jpeg');
-    background-size: cover;
     background-position: center;
+    background-size: cover;
     opacity: 0.5;
     z-index: -1;
   }
