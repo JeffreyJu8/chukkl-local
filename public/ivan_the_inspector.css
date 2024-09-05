@@ -112,7 +112,7 @@
     width: 100vw;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; /* Aligns content to the bottom */
+    justify-content: flex-end;
     text-align: left;
   }
   
@@ -133,10 +133,9 @@
   .hero h1 {
     font-family: 'Poppins';
     margin-left: 3vw;
-    font-family: "Poppins";
     font-size: 48px;
     font-weight: 900; 
-    margin-bottom: 20px;
+    margin-bottom: 0rem;
     color: white; 
     text-shadow: 4px 0 #000, -4px 0 #000, 0 4px #000, 0 -4px #000,
              3px 3px #000, -3px -3px #000, 3px -3px #000, -3px 3px #000;
@@ -144,9 +143,10 @@
   
   
   .hero p {
+    width: 50%;
     margin-left: 3vw;
+    margin-top: 0rem;
     font-size: 18px;
-    margin-bottom: 40px;
     text-shadow: 2px 0 #000, -2px 0 #000, 0 2px #000, 0 -2px #000,
              1px 1px #000, -1px -1px #000, 1px -1px #000, -1px 1px #000;
 
