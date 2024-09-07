@@ -11,7 +11,8 @@ function playVideo(videoUrl) {
 
         videoContainer.innerHTML = `
             <iframe src="${embedUrl}"
-                    width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen>
+                    width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen
+                    style="margin-right: 20px;">
             </iframe>
         `;
     } else {
