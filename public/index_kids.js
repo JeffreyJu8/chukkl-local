@@ -52,7 +52,7 @@ async function checkLoginStatus() {
             }
 
             // Update the UI for a logged-in user
-            // updateUIForLoggedInUser(result.user);
+            updateUIForLoggedInUser(result.user);
 
         } else {
             console.error('Token verification failed');
@@ -74,19 +74,12 @@ function updateUIForLoggedInUser(user) {
     document.getElementById('loginButton').style.display = 'none';
     document.getElementById('registerButton').style.display = 'none';
     document.getElementById('signOutButton').style.display = 'inline-block';
-    document.getElementById('welcomeMessage').textContent = `Welcome, ${user.email}`;
-    document.getElementById('personalizedContent').style.display = 'block';
-    document.getElementById('genericContent').style.display = 'none';
 }
 
 function updateUIForLoggedOutUser() {
     document.getElementById('loginButton').style.display = 'inline-block';
     document.getElementById('registerButton').style.display = 'inline-block';
     document.getElementById('signOutButton').style.display = 'none';
-    // Show generic content
-    document.getElementById('welcomeMessage').textContent = '';
-    document.getElementById('personalizedContent').style.display = 'none';
-    document.getElementById('genericContent').style.display = 'block';
 }
 
 

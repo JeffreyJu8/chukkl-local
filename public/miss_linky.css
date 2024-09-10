@@ -91,19 +91,19 @@
   gap: 10px;
 }
 
-.login,.register{
-font-size: 1vw;
-color: white;
-width: 150px;
-margin-top: 10px;
-background-color: black;
-border: 3px solid #8aefe7;
-border-radius: 10px;
-height: 50px;
+.login,.register,.sign-out{
+  font-size: 1vw;
+  color: white;
+  width: 150px;
+  margin-top: 10px;
+  background-color: black;
+  border: 3px solid #8aefe7;
+  border-radius: 10px;
+  height: 50px;
 }
 
-.login,.register:hover {
-cursor: pointer; 
+.login,.registe,.sign-out:hover {
+  cursor: pointer; 
 }
 
 .hero {

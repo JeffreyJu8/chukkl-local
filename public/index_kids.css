@@ -109,7 +109,7 @@ color: #8aefe7;
     height: 50px;
 }
 
-.login,.register:hover {
+.login,.registe,.sign-out:hover {
     cursor: pointer; 
 }
 

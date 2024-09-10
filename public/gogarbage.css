@@ -91,7 +91,7 @@
     gap: 10px;
 }
 
-.login,.register{
+.login,.register,.sign-out{
   font-size: 1vw;
   color: white;
   width: 150px;
@@ -102,7 +102,7 @@
   height: 50px;
 }
 
-.login,.register:hover {
+.login,.registe,.sign-out:hover {
   cursor: pointer; 
 }
 
