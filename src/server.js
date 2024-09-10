@@ -13,40 +13,13 @@ const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const formData = require('form-data');
 const Mailgun = require('mailgun.js');
-const session = require('express-session');
-// const { isAuthenticated } = require('./middleware/auth');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 const cors = require('cors');
 app.use(cors());
 app.use(compression());
 app.use(express.json());
-
-
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: process.env.NODE_ENV === 'production' }
-}));
-
-
-const PORT = process.env.PORT || 3003;
-
-// PostgreSQL configuration
-const dbConfig = {
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE,
-    port: process.env.DB_PORT,
-    ssl: { rejectUnauthorized: false },
-    max: 20,
-    idleTimeoutMillis: 30000,
-    connectionTimeoutMillis: 2000,
-};
-
-const db = new Pool(dbConfig);
 
 // MongoDB Atlas connection
 const mongoUri = process.env.MONGO_URI; 
@@ -69,6 +42,49 @@ async function connectToMongoDB() {
         console.error("Failed to connect to MongoDB Atlas:", error);
     }
 }
+
+
+// app.use(session({
+//     secret: process.env.SESSION_SECRET,
+//     resave: false,
+//     saveUninitialized: true,
+//     store: MongoStore.create({
+//         mongoUrl: process.env.MONGO_URI,
+//         dbName: process.env.MONGO_DB_NAME
+//     }),
+//     cookie: {
+//         secure: process.env.NODE_ENV === 'production',  
+//         httpOnly: true,
+//         sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax',  
+//         maxAge: 24 * 60 * 60 * 1000 // 24 hours
+//     }
+// }));
+
+
+// app.use(cors({
+//     origin: process.env.NODE_ENV === 'production' 
+//         ? 'https://chukkl.com' 
+//         : 'http://localhost:3003',
+//     credentials: true
+// }));
+
+const PORT = process.env.PORT || 3003;
+
+// PostgreSQL configuration
+const dbConfig = {
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
+    port: process.env.DB_PORT,
+    ssl: { rejectUnauthorized: false },
+    max: 20,
+    idleTimeoutMillis: 30000,
+    connectionTimeoutMillis: 2000,
+};
+
+const db = new Pool(dbConfig);
+
 
 const memcachedClient = memjs.Client.create(process.env.MEMCACHED_SERVERS, {
     username: process.env.MEMCACHED_USERNAME,
@@ -222,7 +238,7 @@ app.get('/login', (req, res) => {
     res.sendFile(path.join(publicDirectoryPath, 'login.html'));
 });
 
-// User cannot login until email is confirmed
+// Login route to issue JWT token
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
@@ -244,31 +260,24 @@ app.post('/login', async (req, res) => {
             return res.status(401).json({ message: 'Invalid password' });
         }
 
-        // Store user info in session
-        req.session.user = {
-            id: user._id,
-            email: user.email,
-            fullname: user.fullname
-        };
+        // Generate JWT token
+        const token = jwt.sign(
+            { id: user._id, email: user.email }, 
+            process.env.JWT_SECRET, 
+            { expiresIn: '1h' }
+        );
 
-        console.log('Session after login:', req.session);
+        // Debugging: Check if token is generated
+        console.log('Generated token:', token);
 
-        res.status(200).json({ message: 'Login successful' });
-
-        // Save the session
-        req.session.save(err => {
-            if (err) {
-                console.error('Session save error:', err);
-                return res.status(500).json({ message: 'Internal Server Error' });
-            }
-            res.status(200).json({ message: 'Login successful' });
-        });
-
+        // Send token in response
+        res.status(200).json({ message: 'Login successful', token });
     } catch (error) {
         console.error("Error during login:", error);
         res.status(500).json({ message: 'Internal Server Error' });
     }
 });
+
 
 const isAuthenticated = (req, res, next) => {
     if (req.session.user) {
@@ -276,22 +285,42 @@ const isAuthenticated = (req, res, next) => {
     } else {
       res.status(401).json({ message: 'Not authenticated' });
     }
-  };
+};
 
 // Use the middleware in a route
-// app.get('/protected-route', isAuthenticated, (req, res) => {
-//     res.send(`Hello, ${req.session.user.fullname}`);
-// });
+app.get('/protected-route', isAuthenticated, (req, res) => {
+    res.send(`Hello, ${req.session.user.fullname}`);
+});
 
-// Route for checking login
-app.get('/api/user', isAuthenticated, (req, res) => {
-    res.json({
-        isLoggedIn: true,
-        user: {
-        id: req.session.user.id,
-        email: req.session.user.email,
-        fullname: req.session.user.fullname
+// Route for checking if the user is logged in
+app.get('/api/user', (req, res) => {
+    if (req.session && req.session.user) {
+        res.json({
+            isLoggedIn: true,
+            user: req.session.user
+        });
+    } else {
+        res.status(401).json({ message: 'Not authenticated' });
+    }
+});
+
+
+// Route to verify token
+app.post('/verify-token', (req, res) => {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1]; // Extract the token from the "Bearer" header
+
+    if (!token) {
+        return res.sendStatus(401); // No token provided
+    }
+
+    // Verify the token
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+        if (err) {
+            return res.sendStatus(403); // Invalid token
         }
+
+        res.json({ user }); // Send user details back if the token is valid
     });
 });
 
@@ -305,7 +334,8 @@ app.post('/signout', (req, res) => {
       res.clearCookie('connect.sid'); // Clear the session cookie
       return res.json({ message: 'Logout successful' });
     });
-  });
+});
+
 
 app.post('/check-registration', async (req, res) => {
     const { email, phone } = req.body;
@@ -425,15 +455,14 @@ app.post('/reset-password', async (req, res) => {
 
 
 // POST endpoint for signing out
-app.post('/signout', (req, res) => {
-    req.session.destroy(err => {
-        if (err) {
-            return res.status(500).json({ message: 'Sign out failed' });
-        }
-        res.status(200).json({ message: 'Sign out successful' });
-    });
-});
-
+// app.post('/signout', (req, res) => {
+//     req.session.destroy(err => {
+//         if (err) {
+//             return res.status(500).json({ message: 'Sign out failed' });
+//         }
+//         res.status(200).json({ message: 'Sign out successful' });
+//     });
+// });
 
 
 // Route for about page

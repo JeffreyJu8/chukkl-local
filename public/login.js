@@ -1,6 +1,6 @@
 const API_BASE_URL = window.location.hostname.includes('localhost')
     ? 'http://localhost:3003'
-    : 'https://chukkl-heroku-839b30d27713.herokuapp.com';
+    : 'https://chukkl.com';
 
 
 document.getElementById('loginForm').addEventListener('submit', async function(event) {
@@ -10,7 +10,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     const messageElement = document.getElementById('message');
 
     try {
-        const response = await fetch('/login', {
+        const response = await fetch(`${API_BASE_URL}/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -20,13 +20,25 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
 
         const result = await response.json();
 
-        // if (response.ok) {
-        //     messageElement.innerText = 'Login successful';
-        //     // Redirect to the main page after successful login
-        //     window.location.href = `${API_BASE_URL}/kids`;
-        // } else {
-        //     messageElement.innerText = `Login failed: ${result.message}`;
-        // }
+        // Debug: Log the entire response to see if the token is included
+        console.log('Full login response:', result);
+
+        if (response.ok) {
+            // Check the token received from the server
+            console.log('Received token:', result.token);
+
+            if (result.token) {
+                // Save the JWT token in localStorage
+                localStorage.setItem('debughoney:core-sdk:*token', result.token);
+                console.log('Stored token:', localStorage.getItem('debughoney:core-sdk:*token'));
+                messageElement.innerText = 'Login successful';
+                window.location.href = `${API_BASE_URL}/kids`;
+            } else {
+                console.error('No token found in the result');
+            }
+        } else {
+            messageElement.innerText = `Login failed: ${result.message}`;
+        }
     } catch (error) {
         console.error('Error during login:', error);
         messageElement.innerText = 'An error occurred during login';

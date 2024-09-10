@@ -13,55 +13,81 @@ var isLoading = false;
 
 const API_BASE_URL = window.location.hostname.includes('localhost')
     ? 'http://localhost:3003'
-    : 'https://chukkl-heroku-839b30d27713.herokuapp.com';
+    : 'https://chukkl.com';
 
-
-window.onload = checkLoginStatus;
 
 async function checkLoginStatus() {
+    console.log('Checking login status...');
+    const token = localStorage.getItem('debughoney:core-sdk:*token');
+    console.log('Token retrieved from localStorage:', token);
+    
+    if (!token) {
+        console.error('No token found in localStorage');
+        // Redirect to login page or handle accordingly
+        // window.location.href = '/login';
+        // return;
+    } else {
+        console.log('Token found, proceeding to verify...');
+    }
+
     try {
-        const response = await fetch('/api/user');
+        const response = await fetch(`${API_BASE_URL}/verify-token`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+    
+        console.log('Verify token response status:', response.status);
+    
         if (response.ok) {
-        const data = await response.json();
-        updateUIForLoggedInUser(data.user);
-        return true;
+            const result = await response.json();
+            console.log('Token verification successful, user:', result.user);
+
+            // **Set the token in localStorage again (if you need to refresh it or update it)**
+            if (result.token) {
+                localStorage.setItem('debughoney:core-sdk:*token', result.token); 
+                console.log('Updated token stored in localStorage:', localStorage.getItem('debughoney:core-sdk:*token'));
+            }
+
+            // Update the UI for a logged-in user
+            // updateUIForLoggedInUser(result.user);
+
         } else {
-        updateUIForLoggedOutUser();
-        return false;
+            console.error('Token verification failed');
+            // localStorage.removeItem('debughoney:core-sdk:*token');
+            // Redirect to login page
+            // window.location.href = '/login';
         }
     } catch (error) {
-        console.error('Error checking login status:', error);
-        updateUIForLoggedOutUser();
-        return false;
+        console.error('Error verifying token:', error);
+        // localStorage.removeItem('debughoney:core-sdk:*token');
+        // Redirect to login page
+        // window.location.href = '/login';
     }
 }
     
+
+
 function updateUIForLoggedInUser(user) {
     document.getElementById('loginButton').style.display = 'none';
     document.getElementById('registerButton').style.display = 'none';
-    document.getElementById('signOutButton').style.display = 'block';
-    // console.log(`Logged in as ${user.fullname}`);
-}
-    
-function updateUIForLoggedOutUser() {
-    document.getElementById('loginButton').style.display = 'block';
-    document.getElementById('registerButton').style.display = 'block';
-    document.getElementById('signOutButton').style.display = 'none';
+    document.getElementById('signOutButton').style.display = 'inline-block';
+    document.getElementById('welcomeMessage').textContent = `Welcome, ${user.email}`;
+    document.getElementById('personalizedContent').style.display = 'block';
+    document.getElementById('genericContent').style.display = 'none';
 }
 
-document.getElementById('signOutButton').addEventListener('click', async function(event) {
-    event.preventDefault();
-    try {
-        const response = await fetch('/signout', { method: 'POST' });
-        if (response.ok) {
-        await checkLoginStatus(); 
-        } else {
-        console.error('Failed to sign out');
-        }
-    } catch (error) {
-        console.error('Error signing out:', error);
-    }
-});
+function updateUIForLoggedOutUser() {
+    document.getElementById('loginButton').style.display = 'inline-block';
+    document.getElementById('registerButton').style.display = 'inline-block';
+    document.getElementById('signOutButton').style.display = 'none';
+    // Show generic content
+    document.getElementById('welcomeMessage').textContent = '';
+    document.getElementById('personalizedContent').style.display = 'none';
+    document.getElementById('genericContent').style.display = 'block';
+}
 
 
 function debounce(func, wait) {
@@ -618,7 +644,8 @@ function loadRestrictedVimeoVideo(vimeoUrl) {
       muted: true,
       keyboard: false,
       control: false,
-      backgroun: false
+      backgroun: true,
+      dnt: true
     });
   
     // Disable pausing
@@ -889,10 +916,26 @@ updateCurrentTime();
 setInterval(updateCurrentTime, 5000);
 
 document.addEventListener('DOMContentLoaded', function() {
+    const signOutButton = document.getElementById('signOutButton');
+    if (signOutButton) {
+        signOutButton.addEventListener('click', async function(event) {
+            event.preventDefault();
+            localStorage.removeItem('debughoney:core-sdk:*token');
+            updateUIForLoggedOutUser();
+            window.location.href = `${API_BASE_URL}/login`; 
+        });
+    }
+
+    checkLoginStatus(); 
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
     // const vimeoUrl = 'https://player.vimeo.com/video/999294023?h=fa1e62e655&badge=0&autopause=0&player_id=0&app_id=58479&dnt=1&muted=1&autoplay=1&background=1&control=0&keyboard=0';
 
-    const vimeoUrl = 'https://player.vimeo.com/video/999284559?h=6008d8725c&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479'
+    const vimeoUrl = 'https://vimeo.com/1007041329'
     loadRestrictedVimeoVideo(vimeoUrl);
+    
 });
 
 // function updateTimeIntervals() {

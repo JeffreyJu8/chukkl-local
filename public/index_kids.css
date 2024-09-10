@@ -98,7 +98,7 @@ color: #8aefe7;
 }
 
 
-.login,.register{
+.login,.register,.sign-out{
     font-size: 1vw;
     color: white;
     width: 150px;
