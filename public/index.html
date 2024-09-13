@@ -14,7 +14,7 @@
         <!-- Preloading a comprehensive URL with multiple families might not be directly supported; consider preloading individual font families if needed -->
     
         <!-- External CSS and Fonts -->
-        <link rel="stylesheet" href="index.css">
+        <link rel="stylesheet" href="index_kids.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
         <link href="https://fonts.cdnfonts.com/css/aileron" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Kavoon&display=swap" rel="stylesheet">
@@ -72,51 +72,38 @@
             </div>
         </div>
         <div class="button-group">
-            <a href="#">
+            <a href="/on_demand">
                 <button class="on-demand">On Demand</button>
             </a>
-            <a href="/">
+            <a href="/kids">
                 <button class="live-tv">Live TV</button>
             </a>
         </div>
 
-        <div class="button-group">
-            <a href="/about">
-                <button class="about-us">About Us</button>
+        <div class="button-group1">
+            <a href="/login" id="loginButton">
+                <button class="login">Login</button>
             </a>
-
-            <a href="https://posh.vip/g/chukkl" target="_blank">
-                <button class="feedback">Events</button>
+          
+            <a href="/register" id="registerButton">
+                <button class="register">Register</button>
+            </a>
+        
+            <a href="/signout" id="signOutButton" style="display: none;">
+                <button class="sign-out">Sign Out</button>
             </a>
         </div>
 
-        
     </div>
-
 
     <div id="contentWrapper">
         <div id="channelInfo" class="channel-info">
-            
         </div>
+        
         <div id="videoContainer">
             <div id="videoPlayer"></div>
-            <div class="video-overlay" onclick="testOverlay()"></div>
-            
         </div>
     </div>
-
-
-    <div id="volume-control-container">
-        <div id="volume-control">
-            <button class="mute-toggle">
-                <i class="fas fa-volume-up"></i>
-            </button>
-            <input type="range" id="volumeSlider" min="0" max="100" value="100" step="1">
-        </div>
-        <button id="fullscreenBtn" class="fullscreen-toggle">
-            <i class="fas fa-expand"></i> 
-        </button>
-    </div>    
     
     
 
@@ -132,7 +119,7 @@
     <div id="channelsGrid"></div>
 
     <div id="footer">
-        <div class="footer-group left">
+        <!-- <div class="footer-group left">
             <div class="social-links">
                 <a href="https://www.instagram.com/chukkltv/" target="_blank">
                     <i class="fab fa-instagram"></i>
@@ -152,7 +139,7 @@
                     <button>Creator or Brand?</button>
                 </a>
             </div>
-        </div>
+        </div> -->
 
 
         <div class="footer-group right">
@@ -178,7 +165,9 @@
     </script>
 
 
-    <script src="index.js"></script>
+    <script src="https://player.vimeo.com/api/player.js" defer></script>
+    <script src="index_kids.js" defer></script>
+
 
 </body>
 </html>

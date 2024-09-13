@@ -78,7 +78,7 @@ const dbConfig = {
     database: process.env.DB_DATABASE,
     port: process.env.DB_PORT,
     ssl: { rejectUnauthorized: false },
-    max: 20,
+    max: 50,
     idleTimeoutMillis: 30000,
     connectionTimeoutMillis: 2000,
 };
@@ -581,32 +581,81 @@ async function fetchScheduleDetailsForChannelAndDay(channelId, dayOfWeek) {
     }
 }
 
+// app.get('/channels/dayoftheweek/:day', async (req, res) => {
+//     const dayOfWeek = req.params.day;
+//     // const cacheKey = `channels_day_${dayOfWeek}`;
+
+//     try {
+//         // Log the request and cache key
+//         console.log(`Request received for channels on day: ${dayOfWeek}, cacheKey: ${cacheKey}`);
+
+//         // Check the local cache
+//         // let channelsData = localCache.get(cacheKey);
+//         // if (channelsData) {
+//         //     console.log(`Cache hit in localCache for ${dayOfWeek}`);
+//         // }
+
+//         // Check the memcached cache if local cache is empty
+//         // if (channelsData) {
+//             // console.log(`Checking memcached for cacheKey: ${cacheKey}`);
+//             // channelsData = await memcachedClient.get(cacheKey);
+
+//             if (channelsData && channelsData.value) {
+//                 // console.log(`Cache hit in memcached for ${cacheKey}`);
+//                 channelsData = JSON.parse(channelsData.value.toString());
+//                 // localCache.set(cacheKey, channelsData);
+//             } else {
+//                 // Cache miss: Fetch from database or external source
+//                 console.log(`Cache miss for channels on ${dayOfWeek}`);
+//                 channelsData = await fetchChannelsForDay(dayOfWeek);
+
+//                 // Cache the data in both memcached and local cache
+//                 // await memcachedClient.set(cacheKey, JSON.stringify(channelsData), { expires: 3600 });
+//                 // localCache.set(cacheKey, channelsData);
+//             }
+//         // }
+
+//         // Ensure channelsData is logged
+//         console.log("Fetched channels data:", channelsData);
+
+//         // Return data to the frontend
+//         res.json(channelsData);
+
+//     } catch (error) {
+//         console.error("Error fetching channels for the day from cache:", error);
+//         res.status(500).send('Internal Server Error');
+//     }
+// });
+
+
 app.get('/channels/dayoftheweek/:day', async (req, res) => {
     const dayOfWeek = req.params.day;
-    const cacheKey = `channels_day_${dayOfWeek}`;
 
     try {
-        let channelsData = localCache.get(cacheKey);
-        if (!channelsData) {
-            channelsData = await memcachedClient.get(cacheKey);
+        // Log the request
+        console.log(`Request received for channels on day: ${dayOfWeek}`);
 
-            if (channelsData && channelsData.value) {
-                channelsData = JSON.parse(channelsData.value.toString());
-                localCache.set(cacheKey, channelsData);
-            } else {
-                console.log(`Cache miss for channels on ${dayOfWeek}`);
-                channelsData = await fetchChannelsForDay(dayOfWeek);
-                await memcachedClient.set(cacheKey, JSON.stringify(channelsData), { expires: 3600 });
-                localCache.set(cacheKey, channelsData);
-            }
+        // Fetch channels directly from the database
+        const channelsData = await fetchChannelsForDay(dayOfWeek);
+
+        // Log the fetched data for debugging
+        console.log("Fetched channels data from database:", channelsData);
+
+        // Check if data exists, otherwise return 404
+        if (!channelsData || channelsData.length === 0) {
+            return res.status(404).json({ message: 'No channels found for this day' });
         }
 
+        // Return data to the frontend
         res.json(channelsData);
+
     } catch (error) {
-        console.error("Error fetching channels for the day from cache:", error);
+        console.error("Error fetching channels from database:", error);
         res.status(500).send('Internal Server Error');
     }
 });
+
+
 
 app.get('/channel/:id', async (req, res) => {
     const channelId = req.params.id;
@@ -659,21 +708,27 @@ app.get('/channels', async (req, res) => {
     }
 });
 
+
 app.post('/videos', async (req, res) => {
     const { channelId, timezone } = req.body;
     const currentTimeMoment = moment().tz(timezone);
     const currentTime = currentTimeMoment.format('HH:mm:ss');
     const dayOfWeek = currentTimeMoment.format('dddd');
 
+    console.log(`Received request for channel ${channelId} at ${currentTime} on ${dayOfWeek}`);
+
     try {
         let videoId = await getCurrentVideoIdFromCache(channelId, currentTimeMoment, timezone, dayOfWeek);
+        console.log("Initial videoId from cache:", videoId);
         if (!videoId) {
             console.log(`Cache miss for video on channel ${channelId} at ${currentTime}`);
             const videos = await fetchVideoDetailsFromDatabase(channelId, currentTime);
             videoId = videos.length > 0 ? videos[0].video_id : null;
+            console.log("Fetched videoId from database:", videoId);
         }
 
         if (!videoId) {
+            console.error("No video found for the current time.");
             return res.status(404).json({ message: 'No video is scheduled to play at this time.' });
         }
 
@@ -681,18 +736,22 @@ app.post('/videos', async (req, res) => {
         let videoDetails = localCache.get(cacheKey);
         if (!videoDetails) {
             videoDetails = await memcachedClient.get(cacheKey);
+            console.log(`Cache ${videoDetails ? 'hit' : 'miss'} for video details: ${cacheKey}`);
             if (videoDetails && videoDetails.value) {
                 videoDetails = JSON.parse(videoDetails.value.toString());
                 localCache.set(cacheKey, videoDetails);
             } else {
                 const videos = await fetchVideoDetailsFromDatabase(channelId, currentTime);
                 videoDetails = videos[0];
+                console.log("Fetched video details from database:", videoDetails);
                 await memcachedClient.set(cacheKey, JSON.stringify(videoDetails), { expires: 3600 });
                 localCache.set(cacheKey, videoDetails);
             }
         }
-
+        
+        console.log("Fetched video details: ", videoDetails)
         const scheduleTimes = await fetchScheduleTimesForVideo(videoId, channelId, currentTimeMoment);
+        console.log("Fetched schedule times:", scheduleTimes);
 
         res.json(formatVideoResponse(videoDetails, scheduleTimes));
     } catch (error) {
@@ -701,25 +760,36 @@ app.post('/videos', async (req, res) => {
     }
 });
 
+
 async function fetchVideoDetailsFromDatabase(channelId, currentTime) {
     const query = `
-        SELECT v.url, v.people, v.video_id, v.channel_id, s.start_time, s.end_time 
+        SELECT 
+            v.url, 
+            v.people, 
+            v.video_id, 
+            v.channel_id, 
+            s.start_time, 
+            s.end_time 
         FROM Schedules s
         JOIN Videos v ON s.video_id = v.video_id
         WHERE s.channel_id = $1
         AND $2 BETWEEN s.start_time AND s.end_time
         ORDER BY s.start_time`;
 
+    let client;
+
     try {
-        const client = await db.connect();
+        client = await db.connect(); // Get connection from the pool
         const { rows } = await client.query(query, [channelId, currentTime]);
-        client.release();
-        return rows;
+        return rows; // Return fetched rows
     } catch (error) {
         console.error("Error fetching video details from database:", error);
-        return [];
+        return []; // Return an empty array if an error occurs
+    } finally {
+        if (client) client.release(); // Ensure the connection is released
     }
 }
+
 
 async function getCurrentVideoIdFromCache(channelId, currentTime, userTimeZone, dayOfWeek) {
     const scheduleKey = `schedule_channel_${channelId}_${dayOfWeek}`;
@@ -808,6 +878,7 @@ async function fetchScheduleTimesForVideo(videoId, channelId, currentTime) {
     }
     return null;
 }
+
 
 app.get('/schedules', async (req, res) => {
     const { channelId, dayOfWeek } = req.query;
