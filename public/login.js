@@ -32,7 +32,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
                 localStorage.setItem('debughoney:core-sdk:*token', result.token);
                 console.log('Stored token:', localStorage.getItem('debughoney:core-sdk:*token'));
                 messageElement.innerText = 'Login successful';
-                window.location.href = `${API_BASE_URL}/kids`;
+                window.location.href = `${API_BASE_URL}/`;
             } else {
                 console.error('No token found in the result');
             }

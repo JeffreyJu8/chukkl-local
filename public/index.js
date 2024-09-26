@@ -145,29 +145,25 @@ function updateChannelUI(details) {
 }
 
 
-async function defaultVideo(){
-
+async function defaultVideo() {
     try {
-        const response = await fetch(`${API_BASE_URL}/channels`); 
-        const channels = await response.json();
-        // const limitedChannels = channels.slice(25, 50);
+        // Fetch channel with id = 1
+        const response = await fetch(`${API_BASE_URL}/channel/1`); 
+        const channel = await response.json();
         const grid = document.getElementById('channelsGrid');
         grid.innerHTML = '';
-        // console.log("kids channels: ", limitedChannels);
 
-        for (const [index, channel] of channels.entries()) {
-            // console.log("loop index: ", index);
-            if (index === 0) {
-                console.log("default channel: ", channel);
-                getChannelInfo(channel, 'channel-style-' + index);
-            }
-        }
+        // Log and use the default channel
+        console.log("default channel: ", channel);
+        getChannelInfo(channel, 'channel-style-0');
+        
     } catch (error) {
-        console.error("Error fetching channels:", error);
+        console.error("Error fetching default channel:", error);
     }
 
     localStorage.setItem('defaultVideoCalled', 'true');
 }
+
 
 
 async function fetchChannels() {
@@ -287,6 +283,23 @@ function getChannelInfo(channel, styleClass) {
         currChannelName.className = '';
         currChannelName.classList.add(styleClass);
 }
+
+
+function toggleChannelInfo() {
+    var channelInfoDiv = document.getElementById("channelInfo");
+    if (window.innerWidth < 500) {
+        channelInfoDiv.style.display = "none";
+    } else {
+        channelInfoDiv.style.display = "block";
+    }
+}
+
+
+// Run the function when the page loads
+window.addEventListener('load', toggleChannelInfo);
+
+// Run the function when the window is resized
+window.addEventListener('resize', toggleChannelInfo);
 
 
 function getCurrentDayOfWeek() {
@@ -611,10 +624,8 @@ function loadVideo(channelId) {
 
 
 function loadRestrictedVimeoVideo(vimeoUrl, timeElapsed) {
-    console.log("vimeo start: ", timeElapsed)
     const playerDiv = document.getElementById('videoContainer');
-    
-    // Get dynamic width and height of the video player container
+
     const updatePlayerDimensions = () => ({
         width: playerDiv.clientWidth,
         height: playerDiv.clientHeight
@@ -624,7 +635,7 @@ function loadRestrictedVimeoVideo(vimeoUrl, timeElapsed) {
         url: vimeoUrl,
         responsive: false,
         autoplay: true,
-        muted: true, // Ensure muted autoplay works across browsers
+        muted: true,
         keyboard: false,
         controls: true,
         background: false,
@@ -632,35 +643,44 @@ function loadRestrictedVimeoVideo(vimeoUrl, timeElapsed) {
         ...updatePlayerDimensions()
     };
 
-    // Initialize or update Vimeo player
+    const setTimeAndPlay = () => {
+        window.player.getDuration().then((duration) => {
+            console.log("Video duration:", duration);
+
+            // Validate timeElapsed
+            if (isNaN(timeElapsed) || timeElapsed < 0 || timeElapsed > duration) {
+                console.warn(`Invalid timeElapsed (${timeElapsed}), resetting to 0`);
+                timeElapsed = 0;
+            }
+
+            return window.player.setCurrentTime(timeElapsed);
+        }).then(() => {
+            return window.player.play();
+        }).catch((error) => {
+            console.error("Error setting video time and playing:", error);
+        });
+    };
+
     if (!window.player) {
         window.player = new Vimeo.Player(playerDiv, playerOptions);
 
-        // Listen for the 'loaded' event once
-        window.player.once('loaded', function() {
-            window.player.setCurrentTime(timeElapsed).then(() => {
-                window.player.play();
-            }).catch((error) => {
-                console.error("Error setting video start time:", error);
-            });
+        window.player.ready().then(() => {
+            setTimeAndPlay();
+        }).catch((error) => {
+            console.error("Error initializing player:", error);
         });
     } else {
         window.player.loadVideo(vimeoUrl).then(() => {
-            const { width, height } = updatePlayerDimensions();
-            window.player.setWidth(width);
-            window.player.setHeight(height);
-
-            // Set the current time and play the video directly
-            window.player.setCurrentTime(timeElapsed).then(() => {
-                
-                window.player.play();
-            }).catch((error) => {
-                console.error("Error setting video start time:", error);
-            });
+            setTimeAndPlay();
         }).catch((error) => {
-            console.error("Error loading video:", error);
+            console.error("Error loading new video:", error);
         });
     }
+
+    // Update player dimensions
+    const { width, height } = updatePlayerDimensions();
+    window.player.setWidth(width);
+    window.player.setHeight(height);
 
     // Listen for time updates and store the last time
     window.player.on('timeupdate', function(event) {
@@ -675,15 +695,8 @@ function loadRestrictedVimeoVideo(vimeoUrl, timeElapsed) {
 }
 
 
-
-
-// Debounce function to optimize resize event handler
-function debounce(func, wait) {
-    let timeout;
-    return function() {
-        clearTimeout(timeout);
-        timeout = setTimeout(func, wait);
-    };
+function isTouchDevice() {
+    return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 }
 
 

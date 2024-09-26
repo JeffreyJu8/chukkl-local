@@ -27,12 +27,12 @@ body {
 #appTitle {
     font-family: 'Aileron', sans-serif;                
     display: flex;
-    font-size: 3.4vw;
+    font-size: 4vw;
     align-items: center;
+    height: 8vh;
 }
 
 #appTitle .letter {
-    margin: -2.2px;
     font-weight: bolder;
 }
 
@@ -44,6 +44,8 @@ body {
     transform: translateX(-50%);
     top: 50%;
     transform: translate(-50%, -50%);
+    width: 15vw;
+    height: 4vh;
 }
 
 
@@ -56,8 +58,7 @@ body {
 
 #appMoto {
     font-family: 'Poppins';
-    font-size: 1.2vw;
-    margin-top: 5px;
+    font-size: 1.1vw;
 }
 
 #appMoto .word:nth-child(1) {color:white}
@@ -67,25 +68,17 @@ body {
 #appMoto .word:nth-child(5) {color:white}
 
 .live-tv, .on-demand {
-
-align-items: center;
-font-size: 20px;
-background-color: black;
-color: white;
-border: none;
-border-radius: 5px;
-transition: background-color 0.3s ease;
+    align-items: center;
+    font-size: 1.4vw;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
 .live-tv:hover, .on-demand:hover {
 color: #8aefe7;
-}
-
-#appTitle .button-group {
-    display: flex;
-    justify-content: flex-end;
-    margin-left: 55vw;
-    gap: 10px;
 }
 
 .button-group1 {
@@ -99,14 +92,14 @@ color: #8aefe7;
 
 
 .login,.register,.sign-out{
-    font-size: 1vw;
+    font-size: 1.2vw;
     color: white;
-    width: 150px;
+    width: 10vw;
+    height: 6vh;
     margin-top: 10px;
     background-color: black;
-    border: 3px solid #8aefe7;
+    border: 1px solid #8aefe7;
     border-radius: 10px;
-    height: 50px;
 }
 
 .login,.registe,.sign-out:hover {
@@ -248,17 +241,18 @@ color: #8aefe7;
 .channel-block {
     position: relative;
     display: flex;
-    padding: 10px 10px;
     border-radius: 5px;
     margin-bottom: 1px; 
     transition: height 0.3s ease;
     overflow: hidden;
     height: 17vh;
+    padding-top: 2px;
+    padding-bottom: 3px;
 }
 
 
 .channel-block-expanded{
-    height: 40vh;
+    height: 30vh;
 }
 
 
@@ -314,7 +308,7 @@ color: #8aefe7;
 
 .channel-style-3 {
     font-family: 'Fredoka One';
-    font-size: 2vw;
+    font-size: 25px;
     display: flex;
     gap: 10px;
     justify-content: center; 
@@ -324,7 +318,7 @@ color: #8aefe7;
 
 .channel-style-4 {
     font-family: 'Fredoka One';
-    font-size: 2vw;
+    font-size: 25px;
     display: flex;
     gap: 10px;
     justify-content: center; 
@@ -524,7 +518,7 @@ color: #8aefe7;
 
 
 .channel-name-expanded {
-    height: 40vh;
+    height: 30vh;
     border: 2px solid transparent;
     border-radius: 5px;
 }
@@ -546,7 +540,7 @@ color: #8aefe7;
 .channel-schedule-expanded {
     display: flex;
     flex-direction: row;
-    height: 40vh;
+    height: 30vh;
     border-radius: 5px;
 }
 
@@ -569,7 +563,7 @@ color: #8aefe7;
 
 .schedule-item-expanded {
     border: 2px solid transparent;
-    height: 40vh;
+    height: 30vh;
 }
 
 .schedule-title {
@@ -707,3 +701,116 @@ color: #8aefe7;
 }
 
 
+@media (max-width: 500px) {
+    #header{
+        display: flex;
+        flex-direction: column;
+        height: 12vh;
+        background-color: black;
+        width: 100vw;
+        align-items: center; 
+        position: relative;
+    }
+
+    #titleContainer {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    #appTitle {
+        font-family: 'Aileron', sans-serif;                
+        display: flex;
+        font-size: 5vw;
+        align-items: center;
+        height: 8vh;
+    }
+    
+    #appTitle .letter {
+        font-weight: bolder;
+    }
+    
+    .button-group {
+        display: flex;
+        gap: 10px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 20vw;
+        height: 4vh;
+    }
+    
+    
+    #appTitle .letter:nth-child(1) { color: #8aefe7; }    /* First letter 'c' */
+    #appTitle .letter:nth-child(2) { color: #8aefe7; } /* Second letter 'h' */
+    #appTitle .letter:nth-child(3) { color: white; } /* Third letter 'u' */
+    #appTitle .letter:nth-child(4) { color: white; }  /* Fourth letter 'k' */
+    #appTitle .letter:nth-child(5) { color: white; }   /* Fifth letter 'k' */
+    #appTitle .letter:nth-child(6) { color: white; } /* Sixth letter 'l' */
+    
+    #appMoto {
+        font-family: 'Poppins';
+        font-size: 1.5vw;
+    }
+    
+    #appMoto .word:nth-child(1) {color:white}
+    #appMoto .word:nth-child(2) {color:#8aefe7}
+    #appMoto .word:nth-child(3) {color:white}
+    #appMoto .word:nth-child(4) {color:white}
+    #appMoto .word:nth-child(5) {color:white}
+    
+    .live-tv, .on-demand {
+        align-items: center;
+        font-size: 2vw;
+        background-color: black;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+    
+    .live-tv:hover, .on-demand:hover {
+    color: #8aefe7;
+    }
+    
+    .button-group1 {
+        position: absolute;
+        right: 5vw; 
+        top: 50%; 
+        transform: translateY(-50%); 
+        display: flex;
+        gap: 10px;
+    }
+    
+    
+    .login,.register,.sign-out{
+        font-size: 2vw;
+        color: white;
+        width: 10vw;
+        height: 6vh;
+        margin-top: 10px;
+        background-color: black;
+        border: 1px solid #8aefe7;
+        border-radius: 10px;
+    }
+    
+    .login,.registe,.sign-out:hover {
+        cursor: pointer; 
+    }
+
+
+    #contentWrapper{
+        height: 50%;
+    }
+
+    #videoContainer {
+        width: 100%;
+        height: 50%;
+        margin: 0;
+    }
+}

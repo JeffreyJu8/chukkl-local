@@ -471,37 +471,37 @@ app.get('/about', (req, res) => {
 });
 
 // Route for "/kids"
-app.get('/kids', (req, res) => {
-    res.sendFile(path.join(publicDirectoryPath, 'index_kids.html'));
-});
+// app.get('/kids', (req, res) => {
+//     res.sendFile(path.join(publicDirectoryPath, 'index_kids.html'));
+// });
 
 // Route for "/kids/about"
-app.get('/kids/about', (req, res) => {
-    res.sendFile(path.join(publicDirectoryPath, 'about_us_kids.html'));
-});
+// app.get('/kids/about', (req, res) => {
+//     res.sendFile(path.join(publicDirectoryPath, 'about_us_kids.html'));
+// });
 
 // Route for "/on_demand"
-app.get('/on_demand', (req, res) => {
+app.get('/on-demand', (req, res) => {
     res.sendFile(path.join(publicDirectoryPath, 'on_demand.html'));
 });
 
 // Route for Ivan the Inspector
-app.get('/ivan_the_inspector', (req, res) => {
+app.get('/ivan-the-inspector', (req, res) => {
     res.sendFile(path.join(publicDirectoryPath, 'ivan_the_inspector.html'));
 });
 
 // Route for Art with Ashley
-app.get('/art_with_ashley', (req, res) => {
+app.get('/art-with-ashley', (req, res) => {
     res.sendFile(path.join(publicDirectoryPath, 'art_with_ashley.html'));
 });
 
 // Route for Miss Linky
-app.get('/miss_linky', (req, res) => {
+app.get('/miss-linky', (req, res) => {
     res.sendFile(path.join(publicDirectoryPath, 'miss_linky.html'));
 });
 
 // Route for GoGarbage
-app.get('/gogarbage', (req, res) => {
+app.get('/go-garbage', (req, res) => {
     res.sendFile(path.join(publicDirectoryPath, 'gogarbage.html'));
 });
 
@@ -681,6 +681,7 @@ app.get('/channel/:id', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
 
 app.get('/channels', async (req, res) => {
     const cacheKey = 'all_channels';
