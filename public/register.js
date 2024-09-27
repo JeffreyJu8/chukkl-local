@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const stripe = Stripe('<%= stripePublishableKey %>'); 
+
     document.getElementById('registrationForm').addEventListener('submit', async function(event) {
         event.preventDefault();
         
@@ -80,8 +82,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const result = await response.json();
 
             if (response.status === 201) {
-                // Redirect to the home page after successful registration
-                window.location.href = '/';
+                // Registration is successful, now redirect to the payment page
+                window.location.href = `/payment?email=${encodeURIComponent(email)}`;
             } else {
                 messageElement.innerText = `Registration failed: ${result.message}`;
             }

@@ -867,13 +867,28 @@ function updateUIForLoggedInUser(user) {
     document.getElementById('loginButton').style.display = 'none';
     document.getElementById('registerButton').style.display = 'none';
     document.getElementById('signOutButton').style.display = 'inline-block';
+    document.getElementById('go-to-payment').style.display = 'inline-block';
+    
 }
 
 function updateUIForLoggedOutUser() {
     document.getElementById('loginButton').style.display = 'inline-block';
     document.getElementById('registerButton').style.display = 'inline-block';
     document.getElementById('signOutButton').style.display = 'none';
+    document.getElementById('go-to-payment').style.display = 'none';
 }
+
+
+document.getElementById('go-to-payment').addEventListener('click', () => {
+    const loggedInEmail = localStorage.getItem('loggedInUserEmail');
+    
+    if (loggedInEmail) {
+        // Redirect to the payment page with the user's email
+        window.location.href = `${API_BASE_URL}/payment?email=${encodeURIComponent(loggedInEmail)}`;
+    } else {
+        console.error('User is not logged in or email is not available');
+    }
+});
 
 
 document.addEventListener("DOMContentLoaded", function() {

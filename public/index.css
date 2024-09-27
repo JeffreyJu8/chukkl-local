@@ -102,8 +102,23 @@ color: #8aefe7;
     border-radius: 10px;
 }
 
+#go-to-payment{
+    font-size: 1.2vw;
+    color: white;
+    width: 10vw;
+    height: 6vh;
+    margin-top: 10px;
+    background-color: black;
+    border: 1px solid #8aefe7;
+    border-radius: 10px;
+}
+
 .login,.registe,.sign-out:hover {
     cursor: pointer; 
+}
+
+#go-to-payment:hover{
+    cursor: pointer;
 }
 
 

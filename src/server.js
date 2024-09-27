@@ -1,7 +1,6 @@
 const { Pool } = require('pg');
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const moment = require('moment-timezone');
-require('dotenv').config({ path: 'src/.env' });
 const path = require('path');
 const express = require('express');
 const compression = require('compression');
@@ -14,12 +13,19 @@ const crypto = require('crypto');
 const formData = require('form-data');
 const Mailgun = require('mailgun.js');
 const jwt = require('jsonwebtoken');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+require('dotenv').config({ path: 'src/.env' });
 
 const app = express();
 const cors = require('cors');
 app.use(cors());
 app.use(compression());
 app.use(express.json());
+
+
+app.set('view engine', 'ejs');
+
+app.set('views', path.join(__dirname, '../public'));
 
 // MongoDB Atlas connection
 const mongoUri = process.env.MONGO_URI; 
@@ -144,14 +150,18 @@ function generateToken() {
 
 // Route for registration page
 app.get('/register', (req, res) => {
-    res.sendFile(path.join(publicDirectoryPath, 'register.html'));
+    const stripePublishableKey = process.env.STRIPE_PUBLISHABLE_KEY;
+    res.render('register', { stripePublishableKey });
 });
 
+
+// Route for handling registration
 // Route for handling registration
 app.post('/register', async (req, res) => {
     const { fullname, email, phone, dob, password } = req.body;
 
     try {
+        // Validate input fields
         if (!fullname || !email || !phone || !dob || !password) {
             return res.status(400).json({ message: 'All fields are required' });
         }
@@ -169,7 +179,13 @@ app.post('/register', async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
         const emailToken = generateToken();
-        const confirmationLink = `chukkl.com/confirm-email?token=${emailToken}`;
+        const confirmationLink = `https://chukkl.com/confirm-email?token=${emailToken}`;
+
+        const stripeCustomer = await stripe.customers.create({
+            email: email,
+            name: fullname,
+            phone: phone,
+        });
 
         const newUser = {
             fullname: fullname,
@@ -180,6 +196,8 @@ app.post('/register', async (req, res) => {
             emailToken,
             isConfirmed: false,
             createdAt: new Date(),
+            stripeCustomerId: stripeCustomer.id,
+            paymentStatus: 'pending',
         };
 
         const result = await userCollection.insertOne(newUser);
@@ -188,7 +206,7 @@ app.post('/register', async (req, res) => {
             throw new Error('Failed to insert user into database');
         }
 
-        // Confirmation email
+        // Send confirmation email
         try {
             await sendEmail(
                 email,
@@ -198,7 +216,12 @@ app.post('/register', async (req, res) => {
                  <p>Thank you for registering. Please click the link below to confirm your email address:</p>
                  <a href="${confirmationLink}">Confirm Email</a>`
             );
-            res.status(201).json({ message: 'User registered successfully. Please check your email to confirm your registration.' });
+
+            // Send success response after sending email
+            res.status(201).json({ 
+                message: 'User registered successfully. Please check your email to confirm your registration.' 
+            });
+
         } catch (emailError) {
             console.error("Error sending confirmation email:", emailError);
             res.status(201).json({ 
@@ -210,6 +233,8 @@ app.post('/register', async (req, res) => {
         res.status(500).json({ message: 'Internal Server Error', error: error.message });
     }
 });
+
+
 
 // Route for email confirmation
 app.get('/confirm-email', async (req, res) => {
@@ -231,6 +256,133 @@ app.get('/confirm-email', async (req, res) => {
         res.status(500).json({ message: 'Internal Server Error' });
     }
 });
+
+
+app.get('/payment-intent', (req, res) => {
+    const { email } = req.query;
+    const stripePublishableKey = process.env.STRIPE_PUBLISHABLE_KEY;
+
+    res.render('payment-intent', { 
+        stripePublishableKey, 
+        userEmail: email 
+    });
+});
+
+
+// Route for creating a Stripe Checkout session
+app.post('/create-checkout-session', async (req, res) => {
+    const { email, amount } = req.body;
+
+    try {
+        // Find the user in MongoDB by email
+        const userCollection = mongoDB.collection('users');
+        const user = await userCollection.findOne({ email });
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Create the Stripe Checkout session
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            customer_email: email,
+            line_items: [
+                {
+                    price_data: {
+                        currency: 'usd',
+                        product_data: {
+                            name: 'Platform Subscription',  // Customize as needed
+                        },
+                        unit_amount: amount,  // Amount in cents
+                    },
+                    quantity: 1,
+                },
+            ],
+            mode: 'payment',
+            success_url: 'https://yourdomain.com/success',  // Success URL
+            cancel_url: 'https://yourdomain.com/cancel',    // Cancel URL
+        });
+
+        // Send the sessionId back to the client
+        res.status(200).json({ sessionId: session.id });
+    } catch (error) {
+        console.error('Error creating checkout session:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+
+// Route to handle Stripe webhook
+app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
+    const sig = req.headers['stripe-signature'];
+
+    let event;
+    try {
+        event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
+    } catch (err) {
+        console.log(`⚠️  Webhook signature verification failed: ${err.message}`);
+        return res.status(400).send(`Webhook Error: ${err.message}`);
+    }
+
+    // Handle the event
+    switch (event.type) {
+        case 'checkout.session.completed':
+            const session = event.data.object;
+            try {
+                // Update user payment status in MongoDB
+                await mongoDB.collection('users').updateOne(
+                    { stripeCustomerId: session.customer },
+                    { 
+                        $set: { 
+                            paymentStatus: 'paid',  // Update to 'paid' after successful payment
+                            paymentDetails: {
+                                sessionId: session.id,
+                                amount: session.amount_total,
+                                currency: session.currency,
+                                paymentMethodTypes: session.payment_method_types,
+                                paymentStatus: session.payment_status
+                            }
+                        }
+                    }
+                );
+                console.log(`Payment status updated for customer ${session.customer}`);
+            } catch (updateError) {
+                console.error('Error updating payment status:', updateError);
+            }
+            break;
+        default:
+            console.log(`Unhandled event type ${event.type}`);
+    }
+
+    // Return a 200 response to acknowledge receipt of the event
+    res.status(200).json({ received: true });
+});
+
+
+
+app.get('/success', (req, res) => {
+    res.sendFile(path.join(publicDirectoryPath, 'success.html'));
+});
+
+app.get('/cancel', (req, res) => {
+    res.sendFile(path.join(publicDirectoryPath, 'cancel.html'));
+});
+
+
+app.get('/payment', (req, res) => {
+    const { email } = req.query;
+    const stripePublishableKey = process.env.STRIPE_PUBLISHABLE_KEY;
+
+    if (!email) {
+        return res.status(400).send('Email is required to process payment.');
+    }
+
+    res.render('payment', { 
+        stripePublishableKey, 
+        userEmail: email 
+    });
+});
+
 
 
 // Route for login page

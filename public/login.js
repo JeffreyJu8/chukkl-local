@@ -30,6 +30,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
             if (result.token) {
                 // Save the JWT token in localStorage
                 localStorage.setItem('debughoney:core-sdk:*token', result.token);
+                localStorage.setItem('loggedInUserEmail', email);
                 console.log('Stored token:', localStorage.getItem('debughoney:core-sdk:*token'));
                 messageElement.innerText = 'Login successful';
                 window.location.href = `${API_BASE_URL}/`;

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Your Payment</title>
+    <link rel="stylesheet" href="payment.css">
+    <script src="https://js.stripe.com/v3/"></script> <!-- Stripe.js -->
+</head>
+<body>
+
+    <h1>Complete Your Payment</h1>
+    <p>Thank you for registering. Please complete your payment to finalize your subscription.</p>
+
+    <!-- Payment Button -->
+    <button id="checkout-button">Pay Now</button>
+
+    <script>
+        document.getElementById('checkout-button').addEventListener('click', async () => {
+            const stripe = Stripe('<%= stripePublishableKey %>');  // Injected from backend
+
+            try {
+                // Call your backend to create the checkout session
+                const response = await fetch('/create-checkout-session', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: '<%= userEmail %>',  // User's email from backend
+                        amount: 1000,  // Amount in cents
+                    }),
+                });
+
+
+                const { sessionId } = await response.json();
+
+                if (sessionId) {
+                    // Redirect to Stripe Checkout
+                    const { error } = await stripe.redirectToCheckout({
+                        sessionId: sessionId,
+                    });
+
+                    if (error) {
+                        console.error('Error redirecting to Stripe checkout:', error);
+                        alert(error.message || "An error occurred with the payment.");
+                    }
+                } else {
+                    console.error('Error creating Stripe session.');
+                    alert('Failed to create Stripe session. Please try again.');
+                }
+            } catch (err) {
+                console.error('Error:', err);
+                alert('An unexpected error occurred. Please try again.');
+            }
+        });
+    </script>
+</body>
+</html>
