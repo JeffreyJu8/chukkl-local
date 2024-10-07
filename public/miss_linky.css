@@ -251,105 +251,105 @@
 
 @media (max-width: 500px) {
   #header{
-      display: flex;
-      flex-direction: column;
-      height: 12vh;
-      background-color: black;
-      width: 100vw;
-      align-items: center; 
-      position: relative;
-  }
+    display: flex;
+    flex-direction: column;
+    height: 12vh;
+    background-color: black;
+    width: 100vw;
+    align-items: center; 
+    position: relative;
+}
 
-  #titleContainer {
-      display: flex;
-      flex-direction: column;
-      position: absolute;
-      left: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-  }
-  
-  #appTitle {
-      font-family: 'Aileron', sans-serif;                
-      display: flex;
-      font-size: 5vw;
-      align-items: center;
-      height: 8vh;
-  }
-  
-  #appTitle .letter {
-      font-weight: bolder;
-  }
-  
-  .button-group {
-      display: flex;
-      gap: 10px;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: 20vw;
-      height: 4vh;
-  }
-  
-  
-  #appTitle .letter:nth-child(1) { color: #8aefe7; }    /* First letter 'c' */
-  #appTitle .letter:nth-child(2) { color: #8aefe7; } /* Second letter 'h' */
-  #appTitle .letter:nth-child(3) { color: white; } /* Third letter 'u' */
-  #appTitle .letter:nth-child(4) { color: white; }  /* Fourth letter 'k' */
-  #appTitle .letter:nth-child(5) { color: white; }   /* Fifth letter 'k' */
-  #appTitle .letter:nth-child(6) { color: white; } /* Sixth letter 'l' */
-  
-  #appMoto {
-      font-family: 'Poppins';
-      font-size: 1.5vw;
-  }
-  
-  #appMoto .word:nth-child(1) {color:white}
-  #appMoto .word:nth-child(2) {color:#8aefe7}
-  #appMoto .word:nth-child(3) {color:white}
-  #appMoto .word:nth-child(4) {color:white}
-  #appMoto .word:nth-child(5) {color:white}
-  
-  .live-tv, .on-demand {
-      align-items: center;
-      font-size: 2vw;
-      background-color: black;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-  }
-  
-  .live-tv:hover, .on-demand:hover {
-  color: #8aefe7;
-  }
-  
-  .button-group1 {
-      position: absolute;
-      right: 5vw; 
-      top: 50%; 
-      transform: translateY(-50%); 
-      display: flex;
-      gap: 10px;
-  }
-  
-  
-  .login,.register,.sign-out{
-      font-size: 2vw;
-      color: white;
-      width: 10vw;
-      height: 6vh;
-      margin-top: 10px;
-      background-color: black;
-      border: 1px solid #8aefe7;
-      border-radius: 10px;
-  }
-  
-  .login,.registe,.sign-out:hover {
-      cursor: pointer; 
-  }
+#titleContainer {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#appTitle {
+    font-family: 'Aileron', sans-serif;                
+    display: flex;
+    font-size: 7vw;
+    align-items: center;
+    height: 8vh;
+}
+
+#appTitle .letter {
+    font-weight: bolder;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 20vw;
+    height: 4vh;
+}
+
+
+#appTitle .letter:nth-child(1) { color: #8aefe7; }    /* First letter 'c' */
+#appTitle .letter:nth-child(2) { color: #8aefe7; } /* Second letter 'h' */
+#appTitle .letter:nth-child(3) { color: white; } /* Third letter 'u' */
+#appTitle .letter:nth-child(4) { color: white; }  /* Fourth letter 'k' */
+#appTitle .letter:nth-child(5) { color: white; }   /* Fifth letter 'k' */
+#appTitle .letter:nth-child(6) { color: white; } /* Sixth letter 'l' */
+
+#appMoto {
+    font-family: 'Poppins';
+    font-size: 2vw;
+}
+
+#appMoto .word:nth-child(1) {color:white}
+#appMoto .word:nth-child(2) {color:#8aefe7}
+#appMoto .word:nth-child(3) {color:white}
+#appMoto .word:nth-child(4) {color:white}
+#appMoto .word:nth-child(5) {color:white}
+
+.live-tv, .on-demand {
+    align-items: center;
+    font-size: 2.5vw;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.live-tv:hover, .on-demand:hover {
+color: #8aefe7;
+}
+
+.button-group1 {
+    position: absolute;
+    right: 5vw; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    display: flex;
+    gap: 10px;
+}
+
+
+.login,.register,.sign-out{
+    font-size: 2.5vw;
+    color: white;
+    width: 12vw;
+    height: 6vh;
+    margin-top: 10px;
+    background-color: black;
+    border: 1px solid #8aefe7;
+    border-radius: 10px;
+}
+
+.login,.registe,.sign-out:hover {
+    cursor: pointer; 
+}
 
 
   #contentWrapper{

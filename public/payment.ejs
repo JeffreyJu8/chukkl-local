@@ -16,44 +16,12 @@
     <button id="checkout-button">Pay Now</button>
 
     <script>
-        document.getElementById('checkout-button').addEventListener('click', async () => {
-            const stripe = Stripe('<%= stripePublishableKey %>');  // Injected from backend
-
-            try {
-                // Call your backend to create the checkout session
-                const response = await fetch('/create-checkout-session', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        email: '<%= userEmail %>',  // User's email from backend
-                        amount: 1000,  // Amount in cents
-                    }),
-                });
-
-
-                const { sessionId } = await response.json();
-
-                if (sessionId) {
-                    // Redirect to Stripe Checkout
-                    const { error } = await stripe.redirectToCheckout({
-                        sessionId: sessionId,
-                    });
-
-                    if (error) {
-                        console.error('Error redirecting to Stripe checkout:', error);
-                        alert(error.message || "An error occurred with the payment.");
-                    }
-                } else {
-                    console.error('Error creating Stripe session.');
-                    alert('Failed to create Stripe session. Please try again.');
-                }
-            } catch (err) {
-                console.error('Error:', err);
-                alert('An unexpected error occurred. Please try again.');
-            }
-        });
+        const userEmail = '<%= userEmail %>';
     </script>
+
+    <script src="payment.js"></script>
+    
 </body>
+
+
 </html>

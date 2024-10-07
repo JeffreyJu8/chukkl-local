@@ -21,11 +21,30 @@ const cors = require('cors');
 app.use(cors());
 app.use(compression());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 
 app.set('view engine', 'ejs');
 
 app.set('views', path.join(__dirname, '../public'));
+
+
+const PORT = process.env.PORT || 3003;
+
+// PostgreSQL configuration
+const dbConfig = {
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
+    port: process.env.DB_PORT,
+    ssl: { rejectUnauthorized: false },
+    max: 20,
+    idleTimeoutMillis: 30000,
+    connectionTimeoutMillis: 2000,
+};
+
+const db = new Pool(dbConfig);
 
 // MongoDB Atlas connection
 const mongoUri = process.env.MONGO_URI; 
@@ -48,49 +67,6 @@ async function connectToMongoDB() {
         console.error("Failed to connect to MongoDB Atlas:", error);
     }
 }
-
-
-// app.use(session({
-//     secret: process.env.SESSION_SECRET,
-//     resave: false,
-//     saveUninitialized: true,
-//     store: MongoStore.create({
-//         mongoUrl: process.env.MONGO_URI,
-//         dbName: process.env.MONGO_DB_NAME
-//     }),
-//     cookie: {
-//         secure: process.env.NODE_ENV === 'production',  
-//         httpOnly: true,
-//         sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax',  
-//         maxAge: 24 * 60 * 60 * 1000 // 24 hours
-//     }
-// }));
-
-
-// app.use(cors({
-//     origin: process.env.NODE_ENV === 'production' 
-//         ? 'https://chukkl.com' 
-//         : 'http://localhost:3003',
-//     credentials: true
-// }));
-
-const PORT = process.env.PORT || 3003;
-
-// PostgreSQL configuration
-const dbConfig = {
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE,
-    port: process.env.DB_PORT,
-    ssl: { rejectUnauthorized: false },
-    max: 50,
-    idleTimeoutMillis: 30000,
-    connectionTimeoutMillis: 2000,
-};
-
-const db = new Pool(dbConfig);
-
 
 const memcachedClient = memjs.Client.create(process.env.MEMCACHED_SERVERS, {
     username: process.env.MEMCACHED_USERNAME,
@@ -271,43 +247,51 @@ app.get('/payment-intent', (req, res) => {
 
 // Route for creating a Stripe Checkout session
 app.post('/create-checkout-session', async (req, res) => {
-    const { email, amount } = req.body;
+    const { email } = req.body;
 
     try {
-        // Find the user in MongoDB by email
-        const userCollection = mongoDB.collection('users');
-        const user = await userCollection.findOne({ email });
+        console.log('Received email:', email);  // Log the received email
 
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+        // Create or retrieve Stripe customer
+        let customer = await stripe.customers.list({ email });
+        console.log('Customer list response:', customer);  // Log customer response
+
+        if (customer.data.length === 0) {
+            customer = await stripe.customers.create({ email });
+            console.log('New customer created:', customer);  // Log new customer creation
+        } else {
+            customer = customer.data[0];
+            console.log('Existing customer found:', customer);  // Log existing customer
         }
 
-        // Create the Stripe Checkout session
+        // Log before creating the session
+        console.log('Creating checkout session for customer:', customer.id);
+
+        // Create a new Stripe Checkout Session
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
-            customer_email: email,
-            line_items: [
-                {
-                    price_data: {
-                        currency: 'usd',
-                        product_data: {
-                            name: 'Platform Subscription',  // Customize as needed
-                        },
-                        unit_amount: amount,  // Amount in cents
+            mode: 'payment',  // Or 'subscription' depending on your use case
+            customer: customer.id,
+            line_items: [{
+                price_data: {
+                    currency: 'usd',
+                    product_data: {
+                        name: 'Your Product or Service',
                     },
-                    quantity: 1,
+                    unit_amount: 1000,  // Amount in cents ($10.00 in this example)
                 },
-            ],
-            mode: 'payment',
-            success_url: 'https://yourdomain.com/success',  // Success URL
-            cancel_url: 'https://yourdomain.com/cancel',    // Cancel URL
+                quantity: 1,
+            }],
+            success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${req.headers.origin}/cancel`,
         });
 
-        // Send the sessionId back to the client
-        res.status(200).json({ sessionId: session.id });
+        console.log('Checkout session created successfully:', session);  // Log session creation success
+        res.json({ sessionId: session.id });
+
     } catch (error) {
-        console.error('Error creating checkout session:', error);
-        res.status(500).json({ message: 'Internal Server Error' });
+        console.error('Error creating checkout session:', error);  // Log the error
+        res.status(500).json({ error: 'Failed to create checkout session' });
     }
 });
 
@@ -318,6 +302,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
 
     let event;
     try {
+        // Stripe needs the raw body, not parsed JSON
         event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
     } catch (err) {
         console.log(`⚠️  Webhook signature verification failed: ${err.message}`);
@@ -328,30 +313,51 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
     switch (event.type) {
         case 'checkout.session.completed':
             const session = event.data.object;
+            
+            // Log the session details for debugging
+            console.log(`Received checkout.session.completed event for session: ${session.id}`);
+            console.log(`Customer Stripe ID: ${session.customer}`);
+            console.log(`Session details:`, session);
+
             try {
-                // Update user payment status in MongoDB
-                await mongoDB.collection('users').updateOne(
-                    { stripeCustomerId: session.customer },
-                    { 
-                        $set: { 
-                            paymentStatus: 'paid',  // Update to 'paid' after successful payment
-                            paymentDetails: {
-                                sessionId: session.id,
-                                amount: session.amount_total,
-                                currency: session.currency,
-                                paymentMethodTypes: session.payment_method_types,
-                                paymentStatus: session.payment_status
+                // Check if the customer exists in the database
+                const user = await mongoDB.collection('users').findOne({ stripeCustomerId: session.customer });
+                if (!user) {
+                    console.error(`No user found with stripeCustomerId: ${session.customer}`);
+                } else {
+                    console.log(`User found: ${user.fullname} (${user.email})`);
+                    
+                    // Update user payment status in MongoDB
+                    const result = await mongoDB.collection('users').updateOne(
+                        { stripeCustomerId: session.customer },
+                        { 
+                            $set: { 
+                                paymentStatus: 'paid', 
+                                paymentDetails: {
+                                    sessionId: session.id,
+                                    amount: session.amount_total,
+                                    currency: session.currency,
+                                    paymentMethodTypes: session.payment_method_types,
+                                    paymentStatus: session.payment_status
+                                }
                             }
                         }
+                    );
+                    
+                    // Log the result of the update
+                    if (result.modifiedCount > 0) {
+                        console.log(`Successfully updated payment status to 'paid' for user ${user.fullname} (${user.email})`);
+                    } else {
+                        console.error(`Failed to update payment status for user ${user.fullname} (${user.email})`);
                     }
-                );
-                console.log(`Payment status updated for customer ${session.customer}`);
+                }
             } catch (updateError) {
-                console.error('Error updating payment status:', updateError);
+                console.error('Error updating payment status in MongoDB:', updateError);
             }
             break;
+
         default:
-            console.log(`Unhandled event type ${event.type}`);
+            console.log(`Unhandled event type: ${event.type}`);
     }
 
     // Return a 200 response to acknowledge receipt of the event
@@ -370,11 +376,11 @@ app.get('/cancel', (req, res) => {
 
 
 app.get('/payment', (req, res) => {
-    const { email } = req.query;
+    const email = req.query.email || req.body.email || ''; 
     const stripePublishableKey = process.env.STRIPE_PUBLISHABLE_KEY;
 
     if (!email) {
-        return res.status(400).send('Email is required to process payment.');
+        return res.render('payment-email-form', { stripePublishableKey });
     }
 
     res.render('payment', { 
@@ -383,6 +389,91 @@ app.get('/payment', (req, res) => {
     });
 });
 
+
+app.post('/payment', (req, res) => {
+    const { email } = req.body;
+
+    if (!email) {
+        return res.status(400).send('Email is required to process payment.');
+    }
+
+    // Redirect to the payment page with the email as a query param
+    res.redirect(`/payment?email=${encodeURIComponent(email)}`);
+});
+
+// Route to check user email
+app.post('/check-email', async (req, res) => {
+    const { email } = req.body;
+
+    if (!email) {
+        return res.status(400).json({ message: 'Email is required' });
+    }
+
+    try {
+        const userCollection = mongoDB.collection('users');
+        const user = await userCollection.findOne({ email });
+
+        // If user does not exist
+        if (!user) {
+            return res.status(401).json({ message: 'Invalid email' });
+        }
+
+        // If user has not confirmed their email
+        if (!user.isConfirmed) {
+            return res.status(403).json({ message: 'Please confirm your email to proceed to payment' });
+        }
+
+        // If user exists and has confirmed their email, return success
+        return res.status(200).json({ message: 'Email found and confirmed', exists: true });
+    } catch (error) {
+        console.error('Error checking email:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+
+// Route for subcription creation
+app.post('/create-stripe-customer', async (req, res) => {
+    const { email } = req.body;
+
+    try {
+        // Step 1: Check MongoDB if the user exists and has a stripeCustomerId
+        const user = await mongoDB.collection('users').findOne({ email });
+
+        let stripeCustomerId;
+
+        if (user) {
+            // Step 2: If user exists, check if they already have a stripeCustomerId
+            if (user.stripeCustomerId) {
+                stripeCustomerId = user.stripeCustomerId;
+                console.log(`Found existing Stripe customer ID: ${stripeCustomerId} for user ${user.fullname}`);
+            } else {
+                // Step 3: If no stripeCustomerId exists, create a new customer in Stripe
+                const customer = await stripe.customers.create({
+                    email: email,
+                });
+
+                stripeCustomerId = customer.id;
+                console.log(`Created new Stripe customer ID: ${stripeCustomerId} for user ${user.fullname}`);
+
+                // Step 4: Update MongoDB with the new stripeCustomerId
+                await mongoDB.collection('users').updateOne(
+                    { _id: user._id },
+                    { $set: { stripeCustomerId: stripeCustomerId } }
+                );
+            }
+        } else {
+            return res.status(404).json({ error: 'User not found in the database' });
+        }
+
+        // Step 5: Return the Stripe payment link
+        const stripePaymentLink = 'https://buy.stripe.com/bIY6ox7lvc9petO3cc'; // Replace with your actual link
+        res.json({ stripePaymentLink, stripeCustomerId });
+    } catch (error) {
+        console.error('Error creating customer or retrieving payment link:', error);
+        res.status(500).json({ error: 'Failed to create customer or retrieve payment link' });
+    }
+});
 
 
 // Route for login page
@@ -438,6 +529,7 @@ const isAuthenticated = (req, res, next) => {
       res.status(401).json({ message: 'Not authenticated' });
     }
 };
+
 
 // Use the middleware in a route
 app.get('/protected-route', isAuthenticated, (req, res) => {
@@ -607,14 +699,15 @@ app.post('/reset-password', async (req, res) => {
 
 
 // POST endpoint for signing out
-// app.post('/signout', (req, res) => {
-//     req.session.destroy(err => {
-//         if (err) {
-//             return res.status(500).json({ message: 'Sign out failed' });
-//         }
-//         res.status(200).json({ message: 'Sign out successful' });
-//     });
-// });
+app.post('/signout', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            return res.status(500).json({ message: 'Sign out failed' });
+        }
+        res.status(200).json({ message: 'Sign out successful' });
+    });
+});
+
 
 
 // Route for about page
@@ -632,7 +725,7 @@ app.get('/about', (req, res) => {
 //     res.sendFile(path.join(publicDirectoryPath, 'about_us_kids.html'));
 // });
 
-// Route for "/on_demand"
+// Route for "/on-demand"
 app.get('/on-demand', (req, res) => {
     res.sendFile(path.join(publicDirectoryPath, 'on_demand.html'));
 });
@@ -733,46 +826,28 @@ async function fetchScheduleDetailsForChannelAndDay(channelId, dayOfWeek) {
     }
 }
 
+
 // app.get('/channels/dayoftheweek/:day', async (req, res) => {
 //     const dayOfWeek = req.params.day;
-//     // const cacheKey = `channels_day_${dayOfWeek}`;
+//     const cacheKey = `channels_day_${dayOfWeek}`;
 
 //     try {
-//         // Log the request and cache key
-//         console.log(`Request received for channels on day: ${dayOfWeek}, cacheKey: ${cacheKey}`);
-
-//         // Check the local cache
-//         // let channelsData = localCache.get(cacheKey);
-//         // if (channelsData) {
-//         //     console.log(`Cache hit in localCache for ${dayOfWeek}`);
-//         // }
-
-//         // Check the memcached cache if local cache is empty
-//         // if (channelsData) {
-//             // console.log(`Checking memcached for cacheKey: ${cacheKey}`);
-//             // channelsData = await memcachedClient.get(cacheKey);
+//         let channelsData = localCache.get(cacheKey);
+//         if (!channelsData) {
+//             channelsData = await memcachedClient.get(cacheKey);
 
 //             if (channelsData && channelsData.value) {
-//                 // console.log(`Cache hit in memcached for ${cacheKey}`);
 //                 channelsData = JSON.parse(channelsData.value.toString());
-//                 // localCache.set(cacheKey, channelsData);
+//                 localCache.set(cacheKey, channelsData);
 //             } else {
-//                 // Cache miss: Fetch from database or external source
 //                 console.log(`Cache miss for channels on ${dayOfWeek}`);
 //                 channelsData = await fetchChannelsForDay(dayOfWeek);
-
-//                 // Cache the data in both memcached and local cache
-//                 // await memcachedClient.set(cacheKey, JSON.stringify(channelsData), { expires: 3600 });
-//                 // localCache.set(cacheKey, channelsData);
+//                 await memcachedClient.set(cacheKey, JSON.stringify(channelsData), { expires: 3600 });
+//                 localCache.set(cacheKey, channelsData);
 //             }
-//         // }
+//         }
 
-//         // Ensure channelsData is logged
-//         console.log("Fetched channels data:", channelsData);
-
-//         // Return data to the frontend
 //         res.json(channelsData);
-
 //     } catch (error) {
 //         console.error("Error fetching channels for the day from cache:", error);
 //         res.status(500).send('Internal Server Error');
@@ -861,27 +936,21 @@ app.get('/channels', async (req, res) => {
     }
 });
 
-
 app.post('/videos', async (req, res) => {
     const { channelId, timezone } = req.body;
     const currentTimeMoment = moment().tz(timezone);
     const currentTime = currentTimeMoment.format('HH:mm:ss');
     const dayOfWeek = currentTimeMoment.format('dddd');
 
-    console.log(`Received request for channel ${channelId} at ${currentTime} on ${dayOfWeek}`);
-
     try {
         let videoId = await getCurrentVideoIdFromCache(channelId, currentTimeMoment, timezone, dayOfWeek);
-        console.log("Initial videoId from cache:", videoId);
         if (!videoId) {
             console.log(`Cache miss for video on channel ${channelId} at ${currentTime}`);
             const videos = await fetchVideoDetailsFromDatabase(channelId, currentTime);
             videoId = videos.length > 0 ? videos[0].video_id : null;
-            console.log("Fetched videoId from database:", videoId);
         }
 
         if (!videoId) {
-            console.error("No video found for the current time.");
             return res.status(404).json({ message: 'No video is scheduled to play at this time.' });
         }
 
@@ -889,22 +958,18 @@ app.post('/videos', async (req, res) => {
         let videoDetails = localCache.get(cacheKey);
         if (!videoDetails) {
             videoDetails = await memcachedClient.get(cacheKey);
-            console.log(`Cache ${videoDetails ? 'hit' : 'miss'} for video details: ${cacheKey}`);
             if (videoDetails && videoDetails.value) {
                 videoDetails = JSON.parse(videoDetails.value.toString());
                 localCache.set(cacheKey, videoDetails);
             } else {
                 const videos = await fetchVideoDetailsFromDatabase(channelId, currentTime);
                 videoDetails = videos[0];
-                console.log("Fetched video details from database:", videoDetails);
                 await memcachedClient.set(cacheKey, JSON.stringify(videoDetails), { expires: 3600 });
                 localCache.set(cacheKey, videoDetails);
             }
         }
-        
-        console.log("Fetched video details: ", videoDetails)
+
         const scheduleTimes = await fetchScheduleTimesForVideo(videoId, channelId, currentTimeMoment);
-        console.log("Fetched schedule times:", scheduleTimes);
 
         res.json(formatVideoResponse(videoDetails, scheduleTimes));
     } catch (error) {
@@ -913,36 +978,25 @@ app.post('/videos', async (req, res) => {
     }
 });
 
-
 async function fetchVideoDetailsFromDatabase(channelId, currentTime) {
     const query = `
-        SELECT 
-            v.url, 
-            v.people, 
-            v.video_id, 
-            v.channel_id, 
-            s.start_time, 
-            s.end_time 
+        SELECT v.url, v.people, v.video_id, v.channel_id, s.start_time, s.end_time 
         FROM Schedules s
         JOIN Videos v ON s.video_id = v.video_id
         WHERE s.channel_id = $1
         AND $2 BETWEEN s.start_time AND s.end_time
         ORDER BY s.start_time`;
 
-    let client;
-
     try {
-        client = await db.connect(); // Get connection from the pool
+        const client = await db.connect();
         const { rows } = await client.query(query, [channelId, currentTime]);
-        return rows; // Return fetched rows
+        client.release();
+        return rows;
     } catch (error) {
         console.error("Error fetching video details from database:", error);
-        return []; // Return an empty array if an error occurs
-    } finally {
-        if (client) client.release(); // Ensure the connection is released
+        return [];
     }
 }
-
 
 async function getCurrentVideoIdFromCache(channelId, currentTime, userTimeZone, dayOfWeek) {
     const scheduleKey = `schedule_channel_${channelId}_${dayOfWeek}`;
@@ -1031,7 +1085,6 @@ async function fetchScheduleTimesForVideo(videoId, channelId, currentTime) {
     }
     return null;
 }
-
 
 app.get('/schedules', async (req, res) => {
     const { channelId, dayOfWeek } = req.query;

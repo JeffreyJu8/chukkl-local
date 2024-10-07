@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Your Email</title>
+    <link rel="stylesheet" href="payment-email-form.css">
+</head>
+<body>
+
+    <h1>Enter Your Email</h1>
+    <p>Please enter the email associated with your account to proceed to payment.</p>
+
+    <form id="emailForm" action="/payment" method="POST">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <span id="errorMessage" style="color: red;"></span>
+        <button type="submit">Proceed to Payment</button>
+    </form>
+
+    <script>src="payment-email-form.js"</script>
+
+</body>
+</html>

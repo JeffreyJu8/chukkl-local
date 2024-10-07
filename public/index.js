@@ -817,9 +817,9 @@ async function checkLoginStatus() {
     
     if (!token) {
         console.error('No token found in localStorage');
-        // Redirect to login page or handle accordingly
-        // window.location.href = '/login';
-        // return;
+        // Handle case when no token is found (user is not logged in)
+        updateUIForLoggedOutUser();
+        return;
     } else {
         console.log('Token found, proceeding to verify...');
     }
@@ -839,57 +839,41 @@ async function checkLoginStatus() {
             const result = await response.json();
             console.log('Token verification successful, user:', result.user);
 
-            // **Set the token in localStorage again (if you need to refresh it or update it)**
+            // Update the token in localStorage if necessary
             if (result.token) {
                 localStorage.setItem('debughoney:core-sdk:*token', result.token); 
                 console.log('Updated token stored in localStorage:', localStorage.getItem('debughoney:core-sdk:*token'));
             }
 
-            // Update the UI for a logged-in user
+            // Update UI for logged-in user
             updateUIForLoggedInUser(result.user);
 
         } else {
             console.error('Token verification failed');
-            // localStorage.removeItem('debughoney:core-sdk:*token');
-            // Redirect to login page
-            // window.location.href = '/login';
+            updateUIForLoggedOutUser();
+            // Optionally redirect to login page
         }
     } catch (error) {
         console.error('Error verifying token:', error);
-        // localStorage.removeItem('debughoney:core-sdk:*token');
-        // Redirect to login page
-        // window.location.href = '/login';
+        updateUIForLoggedOutUser();
+        // Optionally redirect to login page
     }
 }
-
 
 function updateUIForLoggedInUser(user) {
     document.getElementById('loginButton').style.display = 'none';
     document.getElementById('registerButton').style.display = 'none';
     document.getElementById('signOutButton').style.display = 'inline-block';
-    document.getElementById('go-to-payment').style.display = 'inline-block';
-    
+    document.getElementById('go-to-payment').style.display = 'inline-block'; 
 }
 
 function updateUIForLoggedOutUser() {
+    console.log("loading UI for logged out user")
     document.getElementById('loginButton').style.display = 'inline-block';
     document.getElementById('registerButton').style.display = 'inline-block';
     document.getElementById('signOutButton').style.display = 'none';
-    document.getElementById('go-to-payment').style.display = 'none';
+    document.getElementById('go-to-payment').style.display = 'none'; 
 }
-
-
-document.getElementById('go-to-payment').addEventListener('click', () => {
-    const loggedInEmail = localStorage.getItem('loggedInUserEmail');
-    
-    if (loggedInEmail) {
-        // Redirect to the payment page with the user's email
-        window.location.href = `${API_BASE_URL}/payment?email=${encodeURIComponent(loggedInEmail)}`;
-    } else {
-        console.error('User is not logged in or email is not available');
-    }
-});
-
 
 document.addEventListener("DOMContentLoaded", function() {
     const signOutButton = document.getElementById('signOutButton');
@@ -902,18 +886,11 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // matchChannelInfoHeight()
-
     checkLoginStatus();
 
-    //selectChannel(9);
-    
-    // fetchChannels();
-    // getVideoCast(9);
     fetchChannels().then(() => {
         selectChannel(1);
         getVideoCast(1);
-        
     });
     defaultVideo();
 
