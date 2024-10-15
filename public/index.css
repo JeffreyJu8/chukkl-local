@@ -829,3 +829,167 @@ color: #8aefe7;
         height: 50%;
         margin: 0;
     }
+
+    #channelBar .displays:nth-child(1) {
+        color:#8aefe7;
+        margin-left: 10vw;
+        font-size: 3vw;
+    }
+
+    .channel-block {
+        position: relative;
+        display: flex;
+        border-radius: 5px;
+        margin-bottom: 1px; 
+        transition: height 0.3s ease;
+        overflow: hidden;
+        height: 17vh;
+        padding-top: 2px;
+        padding-bottom: 3px;
+    }
+    
+    
+    .channel-block-expanded{
+        height: 30vh;
+    }
+    
+    
+    .channel-name {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        /* border: 2px solid transparent; */
+        background-color: #000000;
+        height: 100%;
+        border-radius: 5px;
+        /* padding: 5px 15px; */
+        width: 150px;
+    }
+    
+    .channel-name:hover {
+        border: 2px solid #8aefe7;
+        cursor: pointer; 
+    }
+    
+    
+    .channel-style-0 {
+        font-family: 'Kavoon', sans-serif;
+        font-size: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    
+    .channel-style-1 {
+        font-family: 'Fredoka One';
+        font-size: 15px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        text-align: center;
+        align-items: center;
+    }
+    
+    
+    .channel-style-2 {
+        font-family: 'Fredoka One';
+        font-size: 15px;
+        display: flex;
+        gap: 5px;
+        justify-content: center; 
+        text-align: center;
+        align-items: center;
+        /* margin-top: 0.25px; */
+    }
+    
+    .channel-style-3 {
+        font-family: 'Fredoka One';
+        font-size: 15px;
+        display: flex;
+        gap: 10px;
+        justify-content: center; 
+        text-align: center;
+        align-items: center;
+    }
+    
+    .channel-style-4 {
+        font-family: 'Fredoka One';
+        font-size: 15px;
+        display: flex;
+        gap: 10px;
+        justify-content: center; 
+        align-items: center; 
+    }
+
+    .channel-schedule {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 3px;
+        left: 230px;
+        top: 0;
+        /* padding: 5px; */
+        height: 100%;
+        width: 100%;
+        border-radius: 5px;
+    }
+    
+    .channel-schedule-expanded {
+        display: flex;
+        flex-direction: row;
+        height: 30vh;
+        border-radius: 5px;
+    }
+    
+    .schedule-item {
+        flex: 1;
+        gap: 10px;
+        background-color: #373243; 
+        /* border: 2px solid transparent; */
+        /* padding: 5px; */
+        border-radius: 5px;
+        top: 0;
+        width: 358.75px;
+        height: 100%;
+    }
+
+    .schedule-title {
+        margin-top: 10px;
+        margin-left: 10px;
+        font-weight: bold;
+        font-size: 2vw;
+    }
+    
+    .schedule-maturity-rating{
+        font-size: 1.5vw;
+        margin-top: 5px;
+        margin-left: 10px;
+    }
+    
+    
+    .schedule-remaining-time {
+        font-size: 1.7vw;
+        margin-top: 10px;
+        margin-left: 10px;
+        color: #aaaaaa;
+    }
+    
+    
+    .schedule-time {
+        font-size: 1.7vw;
+        margin-top: 10px;
+        margin-left: 10px;
+        color: #aaaaaa;
+    }
+    
+    
+    .schedule-video-description{
+        font-family: 'Poppins';font-size: 22px;
+        font-size: 1.5vw;
+        margin-top: 15px;
+        margin-left: 10px;
+        line-height: 1.5;
+    }
+}

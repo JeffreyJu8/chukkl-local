@@ -275,6 +275,7 @@ transform: translateY(-50%);
     font-size: 7vw;
     align-items: center;
     height: 8vh;
+    gap: 0.5vw;
 }
 
 #appTitle .letter {

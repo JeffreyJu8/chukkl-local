@@ -467,7 +467,7 @@ app.post('/create-stripe-customer', async (req, res) => {
         }
 
         // Step 5: Return the Stripe payment link
-        const stripePaymentLink = 'https://buy.stripe.com/bIY6ox7lvc9petO3cc'; // Replace with your actual link
+        const stripePaymentLink = 'https://buy.stripe.com/bIY6ox7lvc9petO3cc'; 
         res.json({ stripePaymentLink, stripeCustomerId });
     } catch (error) {
         console.error('Error creating customer or retrieving payment link:', error);
@@ -748,6 +748,11 @@ app.get('/miss-linky', (req, res) => {
 // Route for GoGarbage
 app.get('/go-garbage', (req, res) => {
     res.sendFile(path.join(publicDirectoryPath, 'gogarbage.html'));
+});
+
+// Route for Cowboy Jack
+app.get('/cowboy-jack', (req, res) => {
+    res.sendFile(path.join(publicDirectoryPath, 'cowboyjack.html'));
 });
 
 
