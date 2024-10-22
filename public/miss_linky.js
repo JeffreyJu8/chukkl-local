@@ -35,6 +35,7 @@ function playVideo(videoUrl) {
     }
 }
 
+
 const API_BASE_URL = window.location.hostname.includes('localhost')
     ? 'http://localhost:3003'
     : 'https://chukkl.com';

@@ -1,88 +1,332 @@
-    /* Global Styles */
-    body {
-        font-family: 'Arial', sans-serif;
-        background: #1a1126;
-        color: white;
-        margin: 0;
-    }
-  
-    #header{
-        display: flex;
-        flex-direction: column;
-        height: 12vh;
-        background-color: black;
-        width: 100vw;
-        align-items: center; 
-        position: relative;
-    }
+body {
+  font-family: 'Arial', sans-serif;
+  background: #1a1126;
+  color: white;
+  margin: 0;
+}
 
-    #titleContainer {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        left: 20px;
-        top: 50%;
-        transform: translateY(-50%);
-    }
+#header{
+  display: flex;
+  flex-direction: column;
+  height: 12vh;
+  background-color: black;
+  width: 100vw;
+  align-items: center; 
+  position: relative;
+}
 
-    #appTitle {
-        font-family: 'Aileron', sans-serif;                
-        display: flex;
-        font-size: 3.4vw;
-        align-items: center;
-    }
-    
-    #appTitle .letter {
-        margin: -2.2px;
-        font-weight: bolder;
-    }
+#titleContainer {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
 
-    .button-group {
-        display: flex;
-        gap: 10px;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        top: 50%;
-        transform: translate(-50%, -50%);
-    }
+#appTitle {
+  font-family: 'Aileron', sans-serif;                
+  display: flex;
+  font-size: 3.4vw;
+  align-items: center;
+}
+
+#appTitle .letter {
+  margin: -2.2px;
+  font-weight: bolder;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
 
 
-    #appTitle .letter:nth-child(1) { color: #8aefe7; }    /* First letter 'c' */
-    #appTitle .letter:nth-child(2) { color: #8aefe7; } /* Second letter 'h' */
-    #appTitle .letter:nth-child(3) { color: white; } /* Third letter 'u' */
-    #appTitle .letter:nth-child(4) { color: white; }  /* Fourth letter 'k' */
-    #appTitle .letter:nth-child(5) { color: white; }   /* Fifth letter 'k' */
-    #appTitle .letter:nth-child(6) { color: white; } /* Sixth letter 'l' */
+#appTitle .letter:nth-child(1) { color: #8aefe7; }    /* First letter 'c' */
+#appTitle .letter:nth-child(2) { color: #8aefe7; } /* Second letter 'h' */
+#appTitle .letter:nth-child(3) { color: white; } /* Third letter 'u' */
+#appTitle .letter:nth-child(4) { color: white; }  /* Fourth letter 'k' */
+#appTitle .letter:nth-child(5) { color: white; }   /* Fifth letter 'k' */
+#appTitle .letter:nth-child(6) { color: white; } /* Sixth letter 'l' */
 
-    #appMoto {
-        font-family: 'Poppins';
-        font-size: 1.2vw;
-        margin-top: 5px;
-    }
+#appMoto {
+  font-family: 'Poppins';
+  font-size: 1.2vw;
+  margin-top: 5px;
+}
 
-    #appMoto .word:nth-child(1) {color:white}
-    #appMoto .word:nth-child(2) {color:#8aefe7}
-    #appMoto .word:nth-child(3) {color:white}
-    #appMoto .word:nth-child(4) {color:white}
-    #appMoto .word:nth-child(5) {color:white}
-  
-  .live-tv, .on-demand {
+#appMoto .word:nth-child(1) {color:white}
+#appMoto .word:nth-child(2) {color:#8aefe7}
+#appMoto .word:nth-child(3) {color:white}
+#appMoto .word:nth-child(4) {color:white}
+#appMoto .word:nth-child(5) {color:white}
 
+.live-tv, .on-demand {
+
+align-items: center;
+font-size: 20px;
+background-color: black;
+color: white;
+border: none;
+border-radius: 5px;
+transition: background-color 0.3s ease;
+}
+
+.live-tv:hover, .on-demand:hover {
+color: #8aefe7;
+}
+
+.button-group1 {
+position: absolute;
+right: 5vw; 
+top: 50%; 
+transform: translateY(-50%); 
+display: flex;
+gap: 10px;
+}
+
+.login,.register,.sign-out{
+  font-size: 1vw;
+  color: white;
+  width: 10vw;
+  height: 6vh;
+  margin-top: 10px;
+  background-color: black;
+  border: 3px solid #8aefe7;
+  border-radius: 10px;
+}
+
+.login,.register,.sign-out:hover {
+cursor: pointer; 
+}
+
+.hero {
+  position: relative;
+  color: #fff;
+  height: 40vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Aligns content to the bottom */
+  text-align: left;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('./images/go_garbage_background.jpeg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.5;
+  z-index: -1;
+}
+
+.hero h1 {
+  font-family: 'Poppins';
+  margin-left: 3vw;
+  font-size: 48px;
+  font-weight: 900; 
+  margin-bottom: 0rem;
+  color: white; 
+  text-shadow: 4px 0 #000, -4px 0 #000, 0 4px #000, 0 -4px #000,
+           3px 3px #000, -3px -3px #000, 3px -3px #000, -3px 3px #000;
+}
+
+
+.hero p {
+  width: 50%;
+  margin-left: 3vw;
+  margin-top: 0rem;
+  font-size: 18px;
+  text-shadow: 2px 0 #000, -2px 0 #000, 0 2px #000, 0 -2px #000,
+           1px 1px #000, -1px -1px #000, 1px -1px #000, -1px 1px #000;
+
+}
+
+.start-watching-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px;
+  height: 50px;
+}
+
+.text {
+  color: white; 
+  font-weight: 500;
+  font-size: 36px; 
+  font-family: Arial, sans-serif;
+}
+
+.line {
+  flex-grow: 1;
+  margin-left: 20px;
+  height: 1px;
+  background-color: #aaa;
+}
+
+.video-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.video-item {
+  display: flex;
+  width: 90vw;
+  align-items: center;
+  text-decoration: none;
+  background-color: #373243; 
+  border: 2px solid transparent;
+  padding: 10px;
+  border-radius: 10px;
+  align-items: center;
+  position: relative;
+}
+
+.video-thumbnail {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin-right: 20px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.video-thumbnail img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.video-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.video-info h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.5vw;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+  color: #fff;
+}
+
+.video-info p {
+  font-size: 2vw;
+  margin: 0 0 10px 0;
+  color: #aaa;
+}
+
+.duration {
+  font-size: 1.8vw;
+  color: #aaaaaa;
+  margin-top: 5px;
+}
+
+
+@media (max-width: 500px) {
+  #header{
+    display: flex;
+    flex-direction: column;
+    height: 12vh;
+    background-color: black;
+    width: 100vw;
+    align-items: center; 
+    position: relative;
+}
+
+#titleContainer {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#appTitle {
+  font-family: 'Aileron', sans-serif;                
+  display: flex;
+  font-size: 7vw;
+  align-items: center;
+  height: 8vh;
+  gap: 0.5vw;
+}
+
+#appTitle .letter {
+    font-weight: bolder;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 20vw;
+    height: 4vh;
+}
+
+
+#appTitle .letter:nth-child(1) { color: #8aefe7; }    /* First letter 'c' */
+#appTitle .letter:nth-child(2) { color: #8aefe7; } /* Second letter 'h' */
+#appTitle .letter:nth-child(3) { color: white; } /* Third letter 'u' */
+#appTitle .letter:nth-child(4) { color: white; }  /* Fourth letter 'k' */
+#appTitle .letter:nth-child(5) { color: white; }   /* Fifth letter 'k' */
+#appTitle .letter:nth-child(6) { color: white; } /* Sixth letter 'l' */
+
+#appMoto {
+    font-family: 'Poppins';
+    font-size: 2vw;
+}
+
+#appMoto .word:nth-child(1) {color:white}
+#appMoto .word:nth-child(2) {color:#8aefe7}
+#appMoto .word:nth-child(3) {color:white}
+#appMoto .word:nth-child(4) {color:white}
+#appMoto .word:nth-child(5) {color:white}
+
+.live-tv, .on-demand {
     align-items: center;
-    font-size: 20px;
+    font-size: 2.5vw;
     background-color: black;
     color: white;
     border: none;
     border-radius: 5px;
     transition: background-color 0.3s ease;
-  }
-  
-  .live-tv:hover, .on-demand:hover {
-    color: #8aefe7;
-  }
+}
 
-  .button-group1 {
+.live-tv:hover, .on-demand:hover {
+color: #8aefe7;
+}
+
+.button-group1 {
     position: absolute;
     right: 5vw; 
     top: 50%; 
@@ -91,275 +335,30 @@
     gap: 10px;
 }
 
+
 .login,.register,.sign-out{
-  font-size: 1vw;
-  color: white;
-  width: 150px;
-  margin-top: 10px;
-  background-color: black;
-  border: 3px solid #8aefe7;
-  border-radius: 10px;
-  height: 50px;
+    font-size: 2.5vw;
+    color: white;
+    width: 12vw;
+    height: 6vh;
+    margin-top: 10px;
+    background-color: black;
+    border: 1px solid #8aefe7;
+    border-radius: 10px;
 }
 
 .login,.registe,.sign-out:hover {
-  cursor: pointer; 
+    cursor: pointer; 
 }
 
-.hero {
-    position: relative;
-    color: #fff;
-    height: 40vh;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end; /* Aligns content to the bottom */
-    text-align: left;
-  }
-  
-  .hero::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('./images/go_garbage_background.jpeg');
-    background-size: cover;
-    background-position: center;
-    opacity: 0.5;
-    z-index: -1;
-  }
-  
-  .hero h1 {
-    font-family: 'Poppins';
-    margin-left: 3vw;
-    font-size: 48px;
-    font-weight: 900; 
-    margin-bottom: 0rem;
-    color: white; 
-    text-shadow: 4px 0 #000, -4px 0 #000, 0 4px #000, 0 -4px #000,
-             3px 3px #000, -3px -3px #000, 3px -3px #000, -3px 3px #000;
-  }
-  
-  
-  .hero p {
-    width: 50%;
-    margin-left: 3vw;
-    margin-top: 0rem;
-    font-size: 18px;
-    text-shadow: 2px 0 #000, -2px 0 #000, 0 2px #000, 0 -2px #000,
-             1px 1px #000, -1px -1px #000, 1px -1px #000, -1px 1px #000;
 
+  #contentWrapper{
+      height: 50%;
   }
 
-  .start-watching-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 30px;
-    height: 50px;
+  #videoContainer {
+      width: 100%;
+      height: 50%;
+      margin: 0;
+  }
 }
-
-.text {
-    color: white; 
-    font-weight: 500;
-    font-size: 36px; 
-    font-family: Arial, sans-serif;
-}
-
-.line {
-    flex-grow: 1;
-    margin-left: 20px;
-    height: 1px;
-    background-color: #aaa;
-}
-  
-  .video-list {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .video-item {
-    display: flex;
-    width: 90vw;
-    align-items: center;
-    text-decoration: none;
-    background-color: #373243; 
-    border: 2px solid transparent;
-    padding: 10px;
-    border-radius: 10px;
-    align-items: center;
-    position: relative;
-  }
-  
-  .video-thumbnail {
-    position: relative;
-    width: 200px;
-    height: 200px;
-    margin-right: 20px;
-    border-radius: 5px;
-    overflow: hidden;
-  }
-  
-  .video-thumbnail img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-  }
-  
-  .play-button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 24px;
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 50%;
-    padding: 10px;
-  }
-  
-  .video-info {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .video-info h3 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 2.5vw;
-    font-weight: bold;
-    margin: 0 0 10px 0;
-    color: #fff;
-  }
-  
-  .video-info p {
-    font-size: 2vw;
-    margin: 0 0 10px 0;
-    color: #aaa;
-  }
-  
-  .duration {
-    font-size: 1.8vw;
-    color: #aaaaaa;
-    margin-top: 5px;
-  }
-
-
-  @media (max-width: 500px) {
-    #header{
-      display: flex;
-      flex-direction: column;
-      height: 12vh;
-      background-color: black;
-      width: 100vw;
-      align-items: center; 
-      position: relative;
-  }
-  
-  #titleContainer {
-      display: flex;
-      flex-direction: column;
-      position: absolute;
-      left: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-  }
-  
-  #appTitle {
-      font-family: 'Aileron', sans-serif;                
-      display: flex;
-      font-size: 7vw;
-      align-items: center;
-      height: 8vh;
-      gap: 0.5vw;
-  }
-  
-  #appTitle .letter {
-      font-weight: bolder;
-  }
-  
-  .button-group {
-      display: flex;
-      gap: 10px;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: 20vw;
-      height: 4vh;
-  }
-  
-  
-  #appTitle .letter:nth-child(1) { color: #8aefe7; }    /* First letter 'c' */
-  #appTitle .letter:nth-child(2) { color: #8aefe7; } /* Second letter 'h' */
-  #appTitle .letter:nth-child(3) { color: white; } /* Third letter 'u' */
-  #appTitle .letter:nth-child(4) { color: white; }  /* Fourth letter 'k' */
-  #appTitle .letter:nth-child(5) { color: white; }   /* Fifth letter 'k' */
-  #appTitle .letter:nth-child(6) { color: white; } /* Sixth letter 'l' */
-  
-  #appMoto {
-      font-family: 'Poppins';
-      font-size: 2vw;
-  }
-  
-  #appMoto .word:nth-child(1) {color:white}
-  #appMoto .word:nth-child(2) {color:#8aefe7}
-  #appMoto .word:nth-child(3) {color:white}
-  #appMoto .word:nth-child(4) {color:white}
-  #appMoto .word:nth-child(5) {color:white}
-  
-  .live-tv, .on-demand {
-      align-items: center;
-      font-size: 2.5vw;
-      background-color: black;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-  }
-  
-  .live-tv:hover, .on-demand:hover {
-  color: #8aefe7;
-  }
-  
-  .button-group1 {
-      position: absolute;
-      right: 5vw; 
-      top: 50%; 
-      transform: translateY(-50%); 
-      display: flex;
-      gap: 10px;
-  }
-  
-  
-  .login,.register,.sign-out{
-      font-size: 2.5vw;
-      color: white;
-      width: 12vw;
-      height: 6vh;
-      margin-top: 10px;
-      background-color: black;
-      border: 1px solid #8aefe7;
-      border-radius: 10px;
-  }
-  
-  .login,.registe,.sign-out:hover {
-      cursor: pointer; 
-  }
-  
-  
-    #contentWrapper{
-        height: 50%;
-    }
-  
-    #videoContainer {
-        width: 100%;
-        height: 50%;
-        margin: 0;
-    }
-  }

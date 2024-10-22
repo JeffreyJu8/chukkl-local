@@ -1,109 +1,108 @@
-    /* Global Styles */
-    body {
-      font-family: 'Arial', sans-serif;
-      background: #1a1126;
-      color: white;
-      margin: 0;
-  }
+body {
+  font-family: 'Arial', sans-serif;
+  background: #1a1126;
+  color: white;
+  margin: 0;
+}
 
-  #header{
-      display: flex;
-      flex-direction: column;
-      height: 12vh;
-      background-color: black;
-      width: 100vw;
-      align-items: center; 
-      position: relative;
-  }
+#header{
+  display: flex;
+  flex-direction: column;
+  height: 12vh;
+  background-color: black;
+  width: 100vw;
+  align-items: center; 
+  position: relative;
+}
 
-  #titleContainer {
-      display: flex;
-      flex-direction: column;
-      position: absolute;
-      left: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-  }
+#titleContainer {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
 
-  #appTitle {
-      font-family: 'Aileron', sans-serif;                
-      display: flex;
-      font-size: 3.4vw;
-      align-items: center;
-  }
-  
-  #appTitle .letter {
-      margin: -2.2px;
-      font-weight: bolder;
-  }
+#appTitle {
+  font-family: 'Aileron', sans-serif;                
+  display: flex;
+  font-size: 3.4vw;
+  align-items: center;
+}
 
-  .button-group {
-      display: flex;
-      gap: 10px;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      top: 50%;
-      transform: translate(-50%, -50%);
-  }
+#appTitle .letter {
+  margin: -2.2px;
+  font-weight: bolder;
+}
 
-  .button-group1 {
-    position: absolute;
-    right: 5vw; 
-    top: 50%; 
-    transform: translateY(-50%); 
-    display: flex;
-    gap: 10px;
+.button-group {
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+#appTitle .letter:nth-child(1) { color: #8aefe7; }    /* First letter 'c' */
+#appTitle .letter:nth-child(2) { color: #8aefe7; } /* Second letter 'h' */
+#appTitle .letter:nth-child(3) { color: white; } /* Third letter 'u' */
+#appTitle .letter:nth-child(4) { color: white; }  /* Fourth letter 'k' */
+#appTitle .letter:nth-child(5) { color: white; }   /* Fifth letter 'k' */
+#appTitle .letter:nth-child(6) { color: white; } /* Sixth letter 'l' */
+
+#appMoto {
+  font-family: 'Poppins';
+  font-size: 1.2vw;
+  margin-top: 5px;
+}
+
+#appMoto .word:nth-child(1) {color:white}
+#appMoto .word:nth-child(2) {color:#8aefe7}
+#appMoto .word:nth-child(3) {color:white}
+#appMoto .word:nth-child(4) {color:white}
+#appMoto .word:nth-child(5) {color:white}
+
+.live-tv, .on-demand {
+
+align-items: center;
+font-size: 20px;
+background-color: black;
+color: white;
+border: none;
+border-radius: 5px;
+transition: background-color 0.3s ease;
+}
+
+.live-tv:hover, .on-demand:hover {
+color: #8aefe7;
+}
+
+.button-group1 {
+position: absolute;
+right: 5vw; 
+top: 50%; 
+transform: translateY(-50%); 
+display: flex;
+gap: 10px;
 }
 
 .login,.register,.sign-out{
   font-size: 1vw;
   color: white;
-  width: 150px;
+  width: 10vw;
+  height: 6vh;
   margin-top: 10px;
   background-color: black;
   border: 3px solid #8aefe7;
   border-radius: 10px;
-  height: 50px;
 }
 
-.login,.registe,.sign-out:hover {
-  cursor: pointer; 
-}
-
-
-  #appTitle .letter:nth-child(1) { color: #8aefe7; }    /* First letter 'c' */
-  #appTitle .letter:nth-child(2) { color: #8aefe7; } /* Second letter 'h' */
-  #appTitle .letter:nth-child(3) { color: white; } /* Third letter 'u' */
-  #appTitle .letter:nth-child(4) { color: white; }  /* Fourth letter 'k' */
-  #appTitle .letter:nth-child(5) { color: white; }   /* Fifth letter 'k' */
-  #appTitle .letter:nth-child(6) { color: white; } /* Sixth letter 'l' */
-
-  #appMoto {
-      font-family: 'Poppins';
-      font-size: 1.2vw;
-      margin-top: 5px;
-  }
-
-  #appMoto .word:nth-child(1) {color:white}
-  #appMoto .word:nth-child(2) {color:#8aefe7}
-  #appMoto .word:nth-child(3) {color:white}
-  #appMoto .word:nth-child(4) {color:white}
-  #appMoto .word:nth-child(5) {color:white}
-
-.live-tv, .on-demand {
-
-  align-items: center;
-  font-size: 20px;
-  background-color: black;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-.live-tv:hover, .on-demand:hover {
-  color: #8aefe7;
+.login,.register,.sign-out:hover {
+cursor: pointer; 
 }
 
 .hero {
@@ -270,12 +269,12 @@
 }
 
 #appTitle {
-    font-family: 'Aileron', sans-serif;                
-    display: flex;
-    font-size: 7vw;
-    align-items: center;
-    height: 8vh;
-    gap: 0.5vw;
+  font-family: 'Aileron', sans-serif;                
+  display: flex;
+  font-size: 7vw;
+  align-items: center;
+  height: 8vh;
+  gap: 0.5vw;
 }
 
 #appTitle .letter {

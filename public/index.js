@@ -145,6 +145,7 @@ function updateChannelUI(details) {
 }
 
 
+
 async function defaultVideo() {
     try {
         // Fetch channel with id = 1
@@ -163,7 +164,6 @@ async function defaultVideo() {
 
     localStorage.setItem('defaultVideoCalled', 'true');
 }
-
 
 
 async function fetchChannels() {
@@ -695,11 +695,6 @@ function loadRestrictedVimeoVideo(vimeoUrl, timeElapsed) {
 }
 
 
-function isTouchDevice() {
-    return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-}
-
-
 
 function convertToFullDateTime(timeString, timeZone) {
     // Assuming moment and moment-timezone libraries are imported
@@ -808,7 +803,6 @@ function updateTimeIntervals() {
         currentIntervalTime.add(15, 'minutes');
     }
 }
-
 
 async function checkLoginStatus() {
     console.log('Checking login status...');
