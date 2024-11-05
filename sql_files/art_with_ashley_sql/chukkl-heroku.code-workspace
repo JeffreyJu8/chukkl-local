@@ -1,0 +1,42 @@
+{
+	"folders": [
+		{
+			"name": "chukkl-heroku",
+			"path": "../../../../Coding_project/chukkl-heroku"
+		}
+	],
+	"settings": {
+		"sqltools.connections": [
+			{
+				"mysqlOptions": {
+					"authProtocol": "default",
+					"enableSsl": "Disabled"
+				},
+				"previewLimit": 50,
+				"server": "database-2.crcc4k6awjdh.us-east-2.rds.amazonaws.com",
+				"port": 3306,
+				"driver": "MySQL",
+				"name": "chukkl_database",
+				"database": "h_h_database",
+				"username": "admin"
+			},
+			{
+				"pgOptions": {
+					"ssl": {
+						"rejectUnauthorized": false,
+						"requestCert": true
+					}
+				},
+				"previewLimit": 50,
+				"server": "ccpa7stkruda3o.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com",
+				"port": 5432,
+				"askForPassword": true,
+				"driver": "PostgreSQL",
+				"password": "p09847ab526787d9e8d15d6426b287630959802023181f098c7d15f5b3aadfbd0",
+				"name": "chukkl_db",
+				"database": "d4rgfol4gk3ula",
+				"username": "u37e8g60ng6qtd"
+			}
+		]
+	}
+}
